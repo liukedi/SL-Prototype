@@ -1,22 +1,201 @@
 {
-  "_help": "Version B 'Information' tab for art stations. Texts from the thesis Notion page (Stockholms tunnelbana – highlights). complexity: 1 easy, 2 medium (branch / easy to miss), 3 complex. photo: file in assets/b/stations/ (credits in credits.json there). discoverUrl: page opened by DISCOVER (null = not built yet).",
+  "_help": "Version B 'Information' tab for art stations. Texts from the thesis Notion page (Stockholms tunnelbana – highlights). complexity: 1 easy, 2 medium (branch / easy to miss), 3 complex. photo: file in assets/b/stations/ (credits in credits.json there). discoverUrl: page opened by DISCOVER (null = not built yet). tip / lines / duration / complexity from the thesis Notion page \"斯德哥尔摩地铁重点整理\" (what to look for, metro lines, suggested stay).",
   "stations": {
-    "T-Centralen|Stockholm": { "description": "Blue-and-white cave walls with climbing vines and silhouettes of the workers who built the metro.", "duration": "15-30 mins", "complexity": 3, "photo": "t-centralen.jpg", "discoverUrl": null },
-    "Kungsträdgården|Stockholm": { "description": "An underground excavation site in red, white and green, with sculptures and relics of Makalös Palace.", "duration": "15-30 mins", "complexity": 2, "photo": "kungstradgarden.jpg", "discoverUrl": null },
-    "Rådhuset|Stockholm": { "description": "A huge pink and rust-red rock cave with historic objects set into its walls.", "duration": "10-20 mins", "complexity": 1, "photo": "radhuset.jpg", "discoverUrl": null },
-    "Solna centrum|Solna": { "description": "A deep red cave ceiling above a green forest, about nature and society.", "duration": "15-20 mins", "complexity": 2, "photo": "solna-centrum.jpg", "discoverUrl": null },
-    "Solna strand|Solna": { "description": "Blue 'sky' cubes set into the rock walls of a surreal cave.", "duration": "10-15 mins", "complexity": 2, "photo": "solna-strand.jpg", "discoverUrl": null },
-    "Rissne|Sundbyberg": { "description": "A long timeline with maps, running from ancient times to today.", "duration": "15-20 mins", "complexity": 1, "photo": "rissne.jpg", "discoverUrl": null },
-    "Tensta|Stockholm": { "description": "Words in many languages about migration, solidarity and living together.", "duration": "15-20 mins", "complexity": 1, "photo": "tensta.jpg", "discoverUrl": null },
-    "Hallonbergen|Sundbyberg": { "description": "Children's drawings turned into walls full of childhood memories.", "duration": "10-15 mins", "complexity": 1, "photo": "hallonbergen.jpg", "discoverUrl": null },
-    "Husby|Stockholm": { "description": "Colourful public art about the local community.", "duration": "10 mins", "complexity": 1, "photo": "husby.jpg", "discoverUrl": null },
-    "Östermalmstorg|Stockholm": { "description": "Siri Derkert's wall drawings on peace, women's rights and the environment.", "duration": "15 mins", "complexity": 2, "photo": "ostermalmstorg.jpg", "discoverUrl": null },
-    "Stadion|Stockholm": { "description": "A vaulted ceiling painted in sweeping rainbow arcs.", "duration": "10-15 mins", "complexity": 1, "photo": "stadion.jpg", "discoverUrl": null },
-    "Tekniska högskolan|Stockholm": { "description": "Science, space and geometry, with installations hanging from the ceiling.", "duration": "15-20 mins", "complexity": 2, "photo": "tekniska-hogskolan.jpg", "discoverUrl": null },
-    "Mörby centrum|Danderyd": { "description": "Wall colours that change as you move along the platform.", "duration": "10-15 mins", "complexity": 1, "photo": "morby-centrum.jpg", "discoverUrl": null },
-    "Universitetet|Stockholm": { "description": "Tiles with words and images on science, nature and human rights: a station to read as you walk.", "duration": "15-25 mins", "complexity": 1, "photo": "universitetet.jpg", "discoverUrl": null },
-    "Thorildsplan|Stockholm": { "description": "8-bit video-game tiles with pixel clouds and mushrooms.", "duration": "15 mins", "complexity": 2, "photo": "thorildsplan.jpg", "discoverUrl": null },
-    "Hötorget|Stockholm": { "description": "1950s architecture and light art with a strong retro feel.", "duration": "10-15 mins", "complexity": 1, "photo": "hotorget.jpg", "discoverUrl": null },
-    "Bagarmossen|Stockholm": { "description": "Modern public art, quite different from the classic cave stations.", "duration": "10 mins", "complexity": 1, "photo": "bagarmossen.jpg", "discoverUrl": null }
+    "T-Centralen|Stockholm": {
+      "description": "Blue-and-white cave walls with climbing vines and silhouettes of the workers who built the metro.",
+      "tip": "Follow the Blå linjen signs down to the blue line platforms: the platforms, the escalators and the blue-and-white cave.",
+      "lines": [
+        10,
+        11
+      ],
+      "duration": "15-30 mins",
+      "complexity": 3,
+      "photo": "t-centralen.jpg",
+      "discoverUrl": null
+    },
+    "Kungsträdgården|Stockholm": {
+      "description": "An underground excavation site in red, white and green, with sculptures and relics of Makalös Palace.",
+      "tip": "Don’t stop at the platform: walk the platform, the passages and the exit area too.",
+      "lines": [
+        10,
+        11
+      ],
+      "duration": "15-30 mins",
+      "complexity": 2,
+      "photo": "kungstradgarden.jpg",
+      "discoverUrl": null
+    },
+    "Rådhuset|Stockholm": {
+      "description": "A huge pink and rust-red rock cave with historic objects set into its walls.",
+      "tip": "Walk the whole platform and look for the historic objects set into the cave walls.",
+      "lines": [
+        10,
+        11
+      ],
+      "duration": "10-20 mins",
+      "complexity": 1,
+      "photo": "radhuset.jpg",
+      "discoverUrl": null
+    },
+    "Solna centrum|Solna": {
+      "description": "A deep red cave ceiling above a green forest, about nature and society.",
+      "tip": "Take line 11 (Akalla branch) and walk the platform from one end to the other.",
+      "lines": [
+        11
+      ],
+      "duration": "15-20 mins",
+      "complexity": 2,
+      "photo": "solna-centrum.jpg",
+      "discoverUrl": null
+    },
+    "Solna strand|Solna": {
+      "description": "Blue 'sky' cubes set into the rock walls of a surreal cave.",
+      "tip": "Take line 10 (Hjulsta branch) and look for the blue cubes set into the rock walls.",
+      "lines": [
+        10
+      ],
+      "duration": "10-15 mins",
+      "complexity": 2,
+      "photo": "solna-strand.jpg",
+      "discoverUrl": null
+    },
+    "Rissne|Sundbyberg": {
+      "description": "A long timeline with maps, running from ancient times to today.",
+      "tip": "Walk along the platform wall: the timeline runs the whole length.",
+      "lines": [
+        10
+      ],
+      "duration": "15-20 mins",
+      "complexity": 1,
+      "photo": "rissne.jpg",
+      "discoverUrl": null
+    },
+    "Tensta|Stockholm": {
+      "description": "Words in many languages about migration, solidarity and living together.",
+      "tip": "Look at both sides of the platform, the walls, the texts and the ceiling.",
+      "lines": [
+        10
+      ],
+      "duration": "15-20 mins",
+      "complexity": 1,
+      "photo": "tensta.jpg",
+      "discoverUrl": null
+    },
+    "Hallonbergen|Sundbyberg": {
+      "description": "Children's drawings turned into walls full of childhood memories.",
+      "tip": "Walk along the platform and look at the walls.",
+      "lines": [
+        11
+      ],
+      "duration": "10-15 mins",
+      "complexity": 1,
+      "photo": "hallonbergen.jpg",
+      "discoverUrl": null
+    },
+    "Husby|Stockholm": {
+      "description": "Colourful public art about the local community.",
+      "tip": "Look at the platform and the cave walls.",
+      "lines": [
+        11
+      ],
+      "duration": "10 mins",
+      "complexity": 1,
+      "photo": "husby.jpg",
+      "discoverUrl": null
+    },
+    "Östermalmstorg|Stockholm": {
+      "description": "Siri Derkert's wall drawings on peace, women's rights and the environment.",
+      "tip": "Look at the platform walls. Going on to Tekniska högskolan? Take line 14 towards Mörby centrum.",
+      "lines": [
+        13,
+        14
+      ],
+      "duration": "15 mins",
+      "complexity": 2,
+      "photo": "ostermalmstorg.jpg",
+      "discoverUrl": null
+    },
+    "Stadion|Stockholm": {
+      "description": "A vaulted ceiling painted in sweeping rainbow arcs.",
+      "tip": "Look up for the huge rainbow on the cave ceiling.",
+      "lines": [
+        13,
+        14
+      ],
+      "duration": "10-15 mins",
+      "complexity": 1,
+      "photo": "stadion.jpg",
+      "discoverUrl": null
+    },
+    "Tekniska högskolan|Stockholm": {
+      "description": "Science, space and geometry, with installations hanging from the ceiling.",
+      "tip": "Don’t just photograph one wall: look at the platform, the ceiling and the hanging installations.",
+      "lines": [
+        14
+      ],
+      "duration": "15-20 mins",
+      "complexity": 2,
+      "photo": "tekniska-hogskolan.jpg",
+      "discoverUrl": null
+    },
+    "Mörby centrum|Danderyd": {
+      "description": "Wall colours that change as you move along the platform.",
+      "tip": "Walk along the platform and look at the walls from different directions.",
+      "lines": [
+        14
+      ],
+      "duration": "10-15 mins",
+      "complexity": 1,
+      "photo": "morby-centrum.jpg",
+      "discoverUrl": null
+    },
+    "Universitetet|Stockholm": {
+      "description": "Tiles with words and images on science, nature and human rights: a station to read as you walk.",
+      "tip": "Walk the platform and read the texts and images on the walls, tiles and passages.",
+      "lines": [
+        14
+      ],
+      "duration": "15-25 mins",
+      "complexity": 1,
+      "photo": "universitetet.jpg",
+      "discoverUrl": null
+    },
+    "Thorildsplan|Stockholm": {
+      "description": "8-bit video-game tiles with pixel clouds and mushrooms.",
+      "tip": "Not a cave station: look for the tiled walls around the above-ground platform.",
+      "lines": [
+        17,
+        18,
+        19
+      ],
+      "duration": "15 mins",
+      "complexity": 2,
+      "photo": "thorildsplan.jpg",
+      "discoverUrl": null
+    },
+    "Hötorget|Stockholm": {
+      "description": "1950s architecture and light art with a strong retro feel.",
+      "tip": "Look at the whole platform, the tiles and the ceiling lights.",
+      "lines": [
+        17,
+        18,
+        19
+      ],
+      "duration": "10-15 mins",
+      "complexity": 1,
+      "photo": "hotorget.jpg",
+      "discoverUrl": null
+    },
+    "Bagarmossen|Stockholm": {
+      "description": "Modern public art, quite different from the classic cave stations.",
+      "tip": "Look at the platform and the walls.",
+      "lines": [
+        17
+      ],
+      "duration": "10 mins",
+      "complexity": 1,
+      "photo": "bagarmossen.jpg",
+      "discoverUrl": null
+    }
   }
 }

@@ -213,6 +213,13 @@ export async function createMap(container, { onStopClick } = {}) {
   }
 
   let stopPin = null;
+  // Version B: bottom inset (pt) of the visible map, so camera moves centre on the part
+  // above the bottom sheet. A function returning a number, or null for the fixed paddings.
+  let cameraInset = null;
+  const padding = (fallback) => {
+    const bottom = cameraInset?.();
+    return bottom == null ? fallback : { top: 0, bottom, left: 0, right: 0 };
+  };
 
   // Handy for tuning in the console: slMap.getZoom(), slMap.setZoom(13.3)…
   window.slMap = map;
@@ -224,8 +231,9 @@ export async function createMap(container, { onStopClick } = {}) {
       stopPin = new maplibregl.Marker({ element: createStopPinElement(iconName), anchor: 'bottom' })
         .setLngLat(lngLat)
         .addTo(map);
-      map.flyTo({ center: lngLat, zoom: Math.max(map.getZoom(), STOP_ZOOM), padding: STOP_PADDING, duration: 900, essential: true });
+      map.flyTo({ center: lngLat, zoom: Math.max(map.getZoom(), STOP_ZOOM), padding: padding(STOP_PADDING), duration: 900, essential: true });
     },
+    setCameraInset(fn) { cameraInset = fn; },
     clearStop() {
       stopPin?.remove();
       stopPin = null;
@@ -234,7 +242,7 @@ export async function createMap(container, { onStopClick } = {}) {
       map.flyTo({
         center: CONFIG.userLocation,
         zoom: CONFIG.defaultZoom,
-        padding: CONFIG.cameraPadding,
+        padding: padding(CONFIG.cameraPadding),
         bearing: 0,
         duration: 900,
         essential: true,

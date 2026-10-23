@@ -11,7 +11,7 @@ export function initSheet(sheet, { tabbar, onChange } = {}) {
   let snaps = {};
   let current = 'default';
   let top = 0;
-  let defaultTop = null; // override for the default snap point (version B)
+  let defaultTop = null; // override for the default snap point of the home sheet (version B)
 
   const screen = sheet.parentElement; // the fixed 393×852 phone screen
 
@@ -25,7 +25,8 @@ export function initSheet(sheet, { tabbar, onChange } = {}) {
     snaps = {
       expanded: Math.round(h * 0.1),
       // Matches reference/zoom-4: sheet top at 479 of 852 pt.
-      default: defaultTop ?? Math.round(h * (479 / 852)),
+      // (The override is for the home sheet only: stop pages keep the standard position.)
+      default: (!sheet.classList.contains('is-stop') && defaultTop) || Math.round(h * (479 / 852)),
       // Only the search field shows above the tab bar.
       collapsed: Math.round(tabTop - headerBottom + 6),
     };

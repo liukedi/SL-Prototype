@@ -333,7 +333,9 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
 - **Selected special station:** shown on the map as a white label with its icon and name.
 - **Information tab for art stations** (`js/b/station-info.js`, `data/b/station-info.json`):
   - The stop page gets "Information" (default) and "Time Table" (the original departures) tabs.
-  - Information shows a description, a photo, Duration, Complexity (easy ○○●, medium ○●●, complex ●●●) and DISCOVER.
+  - Information shows a description, a square photo (with a gradient mask behind the 360° icon), the metro lines,
+    Duration, Complexity (easy ○○●, medium ○●●, complex ●●●), "What to look for" and DISCOVER. Lines, tips,
+    durations and complexity come from the thesis Notion page. The photos are cropped and resized to 405 × 405.
   - The 360° button shows "not available in the prototype" for 5 s, with a close button. DISCOVER does the same
     until `discoverUrl` is set.
 - **Tab bar:** hidden while a stop page is open in version B with Tourist Mode on (as in the Stadion design).
@@ -346,7 +348,10 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
     plans the trip from the first to the last stop in the Travel tab. Routes are edited in
     `data/b/curated-routes.json`.
   - With Tourist Mode on, the sheet's default position is higher (350 pt from the top;
-    `DEFAULT_TOP` in `js/b/explore.js`, through `sheet.setDefaultTop`).
+    `DEFAULT_TOP` in `js/b/explore.js`, through `sheet.setDefaultTop`). Stop pages keep A's position (479 pt).
+- **Map centre** (`js/b/map-center.js`, Tourist Mode on): the map centres on the part of the screen above the sheet.
+  Stop focus and "my location" use that area, and when the sheet settles at a new height the map eases so the
+  same point stays in the visible centre.
   - **Favorite:** the original sheet content (favourites, Add favorite).
   - With Tourist Mode off there are no tabs, and the sheet is as in A.
 - **Art stations on journey details** (`js/b/journey-art.js`, through the `setJourneyDecorator` hook in

@@ -7,19 +7,30 @@
 [data-variant="b"] .stop-tabs button.is-selected { color: #fff; }
 [data-variant="b"] .stop-tabs button.is-selected::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2.5px; border-radius: 2px; background: #fff; }
 
-[data-variant="b"] .si { padding: 0 0 0 11px; }
-[data-variant="b"] .si__desc { margin: 0 0 16px; font-size: 16px; line-height: 1.4; color: #d5dade; }
-[data-variant="b"] .si__row { display: flex; gap: 22px; align-items: stretch; }
-[data-variant="b"] .si__photo { position: relative; flex: none; width: 168px; height: 101px; box-sizing: border-box; border: 3px solid #fff; border-radius: 22px; overflow: hidden; background: #1f242d; }
+[data-variant="b"] .si { padding: 0 11px 24px; }
+[data-variant="b"] .si__desc { margin: 0 0 16px; font-size: 16px; line-height: 1.4; color: #e6e9ec; }
+/* Photo (square crop) + facts side by side */
+[data-variant="b"] .si__row { display: flex; gap: 18px; align-items: stretch; }
+[data-variant="b"] .si__photo { position: relative; flex: none; width: 118px; height: 118px; box-sizing: border-box; border: 3px solid #fff; border-radius: 22px; overflow: hidden; background: #1f242d; }
 [data-variant="b"] .si__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-[data-variant="b"] .si__360 { position: absolute; left: 10px; bottom: 8px; width: 34px; height: 26px; display: grid; place-items: center; color: #fff; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7)); }
-[data-variant="b"] .si__facts { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 2px 0; }
-[data-variant="b"] .si__fact { display: flex; align-items: center; justify-content: space-between; font-size: 15.5px; color: #e6e9ec; }
-[data-variant="b"] .si__label { font-weight: 600; font-size: 16px; }
+/* Mask for the 360° icon (Figma: linear, #000 100% at 9% → #000 10% at 100%; the layer itself half transparent) */
+[data-variant="b"] .si__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top right, #000 9%, rgba(0, 0, 0, 0.1) 100%); opacity: 0.5; pointer-events: none; }
+[data-variant="b"] .si__360 { position: absolute; z-index: 1; left: 8px; bottom: 7px; width: 34px; height: 26px; display: grid; place-items: center; color: #fff; }
+[data-variant="b"] .si__facts { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 0; }
+[data-variant="b"] .si__fact { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 37px; font-size: 15px; color: #e6e9ec; }
+[data-variant="b"] .si__fact + .si__fact { border-top: 1px solid rgba(255, 255, 255, 0.12); }
+[data-variant="b"] .si__label { font-weight: 600; font-size: 15px; }
+[data-variant="b"] .si__lines { display: flex; gap: 4px; }
+[data-variant="b"] .si__lines .line-badge { width: auto; min-width: 26px; height: 20px; padding: 0 4px; font-size: 13px; }
 [data-variant="b"] .si__dots { display: flex; gap: 3px; }
 [data-variant="b"] .si-dot { width: 9px; height: 9px; box-sizing: border-box; border-radius: 50%; border: 1.3px solid #c5cad0; }
 [data-variant="b"] .si-dot.is-on { border-color: var(--c); background: var(--c); }
-[data-variant="b"] .si__discover { align-self: stretch; height: 30px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 15px; background: #0c3346; color: #3fb5e8; font-size: 12.5px; font-weight: 600; letter-spacing: 0.06em; }
+/* What to look for */
+[data-variant="b"] .si__tip { display: flex; gap: 12px; margin-top: 18px; padding: 14px 16px; border-radius: 18px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.08); }
+[data-variant="b"] .si__tip svg { flex: none; margin-top: 1px; color: #3fb5e8; }
+[data-variant="b"] .si__tip b { display: block; margin-bottom: 3px; font-size: 14px; font-weight: 600; }
+[data-variant="b"] .si__tip p { margin: 0; font-size: 14px; line-height: 1.4; color: #d5dade; }
+[data-variant="b"] .si__discover { width: 100%; height: 40px; margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 20px; background: #0c3346; color: #3fb5e8; font: inherit; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; }
 [data-variant="b"] .si__discover:active { filter: brightness(1.2); }
 
 /* Selected special station on the map: white label with icon + name */
