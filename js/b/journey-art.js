@@ -12,7 +12,7 @@ import { touristMode } from './tourist-mode.js';
 const DATA_URL = './data/b/special-stations.json';
 const GENERIC_ICON = 'special-generic.png';
 const MAX_KM = 0.5;
-const ART_ICON = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="2.5"/><path d="m3 17 5.5-5.5 4 4 2.5-2.5L21 19" stroke-linecap="round"/><circle cx="16" cy="8.8" r="1.6" fill="currentColor" stroke="none"/></svg>';
+const ART_ICON = '<svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M6.4 6.6h11.2v3.6h-3.8v7.6h-3.6v-7.6H6.4z" fill="currentColor"/></svg>';
 
 function km([lng1, lat1], [lng2, lat2]) {
   const r = Math.PI / 180;
