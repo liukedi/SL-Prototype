@@ -1,8 +1,6 @@
-// Version B: three intro cards shown when Tourist Mode is first switched on
-// (Explore Stockholm → Unique Icons → Easy Exploration). Shown once per browser; ?reset
-// shows them again. "Skip All" on the first card closes them.
-
-const KEY = 'sl-proto-onboarding-b';
+// Version B: three intro cards shown when Tourist Mode is switched on
+// (Explore Stockholm → Unique Icons → Easy Exploration), every time.
+// "Skip All" on the first card closes them.
 
 const STEPS = [
   {
@@ -32,19 +30,9 @@ const STEPS = [
   },
 ];
 
-function seen() {
-  try {
-    if (new URLSearchParams(location.search).has('reset')) localStorage.removeItem(KEY);
-    return localStorage.getItem(KEY) === 'done';
-  } catch { return false; }
-}
-let done = seen();
-
-export const onboardingPending = () => !done;
-
-// Shows the cards unless they were already seen.
+// Shows the cards (every time Tourist Mode is switched on).
 export function showOnboarding() {
-  if (done || document.querySelector('.onb')) return;
+  if (document.querySelector('.onb')) return;
   const screen = document.getElementById('screen');
   const el = document.createElement('section');
   el.setAttribute('role', 'dialog');
@@ -67,8 +55,6 @@ export function showOnboarding() {
       </div>`;
   }
   function finish() {
-    done = true;
-    try { localStorage.setItem(KEY, 'done'); } catch { /* ignore */ }
     el.classList.add('is-closing');
     setTimeout(() => el.remove(), 220);
   }

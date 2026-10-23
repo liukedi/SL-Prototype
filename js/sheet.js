@@ -11,6 +11,7 @@ export function initSheet(sheet, { tabbar, onChange } = {}) {
   let snaps = {};
   let current = 'default';
   let top = 0;
+  let defaultTop = null; // override for the default snap point (version B)
 
   const screen = sheet.parentElement; // the fixed 393×852 phone screen
 
@@ -24,7 +25,7 @@ export function initSheet(sheet, { tabbar, onChange } = {}) {
     snaps = {
       expanded: Math.round(h * 0.1),
       // Matches reference/zoom-4: sheet top at 479 of 852 pt.
-      default: Math.round(h * (479 / 852)),
+      default: defaultTop ?? Math.round(h * (479 / 852)),
       // Only the search field shows above the tab bar.
       collapsed: Math.round(tabTop - headerBottom + 6),
     };
@@ -118,6 +119,12 @@ export function initSheet(sheet, { tabbar, onChange } = {}) {
     snapTo,
     // Re-measure after the sheet's content changed (e.g. stop page opened / closed).
     refresh: () => computeSnaps(),
+    // Moves the default snap point (pt from the screen top; null = the standard one).
+    setDefaultTop(px) {
+      defaultTop = px;
+      computeSnaps();
+      if (current === 'default') snapTo('default');
+    },
     get snap() { return current; },
     get snaps() { return { ...snaps }; },
   };

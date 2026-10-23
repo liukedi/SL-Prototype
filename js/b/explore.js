@@ -1,7 +1,9 @@
 // Version B (Tourist Mode on): the Map sheet gets two tabs under the search field.
 //   - Explore (default): "The Art Metro" – the nearest special stations, sorted by distance
-//     from the user (See All shows every one) – and "Curated Routes", a row of cards
-//     (arrows / horizontal scroll); "View Route" plans that trip in the Travel tab.
+//     from the user ("See All" opens a full-screen list, closed with ×) – and "Curated
+//     Routes", a row of cards (arrows / horizontal scroll); tapping a card or "View Route"
+//     plans that trip in the Travel tab.
+//   - The sheet's default position is higher while Tourist Mode is on (DEFAULT_TOP).
 //   - Favorite: the original sheet content (favourites, Add favorite).
 // Tourist Mode off: no tabs, the sheet is as in version A.
 import { CONFIG } from '../config.js';
@@ -14,6 +16,8 @@ const SPECIAL_URL = './data/b/special-stations.json';
 const ROUTES_URL = './data/b/curated-routes.json';
 const GENERIC_ICON = 'special-generic.png';
 const NEAREST = 3;
+const DEFAULT_TOP = 430; // pt from the screen top, as in the design (version A: 479)
+const CLOSE = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m3 3 14 14M17 3 3 17"/></svg>';
 const ARROW_RIGHT = '<svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h17M12 1l6 6-6 6"/></svg>';
 const ARROW_OUT = '<svg width="13" height="13" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"/></svg>';
 const chevron = (dir) => `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${dir === 'left' ? 'M8.5 1.5 1.5 9l7 7.5' : 'M1.5 1.5 8.5 9l-7 7.5'}"/></svg>`;
@@ -50,36 +54,65 @@ export async function addExplore(app) {
   panel.className = 'sheet__body b-explore';
   document.getElementById('sheet-body').after(panel);
 
-  let showAll = false;
+  const rowsHtml = (list) => list.map((s) => `
+    <button type="button" class="b-artrow" data-key="${esc(s.key)}">
+      <img src="icons/b/${esc(s.icon ?? GENERIC_ICON)}" alt="">
+      <span>${esc(s.stop.name)}${CHEVRON}</span>
+    </button>`).join('');
+  const SUBTITLE = 'Explore Stockholm’s curated art metro stations, sorted by distance.';
+
+  // ---- "See All": full-screen list (slides up like the search page, × closes it) ----
+  const screen = document.getElementById('screen');
+  const all = document.createElement('section');
+  all.className = 'b-allart';
+  all.setAttribute('aria-label', 'The Art Metro');
+  all.innerHTML = `
+    <div class="b-allart__head"><h2>The Art Metro</h2>
+      <button type="button" class="sp-close" data-act="close-all" aria-label="Close">${CLOSE}</button></div>
+    <div class="b-allart__body">
+      <p class="b-sec__sub">${SUBTITLE}</p>
+      <div class="b-artlist">${rowsHtml(nearby)}</div>
+    </div>`;
+  screen.appendChild(all);
+  function openAll() {
+    all.querySelector('.b-allart__body').scrollTop = 0;
+    all.classList.remove('is-closing');
+    all.classList.add('is-open');
+  }
+  function closeAll() {
+    if (!all.classList.contains('is-open')) return;
+    all.classList.add('is-closing');
+    all.classList.remove('is-open');
+    setTimeout(() => all.classList.remove('is-closing'), 280);
+  }
+  all.addEventListener('click', (e) => {
+    if (e.target.closest('[data-act="close-all"]')) return closeAll();
+    const row = e.target.closest('.b-artrow');
+    if (row) { closeAll(); app.openStop(stopFromKey(byKey, row.dataset.key)); }
+  });
+  document.querySelectorAll('.tabbar [data-tab]').forEach((t) => t.addEventListener('click', closeAll));
   const routeCard = (r) => {
     const stops = r.stops.map((k) => stopFromKey(byKey, k));
     const color = lineColor('metro', r.line);
     return `
-      <article class="b-route" style="--line:${esc(color)}">
+      <article class="b-route" style="--line:${esc(color)}" data-route="${esc(r.stops[0])}>${esc(r.stops.at(-1))}">
         <div class="b-route__meta">${lineBadgeHtml({ mode: 'metro', line: r.line, color })}<span>${stops.length} stops, ${esc(r.duration)}</span></div>
         <h4>${esc(r.title)}</h4>
         <p>${esc(r.description)}</p>
         <div class="b-route__line" aria-hidden="true">${stops.map(() => '<i></i>').join('')}</div>
         <div class="b-route__ends"><span>${esc(stops[0].name)}</span><span>${esc(stops.at(-1).name)}</span></div>
-        <button type="button" class="b-route__btn" data-route="${esc(r.stops[0])}>${esc(r.stops.at(-1))}">View Route ${ARROW_OUT}</button>
+        <button type="button" class="b-route__btn">View Route ${ARROW_OUT}</button>
       </article>`;
   };
 
   function render() {
-    const list = showAll ? nearby : nearby.slice(0, NEAREST);
     panel.innerHTML = `
       <div class="b-sec">
         <div class="b-sec__head"><h3>The Art Metro</h3>
-          <button type="button" class="b-seeall" data-act="see-all">${showAll ? 'Show less' : 'See All'} ${ARROW_RIGHT}</button></div>
-        <p class="b-sec__sub">Explore Stockholm’s curated art metro stations, sorted by distance.</p>
+          <button type="button" class="b-seeall" data-act="see-all">See All ${ARROW_RIGHT}</button></div>
+        <p class="b-sec__sub">${SUBTITLE}</p>
       </div>
-      <div class="b-artlist">
-        ${list.map((s) => `
-          <button type="button" class="b-artrow" data-key="${esc(s.key)}">
-            <img src="icons/b/${esc(s.icon ?? GENERIC_ICON)}" alt="">
-            <span>${esc(s.stop.name)}${CHEVRON}</span>
-          </button>`).join('')}
-      </div>
+      <div class="b-artlist">${rowsHtml(nearby.slice(0, NEAREST))}</div>
       <div class="b-sec b-sec--routes">
         <div class="b-sec__head"><h3>Curated Routes</h3>
           <span class="b-arrows">
@@ -119,12 +152,7 @@ export async function addExplore(app) {
   panel.addEventListener('click', (e) => {
     const row = e.target.closest('.b-artrow');
     if (row) return app.openStop(stopFromKey(byKey, row.dataset.key));
-    if (e.target.closest('[data-act="see-all"]')) {
-      showAll = !showAll;
-      render();
-      if (showAll) app.sheet.snapTo('expanded');
-      return;
-    }
+    if (e.target.closest('[data-act="see-all"]')) return openAll();
     const arrow = e.target.closest('[data-scroll]');
     if (arrow) {
       const track = panel.querySelector('.b-routes');
@@ -144,6 +172,11 @@ export async function addExplore(app) {
 
   setTab('explore');
   render();
-  // Back to Explore each time Tourist Mode is switched on.
-  touristMode.subscribe((on) => { if (on) setTab('explore'); });
+  const applyMode = (on) => {
+    app.sheet.setDefaultTop(on ? DEFAULT_TOP : null);
+    if (on) setTab('explore'); // back to Explore each time Tourist Mode is switched on
+    else closeAll();
+  };
+  applyMode(touristMode.on);
+  touristMode.subscribe(applyMode);
 }

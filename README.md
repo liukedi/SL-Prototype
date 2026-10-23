@@ -339,9 +339,13 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
 - **Tab bar:** hidden while a stop page is open in version B with Tourist Mode on (as in the Stadion design).
 - **Map sheet: Explore / Favorite tabs** (`js/b/explore.js`, `data/b/curated-routes.json`):
   - **Explore** (default): "The Art Metro" shows the 3 nearest special stations to the user (Gärdet), sorted by
-    distance. "See All" lists all of them and expands the sheet; tapping a station opens its stop page.
-  - "Curated Routes" is a row of route cards (arrows or horizontal scrolling). "View Route" plans the trip from the
-    first to the last stop in the Travel tab. Routes are edited in `data/b/curated-routes.json`.
+    distance; tapping a station opens its stop page. "See All" opens a full-screen list of all of them (like the
+    search page), closed with ×.
+  - "Curated Routes" is a row of route cards (arrows or horizontal scrolling). Tapping a card or "View Route"
+    plans the trip from the first to the last stop in the Travel tab. Routes are edited in
+    `data/b/curated-routes.json`.
+  - With Tourist Mode on, the sheet's default position is higher (430 pt from the top, as in the design;
+    `DEFAULT_TOP` in `js/b/explore.js`, through `sheet.setDefaultTop`).
   - **Favorite:** the original sheet content (favourites, Add favorite).
   - With Tourist Mode off there are no tabs, and the sheet is as in A.
 - **Art stations on journey details** (`js/b/journey-art.js`, through the `setJourneyDecorator` hook in
@@ -353,9 +357,8 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
   - A layers button at the top left of the map opens the "Map Setting" sheet, which has a Tourist Mode switch.
   - **Off:** version B looks and works exactly like A (no special stations, no Information tab, normal tab bar).
   - **On:** all the version B features above.
-  - The first time it is switched on, the sheet closes and three intro cards are shown (`js/b/onboarding.js`):
-    Explore Stockholm (with "Skip All"), Unique Icons, Easy Exploration. They are shown once per browser
-    (`sl-proto-onboarding-b`), and `?reset` shows them again.
+  - Each time it is switched on, the sheet closes and three intro cards are shown (`js/b/onboarding.js`):
+    Explore Stockholm (with "Skip All"), Unique Icons, Easy Exploration.
   - The default is `touristModeDefault` in `js/config.js` (off: participants are guided to switch it on). The choice is remembered per browser
     (`sl-proto-tourist-b`), and `?reset` restores the default.
 
