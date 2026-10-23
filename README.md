@@ -337,6 +337,13 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
   - The 360° button shows "not available in the prototype" for 5 s, with a close button. DISCOVER does the same
     until `discoverUrl` is set.
 - **Tab bar:** hidden while a stop page is open in version B with Tourist Mode on (as in the Stadion design).
+- **Map sheet: Explore / Favorite tabs** (`js/b/explore.js`, `data/b/curated-routes.json`):
+  - **Explore** (default): "The Art Metro" shows the 3 nearest special stations to the user (Gärdet), sorted by
+    distance. "See All" lists all of them and expands the sheet; tapping a station opens its stop page.
+  - "Curated Routes" is a row of route cards (arrows or horizontal scrolling). "View Route" plans the trip from the
+    first to the last stop in the Travel tab. Routes are edited in `data/b/curated-routes.json`.
+  - **Favorite:** the original sheet content (favourites, Add favorite).
+  - With Tourist Mode off there are no tabs, and the sheet is as in A.
 - **Art stations on journey details** (`js/b/journey-art.js`, through the `setJourneyDecorator` hook in
   `js/journey-details.js`, which A doesn't use):
   - The station icon after the station name: boarding and alighting stations, and the stops under "Show N stops".

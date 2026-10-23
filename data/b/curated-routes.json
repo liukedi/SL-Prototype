@@ -1,0 +1,26 @@
+{
+  "_help": "Version B 'Curated Routes' cards (Map sheet → Explore). stops: keys as in data/search-index.json ('Name|Municipality'), in riding order; 'View Route' plans a journey from the first to the last stop. line: metro line number (gives the colour). The first two are from the design; the third is a placeholder.",
+  "routes": [
+    {
+      "title": "Sky & Science",
+      "line": 14,
+      "duration": "about 1 h",
+      "description": "Rainbow tunnel, cosmic ceiling and human rights tiles.",
+      "stops": ["Östermalmstorg|Stockholm", "Stadion|Stockholm", "Tekniska högskolan|Stockholm", "Universitetet|Stockholm"]
+    },
+    {
+      "title": "Blue Line Classics",
+      "line": 11,
+      "duration": "about 1h30",
+      "description": "The most photographed caves on the blue line.",
+      "stops": ["Kungsträdgården|Stockholm", "T-Centralen|Stockholm", "Rådhuset|Stockholm", "Fridhemsplan|Stockholm", "Solna centrum|Solna"]
+    },
+    {
+      "title": "Neon to Pixels",
+      "line": 18,
+      "duration": "about 1 h",
+      "description": "Neon tubes, changing exhibitions and 8-bit tiles.",
+      "stops": ["Hötorget|Stockholm", "Odenplan|Stockholm", "Fridhemsplan|Stockholm", "Thorildsplan|Stockholm"]
+    }
+  ]
+}
