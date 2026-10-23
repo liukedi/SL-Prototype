@@ -8,6 +8,7 @@ import { setStopInfoProvider } from '../stop-page.js';
 import { stopKey } from '../stop-index.js';
 import { esc } from '../departure-row.js';
 import { showToast } from './toast.js';
+import { touristMode } from './tourist-mode.js';
 
 const INFO_URL = './data/b/station-info.json';
 const CREDITS_URL = './assets/b/stations/credits.json';
@@ -37,7 +38,7 @@ export async function addStationInfo(app) {
   // ---- Information tab ----
   setStopInfoProvider((stop) => {
     const d = info[stopKey(stop)];
-    if (!d) return null; // not an art station: the usual stop page
+    if (!d || !touristMode.on) return null; // not an art station, or Tourist Mode off: the usual stop page
     const c = COMPLEXITY[d.complexity] ?? COMPLEXITY[1];
     const credit = credits[stop.name];
     const creditText = credit ? `Photo: ${credit.author} (${credit.license}), Wikimedia Commons` : '';
@@ -82,7 +83,7 @@ export async function addStationInfo(app) {
     clearLabel();
     const stop = e.detail;
     const key = stopKey(stop);
-    if (!iconOf[key] || !stop.lngLat) return;
+    if (!touristMode.on || !iconOf[key] || !stop.lngLat) return;
     app.map.clearStop(); // replace the plain pin
     const el = document.createElement('div');
     // Exhibition stations (Figma "Frame 35"): a wider green frame whose hook rises above the label.
@@ -93,4 +94,5 @@ export async function addStationInfo(app) {
     if (map.getLayer('special-icon')) map.setFilter('special-icon', ['!=', ['get', 'key'], key]);
   });
   document.addEventListener('sl:close-stop', clearLabel);
+  touristMode.subscribe((on) => { if (!on) clearLabel(); });
 }

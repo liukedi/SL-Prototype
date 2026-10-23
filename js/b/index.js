@@ -9,6 +9,7 @@
 //   app.openStop(stop), app.closeStop()
 import { addSpecialStations } from './special-stations.js';
 import { addStationInfo } from './station-info.js';
+import { addMapSettings } from './map-settings.js';
 
 export function initVariantB(app) {
   // Version B styles (css/b.css), only for this version.
@@ -18,6 +19,7 @@ export function initVariantB(app) {
   document.head.appendChild(link);
 
   // Design changes for version B (each in its own module in this folder).
+  addMapSettings();
   addSpecialStations(app).catch((err) => console.error('special stations', err));
   addStationInfo(app).catch((err) => console.error('station info', err));
 }

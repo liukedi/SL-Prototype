@@ -55,8 +55,8 @@
 
 /* On a stop page the tab bar is hidden (as in the Stadion design), so the station
    information is fully visible. */
-[data-variant="b"] .screen:has(.sheet.is-stop) .tabbar { display: none; }
-[data-variant="b"] .sheet.is-stop .stop-page__scroll { padding-bottom: 40px; }
+[data-variant="b"][data-tourist="on"] .screen:has(.sheet.is-stop) .tabbar { display: none; }
+[data-variant="b"][data-tourist="on"] .sheet.is-stop .stop-page__scroll { padding-bottom: 40px; }
 
 /* Exhibition station label (Figma "Frame 35", 196×67 px at 1.5×): the green frame is 82 px wide
    and its hook rises 25 px above the label; the name starts at x = 91 px. */
@@ -69,3 +69,56 @@
   height: 61px;  /* 92 / 1.5: frame 44.7 + hook 16.7 above */
   border-radius: 0;
 }
+
+/* ===== Layers button + Map Setting sheet (Tourist Mode) ===== */
+[data-variant="b"] .layers-btn {
+  position: absolute;
+  left: 15px;
+  top: calc(max(var(--safe-top), 12px) - 2px);
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--c-cyan);
+  background: rgba(30, 52, 64, 0.55);
+  z-index: 10;
+}
+[data-variant="b"] .layers-btn:active { transform: scale(0.94); }
+/* Map attribution moves below the layers button. */
+[data-variant="b"] #map .maplibregl-ctrl-top-left { top: calc(max(var(--safe-top), 12px) + 50px); }
+
+[data-variant="b"] .map-settings {
+  position: absolute;
+  left: var(--sheet-inset);
+  right: var(--sheet-inset);
+  bottom: 0;
+  z-index: 36;
+  display: none;
+  padding: 0 14px calc(var(--safe-bottom) + 6px);
+  border-radius: 28px 28px 0 0;
+  background: var(--c-sheet);
+  -webkit-backdrop-filter: var(--c-sheet-blur);
+  backdrop-filter: var(--c-sheet-blur);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-bottom: 0;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.22);
+}
+[data-variant="b"] .map-settings.is-open { display: block; animation: sp-up 0.32s cubic-bezier(0.2, 0.9, 0.25, 1); }
+[data-variant="b"] .map-settings.is-closing { display: block; animation: sp-down 0.26s ease-in forwards; }
+[data-variant="b"] .map-settings__head { display: flex; align-items: center; justify-content: space-between; padding: 10px 0 10px 8px; }
+[data-variant="b"] .map-settings__head h2 { margin: 0; font-size: 26px; font-weight: 600; }
+[data-variant="b"] .map-settings__section { margin: 14px 0 6px 13px; font-size: 15px; letter-spacing: 0.02em; color: #e6e9ec; }
+[data-variant="b"] .map-settings__hint { margin: 0 0 14px 13px; font-size: 12.5px; color: #c5cad0; }
+[data-variant="b"] .map-settings__card { display: flex; align-items: center; justify-content: space-between; height: 66px; padding: 0 14px 0 20px; border-radius: 22px; background: rgba(4, 30, 40, 0.8); }
+[data-variant="b"] .map-settings__card span { font-size: 18px; font-weight: 600; }
+[data-variant="b"] .switch--large { width: 64px; height: 34px; border-radius: 17px; }
+[data-variant="b"] .switch--large span { width: 30px; height: 30px; }
+[data-variant="b"] .switch--large.is-on { background: #2a9fd8; }
+[data-variant="b"] .switch--large.is-on span { left: 32px; }
+/* While the Map Setting sheet is open, the normal sheet, tab bar and locate button step aside. */
+[data-variant="b"] .screen.map-settings-open .sheet,
+[data-variant="b"] .screen.map-settings-open .tabbar,
+[data-variant="b"] .screen.map-settings-open .locate-btn { visibility: hidden; }
+/* The layers button is part of the Map tab only. */
+[data-variant="b"] .screen:has(.page:not([hidden])) .layers-btn { display: none; }

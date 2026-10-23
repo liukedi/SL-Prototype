@@ -20,6 +20,10 @@ export const CONFIG = {
   // journeys start at this time (today) and run on from there. null = real time.
   scenarioTime: '18:30',
 
+  // Version B: Tourist Mode state when a participant first opens version B (the Map
+  // Setting switch then remembers their choice in the browser).
+  touristModeDefault: true,
+
   // Stop visibility thresholds (MapLibre zoom levels).
   stopsDotMinZoom: 11.8, // below: no stops (zoom-1-city)
   stopsIconMinZoom: 14, // from here: rounded-square icons (zoom-4-street)

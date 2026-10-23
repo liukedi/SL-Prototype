@@ -336,7 +336,13 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
   - Information shows a description, a photo, Duration, Complexity (easy ○○●, medium ○●●, complex ●●●) and DISCOVER.
   - The 360° button shows "not available in the prototype" for 5 s, with a close button. DISCOVER does the same
     until `discoverUrl` is set.
-- **Tab bar:** hidden while a stop page is open in version B (as in the Stadion design).
+- **Tab bar:** hidden while a stop page is open in version B with Tourist Mode on (as in the Stadion design).
+- **Map Setting / Tourist Mode** (`js/b/map-settings.js`, `js/b/tourist-mode.js`):
+  - A layers button at the top left of the map opens the "Map Setting" sheet, which has a Tourist Mode switch.
+  - **Off:** version B looks and works exactly like A (no special stations, no Information tab, normal tab bar).
+  - **On:** all the version B features above.
+  - The default is `touristModeDefault` in `js/config.js` (on). The choice is remembered per browser
+    (`sl-proto-tourist-b`), and `?reset` restores the default.
 
 ### Station photo credits (Wikimedia Commons)
 

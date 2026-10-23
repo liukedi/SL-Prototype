@@ -7,6 +7,7 @@
 //   - Tapping one opens its stop page.
 import { CONFIG } from '../config.js';
 import { loadStopIndex, stopFromKey } from '../stop-index.js';
+import { touristMode } from './tourist-mode.js';
 
 export const SPECIAL_ORANGE = '#d99a46'; // from the orange T icon in the Figma design
 const SPECIAL_ICON_ZOOM = 13.3;
@@ -46,10 +47,9 @@ export async function addSpecialStations(app) {
 
   map.addSource('special-stations', { type: 'geojson', data: { type: 'FeatureCollection', features } });
 
-  // Hide the ordinary metro dot / icon of special stations.
+  // With Tourist Mode on, the ordinary metro dot / icon of special stations is hidden.
   const names = features.map((f) => f.properties.name);
   const notSpecialMetro = ['!', ['all', ['==', ['get', 'type'], 'metro'], ['in', ['get', 'name'], ['literal', names]]]];
-  for (const id of ['stops-dot', 'stops-icon']) map.setFilter(id, notSpecialMetro);
 
   map.addLayer({
     id: 'special-dot',
@@ -77,6 +77,14 @@ export async function addSpecialStations(app) {
       'icon-ignore-placement': true,
     },
   });
+
+  // Tourist Mode off → the map looks exactly like version A.
+  function apply(on) {
+    for (const id of ['stops-dot', 'stops-icon']) map.setFilter(id, on ? notSpecialMetro : null);
+    for (const id of ['special-dot', 'special-icon']) map.setLayoutProperty(id, 'visibility', on ? 'visible' : 'none');
+  }
+  apply(touristMode.on);
+  touristMode.subscribe(apply);
 
   // Tap a special station → its stop page.
   for (const id of ['special-dot', 'special-icon']) {
