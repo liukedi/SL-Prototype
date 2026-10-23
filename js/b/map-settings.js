@@ -1,6 +1,7 @@
 // Version B: layers button (top-left of the map) → "Map Setting" sheet with the Tourist
 // Mode switch. While the sheet is open, the normal bottom sheet and tab bar are hidden.
 import { touristMode } from './tourist-mode.js';
+import { showOnboarding, onboardingPending } from './onboarding.js';
 
 const LAYERS = '<svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M13 3.5 23 9l-10 5.5L3 9z"/><path d="m3 13.2 10 5.5 10-5.5"/><path d="m3 17.4 10 5.5 10-5.5"/></svg>';
 const CLOSE = '<svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m3 3 14 14M17 3 3 17"/></svg>';
@@ -56,7 +57,11 @@ export function addMapSettings() {
   sheet.addEventListener('click', (e) => {
     const act = e.target.closest('[data-act]')?.dataset.act;
     if (act === 'close') close();
-    if (act === 'tourist') touristMode.set(!touristMode.on);
+    if (act === 'tourist') {
+      touristMode.set(!touristMode.on);
+      // First time on: close the sheet and show the intro cards.
+      if (touristMode.on && onboardingPending()) setTimeout(() => { close(); setTimeout(showOnboarding, 280); }, 350);
+    }
   });
   touristMode.subscribe(renderSwitch);
   renderSwitch();

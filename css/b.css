@@ -122,3 +122,58 @@
 [data-variant="b"] .screen.map-settings-open .locate-btn { visibility: hidden; }
 /* The layers button is part of the Map tab only. */
 [data-variant="b"] .screen:has(.page:not([hidden])) .layers-btn { display: none; }
+
+/* ---- Tourist Mode intro cards (js/b/onboarding.js) ---- */
+[data-variant="b"] .onb {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 18px;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  min-height: 332px;
+  padding: 44px 34px 18px 33px;
+  overflow: hidden;
+  border-radius: 40px;
+  color: #fff;
+  background: rgba(70, 98, 104, 0.55);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  backdrop-filter: blur(22px) saturate(140%);
+  border: 1px solid rgba(0, 0, 0, 0.55);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  animation: onb-in 0.32s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+[data-variant="b"] .onb.is-closing { animation: onb-out 0.22s ease-in forwards; }
+@keyframes onb-in { from { opacity: 0; transform: translateY(40px); } }
+@keyframes onb-out { to { opacity: 0; transform: translateY(40px); } }
+[data-variant="b"] .onb__content { flex: 1; }
+[data-variant="b"] .onb h2 { margin: 0 0 18px; font-size: 18.5px; line-height: 1.36; font-weight: 600; }
+[data-variant="b"] .onb p, [data-variant="b"] .onb li { font-size: 12.2px; line-height: 1.6; }
+[data-variant="b"] .onb b { font-weight: 600; }
+[data-variant="b"] .onb__list { margin: 0; padding-left: 20px; }
+[data-variant="b"] .onb__list li { padding-left: 2px; }
+[data-variant="b"] .onb__icons { margin: -4px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+[data-variant="b"] .onb__icons li { display: flex; align-items: center; gap: 14px; }
+[data-variant="b"] .onb__icons img { flex: none; width: 45px; height: 45px; object-fit: contain; }
+[data-variant="b"] .onb__icons p { margin: 0; }
+[data-variant="b"] .onb__actions { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 12px; }
+[data-variant="b"] .onb__btn {
+  width: 248px;
+  height: 52px;
+  border-radius: 26px;
+  background: #0a7bbd;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+}
+[data-variant="b"] .onb__btn:active { background: #08679f; }
+[data-variant="b"] .onb__skip { color: #fff; font: inherit; font-size: 13px; padding: 4px 10px; }
+/* First card: T-Centralen photo, faded, behind the text. */
+[data-variant="b"] .onb--photo {
+  background:
+    linear-gradient(180deg, rgba(20, 24, 28, 0.25) 0%, rgba(20, 24, 28, 0.15) 60%, rgba(20, 24, 28, 0.35) 100%),
+    url("../assets/b/stations/t-centralen.jpg") center 60% / cover;
+}
+[data-variant="b"] .onb--photo h2, [data-variant="b"] .onb--photo p { text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55); }

@@ -22,7 +22,7 @@ export const CONFIG = {
 
   // Version B: Tourist Mode state when a participant first opens version B (the Map
   // Setting switch then remembers their choice in the browser).
-  touristModeDefault: true,
+  touristModeDefault: false,
 
   // Stop visibility thresholds (MapLibre zoom levels).
   stopsDotMinZoom: 11.8, // below: no stops (zoom-1-city)

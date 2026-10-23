@@ -341,7 +341,10 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
   - A layers button at the top left of the map opens the "Map Setting" sheet, which has a Tourist Mode switch.
   - **Off:** version B looks and works exactly like A (no special stations, no Information tab, normal tab bar).
   - **On:** all the version B features above.
-  - The default is `touristModeDefault` in `js/config.js` (on). The choice is remembered per browser
+  - The first time it is switched on, the sheet closes and three intro cards are shown (`js/b/onboarding.js`):
+    Explore Stockholm (with "Skip All"), Unique Icons, Easy Exploration. They are shown once per browser
+    (`sl-proto-onboarding-b`), and `?reset` shows them again.
+  - The default is `touristModeDefault` in `js/config.js` (off: participants are guided to switch it on). The choice is remembered per browser
     (`sl-proto-tourist-b`), and `?reset` restores the default.
 
 ### Station photo credits (Wikimedia Commons)
