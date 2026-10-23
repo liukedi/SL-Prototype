@@ -1,8 +1,9 @@
 // Version B (Tourist Mode on): the Map sheet gets two tabs under the search field.
 //   - Explore (default): "The Art Metro" – the nearest special stations, sorted by distance
 //     from the user ("See All" opens a full-screen list, closed with ×) – and "Curated
-//     Routes", a row of cards (arrows / horizontal scroll); tapping a card or "View Route"
-//     plans that trip in the Travel tab.
+//     Routes", a row of cards (arrows / horizontal scroll); a card opens a full-screen route
+//     page (small route map, its stations, "Plan this trip" → Travel tab).
+//   - A stop opened from See All or a route page returns there (same scroll) when closed.
 //   - The sheet's default position is higher while Tourist Mode is on (DEFAULT_TOP).
 //   - Favorite: the original sheet content (favourites, Add favorite).
 // Tourist Mode off: no tabs, the sheet is as in version A.
@@ -10,7 +11,10 @@ import { CONFIG } from '../config.js';
 import { loadStopIndex, stopFromKey } from '../stop-index.js';
 import { lineColor } from '../departures.js';
 import { lineBadgeHtml, CHEVRON, esc } from '../departure-row.js';
+import { createRouteMap } from '../map.js';
+import { METRO_LINES } from '../routes.js';
 import { touristMode } from './tourist-mode.js';
+import { routeArtIcons } from './journey-art.js';
 
 const SPECIAL_URL = './data/b/special-stations.json';
 const ROUTES_URL = './data/b/curated-routes.json';
@@ -29,7 +33,7 @@ function km([lng1, lat1], [lng2, lat2]) {
 }
 
 export async function addExplore(app) {
-  const [{ stations }, { routes }, { byKey }] = await Promise.all([
+  const [{ stations }, { routes }, { byKey, rows }] = await Promise.all([
     fetch(SPECIAL_URL).then((r) => r.json()),
     fetch(ROUTES_URL).then((r) => r.json()),
     loadStopIndex(),
@@ -99,12 +103,7 @@ export async function addExplore(app) {
     all.classList.remove('is-closing');
     all.classList.add('is-open');
   }
-  function closeAll() {
-    if (!all.classList.contains('is-open')) return;
-    all.classList.add('is-closing');
-    all.classList.remove('is-open');
-    setTimeout(() => all.classList.remove('is-closing'), 280);
-  }
+  const closeAll = () => closePanel(all);
   all.addEventListener('click', (e) => {
     if (e.target.closest('[data-act="close-all"]')) return closeAll();
     const chip = e.target.closest('[data-cat]');
@@ -113,14 +112,120 @@ export async function addExplore(app) {
       return renderAll();
     }
     const row = e.target.closest('.b-artrow');
-    if (row) { closeAll(); app.openStop(stopFromKey(byKey, row.dataset.key)); }
+    if (row) openStopFrom(all, row.dataset.key);
   });
-  document.querySelectorAll('.tabbar [data-tab]').forEach((t) => t.addEventListener('click', closeAll));
-  const routeCard = (r) => {
+
+  // ---- Full-screen pages (See All, route page): open / close, and coming back from a stop ----
+  function closePanel(el, after) {
+    if (!el.classList.contains('is-open')) return;
+    el.classList.add('is-closing');
+    el.classList.remove('is-open');
+    setTimeout(() => { el.classList.remove('is-closing'); after?.(); }, 280);
+  }
+  // A stop opened from a full-screen page: hide the page (kept as it is), and show it again,
+  // scrolled where it was, when the stop page is closed.
+  let returnTo = null;
+  function openStopFrom(el, key) {
+    returnTo = { el, scroll: el.querySelector('.b-allart__body').scrollTop };
+    el.classList.remove('is-open');
+    app.openStop(stopFromKey(byKey, key));
+  }
+  document.addEventListener('sl:close-stop', () => {
+    if (!returnTo) return;
+    const { el, scroll } = returnTo;
+    returnTo = null;
+    el.classList.add('is-open');
+    el.querySelector('.b-allart__body').scrollTop = scroll;
+    if (el === routePage) routeMap?.map.resize();
+  });
+  const leave = () => {
+    returnTo = null;
+    closeAll();
+    closeRoute();
+  };
+  document.querySelectorAll('.tabbar [data-tab]').forEach((t) => t.addEventListener('click', leave));
+
+  // ---- Route page: a curated route's map, stations and "Plan this trip" ----
+  const iconOf = Object.fromEntries(stations.map((s) => [s.key, s.icon ?? GENERIC_ICON]));
+  const metroStation = (name) => {
+    let any = null;
+    for (const [n, municipality, types, lng, lat] of rows) {
+      if (n !== name || lng == null) continue;
+      if (types.includes('m')) return { name, municipality, lngLat: [lng, lat] };
+      any ??= { name, municipality, lngLat: [lng, lat] };
+    }
+    return any;
+  };
+  // The ride as a journey for createRouteMap: every station of the line between the ends.
+  function routeJourney(r) {
+    const ends = [r.stops[0], r.stops.at(-1)].map((k) => stopFromKey(byKey, k).name);
+    const line = METRO_LINES[r.line] ?? [];
+    const [a, b] = ends.map((n) => line.indexOf(n));
+    const names = a < 0 || b < 0 ? r.stops.map((k) => stopFromKey(byKey, k).name)
+      : a <= b ? line.slice(a, b + 1) : line.slice(b, a + 1).reverse();
+    const stops = names.map(metroStation).filter((x) => x?.lngLat);
+    return { legs: [{ mode: 'metro', line: r.line, color: lineColor('metro', r.line), stops }], startLngLat: null, endLngLat: null };
+  }
+  const routePage = document.createElement('section');
+  routePage.className = 'b-allart b-routepage';
+  screen.appendChild(routePage);
+  let routeMap = null;
+  let routeShown = null;
+  function openRoute(i) {
+    const r = routes[i];
+    routeShown = r;
+    const color = lineColor('metro', r.line);
+    routePage.setAttribute('aria-label', r.title);
+    routePage.innerHTML = `
+      <div class="b-allart__head"><h2>${esc(r.title)}</h2>
+        <button type="button" class="sp-close" data-act="close-route" aria-label="Close">${CLOSE}</button></div>
+      <div class="b-allart__body">
+        <div class="b-route__meta">${lineBadgeHtml({ mode: 'metro', line: r.line, color })}<span>${r.stops.length} stops, ${esc(r.duration)}</span></div>
+        <p class="b-routepage__desc">${esc(r.description)}</p>
+        <div class="b-routepage__map"></div>
+        <h3 class="b-routepage__h">Stations</h3>
+        <div class="b-artlist">${r.stops.map((k) => `
+          <button type="button" class="b-artrow" data-key="${esc(k)}">
+            <img src="icons/b/${esc(iconOf[k] ?? GENERIC_ICON)}" alt="">
+            <span>${esc(stopFromKey(byKey, k).name)}${CHEVRON}</span>
+          </button>`).join('')}
+        </div>
+        <button type="button" class="b-routepage__plan" data-act="plan">Plan this trip ${ARROW_OUT}</button>
+      </div>`;
+    routePage.classList.remove('is-closing');
+    routePage.classList.add('is-open');
+    routeMap?.remove();
+    routeMap = null;
+    const journey = routeJourney(r);
+    createRouteMap(routePage.querySelector('.b-routepage__map'), journey).then((m) => {
+      if (routeShown !== r) return m.remove(); // closed or another route opened meanwhile
+      routeMap = m;
+      routeArtIcons(m, journey)?.setFullscreen(true);
+    });
+  }
+  function closeRoute() {
+    routeShown = null;
+    closePanel(routePage, () => { routeMap?.remove(); routeMap = null; });
+  }
+  function planTrip(r) {
+    const [from, to] = [r.stops[0], r.stops.at(-1)].map((k) => stopFromKey(byKey, k));
+    document.querySelector('.tabbar [data-tab="travel"]').click();
+    app.travel.setEndpoint('from', from);
+    app.travel.setEndpoint('to', to);
+    document.querySelector('#page-travel [data-act="search"]')?.click();
+  }
+  routePage.addEventListener('click', (e) => {
+    const act = e.target.closest('[data-act]')?.dataset.act;
+    if (act === 'close-route') return closeRoute();
+    if (act === 'plan') return planTrip(routeShown);
+    const row = e.target.closest('.b-artrow');
+    if (row) openStopFrom(routePage, row.dataset.key);
+  });
+  const routeCard = (r, i) => {
     const stops = r.stops.map((k) => stopFromKey(byKey, k));
     const color = lineColor('metro', r.line);
     return `
-      <article class="b-route" style="--line:${esc(color)}" data-route="${esc(r.stops[0])}>${esc(r.stops.at(-1))}">
+      <article class="b-route" style="--line:${esc(color)}" data-route="${i}">
         <div class="b-route__meta">${lineBadgeHtml({ mode: 'metro', line: r.line, color })}<span>${stops.length} stops, ${esc(r.duration)}</span></div>
         <h4>${esc(r.title)}</h4>
         <p>${esc(r.description)}</p>
@@ -212,13 +317,7 @@ export async function addExplore(app) {
       return stepRoutes(Number(arrow.dataset.scroll));
     }
     const route = e.target.closest('[data-route]');
-    if (route) {
-      const [from, to] = route.dataset.route.split('>').map((k) => stopFromKey(byKey, k));
-      document.querySelector('.tabbar [data-tab="travel"]').click();
-      app.travel.setEndpoint('from', from);
-      app.travel.setEndpoint('to', to);
-      document.querySelector('#page-travel [data-act="search"]')?.click();
-    }
+    if (route) openRoute(Number(route.dataset.route));
   });
 
   setTab('explore');
@@ -226,7 +325,7 @@ export async function addExplore(app) {
   const applyMode = (on) => {
     app.sheet.setDefaultTop(on ? DEFAULT_TOP : null);
     if (on) setTab('explore'); // back to Explore each time Tourist Mode is switched on
-    else closeAll();
+    else leave();
   };
   applyMode(touristMode.on);
   touristMode.subscribe(applyMode);

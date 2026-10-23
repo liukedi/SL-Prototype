@@ -315,3 +315,26 @@
 [data-variant="b"] .b-filters::-webkit-scrollbar { display: none; }
 [data-variant="b"] .b-filter { height: 38px; gap: 6px; padding: 0 10px 0 5px; font: inherit; font-size: 13.5px; }
 [data-variant="b"] .b-filter img { width: 28px; height: 28px; object-fit: contain; }
+
+/* Curated route page (full-screen, like See All) */
+[data-variant="b"] .b-routepage .b-route__meta { margin: 2px 4px 0; font-size: 13px; }
+[data-variant="b"] .b-routepage .line-badge { width: 35px; height: 22px; font-size: 15px; }
+[data-variant="b"] .b-routepage__desc { margin: 10px 4px 16px; font-size: 15px; line-height: 1.4; color: #e6e9ec; }
+[data-variant="b"] .b-routepage__map { height: 210px; border-radius: 22px; overflow: hidden; background: #1f242d; border: 1px solid rgba(255, 255, 255, 0.08); }
+[data-variant="b"] .b-routepage__h { margin: 22px 4px 12px; font-size: 16.5px; font-weight: 600; }
+[data-variant="b"] .b-routepage__plan {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 46px;
+  margin-top: 18px;
+  border-radius: 23px;
+  background: #0a7bbd;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+}
+[data-variant="b"] .b-routepage__plan:active { background: #08679f; }

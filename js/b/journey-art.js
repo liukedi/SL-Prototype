@@ -29,6 +29,11 @@ function loadImage(url) {
   });
 }
 
+// Art station icons on a route map (createRouteMap): returns { setFullscreen(on) } that
+// shows / hides them, or null when the route has none. Ready once addJourneyArt has loaded.
+let routeArt = null;
+export const routeArtIcons = (routeMap, journey) => routeArt?.(routeMap, journey) ?? null;
+
 export async function addJourneyArt() {
   const [{ stations }, { byKey }] = await Promise.all([fetch(DATA_URL).then((r) => r.json()), loadStopIndex()]);
   const byName = new Map();
@@ -56,44 +61,45 @@ export async function addJourneyArt() {
       const n = touristMode.on ? onRoute(j).size : 0;
       return n ? `<span class="jd-summary__art">${ART_ICON}${n} art station${n > 1 ? 's' : ''}</span>` : '';
     },
-    routeMap(routeMap, j) {
-      if (!touristMode.on) return null;
-      const map = routeMap.map;
-      const found = onRoute(j);
-      if (!found.size) return null;
-      const names = [...found.keys()];
-      const features = [...found].map(([name, s]) => ({
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: s.lngLat },
-        properties: { name, icon: `b-${s.icon}` },
-      }));
-      Promise.all([...new Set(features.map((f) => f.properties.icon))].map(async (id) => {
-        const img = await loadImage(`icons/b/${id.slice(2)}`);
-        if (!map.hasImage(id)) map.addImage(id, img, { pixelRatio: 3 });
-      })).catch((err) => console.error('journey art icons', err));
-
-      map.addSource('route-art', { type: 'geojson', data: { type: 'FeatureCollection', features } });
-      map.addLayer({
-        id: 'route-art',
-        type: 'symbol',
-        source: 'route-art',
-        layout: {
-          visibility: 'none',
-          'icon-image': ['get', 'icon'],
-          'icon-size': 0.45, // 67 pt designs at ~30 pt
-          'icon-allow-overlap': true,
-          'icon-ignore-placement': true,
-        },
-      });
-      // The route's own dots / end circles at these stations step aside for the icon.
-      const notArt = ['!', ['in', ['get', 'name'], ['literal', names]]];
-      const original = Object.fromEntries(['route-dots', 'route-ends', 'route-ends-core'].map((id) => [id, map.getFilter(id)]));
-      return {
-        setFullscreen(on) {
-          map.setLayoutProperty('route-art', 'visibility', on ? 'visible' : 'none');
-          for (const [id, f] of Object.entries(original)) map.setFilter(id, on ? ['all', f, notArt] : f);
-        },
-      };
-    },
+    routeMap: (routeMap, j) => (touristMode.on ? routeArt(routeMap, j) : null),
   });
+
+  routeArt = (routeMap, j) => {
+    const map = routeMap.map;
+    const found = onRoute(j);
+    if (!found.size) return null;
+    const names = [...found.keys()];
+    const features = [...found].map(([name, s]) => ({
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: s.lngLat },
+      properties: { name, icon: `b-${s.icon}` },
+    }));
+    Promise.all([...new Set(features.map((f) => f.properties.icon))].map(async (id) => {
+      const img = await loadImage(`icons/b/${id.slice(2)}`);
+      if (!map.hasImage(id)) map.addImage(id, img, { pixelRatio: 3 });
+    })).catch((err) => console.error('journey art icons', err));
+
+    map.addSource('route-art', { type: 'geojson', data: { type: 'FeatureCollection', features } });
+    map.addLayer({
+      id: 'route-art',
+      type: 'symbol',
+      source: 'route-art',
+      layout: {
+        visibility: 'none',
+        'icon-image': ['get', 'icon'],
+        'icon-size': 0.45, // 67 pt designs at ~30 pt
+        'icon-allow-overlap': true,
+        'icon-ignore-placement': true,
+      },
+    });
+    // The route's own dots / end circles at these stations step aside for the icon.
+    const notArt = ['!', ['in', ['get', 'name'], ['literal', names]]];
+    const original = Object.fromEntries(['route-dots', 'route-ends', 'route-ends-core'].map((id) => [id, map.getFilter(id)]));
+    return {
+      setFullscreen(on) {
+        map.setLayoutProperty('route-art', 'visibility', on ? 'visible' : 'none');
+        for (const [id, f] of Object.entries(original)) map.setFilter(id, on ? ['all', f, notArt] : f);
+      },
+    };
+  };
 }

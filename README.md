@@ -344,9 +344,11 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
     distance; tapping a station opens its stop page. "See All" opens a full-screen list of all of them (like the
     search page), closed with ×, with three filter chips: Art Interior, Art Exhibits, Scenic View (one at a time;
     tap again to show all).
-  - "Curated Routes" is a row of route cards (arrows or horizontal scrolling). Tapping a card or "View Route"
-    plans the trip from the first to the last stop in the Travel tab. Routes are edited in
+  - "Curated Routes" is a row of route cards (arrows or horizontal scrolling). A card opens a full-screen route
+    page: a small route map (every station of the line between the ends, art stations as icons), the route's
+    stations as a list, and "Plan this trip", which plans it in the Travel tab. Routes are edited in
     `data/b/curated-routes.json`.
+  - A stop opened from See All or a route page returns there when it's closed, with the same filter and scroll.
   - With Tourist Mode on, the sheet's default position is higher (350 pt from the top;
     `DEFAULT_TOP` in `js/b/explore.js`, through `sheet.setDefaultTop`). Stop pages keep A's position (479 pt).
 - **Map centre** (`js/b/map-center.js`, Tourist Mode on): the map centres on the part of the screen above the sheet.
