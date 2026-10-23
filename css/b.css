@@ -126,14 +126,14 @@
 /* ---- Tourist Mode intro cards (js/b/onboarding.js) ---- */
 [data-variant="b"] .onb {
   position: absolute;
-  left: 8px;
-  right: 8px;
+  left: 7px;
+  right: 7px;
   bottom: 18px;
   z-index: 40;
   display: flex;
   flex-direction: column;
   min-height: 332px;
-  padding: 44px 34px 18px 33px;
+  padding: 44px 42px 18px 34px;
   overflow: hidden;
   border-radius: 40px;
   color: #fff;
@@ -148,8 +148,10 @@
 @keyframes onb-in { from { opacity: 0; transform: translateY(40px); } }
 @keyframes onb-out { to { opacity: 0; transform: translateY(40px); } }
 [data-variant="b"] .onb__content { flex: 1; }
-[data-variant="b"] .onb h2 { margin: 0 0 18px; font-size: 18.5px; line-height: 1.36; font-weight: 600; }
-[data-variant="b"] .onb p, [data-variant="b"] .onb li { font-size: 12.2px; line-height: 1.6; }
+[data-variant="b"] .onb h2 { margin: 0 0 26px; font-size: 19.5px; line-height: 1.35; font-weight: 600; }
+[data-variant="b"] .onb--photo h2 { margin-bottom: 40px; }
+[data-variant="b"] .onb:has(.onb__icons) h2 { margin-bottom: 14px; }
+[data-variant="b"] .onb p, [data-variant="b"] .onb li { margin: 0; font-size: 12.8px; line-height: 1.54; }
 [data-variant="b"] .onb b { font-weight: 600; }
 [data-variant="b"] .onb__list { margin: 0; padding-left: 20px; }
 [data-variant="b"] .onb__list li { padding-left: 2px; }
@@ -159,8 +161,8 @@
 [data-variant="b"] .onb__icons p { margin: 0; }
 [data-variant="b"] .onb__actions { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 12px; }
 [data-variant="b"] .onb__btn {
-  width: 248px;
-  height: 52px;
+  width: 246px;
+  height: 50px;
   border-radius: 26px;
   background: #0a7bbd;
   color: #fff;
@@ -173,7 +175,6 @@
 /* First card: T-Centralen photo, faded, behind the text. */
 [data-variant="b"] .onb--photo {
   background:
-    linear-gradient(180deg, rgba(20, 24, 28, 0.25) 0%, rgba(20, 24, 28, 0.15) 60%, rgba(20, 24, 28, 0.35) 100%),
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* 50% black over the photo, as in Figma */
     url("../assets/b/stations/t-centralen.jpg") center 60% / cover;
 }
-[data-variant="b"] .onb--photo h2, [data-variant="b"] .onb--photo p { text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55); }
