@@ -232,6 +232,7 @@
   column-gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  position: relative; /* offsetParent of the cards (arrow positions) */
   scroll-padding: 0 14px;
   margin: 0 -14px;
   padding: 0 14px 4px;
@@ -299,3 +300,7 @@
 [data-variant="b"] .b-allart__body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 4px 16px 34px; scrollbar-width: none; }
 [data-variant="b"] .b-allart__body::-webkit-scrollbar { display: none; }
 [data-variant="b"] .b-allart__body .b-sec__sub { margin: 0 4px 16px; }
+[data-variant="b"] .b-filters { display: flex; gap: 8px; margin: 0 0 16px; overflow-x: auto; scrollbar-width: none; }
+[data-variant="b"] .b-filters::-webkit-scrollbar { display: none; }
+[data-variant="b"] .b-filter { height: 38px; gap: 6px; padding: 0 10px 0 5px; font: inherit; font-size: 13.5px; }
+[data-variant="b"] .b-filter img { width: 28px; height: 28px; object-fit: contain; }

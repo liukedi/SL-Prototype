@@ -16,7 +16,7 @@ const SPECIAL_URL = './data/b/special-stations.json';
 const ROUTES_URL = './data/b/curated-routes.json';
 const GENERIC_ICON = 'special-generic.png';
 const NEAREST = 3;
-const DEFAULT_TOP = 430; // pt from the screen top, as in the design (version A: 479)
+const DEFAULT_TOP = 350; // pt from the screen top (version A: 479)
 const CLOSE = '<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="m3 3 14 14M17 3 3 17"/></svg>';
 const ARROW_RIGHT = '<svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 7h17M12 1l6 6-6 6"/></svg>';
 const ARROW_OUT = '<svg width="13" height="13" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8"/></svg>';
@@ -59,6 +59,13 @@ export async function addExplore(app) {
       <img src="icons/b/${esc(s.icon ?? GENERIC_ICON)}" alt="">
       <span>${esc(s.stop.name)}${CHEVRON}</span>
     </button>`).join('');
+  // See All filters (one at a time, like the stop page's mode chips; tap again for all).
+  const CATEGORIES = [
+    { id: 'art', label: 'Art Interior', icon: 'art-stadion.png' },
+    { id: 'exhibition', label: 'Art Exhibits', icon: 'exhibition-hook.png' },
+    { id: 'nature', label: 'Scenic View', icon: 'nature-gamla-stan.png' },
+  ];
+  let category = null;
   const SUBTITLE = 'Explore Stockholm’s curated art metro stations, sorted by distance.';
 
   // ---- "See All": full-screen list (slides up like the search page, × closes it) ----
@@ -71,10 +78,23 @@ export async function addExplore(app) {
       <button type="button" class="sp-close" data-act="close-all" aria-label="Close">${CLOSE}</button></div>
     <div class="b-allart__body">
       <p class="b-sec__sub">${SUBTITLE}</p>
-      <div class="b-artlist">${rowsHtml(nearby)}</div>
+      <div class="b-filters" role="group" aria-label="Filter by type">${CATEGORIES.map((c) => `
+        <button type="button" class="chip b-filter" data-cat="${c.id}" aria-pressed="false"><img src="icons/b/${c.icon}" alt=""><span>${c.label}</span></button>`).join('')}
+      </div>
+      <div class="b-artlist"></div>
     </div>`;
   screen.appendChild(all);
+  function renderAll() {
+    for (const b of all.querySelectorAll('[data-cat]')) {
+      const on = b.dataset.cat === category;
+      b.classList.toggle('is-selected', on);
+      b.setAttribute('aria-pressed', String(on));
+    }
+    all.querySelector('.b-artlist').innerHTML = rowsHtml(category ? nearby.filter((s) => s.category === category) : nearby);
+  }
   function openAll() {
+    category = null;
+    renderAll();
     all.querySelector('.b-allart__body').scrollTop = 0;
     all.classList.remove('is-closing');
     all.classList.add('is-open');
@@ -87,6 +107,11 @@ export async function addExplore(app) {
   }
   all.addEventListener('click', (e) => {
     if (e.target.closest('[data-act="close-all"]')) return closeAll();
+    const chip = e.target.closest('[data-cat]');
+    if (chip) {
+      category = category === chip.dataset.cat ? null : chip.dataset.cat;
+      return renderAll();
+    }
     const row = e.target.closest('.b-artrow');
     if (row) { closeAll(); app.openStop(stopFromKey(byKey, row.dataset.key)); }
   });
@@ -124,7 +149,36 @@ export async function addExplore(app) {
       <div class="b-routes">${routes.map(routeCard).join('')}</div>`;
     const track = panel.querySelector('.b-routes');
     track.addEventListener('scroll', updateArrows, { passive: true });
+    // After a manual scroll (trackpad), continue from the card now in view.
+    // (Not right after an arrow press: quick presses must not be undone by the animation ending.)
+    track.addEventListener('scrollend', () => { if (performance.now() - lastStep > 700) routeIndex = currentRoute(track); });
+    routeIndex = 0;
     updateArrows();
+  }
+
+  // Curated Routes arrows: one card per press. Positions come from the cards themselves,
+  // so "previous" from the end lands on the card before, not wherever snapping pulls it.
+  let routeIndex = 0;
+  let lastStep = 0;
+  const cardStart = (track, card) => card.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft);
+  const maxScroll = (track) => track.scrollWidth - track.clientWidth;
+  function currentRoute(track) {
+    const cards = [...track.querySelectorAll('.b-route')];
+    if (track.scrollLeft >= maxScroll(track) - 2) return cards.length - 1;
+    let best = 0;
+    cards.forEach((c, i) => {
+      if (Math.abs(cardStart(track, c) - track.scrollLeft) < Math.abs(cardStart(track, cards[best]) - track.scrollLeft)) best = i;
+    });
+    return best;
+  }
+  function stepRoutes(dir) {
+    const track = panel.querySelector('.b-routes');
+    const cards = [...track.querySelectorAll('.b-route')];
+    lastStep = performance.now();
+    routeIndex = Math.max(0, Math.min(cards.length - 1, routeIndex + dir));
+    // Scrolled to the end, the last cards are all in view: going back starts from there.
+    if (dir < 0) while (routeIndex > 0 && cardStart(track, cards[routeIndex]) >= track.scrollLeft - 2) routeIndex -= 1;
+    track.scrollTo({ left: Math.min(cardStart(track, cards[routeIndex]), maxScroll(track)), behavior: 'smooth' });
   }
 
   function updateArrows() {
@@ -155,10 +209,7 @@ export async function addExplore(app) {
     if (e.target.closest('[data-act="see-all"]')) return openAll();
     const arrow = e.target.closest('[data-scroll]');
     if (arrow) {
-      const track = panel.querySelector('.b-routes');
-      const card = track.querySelector('.b-route');
-      const step = card ? card.offsetWidth + parseFloat(getComputedStyle(track).columnGap || 0) : track.clientWidth;
-      return track.scrollBy({ left: step * Number(arrow.dataset.scroll), behavior: 'smooth' });
+      return stepRoutes(Number(arrow.dataset.scroll));
     }
     const route = e.target.closest('[data-route]');
     if (route) {

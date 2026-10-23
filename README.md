@@ -340,11 +340,12 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
 - **Map sheet: Explore / Favorite tabs** (`js/b/explore.js`, `data/b/curated-routes.json`):
   - **Explore** (default): "The Art Metro" shows the 3 nearest special stations to the user (Gärdet), sorted by
     distance; tapping a station opens its stop page. "See All" opens a full-screen list of all of them (like the
-    search page), closed with ×.
+    search page), closed with ×, with three filter chips: Art Interior, Art Exhibits, Scenic View (one at a time;
+    tap again to show all).
   - "Curated Routes" is a row of route cards (arrows or horizontal scrolling). Tapping a card or "View Route"
     plans the trip from the first to the last stop in the Travel tab. Routes are edited in
     `data/b/curated-routes.json`.
-  - With Tourist Mode on, the sheet's default position is higher (430 pt from the top, as in the design;
+  - With Tourist Mode on, the sheet's default position is higher (350 pt from the top;
     `DEFAULT_TOP` in `js/b/explore.js`, through `sheet.setDefaultTop`).
   - **Favorite:** the original sheet content (favourites, Add favorite).
   - With Tourist Mode off there are no tabs, and the sheet is as in A.
