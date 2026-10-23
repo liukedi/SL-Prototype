@@ -57,3 +57,15 @@
    information is fully visible. */
 [data-variant="b"] .screen:has(.sheet.is-stop) .tabbar { display: none; }
 [data-variant="b"] .sheet.is-stop .stop-page__scroll { padding-bottom: 40px; }
+
+/* Exhibition station label (Figma "Frame 35", 196×67 px at 1.5×): the green frame is 82 px wide
+   and its hook rises 25 px above the label; the name starts at x = 91 px. */
+[data-variant="b"] .si-pin--exhibition { padding-left: 61px; overflow: visible; }
+[data-variant="b"] .si-pin--exhibition img {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 55px;   /* 82 / 1.5 */
+  height: 61px;  /* 92 / 1.5: frame 44.7 + hook 16.7 above */
+  border-radius: 0;
+}

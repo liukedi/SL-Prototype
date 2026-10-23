@@ -32,6 +32,7 @@ export async function addStationInfo(app) {
     fetch(SPECIAL_URL).then((r) => r.json()),
   ]);
   const iconOf = Object.fromEntries(special.map((s) => [s.key, s.icon ?? 'special-generic.png']));
+  const categoryOf = Object.fromEntries(special.map((s) => [s.key, s.category]));
 
   // ---- Information tab ----
   setStopInfoProvider((stop) => {
@@ -84,7 +85,8 @@ export async function addStationInfo(app) {
     if (!iconOf[key] || !stop.lngLat) return;
     app.map.clearStop(); // replace the plain pin
     const el = document.createElement('div');
-    el.className = 'si-pin';
+    // Exhibition stations (Figma "Frame 35"): a wider green frame whose hook rises above the label.
+    el.className = categoryOf[key] === 'exhibition' ? 'si-pin si-pin--exhibition' : 'si-pin';
     el.innerHTML = `<img src="icons/b/${esc(iconOf[key])}" alt=""><span>${esc(stop.name)}</span>`;
     label = new maplibregl.Marker({ element: el, anchor: 'center' }).setLngLat(stop.lngLat).addTo(map);
     // Hide the station's own icon underneath while the label is shown.
