@@ -1,2 +1,59 @@
 /* Version B (redesign) styles. Loaded only by version B (js/b/index.js).
    Prefer scoping rules with [data-variant="b"] so they can never leak into version A. */
+
+/* ===== Stop page: Information / Time Table tabs (art stations) ===== */
+[data-variant="b"] .stop-tabs { display: flex; gap: 38px; margin: -4px 0 18px 11px; }
+[data-variant="b"] .stop-tabs button { position: relative; padding: 4px 4px 10px; font-size: 17px; color: #d5dade; }
+[data-variant="b"] .stop-tabs button.is-selected { color: #fff; }
+[data-variant="b"] .stop-tabs button.is-selected::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2.5px; border-radius: 2px; background: #fff; }
+
+[data-variant="b"] .si { padding: 0 0 0 11px; }
+[data-variant="b"] .si__desc { margin: 0 0 16px; font-size: 16px; line-height: 1.4; color: #d5dade; }
+[data-variant="b"] .si__row { display: flex; gap: 22px; align-items: stretch; }
+[data-variant="b"] .si__photo { position: relative; flex: none; width: 168px; height: 101px; box-sizing: border-box; border: 3px solid #fff; border-radius: 22px; overflow: hidden; background: #1f242d; }
+[data-variant="b"] .si__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+[data-variant="b"] .si__360 { position: absolute; left: 10px; bottom: 8px; width: 34px; height: 26px; display: grid; place-items: center; color: #fff; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7)); }
+[data-variant="b"] .si__facts { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 2px 0; }
+[data-variant="b"] .si__fact { display: flex; align-items: center; justify-content: space-between; font-size: 15.5px; color: #e6e9ec; }
+[data-variant="b"] .si__label { font-weight: 600; font-size: 16px; }
+[data-variant="b"] .si__dots { display: flex; gap: 3px; }
+[data-variant="b"] .si-dot { width: 9px; height: 9px; box-sizing: border-box; border-radius: 50%; border: 1.3px solid #c5cad0; }
+[data-variant="b"] .si-dot.is-on { border-color: var(--c); background: var(--c); }
+[data-variant="b"] .si__discover { align-self: stretch; height: 30px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 15px; background: #0c3346; color: #3fb5e8; font-size: 12.5px; font-weight: 600; letter-spacing: 0.06em; }
+[data-variant="b"] .si__discover:active { filter: brightness(1.2); }
+
+/* Selected special station on the map: white label with icon + name */
+[data-variant="b"] .si-pin { display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 0; border-radius: 8px; background: #fff; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4); pointer-events: none; }
+[data-variant="b"] .si-pin img { width: 44px; height: 44px; border-radius: 8px; }
+[data-variant="b"] .si-pin span { font-size: 22px; color: #111; white-space: nowrap; }
+
+/* Message card (features not built in the prototype) */
+[data-variant="b"] .b-toast {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 50%;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 16px 20px 20px;
+  border-radius: 20px;
+  background: rgba(20, 26, 34, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-50%) scale(0.96);
+  transition: opacity 0.2s, transform 0.2s;
+}
+[data-variant="b"] .b-toast.is-visible { opacity: 1; transform: translateY(-50%) scale(1); }
+[data-variant="b"] .b-toast p { flex: 1; margin: 0; font-size: 16px; line-height: 1.4; color: #f2f4f6; }
+[data-variant="b"] .b-toast__close { flex: none; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: rgba(255, 255, 255, 0.12); color: #fff; }
+[data-variant="b"] .b-toast__bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: #3fb5e8; transform-origin: left; animation: b-toast-bar linear forwards; }
+@keyframes b-toast-bar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+/* On a stop page the tab bar is hidden (as in the Stadion design), so the station
+   information is fully visible. */
+[data-variant="b"] .screen:has(.sheet.is-stop) .tabbar { display: none; }
+[data-variant="b"] .sheet.is-stop .stop-page__scroll { padding-bottom: 40px; }

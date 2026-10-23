@@ -19,7 +19,8 @@ export function initSheet(sheet, { tabbar, onChange } = {}) {
     // What stays visible when collapsed: the search field, or the stop page's title row.
     const header = sheet.querySelector('.stop-page:not([hidden]) .stop-page__head') ?? sheet.querySelector('.sheet__header');
     const headerBottom = header.offsetTop + header.offsetHeight;
-    const tabTop = tabbar ? tabbar.offsetTop : h;
+    // A hidden tab bar (offsetParent null) leaves room down to the home indicator.
+    const tabTop = tabbar && tabbar.offsetParent !== null ? tabbar.offsetTop : h - 34;
     snaps = {
       expanded: Math.round(h * 0.1),
       // Matches reference/zoom-4: sheet top at 479 of 852 pt.

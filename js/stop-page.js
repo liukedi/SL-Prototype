@@ -13,6 +13,11 @@ const STAR_OFF = '<svg width="26" height="25" viewBox="0 0 24 23" fill="none" st
 const CLOSE = '<svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m3 3 14 14M17 3 3 17"/></svg>';
 const FILTER = '<svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 2h18M5.5 8h11M9 14h4"/></svg>';
 
+// Optional extra "Information" tab (used by version B for special stations; version A
+// never sets a provider, so its stop page is unchanged). provider(stop) → { html } | null.
+let infoProvider = null;
+export function setStopInfoProvider(fn) { infoProvider = fn; }
+
 const icon = (mode, size = 26) => `<img src="icons/${MODES[mode].icon}.svg" alt="" width="${size}" height="${size}">`;
 
 export function initStopPage(container, { onClose }) {
@@ -33,6 +38,8 @@ export function initStopPage(container, { onClose }) {
   let mode = null; // selected mode chip
   let line = null; // selected line chip
   let timer = null;
+  let info = null; // { html } from the info provider, if this stop has an Information tab
+  let tab = 'times'; // 'info' | 'times'
 
   function renderStar() {
     if (!stop) return;
@@ -69,10 +76,18 @@ export function initStopPage(container, { onClose }) {
           </section>`;
       })
       .join('');
-    scroll.innerHTML = chips + sections;
+    if (!info) { scroll.innerHTML = chips + sections; return; }
+    const tabs = `
+      <div class="stop-tabs" role="tablist">
+        <button type="button" role="tab" data-stop-tab="info" class="${tab === 'info' ? 'is-selected' : ''}">Information</button>
+        <button type="button" role="tab" data-stop-tab="times" class="${tab === 'times' ? 'is-selected' : ''}">Time Table</button>
+      </div>`;
+    scroll.innerHTML = tabs + (tab === 'info' ? info.html : chips + sections);
   }
 
   scroll.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-stop-tab]')?.dataset.stopTab;
+    if (t) { tab = t; render(); return; }
     const m = e.target.closest('[data-mode]')?.dataset.mode;
     if (m) { mode = mode === m ? null : m; line = null; render(); return; }
     const l = e.target.closest('[data-line]')?.dataset.line;
@@ -93,7 +108,12 @@ export function initStopPage(container, { onClose }) {
       scroll.innerHTML = '';
       scroll.scrollTop = 0;
       container.hidden = false;
-      [services, notices] = await Promise.all([servicesOf(s), listedNotices().then((n) => n[stopKey(s)] ?? [])]);
+      [services, notices, info] = await Promise.all([
+        servicesOf(s),
+        listedNotices().then((n) => n[stopKey(s)] ?? []),
+        infoProvider ? infoProvider(s) : null,
+      ]);
+      tab = info ? 'info' : 'times';
       if (stop !== s) return; // another stop was opened meanwhile
       render();
       clearInterval(timer);

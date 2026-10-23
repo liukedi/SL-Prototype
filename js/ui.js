@@ -73,6 +73,7 @@ async function main() {
   }
 
   function closeStop() {
+    document.dispatchEvent(new CustomEvent('sl:close-stop'));
     stopPage.close();
     sheetEl.classList.remove('is-stop');
     sheet.refresh();

@@ -8,6 +8,7 @@
 //   app.travel      – Travel tab
 //   app.openStop(stop), app.closeStop()
 import { addSpecialStations } from './special-stations.js';
+import { addStationInfo } from './station-info.js';
 
 export function initVariantB(app) {
   // Version B styles (css/b.css), only for this version.
@@ -18,4 +19,5 @@ export function initVariantB(app) {
 
   // Design changes for version B (each in its own module in this folder).
   addSpecialStations(app).catch((err) => console.error('special stations', err));
+  addStationInfo(app).catch((err) => console.error('station info', err));
 }
