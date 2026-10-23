@@ -130,10 +130,11 @@
   right: 7px;
   bottom: 18px;
   z-index: 40;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  min-height: 332px;
-  padding: 44px 42px 18px 34px;
+  height: 334px; /* sizes and positions measured from the Figma frames (pt) */
+  padding: 39px 33px 19px 34px;
   overflow: hidden;
   border-radius: 40px;
   color: #fff;
@@ -148,30 +149,28 @@
 @keyframes onb-in { from { opacity: 0; transform: translateY(40px); } }
 @keyframes onb-out { to { opacity: 0; transform: translateY(40px); } }
 [data-variant="b"] .onb__content { flex: 1; }
-[data-variant="b"] .onb h2 { margin: 0 0 26px; font-size: 19.5px; line-height: 1.35; font-weight: 600; }
-[data-variant="b"] .onb--photo h2 { margin-bottom: 40px; }
-[data-variant="b"] .onb:has(.onb__icons) h2 { margin-bottom: 14px; }
-[data-variant="b"] .onb p, [data-variant="b"] .onb li { margin: 0; font-size: 12.8px; line-height: 1.54; }
+[data-variant="b"] .onb h2 { margin: 0 0 25px; font-size: 19.8px; line-height: 26.7px; font-weight: 600; }
+[data-variant="b"] .onb--photo h2 { margin-bottom: 43px; }
+[data-variant="b"] .onb:has(.onb__icons) h2 { margin-bottom: 15px; }
+[data-variant="b"] .onb p, [data-variant="b"] .onb li { margin: 0; font-size: 13.4px; line-height: 20px; }
 [data-variant="b"] .onb b { font-weight: 600; }
-[data-variant="b"] .onb__list { margin: 0; padding-left: 20px; }
-[data-variant="b"] .onb__list li { padding-left: 2px; }
-[data-variant="b"] .onb__icons { margin: -4px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
-[data-variant="b"] .onb__icons li { display: flex; align-items: center; gap: 14px; }
+[data-variant="b"] .onb__list { margin: 0; padding-left: 19px; display: grid; gap: 5px; }
+[data-variant="b"] .onb__icons { margin: 0; padding: 0; list-style: none; display: grid; gap: 15px; }
+[data-variant="b"] .onb__icons li { display: flex; align-items: center; gap: 14px; min-height: 45px; }
 [data-variant="b"] .onb__icons img { flex: none; width: 45px; height: 45px; object-fit: contain; }
-[data-variant="b"] .onb__icons p { margin: 0; }
-[data-variant="b"] .onb__actions { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 12px; }
+[data-variant="b"] .onb__actions { display: flex; flex-direction: column; align-items: center; }
 [data-variant="b"] .onb__btn {
   width: 246px;
   height: 50px;
-  border-radius: 26px;
+  border-radius: 25px;
   background: #0a7bbd;
   color: #fff;
   font: inherit;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
 }
 [data-variant="b"] .onb__btn:active { background: #08679f; }
-[data-variant="b"] .onb__skip { color: #fff; font: inherit; font-size: 13px; padding: 4px 10px; }
+[data-variant="b"] .onb__skip { margin-bottom: 11px; padding: 0 10px; color: #fff; font: inherit; font-size: 13.5px; line-height: 20px; }
 /* First card: T-Centralen photo, faded, behind the text. */
 [data-variant="b"] .onb--photo {
   background:
