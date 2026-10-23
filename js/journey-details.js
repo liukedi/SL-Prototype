@@ -26,6 +26,17 @@ function lineName(leg) {
   if (leg.mode === 'ferry') return `Boat ${leg.line}`;
   return `Bus ${leg.line}`;
 }
+// Extension hook (unused in version A): version B marks art stations on the route.
+//   stopIcon(stop, leg) → HTML shown after a station name, or ''
+//   summary(journey)    → extra HTML item in the time / transfers row, or ''
+//   routeMap(routeMap, journey) → optional { setFullscreen(on) } for the route map
+let decorator = null;
+export function setJourneyDecorator(d) { decorator = d; }
+const nameHtml = (stop, leg, html) => {
+  const icon = decorator?.stopIcon(stop, leg) ?? '';
+  return icon ? `<span class="jd-name">${html}${icon}</span>` : html;
+};
+
 const MODE_NOUN = { metro: 'metro', train: 'commuter rail', tram: 'light rail', bus: 'bus', ferry: 'boat' };
 const minutesBetween = (a, b) => Math.max(0, Math.round((b - a) / 60000));
 const walkMin = (m) => Math.max(1, Math.ceil(m / 75));
@@ -41,7 +52,7 @@ function legHtml(leg, i) {
         <span class="jd-time"><b>${hhmm(leg.dep)}</b><span class="jd-dur">${formatDuration(leg.arr - leg.dep)}</span></span>
         <span class="jd-dot jd-dot--end"></span>
         <div class="jd-main">
-          <div class="jd-stopline"><b>${esc(leg.from)}</b><span class="jd-badges"><img src="icons/${MODES[leg.mode].icon}.svg" alt="" width="28" height="28">${lineBadgeHtml(leg)}</span></div>
+          <div class="jd-stopline">${nameHtml(leg.stops[0], leg, `<b>${esc(leg.from)}</b>`)}<span class="jd-badges"><img src="icons/${MODES[leg.mode].icon}.svg" alt="" width="28" height="28">${lineBadgeHtml(leg)}</span></div>
           <div class="jd-chips">${rail ? `<span>Track ${track}</span>` : ''}<span>${I.crowd}Typically quiet</span></div>
           <p class="jd-desc">${esc(lineName(leg))} toward ${esc(leg.toward)}</p>
           ${[...new Set(leg.notices ?? [])].map(noticeHtml).join('')}
@@ -50,12 +61,12 @@ function legHtml(leg, i) {
       </div>
       <div class="jd-stops" hidden>
         ${between.map((s) => `
-          <div class="jd-row"><span class="jd-time">${hhmm(s.time)}</span><span class="jd-dot"></span><div class="jd-main">${esc(s.name)}</div></div>`).join('')}
+          <div class="jd-row"><span class="jd-time">${hhmm(s.time)}</span><span class="jd-dot"></span><div class="jd-main">${nameHtml(s, leg, esc(s.name))}</div></div>`).join('')}
       </div>
       <div class="jd-row jd-row--end">
         <span class="jd-time"><b>${hhmm(leg.arr)}</b></span>
         <span class="jd-dot jd-dot--end"></span>
-        <div class="jd-main"><b>${esc(leg.to)}</b></div>
+        <div class="jd-main">${nameHtml(leg.stops.at(-1), leg, `<b>${esc(leg.to)}</b>`)}</div>
       </div>
     </section>`;
 }
@@ -94,6 +105,7 @@ export function renderJourneyDetails(page, journey, { onBack }) {
         <div class="jd-summary">
           <span>${I.clock}${formatDuration(j.arrive - j.depart)}</span>
           <span>${I.transfer}${j.transfers ? `${j.transfers} transfer${j.transfers > 1 ? 's' : ''}` : 'Direct'}</span>
+          ${decorator?.summary(j) ?? ''}
         </div>
       </div>
       ${parts.join('')}
@@ -107,12 +119,14 @@ export function renderJourneyDetails(page, journey, { onBack }) {
   const wrap = page.querySelector('.jd-mapwrap');
   const card = page.querySelector('.jd-mapcard');
   let routeMap = null;
+  let routeDeco = null;
   let fullscreen = false;
   let disposed = false;
   createRouteMap(page.querySelector('.jd-map'), j).then((m) => {
     if (disposed) return m.remove(); // the page was left before the map finished loading
     routeMap = m;
-    if (fullscreen) m.setFullscreen(true); // expand was pressed while loading
+    routeDeco = decorator?.routeMap?.(m, j) ?? null;
+    if (fullscreen) { m.setFullscreen(true); routeDeco?.setFullscreen(true); } // expand was pressed while loading
   });
 
   function setFullscreen(on) {
@@ -122,6 +136,7 @@ export function renderJourneyDetails(page, journey, { onBack }) {
     else card.prepend(wrap);
     wrap.classList.toggle('is-fullscreen', on);
     routeMap?.setFullscreen(on);
+    routeDeco?.setFullscreen(on);
   }
 
   page.onclick = (e) => {

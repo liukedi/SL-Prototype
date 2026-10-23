@@ -273,7 +273,7 @@ export async function createRouteMap(container, journey) {
     lines.push({ type: 'Feature', properties: { color: leg.color }, geometry: { type: 'LineString', coordinates: leg.stops.map((s) => s.lngLat) } });
     leg.stops.forEach((s, i) => {
       const end = i === 0 || i === leg.stops.length - 1;
-      points.push({ type: 'Feature', properties: { color: leg.color, end }, geometry: { type: 'Point', coordinates: s.lngLat } });
+      points.push({ type: 'Feature', properties: { color: leg.color, end, name: s.name }, geometry: { type: 'Point', coordinates: s.lngLat } });
     });
   });
   walk(journey.legs.at(-1)?.stops.at(-1).lngLat, journey.endLngLat);

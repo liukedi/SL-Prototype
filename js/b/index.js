@@ -10,6 +10,7 @@
 import { addSpecialStations } from './special-stations.js';
 import { addStationInfo } from './station-info.js';
 import { addMapSettings } from './map-settings.js';
+import { addJourneyArt } from './journey-art.js';
 
 export function initVariantB(app) {
   // Version B styles (css/b.css), only for this version.
@@ -22,4 +23,5 @@ export function initVariantB(app) {
   addMapSettings();
   addSpecialStations(app).catch((err) => console.error('special stations', err));
   addStationInfo(app).catch((err) => console.error('station info', err));
+  addJourneyArt().catch((err) => console.error('journey art', err));
 }

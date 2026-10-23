@@ -179,3 +179,11 @@
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* 50% black over the photo, as in Figma */
     url("../assets/b/stations/t-centralen.jpg") center 60% / cover;
 }
+
+/* ---- Art stations on journey details (js/b/journey-art.js) ---- */
+[data-variant="b"] .jd-name { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
+[data-variant="b"] .jd-art { flex: none; width: 24px; height: 24px; object-fit: contain; }
+[data-variant="b"] .jd-stops .jd-art { width: 22px; height: 22px; }
+/* Three items in the summary row: keep each on one line. */
+[data-variant="b"] .jd-summary:has(.jd-summary__art) { justify-content: space-between; gap: 12px; padding-left: 18px; padding-right: 18px; font-size: 15px; }
+[data-variant="b"] .jd-summary:has(.jd-summary__art) span { gap: 9px; white-space: nowrap; }
