@@ -1,0 +1,8535 @@
+{
+ "type": "FeatureCollection",
+ "metadata": {
+  "source": "© OpenStreetMap contributors (ODbL), via Overpass API",
+  "bbox": [
+   59.325,
+   18.02,
+   59.405,
+   18.165
+  ],
+  "generated": "2026-10-23T13:17:42.103Z"
+ },
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.098292,
+     59.333082
+    ]
+   },
+   "properties": {
+    "id": "node/21639944",
+    "name": "Berwaldhallen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.070863,
+     59.345793
+    ]
+   },
+   "properties": {
+    "id": "node/60746176",
+    "name": "Tekniska högskolan",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.053779,
+     59.365097
+    ]
+   },
+   "properties": {
+    "id": "node/148469867",
+    "name": "Universitetet norra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.121434,
+     59.369138
+    ]
+   },
+   "properties": {
+    "id": "node/193893553",
+    "name": "Constantiavägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.128804,
+     59.332659
+    ]
+   },
+   "properties": {
+    "id": "node/251899306",
+    "name": "Kaknäs",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.125167,
+     59.333709
+    ]
+   },
+   "properties": {
+    "id": "node/251899434",
+    "name": "Kaknästornet södra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.133766,
+     59.367506
+    ]
+   },
+   "properties": {
+    "id": "node/266788218",
+    "name": "Odenvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.121006,
+     59.360238
+    ]
+   },
+   "properties": {
+    "id": "node/299430724",
+    "name": "Foresta",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.12313,
+     59.358764
+    ]
+   },
+   "properties": {
+    "id": "node/299430942",
+    "name": "Millesgården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.150535,
+     59.356541
+    ]
+   },
+   "properties": {
+    "id": "node/299482291",
+    "name": "Mosstorpsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.121017,
+     59.369181
+    ]
+   },
+   "properties": {
+    "id": "node/299508060",
+    "name": "Constantiavägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.132584,
+     59.361906
+    ]
+   },
+   "properties": {
+    "id": "node/299715978",
+    "name": "Drottningvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.132607,
+     59.357218
+    ]
+   },
+   "properties": {
+    "id": "node/299723575",
+    "name": "Baggeby station",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.147337,
+     59.372287
+    ]
+   },
+   "properties": {
+    "id": "node/301605477",
+    "name": "Högnäsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.133228,
+     59.365063
+    ]
+   },
+   "properties": {
+    "id": "node/303300528",
+    "name": "Lidingö centrum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.109046,
+     59.345465
+    ]
+   },
+   "properties": {
+    "id": "node/357182456",
+    "name": "Rökubbsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.109945,
+     59.344258
+    ]
+   },
+   "properties": {
+    "id": "node/357183817",
+    "name": "Rökubbsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.107525,
+     59.346895
+    ]
+   },
+   "properties": {
+    "id": "node/357184353",
+    "name": "Sandhamnsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.107461,
+     59.346718
+    ]
+   },
+   "properties": {
+    "id": "node/357184660",
+    "name": "Sandhamnsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.144048,
+     59.373329
+    ]
+   },
+   "properties": {
+    "id": "node/362523245",
+    "name": "Källängstorget",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.105885,
+     59.38614
+    ]
+   },
+   "properties": {
+    "id": "node/368206018",
+    "name": "Sticklinge",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.110679,
+     59.342954
+    ]
+   },
+   "properties": {
+    "id": "node/370160994",
+    "name": "Östhammarsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.11007,
+     59.34292
+    ]
+   },
+   "properties": {
+    "id": "node/370161667",
+    "name": "Östhammarsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.054773,
+     59.34387
+    ]
+   },
+   "properties": {
+    "id": "node/370168879",
+    "name": "Stadsbiblioteket",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.155409,
+     59.371281
+    ]
+   },
+   "properties": {
+    "id": "node/371575932",
+    "name": "Lidingövallen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.160135,
+     59.372197
+    ]
+   },
+   "properties": {
+    "id": "node/371586070",
+    "name": "Askrikevägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.086679,
+     59.347056
+    ]
+   },
+   "properties": {
+    "id": "node/372664695",
+    "name": "Starrbäcksängen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.075526,
+     59.344823
+    ]
+   },
+   "properties": {
+    "id": "node/372681410",
+    "name": "Stadion",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.072358,
+     59.345388
+    ]
+   },
+   "properties": {
+    "id": "node/372691246",
+    "name": "Tekniska högskolan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.057957,
+     59.350781
+    ]
+   },
+   "properties": {
+    "id": "node/372734402",
+    "name": "Roslagstull",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.060004,
+     59.349625
+    ]
+   },
+   "properties": {
+    "id": "node/372783114",
+    "name": "Roslagstull",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.093137,
+     59.345399
+    ]
+   },
+   "properties": {
+    "id": "node/373434192",
+    "name": "Tessinparken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.091468,
+     59.342539
+    ]
+   },
+   "properties": {
+    "id": "node/373448030",
+    "name": "Kallskärsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.091194,
+     59.341476
+    ]
+   },
+   "properties": {
+    "id": "node/373451974",
+    "name": "Erik Dahlbergsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.090356,
+     59.338372
+    ]
+   },
+   "properties": {
+    "id": "node/373459791",
+    "name": "Karlaplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.090797,
+     59.338288
+    ]
+   },
+   "properties": {
+    "id": "node/373459897",
+    "name": "Karlaplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.092325,
+     59.33455
+    ]
+   },
+   "properties": {
+    "id": "node/373473679",
+    "name": "Historiska museet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.091538,
+     59.334303
+    ]
+   },
+   "properties": {
+    "id": "node/373475033",
+    "name": "Historiska museet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.093286,
+     59.332849
+    ]
+   },
+   "properties": {
+    "id": "node/373478708",
+    "name": "Strandvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.055736,
+     59.359978
+    ]
+   },
+   "properties": {
+    "id": "node/376309049",
+    "name": "Universitetet södra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.033375,
+     59.379927
+    ]
+   },
+   "properties": {
+    "id": "node/376322401",
+    "name": "Bergshamra bro",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.091961,
+     59.348507
+    ]
+   },
+   "properties": {
+    "id": "node/377701938",
+    "name": "Erik Dahlbergsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.096646,
+     59.349921
+    ]
+   },
+   "properties": {
+    "id": "node/377702151",
+    "name": "Tegeluddsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.096324,
+     59.349597
+    ]
+   },
+   "properties": {
+    "id": "node/377702437",
+    "name": "Tegeluddsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.031771,
+     59.353156
+    ]
+   },
+   "properties": {
+    "id": "node/377724669",
+    "name": "Karolinska sjukhuset norra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.032241,
+     59.353229
+    ]
+   },
+   "properties": {
+    "id": "node/377725093",
+    "name": "Karolinska sjukhuset norra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.031687,
+     59.352963
+    ]
+   },
+   "properties": {
+    "id": "node/377725775",
+    "name": "Karolinska sjukhuset norra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.032352,
+     59.353011
+    ]
+   },
+   "properties": {
+    "id": "node/377726361",
+    "name": "Karolinska sjukhuset norra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.082085,
+     59.347427
+    ]
+   },
+   "properties": {
+    "id": "node/410515307",
+    "name": "Östermalms idrottsplats",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.07592,
+     59.340091
+    ]
+   },
+   "properties": {
+    "id": "node/410521626",
+    "name": "Humlegården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.071188,
+     59.337642
+    ]
+   },
+   "properties": {
+    "id": "node/410551771",
+    "name": "Humlegården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.054537,
+     59.327946
+    ]
+   },
+   "properties": {
+    "id": "node/410623806",
+    "name": "Stadshuset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.053816,
+     59.328038
+    ]
+   },
+   "properties": {
+    "id": "node/410624526",
+    "name": "Stadshuset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.059191,
+     59.328052
+    ]
+   },
+   "properties": {
+    "id": "node/410630388",
+    "name": "City tour hop on/off",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.050552,
+     59.343016
+    ]
+   },
+   "properties": {
+    "id": "node/413501516",
+    "name": "Odenplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.048412,
+     59.342636
+    ]
+   },
+   "properties": {
+    "id": "node/413505995",
+    "name": "Odenplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.040498,
+     59.329314
+    ]
+   },
+   "properties": {
+    "id": "node/413532452",
+    "name": "Landstingshuset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.021732,
+     59.327881
+    ]
+   },
+   "properties": {
+    "id": "node/413544441",
+    "name": "Västerbroplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.022097,
+     59.32841
+    ]
+   },
+   "properties": {
+    "id": "node/413546971",
+    "name": "Västerbroplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.025501,
+     59.334995
+    ]
+   },
+   "properties": {
+    "id": "node/415305265",
+    "name": "Kulturskolans hus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.025087,
+     59.334662
+    ]
+   },
+   "properties": {
+    "id": "node/415305494",
+    "name": "Kulturskolans hus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.103809,
+     59.357627
+    ]
+   },
+   "properties": {
+    "id": "node/418791934",
+    "name": "Ropsten",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.10388,
+     59.357365
+    ]
+   },
+   "properties": {
+    "id": "node/418791959",
+    "name": "Ropsten",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.103434,
+     59.357457
+    ]
+   },
+   "properties": {
+    "id": "node/418792110",
+    "name": "Ropsten",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.104189,
+     59.35719
+    ]
+   },
+   "properties": {
+    "id": "node/419246147",
+    "name": "Ropsten",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.020185,
+     59.372135
+    ]
+   },
+   "properties": {
+    "id": "node/444623463",
+    "name": "Frösunda",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.020325,
+     59.328109
+    ]
+   },
+   "properties": {
+    "id": "node/468419075",
+    "name": "Västerbroplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.033322,
+     59.334277
+    ]
+   },
+   "properties": {
+    "id": "node/469283926",
+    "name": "Sankt Eriksgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.038874,
+     59.333557
+    ]
+   },
+   "properties": {
+    "id": "node/469283929",
+    "name": "Celsiusgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.044976,
+     59.33241
+    ]
+   },
+   "properties": {
+    "id": "node/469283936",
+    "name": "Fleminggatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.044144,
+     59.330623
+    ]
+   },
+   "properties": {
+    "id": "node/469283946",
+    "name": "Rådhuset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.044275,
+     59.328805
+    ]
+   },
+   "properties": {
+    "id": "node/469283956",
+    "name": "Kungsholmstorg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.047305,
+     59.328504
+    ]
+   },
+   "properties": {
+    "id": "node/469283960",
+    "name": "Kungsholms kyrka",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.047605,
+     59.328361
+    ]
+   },
+   "properties": {
+    "id": "node/469283962",
+    "name": "Kungsholms kyrka",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.047414,
+     59.331172
+    ]
+   },
+   "properties": {
+    "id": "node/469283964",
+    "name": "Pipersgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.045664,
+     59.33339
+    ]
+   },
+   "properties": {
+    "id": "node/469283972",
+    "name": "Fleminggatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.044555,
+     59.333001
+    ]
+   },
+   "properties": {
+    "id": "node/469283973",
+    "name": "Scheelegatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.0376,
+     59.333897
+    ]
+   },
+   "properties": {
+    "id": "node/469283974",
+    "name": "Celsiusgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.035864,
+     59.334416
+    ]
+   },
+   "properties": {
+    "id": "node/469283975",
+    "name": "Inedalsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.036746,
+     59.336212
+    ]
+   },
+   "properties": {
+    "id": "node/469283978",
+    "name": "Kronobergsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.034972,
+     59.336654
+    ]
+   },
+   "properties": {
+    "id": "node/469283979",
+    "name": "Kronobergsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.032284,
+     59.337215
+    ]
+   },
+   "properties": {
+    "id": "node/469283980",
+    "name": "Fridhemsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.02825,
+     59.337779
+    ]
+   },
+   "properties": {
+    "id": "node/469283983",
+    "name": "Industrigatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.025913,
+     59.338327
+    ]
+   },
+   "properties": {
+    "id": "node/469283985",
+    "name": "Industrigatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.024766,
+     59.338472
+    ]
+   },
+   "properties": {
+    "id": "node/469283986",
+    "name": "Igeldammsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.022757,
+     59.338879
+    ]
+   },
+   "properties": {
+    "id": "node/469283988",
+    "name": "Igeldammsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.027095,
+     59.335251
+    ]
+   },
+   "properties": {
+    "id": "node/469283989",
+    "name": "Arbetargatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.027625,
+     59.335037
+    ]
+   },
+   "properties": {
+    "id": "node/469283990",
+    "name": "Arbetargatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.031622,
+     59.33466
+    ]
+   },
+   "properties": {
+    "id": "node/469283991",
+    "name": "Sankt Eriksgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.033085,
+     59.334894
+    ]
+   },
+   "properties": {
+    "id": "node/469283992",
+    "name": "Fleminggatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.032751,
+     59.335036
+    ]
+   },
+   "properties": {
+    "id": "node/469283995",
+    "name": "Fleminggatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.030471,
+     59.334683
+    ]
+   },
+   "properties": {
+    "id": "node/469283996",
+    "name": "Sankt Eriksgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.062662,
+     59.335274
+    ]
+   },
+   "properties": {
+    "id": "node/470495618",
+    "name": "Hötorget",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.061353,
+     59.335057
+    ]
+   },
+   "properties": {
+    "id": "node/470495622",
+    "name": "Hötorget",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.021643,
+     59.337314
+    ]
+   },
+   "properties": {
+    "id": "node/471576209",
+    "name": "Stadshagsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.02229,
+     59.336184
+    ]
+   },
+   "properties": {
+    "id": "node/471576211",
+    "name": "John Bergs plan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.021361,
+     59.334992
+    ]
+   },
+   "properties": {
+    "id": "node/471576218",
+    "name": "Sankt Görans sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.020605,
+     59.335518
+    ]
+   },
+   "properties": {
+    "id": "node/471576219",
+    "name": "Sankt Görans sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.0292,
+     59.332696
+    ]
+   },
+   "properties": {
+    "id": "node/471576221",
+    "name": "Fridhemsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.056766,
+     59.330902
+    ]
+   },
+   "properties": {
+    "id": "node/471963926",
+    "name": "Centralstationen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.052522,
+     59.330827
+    ]
+   },
+   "properties": {
+    "id": "node/471963927",
+    "name": "Blekholmsterrassen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.052085,
+     59.33152
+    ]
+   },
+   "properties": {
+    "id": "node/471963928",
+    "name": "Blekholmsterrassen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.029374,
+     59.332211
+    ]
+   },
+   "properties": {
+    "id": "node/472644547",
+    "name": "Fridhemsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.029649,
+     59.331959
+    ]
+   },
+   "properties": {
+    "id": "node/472644552",
+    "name": "Fridhemsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.030136,
+     59.331976
+    ]
+   },
+   "properties": {
+    "id": "node/472644553",
+    "name": "Fridhemsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.027598,
+     59.332182
+    ]
+   },
+   "properties": {
+    "id": "node/472644554",
+    "name": "Fridhemsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.031674,
+     59.330844
+    ]
+   },
+   "properties": {
+    "id": "node/472644559",
+    "name": "Kronobergsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.035691,
+     59.330152
+    ]
+   },
+   "properties": {
+    "id": "node/472644561",
+    "name": "Polhemsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.035778,
+     59.329976
+    ]
+   },
+   "properties": {
+    "id": "node/472644562",
+    "name": "Polhemsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.041863,
+     59.32923
+    ]
+   },
+   "properties": {
+    "id": "node/472644563",
+    "name": "Kungsholmstorg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.038964,
+     59.32857
+    ]
+   },
+   "properties": {
+    "id": "node/472644565",
+    "name": "Pilgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.037454,
+     59.328705
+    ]
+   },
+   "properties": {
+    "id": "node/472644566",
+    "name": "John Ericssonsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.034992,
+     59.32858
+    ]
+   },
+   "properties": {
+    "id": "node/472644567",
+    "name": "Pontonjärparken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.032472,
+     59.329071
+    ]
+   },
+   "properties": {
+    "id": "node/472644568",
+    "name": "Pontonjärparken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.029882,
+     59.329402
+    ]
+   },
+   "properties": {
+    "id": "node/472644573",
+    "name": "Pontonjärgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.057287,
+     59.330785
+    ]
+   },
+   "properties": {
+    "id": "node/472644577",
+    "name": "Centralstationen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.055256,
+     59.335115
+    ]
+   },
+   "properties": {
+    "id": "node/473594752",
+    "name": "Norra Bantorget",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.055473,
+     59.335323
+    ]
+   },
+   "properties": {
+    "id": "node/473594929",
+    "name": "Norra Bantorget",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.020148,
+     59.328368
+    ]
+   },
+   "properties": {
+    "id": "node/477625866",
+    "name": "Västerbroplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.06612,
+     59.346525
+    ]
+   },
+   "properties": {
+    "id": "node/483071384",
+    "name": "Valhallavägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.053223,
+     59.364984
+    ]
+   },
+   "properties": {
+    "id": "node/483079149",
+    "name": "Universitetet norra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.032069,
+     59.342239
+    ]
+   },
+   "properties": {
+    "id": "node/485081602",
+    "name": "Vikingagatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.033242,
+     59.342434
+    ]
+   },
+   "properties": {
+    "id": "node/485081618",
+    "name": "Vikingagatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.028946,
+     59.343006
+    ]
+   },
+   "properties": {
+    "id": "node/485081626",
+    "name": "Norra Stationsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.028203,
+     59.343053
+    ]
+   },
+   "properties": {
+    "id": "node/485081636",
+    "name": "Norra Stationsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.073137,
+     59.329968
+    ]
+   },
+   "properties": {
+    "id": "node/485962442",
+    "name": "Karl XII:s torg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.048514,
+     59.338622
+    ]
+   },
+   "properties": {
+    "id": "node/485981422",
+    "name": "Sabbatsbergs sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.049778,
+     59.337634
+    ]
+   },
+   "properties": {
+    "id": "node/485981467",
+    "name": "Tegnérgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.050529,
+     59.336597
+    ]
+   },
+   "properties": {
+    "id": "node/485981493",
+    "name": "Tegnérgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.07316,
+     59.333609
+    ]
+   },
+   "properties": {
+    "id": "node/486148786",
+    "name": "Norrmalmstorg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.100111,
+     59.335418
+    ]
+   },
+   "properties": {
+    "id": "node/486458521",
+    "name": "Radiohuset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.134341,
+     59.355603
+    ]
+   },
+   "properties": {
+    "id": "node/486595130",
+    "name": "Baggeby torg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.134703,
+     59.355553
+    ]
+   },
+   "properties": {
+    "id": "node/486595148",
+    "name": "Baggeby torg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.070272,
+     59.332779
+    ]
+   },
+   "properties": {
+    "id": "node/489906408",
+    "name": "Kungsträdgården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.071047,
+     59.332725
+    ]
+   },
+   "properties": {
+    "id": "node/489912120",
+    "name": "Kungsträdgården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.042552,
+     59.390213
+    ]
+   },
+   "properties": {
+    "id": "node/496808482",
+    "name": "Danderyds sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.037054,
+     59.396649
+    ]
+   },
+   "properties": {
+    "id": "node/496810474",
+    "name": "Golfvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.03805,
+     59.396006
+    ]
+   },
+   "properties": {
+    "id": "node/496810477",
+    "name": "Golfvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.037228,
+     59.39789
+    ]
+   },
+   "properties": {
+    "id": "node/496810480",
+    "name": "Mörby centrum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.064605,
+     59.333908
+    ]
+   },
+   "properties": {
+    "id": "node/497171120",
+    "name": "Sergels torg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.056337,
+     59.344161
+    ]
+   },
+   "properties": {
+    "id": "node/497207183",
+    "name": "Stadsbiblioteket",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.125465,
+     59.379336
+    ]
+   },
+   "properties": {
+    "id": "node/497732086",
+    "name": "Golfklubben",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.126089,
+     59.379263
+    ]
+   },
+   "properties": {
+    "id": "node/497732209",
+    "name": "Golfklubben",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.133174,
+     59.372934
+    ]
+   },
+   "properties": {
+    "id": "node/497732429",
+    "name": "Kalvhagsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.059929,
+     59.34514
+    ]
+   },
+   "properties": {
+    "id": "node/498051261",
+    "name": "Roslagsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.049308,
+     59.342965
+    ]
+   },
+   "properties": {
+    "id": "node/498069802",
+    "name": "Odenplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.049388,
+     59.342616
+    ]
+   },
+   "properties": {
+    "id": "node/498069829",
+    "name": "Odenplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.065628,
+     59.346587
+    ]
+   },
+   "properties": {
+    "id": "node/498069867",
+    "name": "Odengatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.061859,
+     59.345459
+    ]
+   },
+   "properties": {
+    "id": "node/498082575",
+    "name": "Roslagsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.055957,
+     59.356354
+    ]
+   },
+   "properties": {
+    "id": "node/498104814",
+    "name": "Albano",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.055202,
+     59.356296
+    ]
+   },
+   "properties": {
+    "id": "node/498104831",
+    "name": "Albano",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.05099,
+     59.371317
+    ]
+   },
+   "properties": {
+    "id": "node/498113552",
+    "name": "Frescati",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.050449,
+     59.369843
+    ]
+   },
+   "properties": {
+    "id": "node/498113555",
+    "name": "Frescati",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.043104,
+     59.387351
+    ]
+   },
+   "properties": {
+    "id": "node/498120888",
+    "name": "Mörbylund",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.042779,
+     59.387474
+    ]
+   },
+   "properties": {
+    "id": "node/498120900",
+    "name": "Mörbylund",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.034987,
+     59.398425
+    ]
+   },
+   "properties": {
+    "id": "node/498124399",
+    "name": "Mörby centrum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.034294,
+     59.398553
+    ]
+   },
+   "properties": {
+    "id": "node/498132415",
+    "name": "Mörby centrum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.033436,
+     59.403973
+    ]
+   },
+   "properties": {
+    "id": "node/498276939",
+    "name": "Nora backe",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.035506,
+     59.403016
+    ]
+   },
+   "properties": {
+    "id": "node/498276951",
+    "name": "Nora backe",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.120201,
+     59.381915
+    ]
+   },
+   "properties": {
+    "id": "node/502950088",
+    "name": "Friluftsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.119909,
+     59.382443
+    ]
+   },
+   "properties": {
+    "id": "node/502958241",
+    "name": "Friluftsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.117603,
+     59.38342
+    ]
+   },
+   "properties": {
+    "id": "node/502965263",
+    "name": "Harrvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.116957,
+     59.383258
+    ]
+   },
+   "properties": {
+    "id": "node/502965619",
+    "name": "Harrvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.110874,
+     59.383026
+    ]
+   },
+   "properties": {
+    "id": "node/503014345",
+    "name": "Karpvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.128988,
+     59.375327
+    ]
+   },
+   "properties": {
+    "id": "node/503075437",
+    "name": "Blåklintsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.128271,
+     59.37102
+    ]
+   },
+   "properties": {
+    "id": "node/503324500",
+    "name": "Dalängen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.128574,
+     59.370884
+    ]
+   },
+   "properties": {
+    "id": "node/503324582",
+    "name": "Dalängen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.039384,
+     59.339569
+    ]
+   },
+   "properties": {
+    "id": "node/503503171",
+    "name": "Sankt Eriksplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.039296,
+     59.339348
+    ]
+   },
+   "properties": {
+    "id": "node/503503173",
+    "name": "Sankt Eriksplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.03833,
+     59.339675
+    ]
+   },
+   "properties": {
+    "id": "node/503503174",
+    "name": "Sankt Eriksplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.037649,
+     59.339622
+    ]
+   },
+   "properties": {
+    "id": "node/503503175",
+    "name": "Sankt Eriksplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.045263,
+     59.345844
+    ]
+   },
+   "properties": {
+    "id": "node/503503212",
+    "name": "Vanadisvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.046352,
+     59.346618
+    ]
+   },
+   "properties": {
+    "id": "node/503503216",
+    "name": "Norrtullsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.046547,
+     59.346774
+    ]
+   },
+   "properties": {
+    "id": "node/503503220",
+    "name": "Norrtullsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.05498,
+     59.344359
+    ]
+   },
+   "properties": {
+    "id": "node/503503222",
+    "name": "Stadsbiblioteket",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.05522,
+     59.34458
+    ]
+   },
+   "properties": {
+    "id": "node/503503226",
+    "name": "Stadsbiblioteket",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.057471,
+     59.342186
+    ]
+   },
+   "properties": {
+    "id": "node/503503236",
+    "name": "Handelshögskolan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.057347,
+     59.341856
+    ]
+   },
+   "properties": {
+    "id": "node/503503246",
+    "name": "Handelshögskolan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.061454,
+     59.329953
+    ]
+   },
+   "properties": {
+    "id": "node/504630039",
+    "name": "Vattugatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.15674,
+     59.366704
+    ]
+   },
+   "properties": {
+    "id": "node/510586230",
+    "name": "Lidingö kyrka",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.123712,
+     59.363974
+    ]
+   },
+   "properties": {
+    "id": "node/510624932",
+    "name": "Torsvikstorg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.122947,
+     59.364657
+    ]
+   },
+   "properties": {
+    "id": "node/510645066",
+    "name": "Torsvikssvängen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.117503,
+     59.364948
+    ]
+   },
+   "properties": {
+    "id": "node/510701523",
+    "name": "Torsviksplatån",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.123035,
+     59.365234
+    ]
+   },
+   "properties": {
+    "id": "node/510701837",
+    "name": "Torsvikssvängen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.026918,
+     59.332156
+    ]
+   },
+   "properties": {
+    "id": "node/519909239",
+    "name": "Fridhemsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.129904,
+     59.357358
+    ]
+   },
+   "properties": {
+    "id": "node/519925570",
+    "name": "Baggeby gårds väg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.130762,
+     59.357402
+    ]
+   },
+   "properties": {
+    "id": "node/519926347",
+    "name": "Baggeby gårds väg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.128316,
+     59.356777
+    ]
+   },
+   "properties": {
+    "id": "node/519933538",
+    "name": "Baggeby gård",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.144628,
+     59.350609
+    ]
+   },
+   "properties": {
+    "id": "node/520057936",
+    "name": "Larsbergs station",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.144197,
+     59.350555
+    ]
+   },
+   "properties": {
+    "id": "node/520058264",
+    "name": "Larsbergs station",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.132938,
+     59.362125
+    ]
+   },
+   "properties": {
+    "id": "node/520101173",
+    "name": "Drottningvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.12784,
+     59.364804
+    ]
+   },
+   "properties": {
+    "id": "node/520139331",
+    "name": "Sturevägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.050988,
+     59.340381
+    ]
+   },
+   "properties": {
+    "id": "node/538191440",
+    "name": "Observatoriegatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.112433,
+     59.339425
+    ]
+   },
+   "properties": {
+    "id": "node/583393686",
+    "name": "Lindarängsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.114612,
+     59.33999
+    ]
+   },
+   "properties": {
+    "id": "node/583393688",
+    "name": "Frihamnsporten",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.112761,
+     59.342143
+    ]
+   },
+   "properties": {
+    "id": "node/583393689",
+    "name": "Sehlstedtsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.02329,
+     59.331178
+    ]
+   },
+   "properties": {
+    "id": "node/610341400",
+    "name": "Mariebergsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.024936,
+     59.331715
+    ]
+   },
+   "properties": {
+    "id": "node/610341412",
+    "name": "Mariebergsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.061443,
+     59.3447
+    ]
+   },
+   "properties": {
+    "id": "node/618547373",
+    "name": "Jarlaplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.062336,
+     59.344094
+    ]
+   },
+   "properties": {
+    "id": "node/618547903",
+    "name": "Jarlaplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.076776,
+     59.340221
+    ]
+   },
+   "properties": {
+    "id": "node/618548290",
+    "name": "Humlegården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.076017,
+     59.340682
+    ]
+   },
+   "properties": {
+    "id": "node/618548472",
+    "name": "Humlegården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.026788,
+     59.381842
+    ]
+   },
+   "properties": {
+    "id": "node/684086331",
+    "name": "Kungshamra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.027949,
+     59.382013
+    ]
+   },
+   "properties": {
+    "id": "node/684086344",
+    "name": "Kungshamra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.027078,
+     59.379201
+    ]
+   },
+   "properties": {
+    "id": "node/684117869",
+    "name": "Bergshamra gård",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.02691,
+     59.378738
+    ]
+   },
+   "properties": {
+    "id": "node/684117885",
+    "name": "Bergshamra gård",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.033868,
+     59.345498
+    ]
+   },
+   "properties": {
+    "id": "node/693531772",
+    "name": "Torsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.035848,
+     59.343269
+    ]
+   },
+   "properties": {
+    "id": "node/693531794",
+    "name": "Karlbergsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.034804,
+     59.34481
+    ]
+   },
+   "properties": {
+    "id": "node/693531864",
+    "name": "Torsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.047072,
+     59.392549
+    ]
+   },
+   "properties": {
+    "id": "node/695842356",
+    "name": "Mörby station",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.069968,
+     59.342075
+    ]
+   },
+   "properties": {
+    "id": "node/713456474",
+    "name": "Runebergsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.053177,
+     59.346758
+    ]
+   },
+   "properties": {
+    "id": "node/750851464",
+    "name": "Frejgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.059216,
+     59.347967
+    ]
+   },
+   "properties": {
+    "id": "node/765971902",
+    "name": "Frejgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.048107,
+     59.339324
+    ]
+   },
+   "properties": {
+    "id": "node/766792007",
+    "name": "Sabbatsbergs sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.044665,
+     59.341434
+    ]
+   },
+   "properties": {
+    "id": "node/766792020",
+    "name": "Dalagatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.144964,
+     59.367245
+    ]
+   },
+   "properties": {
+    "id": "node/768693880",
+    "name": "Hersbyholm",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.152912,
+     59.367085
+    ]
+   },
+   "properties": {
+    "id": "node/768701356",
+    "name": "Kvarnen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.152863,
+     59.366844
+    ]
+   },
+   "properties": {
+    "id": "node/768701495",
+    "name": "Kvarnen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.086263,
+     59.342111
+    ]
+   },
+   "properties": {
+    "id": "node/768840249",
+    "name": "Jungfrugatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.152019,
+     59.35788
+    ]
+   },
+   "properties": {
+    "id": "node/769946194",
+    "name": "Frimurarhemmet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.150861,
+     59.356619
+    ]
+   },
+   "properties": {
+    "id": "node/769969217",
+    "name": "Mosstorpsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.158907,
+     59.357563
+    ]
+   },
+   "properties": {
+    "id": "node/770002298",
+    "name": "Korsfaravägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.159304,
+     59.357546
+    ]
+   },
+   "properties": {
+    "id": "node/770002907",
+    "name": "Korsfaravägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.14967,
+     59.353407
+    ]
+   },
+   "properties": {
+    "id": "node/770149243",
+    "name": "Svalvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.155078,
+     59.34727
+    ]
+   },
+   "properties": {
+    "id": "node/770315979",
+    "name": "AGA",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.151912,
+     59.349108
+    ]
+   },
+   "properties": {
+    "id": "node/770324436",
+    "name": "Lerbovägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.151118,
+     59.351011
+    ]
+   },
+   "properties": {
+    "id": "node/770356499",
+    "name": "Högsätrahuset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.15188,
+     59.351345
+    ]
+   },
+   "properties": {
+    "id": "node/770357166",
+    "name": "Högsätra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.03726,
+     59.342633
+    ]
+   },
+   "properties": {
+    "id": "node/776659674",
+    "name": "Sankt Eriksgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.037107,
+     59.342156
+    ]
+   },
+   "properties": {
+    "id": "node/776660067",
+    "name": "Karlbergsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.043406,
+     59.342621
+    ]
+   },
+   "properties": {
+    "id": "node/778311433",
+    "name": "Hälsingegatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.039638,
+     59.34555
+    ]
+   },
+   "properties": {
+    "id": "node/778311483",
+    "name": "Vanadisplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.045839,
+     59.34129
+    ]
+   },
+   "properties": {
+    "id": "node/778311566",
+    "name": "Vasaparken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.041116,
+     59.348357
+    ]
+   },
+   "properties": {
+    "id": "node/778311585",
+    "name": "Norra Stationsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.039353,
+     59.343849
+    ]
+   },
+   "properties": {
+    "id": "node/778311604",
+    "name": "Vanadisplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.040369,
+     59.347604
+    ]
+   },
+   "properties": {
+    "id": "node/778311644",
+    "name": "Norra Stationsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.052366,
+     59.368424
+    ]
+   },
+   "properties": {
+    "id": "node/783856440",
+    "name": "Naturhistoriska riksmuseet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.052976,
+     59.367704
+    ]
+   },
+   "properties": {
+    "id": "node/783858194",
+    "name": "Naturhistoriska riksmuseet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.058401,
+     59.349491
+    ]
+   },
+   "properties": {
+    "id": "node/811465713",
+    "name": "Roslagstull",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.024405,
+     59.350701
+    ]
+   },
+   "properties": {
+    "id": "node/824764722",
+    "name": "Karolinska vägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.031307,
+     59.347382
+    ]
+   },
+   "properties": {
+    "id": "node/824764727",
+    "name": "Hagaplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.024803,
+     59.353836
+    ]
+   },
+   "properties": {
+    "id": "node/826385391",
+    "name": "Solna kyrka",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.0238,
+     59.353797
+    ]
+   },
+   "properties": {
+    "id": "node/826385411",
+    "name": "Solna kyrka",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.028263,
+     59.348649
+    ]
+   },
+   "properties": {
+    "id": "node/831370259",
+    "name": "Hagaplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.029539,
+     59.369196
+    ]
+   },
+   "properties": {
+    "id": "node/856947003",
+    "name": "Frösundavik",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.046795,
+     59.34424
+    ]
+   },
+   "properties": {
+    "id": "node/867361240",
+    "name": "Frejgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.050253,
+     59.340819
+    ]
+   },
+   "properties": {
+    "id": "node/867361518",
+    "name": "Observatoriegatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.046819,
+     59.344485
+    ]
+   },
+   "properties": {
+    "id": "node/867361535",
+    "name": "Frejgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.057917,
+     59.332316
+    ]
+   },
+   "properties": {
+    "id": "node/877649653",
+    "name": "Centralen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.155933,
+     59.361716
+    ]
+   },
+   "properties": {
+    "id": "node/908293345",
+    "name": "Hersby åker",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.064877,
+     59.384326
+    ]
+   },
+   "properties": {
+    "id": "node/916835754",
+    "name": "Långängsskolan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.073301,
+     59.389532
+    ]
+   },
+   "properties": {
+    "id": "node/916889857",
+    "name": "Stockhagen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.09162,
+     59.397287
+    ]
+   },
+   "properties": {
+    "id": "node/918486563",
+    "name": "Djursholms torg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.088631,
+     59.397414
+    ]
+   },
+   "properties": {
+    "id": "node/918534557",
+    "name": "Djursholm centrum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.088009,
+     59.397659
+    ]
+   },
+   "properties": {
+    "id": "node/918539052",
+    "name": "Djursholms centrum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.057945,
+     59.398045
+    ]
+   },
+   "properties": {
+    "id": "node/918693061",
+    "name": "Djursholms Ösby",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.058429,
+     59.398489
+    ]
+   },
+   "properties": {
+    "id": "node/918698708",
+    "name": "Djursholms Ösby station",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.049418,
+     59.382861
+    ]
+   },
+   "properties": {
+    "id": "node/934875704",
+    "name": "Sjöstigen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.063028,
+     59.369621
+    ]
+   },
+   "properties": {
+    "id": "node/938640341",
+    "name": "Stora Lappkärrsberget",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.067119,
+     59.370133
+    ]
+   },
+   "properties": {
+    "id": "node/938640348",
+    "name": "Lektorsstigen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.054724,
+     59.365737
+    ]
+   },
+   "properties": {
+    "id": "node/938659825",
+    "name": "Universitetet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.05358,
+     59.370242
+    ]
+   },
+   "properties": {
+    "id": "node/938659859",
+    "name": "Bergiusvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.053513,
+     59.370424
+    ]
+   },
+   "properties": {
+    "id": "node/938659864",
+    "name": "Bergiusvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.046358,
+     59.383017
+    ]
+   },
+   "properties": {
+    "id": "node/973572317",
+    "name": "Sikrenovägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.046273,
+     59.383267
+    ]
+   },
+   "properties": {
+    "id": "node/973572853",
+    "name": "Sikrenovägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.044294,
+     59.384825
+    ]
+   },
+   "properties": {
+    "id": "node/973573922",
+    "name": "Stocksunds station",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.042794,
+     59.390707
+    ]
+   },
+   "properties": {
+    "id": "node/1091001485",
+    "name": "Danderyds sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.080891,
+     59.339744
+    ]
+   },
+   "properties": {
+    "id": "node/1193864634",
+    "name": "Nybrogatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.072261,
+     59.345651
+    ]
+   },
+   "properties": {
+    "id": "node/1341051947",
+    "name": "Östra station",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.057786,
+     59.384488
+    ]
+   },
+   "properties": {
+    "id": "node/1342204412",
+    "name": "Stocksunds torg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.071023,
+     59.345949
+    ]
+   },
+   "properties": {
+    "id": "node/1344331354",
+    "name": "Östra station",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.026159,
+     59.362582
+    ]
+   },
+   "properties": {
+    "id": "node/1346354015",
+    "name": "Haga norra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.066682,
+     59.325637
+    ]
+   },
+   "properties": {
+    "id": "node/1349576868",
+    "name": "Riddarhustorget",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.085078,
+     59.403033
+    ]
+   },
+   "properties": {
+    "id": "node/1357473923",
+    "name": "Norrängsgården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.084776,
+     59.402395
+    ]
+   },
+   "properties": {
+    "id": "node/1357473961",
+    "name": "Norrängsgården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.086581,
+     59.398546
+    ]
+   },
+   "properties": {
+    "id": "node/1357481083",
+    "name": "Svitiodsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.050382,
+     59.3956
+    ]
+   },
+   "properties": {
+    "id": "node/1362734304",
+    "name": "Mörbydalen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.050355,
+     59.395833
+    ]
+   },
+   "properties": {
+    "id": "node/1362734344",
+    "name": "Mörbydalen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.152254,
+     59.343626
+    ]
+   },
+   "properties": {
+    "id": "node/1364153532",
+    "name": "Larsbergs brygga",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.118912,
+     59.342526
+    ]
+   },
+   "properties": {
+    "id": "node/1386442700",
+    "name": "Frihamnens färjeterminal",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.117724,
+     59.341057
+    ]
+   },
+   "properties": {
+    "id": "node/1386442709",
+    "name": "Frihamnen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.074704,
+     59.334295
+    ]
+   },
+   "properties": {
+    "id": "node/1386747141",
+    "name": "Stureplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.073065,
+     59.335514
+    ]
+   },
+   "properties": {
+    "id": "node/1386747142",
+    "name": "Stureplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.073037,
+     59.336613
+    ]
+   },
+   "properties": {
+    "id": "node/1393925986",
+    "name": "Stureplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.073417,
+     59.336645
+    ]
+   },
+   "properties": {
+    "id": "node/1393925987",
+    "name": "Stureplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.029549,
+     59.359071
+    ]
+   },
+   "properties": {
+    "id": "node/1396710746",
+    "name": "Linvävartorpet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.028339,
+     59.358968
+    ]
+   },
+   "properties": {
+    "id": "node/1396710791",
+    "name": "Linvävartorpet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.077457,
+     59.332875
+    ]
+   },
+   "properties": {
+    "id": "node/1422945012",
+    "name": "Nybroplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.076845,
+     59.328659
+    ]
+   },
+   "properties": {
+    "id": "node/1424339718",
+    "name": "Nationalmuseum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.077238,
+     59.328558
+    ]
+   },
+   "properties": {
+    "id": "node/1424339719",
+    "name": "Nationalmuseum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.08101,
+     59.326143
+    ]
+   },
+   "properties": {
+    "id": "node/1424339818",
+    "name": "Östasiatiska museet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.080622,
+     59.326514
+    ]
+   },
+   "properties": {
+    "id": "node/1424339821",
+    "name": "Östasiatiska museet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.050774,
+     59.349369
+    ]
+   },
+   "properties": {
+    "id": "node/1436224085",
+    "name": "Sveaplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.053514,
+     59.345924
+    ]
+   },
+   "properties": {
+    "id": "node/1450512254",
+    "name": "Frejgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.050342,
+     59.349302
+    ]
+   },
+   "properties": {
+    "id": "node/1450512292",
+    "name": "Sveaplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.099815,
+     59.332795
+    ]
+   },
+   "properties": {
+    "id": "node/1459363806",
+    "name": "Berwaldhallen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.074979,
+     59.3386
+    ]
+   },
+   "properties": {
+    "id": "node/1469802155",
+    "name": "Linnégatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.080004,
+     59.336315
+    ]
+   },
+   "properties": {
+    "id": "node/1469802397",
+    "name": "Östermalmstorg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.080358,
+     59.336434
+    ]
+   },
+   "properties": {
+    "id": "node/1469802420",
+    "name": "Östermalmstorg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.071945,
+     59.337505
+    ]
+   },
+   "properties": {
+    "id": "node/1471823895",
+    "name": "Humlegården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.044494,
+     59.34118
+    ]
+   },
+   "properties": {
+    "id": "node/1484973303",
+    "name": "Dalagatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.047876,
+     59.342917
+    ]
+   },
+   "properties": {
+    "id": "node/1484973304",
+    "name": "Odenplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.067609,
+     59.339445
+    ]
+   },
+   "properties": {
+    "id": "node/1486022038",
+    "name": "Eriksbergsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.067551,
+     59.33973
+    ]
+   },
+   "properties": {
+    "id": "node/1486022043",
+    "name": "Eriksbergsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.064574,
+     59.341459
+    ]
+   },
+   "properties": {
+    "id": "node/1486022117",
+    "name": "Tegnérgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.03686,
+     59.381743
+    ]
+   },
+   "properties": {
+    "id": "node/1506832755",
+    "name": "Bergshamra centrum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.036621,
+     59.381907
+    ]
+   },
+   "properties": {
+    "id": "node/1506832761",
+    "name": "Bergshamra centrum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.045998,
+     59.348777
+    ]
+   },
+   "properties": {
+    "id": "node/1550011918",
+    "name": "Ynglingagatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.064877,
+     59.341631
+    ]
+   },
+   "properties": {
+    "id": "node/1552995271",
+    "name": "Tegnérgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.032248,
+     59.380119
+    ]
+   },
+   "properties": {
+    "id": "node/1571291397",
+    "name": "Bergshamra bro",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.039541,
+     59.379573
+    ]
+   },
+   "properties": {
+    "id": "node/1571291423",
+    "name": "Bergshamra södra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.05847,
+     59.348061
+    ]
+   },
+   "properties": {
+    "id": "node/1611096421",
+    "name": "Frejgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.059931,
+     59.346249
+    ]
+   },
+   "properties": {
+    "id": "node/1611096665",
+    "name": "Surbrunnsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.071855,
+     59.332274
+    ]
+   },
+   "properties": {
+    "id": "node/1617791775",
+    "name": "Kungsträdgården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.072766,
+     59.331064
+    ]
+   },
+   "properties": {
+    "id": "node/1617791791",
+    "name": "Kungsträdgården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.09718,
+     59.332528
+    ]
+   },
+   "properties": {
+    "id": "node/1649377916",
+    "name": "Berwaldhallen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.025581,
+     59.380458
+    ]
+   },
+   "properties": {
+    "id": "node/1670747086",
+    "name": "Kungshamra södra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.092826,
+     59.332194
+    ]
+   },
+   "properties": {
+    "id": "node/1675164938",
+    "name": "Strandvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.118207,
+     59.341895
+    ]
+   },
+   "properties": {
+    "id": "node/1680681668",
+    "name": "Frihamnen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.113805,
+     59.340862
+    ]
+   },
+   "properties": {
+    "id": "node/1680681691",
+    "name": "Frihamnsporten",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.11394,
+     59.341163
+    ]
+   },
+   "properties": {
+    "id": "node/1680681734",
+    "name": "Frihamnsporten",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.113227,
+     59.347001
+    ]
+   },
+   "properties": {
+    "id": "node/1713470284",
+    "name": "Malmvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.112706,
+     59.34709
+    ]
+   },
+   "properties": {
+    "id": "node/1713470612",
+    "name": "Malmvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.10033,
+     59.335019
+    ]
+   },
+   "properties": {
+    "id": "node/1715043556",
+    "name": "Radiohuset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.095096,
+     59.336461
+    ]
+   },
+   "properties": {
+    "id": "node/1716393346",
+    "name": "Garnisonen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.08067,
+     59.339426
+    ]
+   },
+   "properties": {
+    "id": "node/1716951281",
+    "name": "Nybrogatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.086982,
+     59.338124
+    ]
+   },
+   "properties": {
+    "id": "node/1716951289",
+    "name": "Skeppargatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.085943,
+     59.338707
+    ]
+   },
+   "properties": {
+    "id": "node/1716951298",
+    "name": "Skeppargatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.082136,
+     59.338907
+    ]
+   },
+   "properties": {
+    "id": "node/1725634950",
+    "name": "Karlavägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.065562,
+     59.3844
+    ]
+   },
+   "properties": {
+    "id": "node/1732012962",
+    "name": "Långängsskolan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.076919,
+     59.340984
+    ]
+   },
+   "properties": {
+    "id": "node/1734187019",
+    "name": "Humlegården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.071657,
+     59.341269
+    ]
+   },
+   "properties": {
+    "id": "node/1734187021",
+    "name": "Runebergsplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.078615,
+     59.343103
+    ]
+   },
+   "properties": {
+    "id": "node/1734187023",
+    "name": "Stadion",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.095118,
+     59.336825
+    ]
+   },
+   "properties": {
+    "id": "node/1735712251",
+    "name": "Garnisonen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.102281,
+     59.337391
+    ]
+   },
+   "properties": {
+    "id": "node/1735712491",
+    "name": "Oxenstiernsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.096266,
+     59.338696
+    ]
+   },
+   "properties": {
+    "id": "node/1738665371",
+    "name": "Banérgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.096124,
+     59.338902
+    ]
+   },
+   "properties": {
+    "id": "node/1738665397",
+    "name": "Banérgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.076724,
+     59.332634
+    ]
+   },
+   "properties": {
+    "id": "node/1741554529",
+    "name": "Nybroplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.076338,
+     59.332842
+    ]
+   },
+   "properties": {
+    "id": "node/1741554544",
+    "name": "Nybroplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.085539,
+     59.34172
+    ]
+   },
+   "properties": {
+    "id": "node/1748882019",
+    "name": "Jungfrugatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.081766,
+     59.342666
+    ]
+   },
+   "properties": {
+    "id": "node/1748882020",
+    "name": "Musikhögskolan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.076749,
+     59.343912
+    ]
+   },
+   "properties": {
+    "id": "node/1748882021",
+    "name": "Stadion",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.093228,
+     59.339812
+    ]
+   },
+   "properties": {
+    "id": "node/1748882023",
+    "name": "Värtavägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.070989,
+     59.345383
+    ]
+   },
+   "properties": {
+    "id": "node/1748882242",
+    "name": "Östra station",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.025995,
+     59.349933
+    ]
+   },
+   "properties": {
+    "id": "node/1773000981",
+    "name": "Karolinska institutet Biomedicum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.101245,
+     59.335688
+    ]
+   },
+   "properties": {
+    "id": "node/1793385959",
+    "name": "Radiohuset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.075317,
+     59.325814
+    ]
+   },
+   "properties": {
+    "id": "node/1809117864",
+    "name": "Slottsbacken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.075276,
+     59.326059
+    ]
+   },
+   "properties": {
+    "id": "node/1809117865",
+    "name": "Slottsbacken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.069837,
+     59.329218
+    ]
+   },
+   "properties": {
+    "id": "node/1814125596",
+    "name": "Gustav Adolfs torg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.065998,
+     59.325613
+    ]
+   },
+   "properties": {
+    "id": "node/1859019627",
+    "name": "Riddarhustorget",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.085586,
+     59.325141
+    ]
+   },
+   "properties": {
+    "id": "node/1863238630",
+    "name": "Arkitektur-/Moderna museet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.092606,
+     59.343434
+    ]
+   },
+   "properties": {
+    "id": "node/1866274567",
+    "name": "Kallskärsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.093502,
+     59.347372
+    ]
+   },
+   "properties": {
+    "id": "node/1866274571",
+    "name": "Rindögatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.093596,
+     59.34507
+    ]
+   },
+   "properties": {
+    "id": "node/1866274575",
+    "name": "Tessinparken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.090514,
+     59.341324
+    ]
+   },
+   "properties": {
+    "id": "node/1866274578",
+    "name": "Valhallavägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.043183,
+     59.342874
+    ]
+   },
+   "properties": {
+    "id": "node/1870548391",
+    "name": "Hälsingegatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.100506,
+     59.338756
+    ]
+   },
+   "properties": {
+    "id": "node/1872293748",
+    "name": "Hakberget",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.065372,
+     59.347994
+    ]
+   },
+   "properties": {
+    "id": "node/1872294192",
+    "name": "Körsbärsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.064068,
+     59.348875
+    ]
+   },
+   "properties": {
+    "id": "node/1872294195",
+    "name": "Körsbärsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.081675,
+     59.343293
+    ]
+   },
+   "properties": {
+    "id": "node/1872294197",
+    "name": "Musikhögskolan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.059013,
+     59.352128
+    ]
+   },
+   "properties": {
+    "id": "node/1872294237",
+    "name": "Ruddammen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.058667,
+     59.352248
+    ]
+   },
+   "properties": {
+    "id": "node/1872294239",
+    "name": "Ruddammen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.063406,
+     59.351837
+    ]
+   },
+   "properties": {
+    "id": "node/1872294240",
+    "name": "Ruddammsparken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.064567,
+     59.349931
+    ]
+   },
+   "properties": {
+    "id": "node/1872294280",
+    "name": "Stickelbärsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.093394,
+     59.34033
+    ]
+   },
+   "properties": {
+    "id": "node/1872294291",
+    "name": "Värtavägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.044043,
+     59.330988
+    ]
+   },
+   "properties": {
+    "id": "node/1879777042",
+    "name": "Rådhuset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.102172,
+     59.347537
+    ]
+   },
+   "properties": {
+    "id": "node/1881686025",
+    "name": "Gärdet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.102448,
+     59.348187
+    ]
+   },
+   "properties": {
+    "id": "node/1881686028",
+    "name": "Gärdet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.101609,
+     59.345227
+    ]
+   },
+   "properties": {
+    "id": "node/1881686090",
+    "name": "Kampementsbacken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.102024,
+     59.346252
+    ]
+   },
+   "properties": {
+    "id": "node/1881686093",
+    "name": "Kampementsbacken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.097546,
+     59.341971
+    ]
+   },
+   "properties": {
+    "id": "node/1881686095",
+    "name": "Storskärsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.097537,
+     59.342196
+    ]
+   },
+   "properties": {
+    "id": "node/1881686097",
+    "name": "Storskärsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.025775,
+     59.400737
+    ]
+   },
+   "properties": {
+    "id": "node/1887851520",
+    "name": "Kevingeringen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.105259,
+     59.333088
+    ]
+   },
+   "properties": {
+    "id": "node/1895195766",
+    "name": "Ambassaderna",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.103161,
+     59.333319
+    ]
+   },
+   "properties": {
+    "id": "node/1895195772",
+    "name": "Ambassaderna",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.092252,
+     59.331878
+    ]
+   },
+   "properties": {
+    "id": "node/1895195775",
+    "name": "Djurgårdsbron",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.088078,
+     59.347332
+    ]
+   },
+   "properties": {
+    "id": "node/1917296317",
+    "name": "Starrbäcksängen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.023429,
+     59.363663
+    ]
+   },
+   "properties": {
+    "id": "node/1931837099",
+    "name": "Haga norra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.037093,
+     59.353855
+    ]
+   },
+   "properties": {
+    "id": "node/1931843688",
+    "name": "Haga södra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.103867,
+     59.339141
+    ]
+   },
+   "properties": {
+    "id": "node/1939971489",
+    "name": "Filmhuset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.105931,
+     59.339353
+    ]
+   },
+   "properties": {
+    "id": "node/1939971492",
+    "name": "Filmhuset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.11426,
+     59.340051
+    ]
+   },
+   "properties": {
+    "id": "node/1939971495",
+    "name": "Frihamnsporten",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.103679,
+     59.35787
+    ]
+   },
+   "properties": {
+    "id": "node/2055299913",
+    "name": "Ropsten",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.084571,
+     59.393971
+    ]
+   },
+   "properties": {
+    "id": "node/2063819671",
+    "name": "Djursholms Sveavägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.082914,
+     59.393456
+    ]
+   },
+   "properties": {
+    "id": "node/2063819674",
+    "name": "Djursholms Sveavägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.146893,
+     59.367351
+    ]
+   },
+   "properties": {
+    "id": "node/2063889725",
+    "name": "Hersbyholm",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.15193,
+     59.362417
+    ]
+   },
+   "properties": {
+    "id": "node/2069173034",
+    "name": "Hersby gymnasium",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.140512,
+     59.364562
+    ]
+   },
+   "properties": {
+    "id": "node/2069173036",
+    "name": "Sagavägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.139474,
+     59.365063
+    ]
+   },
+   "properties": {
+    "id": "node/2069173040",
+    "name": "Sagavägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.156001,
+     59.361483
+    ]
+   },
+   "properties": {
+    "id": "node/2069173042",
+    "name": "Hersby åker",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.133776,
+     59.36724
+    ]
+   },
+   "properties": {
+    "id": "node/2069173044",
+    "name": "Odenvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.046539,
+     59.376469
+    ]
+   },
+   "properties": {
+    "id": "node/2211106880",
+    "name": "Sfären",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.066965,
+     59.369644
+    ]
+   },
+   "properties": {
+    "id": "node/2222858137",
+    "name": "Lektorsstigen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.061247,
+     59.369817
+    ]
+   },
+   "properties": {
+    "id": "node/2222858140",
+    "name": "Professorsslingan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.060446,
+     59.370461
+    ]
+   },
+   "properties": {
+    "id": "node/2222858141",
+    "name": "Professorsslingan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.054426,
+     59.365384
+    ]
+   },
+   "properties": {
+    "id": "node/2222858147",
+    "name": "Universitetet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.032724,
+     59.353105
+    ]
+   },
+   "properties": {
+    "id": "node/2225412862",
+    "name": "Karolinska sjukhuset norra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.025241,
+     59.349977
+    ]
+   },
+   "properties": {
+    "id": "node/2225412864",
+    "name": "Karolinska institutet Biomedicum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.026122,
+     59.35086
+    ]
+   },
+   "properties": {
+    "id": "node/2225412865",
+    "name": "Prostvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.10228,
+     59.353995
+    ]
+   },
+   "properties": {
+    "id": "node/2238199853",
+    "name": "Artemisgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.086839,
+     59.354934
+    ]
+   },
+   "properties": {
+    "id": "node/2238199860",
+    "name": "Jaktgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.088238,
+     59.356164
+    ]
+   },
+   "properties": {
+    "id": "node/2238199865",
+    "name": "Jaktgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.098534,
+     59.354158
+    ]
+   },
+   "properties": {
+    "id": "node/2238199869",
+    "name": "Hjorthagens skola",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.09627,
+     59.353221
+    ]
+   },
+   "properties": {
+    "id": "node/2238199871",
+    "name": "Motalavägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.098669,
+     59.356102
+    ]
+   },
+   "properties": {
+    "id": "node/2238199872",
+    "name": "Nimrodsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.098533,
+     59.356355
+    ]
+   },
+   "properties": {
+    "id": "node/2238199873",
+    "name": "Nimrodsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.100729,
+     59.354812
+    ]
+   },
+   "properties": {
+    "id": "node/2238199883",
+    "name": "Skogvaktargatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.10072,
+     59.354996
+    ]
+   },
+   "properties": {
+    "id": "node/2238199887",
+    "name": "Skogvaktargatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.092797,
+     59.331712
+    ]
+   },
+   "properties": {
+    "id": "node/2249281210",
+    "name": "Djurgårdsbron",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.095762,
+     59.328917
+    ]
+   },
+   "properties": {
+    "id": "node/2249281215",
+    "name": "Nordiska museet/Vasamuseet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.095343,
+     59.329465
+    ]
+   },
+   "properties": {
+    "id": "node/2249281218",
+    "name": "Nordiska museet/Vasamuseet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.083917,
+     59.331685
+    ]
+   },
+   "properties": {
+    "id": "node/2249281221",
+    "name": "Styrmansgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.045436,
+     59.34202
+    ]
+   },
+   "properties": {
+    "id": "node/2275862224",
+    "name": "Vasaparken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.042736,
+     59.390977
+    ]
+   },
+   "properties": {
+    "id": "node/2282506840",
+    "name": "Danderyds sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.043003,
+     59.390083
+    ]
+   },
+   "properties": {
+    "id": "node/2292320435",
+    "name": "Danderyds sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.04263,
+     59.389792
+    ]
+   },
+   "properties": {
+    "id": "node/2325598049",
+    "name": "Danderyds sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.043008,
+     59.38955
+    ]
+   },
+   "properties": {
+    "id": "node/2325598061",
+    "name": "Danderyds sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.042227,
+     59.389911
+    ]
+   },
+   "properties": {
+    "id": "node/2325598077",
+    "name": "Danderyds sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.043004,
+     59.389892
+    ]
+   },
+   "properties": {
+    "id": "node/2325598108",
+    "name": "Danderyds sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.0423,
+     59.389572
+    ]
+   },
+   "properties": {
+    "id": "node/2325598122",
+    "name": "Danderyds sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.042378,
+     59.389213
+    ]
+   },
+   "properties": {
+    "id": "node/2325598131",
+    "name": "Danderyds sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.042141,
+     59.390304
+    ]
+   },
+   "properties": {
+    "id": "node/2325699556",
+    "name": "Danderyds sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.042032,
+     59.39081
+    ]
+   },
+   "properties": {
+    "id": "node/2325699561",
+    "name": "Danderyds sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.127633,
+     59.332947
+    ]
+   },
+   "properties": {
+    "id": "node/2415157796",
+    "name": "Kaknäs",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.124479,
+     59.333414
+    ]
+   },
+   "properties": {
+    "id": "node/2415157797",
+    "name": "Kaknästornet södra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.110007,
+     59.333522
+    ]
+   },
+   "properties": {
+    "id": "node/2415157798",
+    "name": "Källhagen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.112005,
+     59.333525
+    ]
+   },
+   "properties": {
+    "id": "node/2415157799",
+    "name": "Källhagen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.119163,
+     59.333153
+    ]
+   },
+   "properties": {
+    "id": "node/2415157800",
+    "name": "Museiparken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.115885,
+     59.33338
+    ]
+   },
+   "properties": {
+    "id": "node/2415157802",
+    "name": "Sjöhistoriska museet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.114817,
+     59.33356
+    ]
+   },
+   "properties": {
+    "id": "node/2415157803",
+    "name": "Sjöhistoriska museet",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.023285,
+     59.346156
+    ]
+   },
+   "properties": {
+    "id": "node/2418127900",
+    "name": "Karolinska institutet västra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.08523,
+     59.331446
+    ]
+   },
+   "properties": {
+    "id": "node/2460497877",
+    "name": "Styrmansgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.104713,
+     59.357083
+    ]
+   },
+   "properties": {
+    "id": "node/2476592821",
+    "name": "Ropsten",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.109483,
+     59.351455
+    ]
+   },
+   "properties": {
+    "id": "node/2518643045",
+    "name": "Värtahamnens färjeterminal",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.050198,
+     59.342795
+    ]
+   },
+   "properties": {
+    "id": "node/2563275379",
+    "name": "Odenplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.048535,
+     59.342817
+    ]
+   },
+   "properties": {
+    "id": "node/2563275382",
+    "name": "Odenplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.124318,
+     59.363672
+    ]
+   },
+   "properties": {
+    "id": "node/2599362358",
+    "name": "Torsvikstorg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.102659,
+     59.357513
+    ]
+   },
+   "properties": {
+    "id": "node/2600134599",
+    "name": "Ropsten",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.156549,
+     59.371809
+    ]
+   },
+   "properties": {
+    "id": "node/2707262090",
+    "name": "Lidingövallen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.071182,
+     59.345604
+    ]
+   },
+   "properties": {
+    "id": "node/2715520667",
+    "name": "Tekniska högskolan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.046698,
+     59.392256
+    ]
+   },
+   "properties": {
+    "id": "node/2718670084",
+    "name": "Mörby station",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.140322,
+     59.37357
+    ]
+   },
+   "properties": {
+    "id": "node/2864661696",
+    "name": "Näset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.142542,
+     59.349166
+    ]
+   },
+   "properties": {
+    "id": "node/2922426276",
+    "name": "Larsbergsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.138071,
+     59.366327
+    ]
+   },
+   "properties": {
+    "id": "node/3094217802",
+    "name": "Lejonvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.144852,
+     59.363078
+    ]
+   },
+   "properties": {
+    "id": "node/3094217924",
+    "name": "Riddarvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.037827,
+     59.342404
+    ]
+   },
+   "properties": {
+    "id": "node/3159257532",
+    "name": "Sankt Eriksgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.09414,
+     59.359091
+    ]
+   },
+   "properties": {
+    "id": "node/3217945181",
+    "name": "Drevergatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.09342,
+     59.35918
+    ]
+   },
+   "properties": {
+    "id": "node/3217945182",
+    "name": "Drevergatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.13246,
+     59.365083
+    ]
+   },
+   "properties": {
+    "id": "node/3258174546",
+    "name": "Lidingö centrum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.121333,
+     59.362162
+    ]
+   },
+   "properties": {
+    "id": "node/3258174549",
+    "name": "Stjärnvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.122198,
+     59.362295
+    ]
+   },
+   "properties": {
+    "id": "node/3258174550",
+    "name": "Stjärnvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.12973,
+     59.364986
+    ]
+   },
+   "properties": {
+    "id": "node/3258174551",
+    "name": "Sturevägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.04087,
+     59.352801
+    ]
+   },
+   "properties": {
+    "id": "node/3609137939",
+    "name": "Haga södra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.057212,
+     59.332694
+    ]
+   },
+   "properties": {
+    "id": "node/3620739357",
+    "name": "Centralen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.058354,
+     59.349889
+    ]
+   },
+   "properties": {
+    "id": "node/3623679146",
+    "name": "Roslagstull",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.057879,
+     59.362054
+    ]
+   },
+   "properties": {
+    "id": "node/3749736158",
+    "name": "Universitetsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.066308,
+     59.335828
+    ]
+   },
+   "properties": {
+    "id": "node/3942267244",
+    "name": "Regeringsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.066918,
+     59.335993
+    ]
+   },
+   "properties": {
+    "id": "node/3942267245",
+    "name": "Regeringsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.037404,
+     59.380702
+    ]
+   },
+   "properties": {
+    "id": "node/4225502312",
+    "name": "Bergshamra",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.041963,
+     59.390951
+    ]
+   },
+   "properties": {
+    "id": "node/4225502316",
+    "name": "Danderyds sjukhus",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.031055,
+     59.332948
+    ]
+   },
+   "properties": {
+    "id": "node/4225502321",
+    "name": "Fridhemsplan",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.063265,
+     59.335831
+    ]
+   },
+   "properties": {
+    "id": "node/4225502338",
+    "name": "Hötorget",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.092295,
+     59.339752
+    ]
+   },
+   "properties": {
+    "id": "node/4225502341",
+    "name": "Karlaplan",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.071054,
+     59.330839
+    ]
+   },
+   "properties": {
+    "id": "node/4225502342",
+    "name": "Kungsträdgården",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.036396,
+     59.398585
+    ]
+   },
+   "properties": {
+    "id": "node/4225502352",
+    "name": "Mörby centrum",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.04793,
+     59.342989
+    ]
+   },
+   "properties": {
+    "id": "node/4225502357",
+    "name": "Odenplan",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.102396,
+     59.357356
+    ]
+   },
+   "properties": {
+    "id": "node/4225502360",
+    "name": "Ropsten",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.044255,
+     59.33015
+    ]
+   },
+   "properties": {
+    "id": "node/4225502362",
+    "name": "Rådhuset",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.059068,
+     59.340274
+    ]
+   },
+   "properties": {
+    "id": "node/4225502363",
+    "name": "Rådmansgatan",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.037223,
+     59.340539
+    ]
+   },
+   "properties": {
+    "id": "node/4225502366",
+    "name": "Sankt Eriksplan",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.080447,
+     59.342285
+    ]
+   },
+   "properties": {
+    "id": "node/4225502375",
+    "name": "Stadion",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.060944,
+     59.331894
+    ]
+   },
+   "properties": {
+    "id": "node/4225502381",
+    "name": "T-Centralen",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.054597,
+     59.365202
+    ]
+   },
+   "properties": {
+    "id": "node/4225502386",
+    "name": "Universitetet",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.077689,
+     59.335478
+    ]
+   },
+   "properties": {
+    "id": "node/4225503127",
+    "name": "Östermalmstorg",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.060489,
+     59.329014
+    ]
+   },
+   "properties": {
+    "id": "node/4390010654",
+    "name": "Centralen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.023206,
+     59.331945
+    ]
+   },
+   "properties": {
+    "id": "node/4469877666",
+    "name": "Mariebergsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.045674,
+     59.34295
+    ]
+   },
+   "properties": {
+    "id": "node/4590873759",
+    "name": "Odenplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.055087,
+     59.331756
+    ]
+   },
+   "properties": {
+    "id": "node/4617101921",
+    "name": "Cityterminalen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.163762,
+     59.372206
+    ]
+   },
+   "properties": {
+    "id": "node/4630485300",
+    "name": "Askrikevägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.15437,
+     59.371723
+    ]
+   },
+   "properties": {
+    "id": "node/4692820529",
+    "name": "Lidingövallen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.134804,
+     59.37085
+    ]
+   },
+   "properties": {
+    "id": "node/4692820543",
+    "name": "Ägirvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.068318,
+     59.330441
+    ]
+   },
+   "properties": {
+    "id": "node/4890372267",
+    "name": "Jakobsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.098877,
+     59.345877
+    ]
+   },
+   "properties": {
+    "id": "node/4937352125",
+    "name": "Gärdet",
+    "type": "metro"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.161585,
+     59.358661
+    ]
+   },
+   "properties": {
+    "id": "node/4940919530",
+    "name": "Hantverkshuset",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.082005,
+     59.347236
+    ]
+   },
+   "properties": {
+    "id": "node/4985489475",
+    "name": "Östermalms idrottsplats",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.047825,
+     59.343459
+    ]
+   },
+   "properties": {
+    "id": "node/5168018581",
+    "name": "Odenplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.023265,
+     59.380957
+    ]
+   },
+   "properties": {
+    "id": "node/5189367594",
+    "name": "Väntorpsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.022646,
+     59.381163
+    ]
+   },
+   "properties": {
+    "id": "node/5189367595",
+    "name": "Väntorpsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.104365,
+     59.357506
+    ]
+   },
+   "properties": {
+    "id": "node/5280809288",
+    "name": "Ropsten",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.139113,
+     59.366262
+    ]
+   },
+   "properties": {
+    "id": "node/5301417951",
+    "name": "Lejonvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.148666,
+     59.352283
+    ]
+   },
+   "properties": {
+    "id": "node/5333870975",
+    "name": "Svalvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.143002,
+     59.358312
+    ]
+   },
+   "properties": {
+    "id": "node/5333870976",
+    "name": "Oskarsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.141908,
+     59.358281
+    ]
+   },
+   "properties": {
+    "id": "node/5333870977",
+    "name": "Oskarsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.137738,
+     59.357284
+    ]
+   },
+   "properties": {
+    "id": "node/5333870978",
+    "name": "Baggeby",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.146854,
+     59.346447
+    ]
+   },
+   "properties": {
+    "id": "node/5334943022",
+    "name": "Larsberg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.141806,
+     59.348842
+    ]
+   },
+   "properties": {
+    "id": "node/5334943023",
+    "name": "Larsbergsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.137085,
+     59.352964
+    ]
+   },
+   "properties": {
+    "id": "node/5334943024",
+    "name": "Bodals station",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.137998,
+     59.352811
+    ]
+   },
+   "properties": {
+    "id": "node/5334943025",
+    "name": "Bodals station",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.138369,
+     59.351471
+    ]
+   },
+   "properties": {
+    "id": "node/5334943026",
+    "name": "Bodals skola",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.151134,
+     59.363147
+    ]
+   },
+   "properties": {
+    "id": "node/5335088084",
+    "name": "Hersby gymnasium",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.146169,
+     59.349398
+    ]
+   },
+   "properties": {
+    "id": "node/5335088087",
+    "name": "Fyrvaktaren",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.15523,
+     59.346946
+    ]
+   },
+   "properties": {
+    "id": "node/5335472249",
+    "name": "AGA",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.041257,
+     59.377578
+    ]
+   },
+   "properties": {
+    "id": "node/5451658417",
+    "name": "Bergshamra Allé",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.047485,
+     59.376511
+    ]
+   },
+   "properties": {
+    "id": "node/5451658419",
+    "name": "Himlabacken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.022735,
+     59.362993
+    ]
+   },
+   "properties": {
+    "id": "node/5486068650",
+    "name": "Andersvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.069581,
+     59.386055
+    ]
+   },
+   "properties": {
+    "id": "node/5619403896",
+    "name": "Svanholmsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.069169,
+     59.386292
+    ]
+   },
+   "properties": {
+    "id": "node/5619403897",
+    "name": "Svanholmsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.086255,
+     59.398356
+    ]
+   },
+   "properties": {
+    "id": "node/5619403904",
+    "name": "Svitiodsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.059147,
+     59.384843
+    ]
+   },
+   "properties": {
+    "id": "node/5619403906",
+    "name": "Stocksunds torg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.050824,
+     59.382417
+    ]
+   },
+   "properties": {
+    "id": "node/5619403907",
+    "name": "Sjöstigen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.03649,
+     59.403315
+    ]
+   },
+   "properties": {
+    "id": "node/5620206043",
+    "name": "Nora backe",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.069968,
+     59.399433
+    ]
+   },
+   "properties": {
+    "id": "node/5620373054",
+    "name": "Vendevägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.06984,
+     59.399644
+    ]
+   },
+   "properties": {
+    "id": "node/5620373055",
+    "name": "Vendevägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.078775,
+     59.398219
+    ]
+   },
+   "properties": {
+    "id": "node/5620373056",
+    "name": "Vasaskolan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.077139,
+     59.398381
+    ]
+   },
+   "properties": {
+    "id": "node/5620373057",
+    "name": "Vasaskolan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.063575,
+     59.400118
+    ]
+   },
+   "properties": {
+    "id": "node/5620373058",
+    "name": "Surtvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.045512,
+     59.397097
+    ]
+   },
+   "properties": {
+    "id": "node/5620373060",
+    "name": "Mörbyskogen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.044782,
+     59.397356
+    ]
+   },
+   "properties": {
+    "id": "node/5620373061",
+    "name": "Mörbyskogen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.084095,
+     59.351832
+    ]
+   },
+   "properties": {
+    "id": "node/5760746881",
+    "name": "Storängsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.038458,
+     59.379131
+    ]
+   },
+   "properties": {
+    "id": "node/6022797427",
+    "name": "Bergshamra södra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.024304,
+     59.369767
+    ]
+   },
+   "properties": {
+    "id": "node/6069202809",
+    "name": "Frösunda strand",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.024513,
+     59.369608
+    ]
+   },
+   "properties": {
+    "id": "node/6069202810",
+    "name": "Frösunda strand",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.057064,
+     59.362172
+    ]
+   },
+   "properties": {
+    "id": "node/6294280287",
+    "name": "Universitetsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.053448,
+     59.350759
+    ]
+   },
+   "properties": {
+    "id": "node/6571868941",
+    "name": "Johannes skola",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.107787,
+     59.354271
+    ]
+   },
+   "properties": {
+    "id": "node/6665580593",
+    "name": "Tredje Tvärvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.106189,
+     59.355946
+    ]
+   },
+   "properties": {
+    "id": "node/6665580594",
+    "name": "Andra Tvärvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.108283,
+     59.353901
+    ]
+   },
+   "properties": {
+    "id": "node/6665580595",
+    "name": "Tredje Tvärvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.072257,
+     59.329575
+    ]
+   },
+   "properties": {
+    "id": "node/6728731585",
+    "name": "Karl XII:s torg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.061169,
+     59.331938
+    ]
+   },
+   "properties": {
+    "id": "node/6745903817",
+    "name": "T-Centralen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.062402,
+     59.332119
+    ]
+   },
+   "properties": {
+    "id": "node/6745903818",
+    "name": "T-Centralen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.064826,
+     59.33435
+    ]
+   },
+   "properties": {
+    "id": "node/6783388959",
+    "name": "Sergels torg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.083716,
+     59.403301
+    ]
+   },
+   "properties": {
+    "id": "node/6795886320",
+    "name": "Norrängsgården",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.053866,
+     59.330201
+    ]
+   },
+   "properties": {
+    "id": "node/7060188942",
+    "name": "Centralen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.021073,
+     59.370497
+    ]
+   },
+   "properties": {
+    "id": "node/7236299538",
+    "name": "Frösunda",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.068465,
+     59.330995
+    ]
+   },
+   "properties": {
+    "id": "node/7239210070",
+    "name": "Jakobsgatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.022852,
+     59.346165
+    ]
+   },
+   "properties": {
+    "id": "node/7242487003",
+    "name": "Karolinska institutet västra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.022944,
+     59.349902
+    ]
+   },
+   "properties": {
+    "id": "node/7242487004",
+    "name": "Karolinska institutet Biomedicum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.023255,
+     59.350082
+    ]
+   },
+   "properties": {
+    "id": "node/7242487005",
+    "name": "Karolinska institutet Biomedicum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.026153,
+     59.349579
+    ]
+   },
+   "properties": {
+    "id": "node/7250332570",
+    "name": "Karolinska institutet Biomedicum",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.154057,
+     59.349051
+    ]
+   },
+   "properties": {
+    "id": "node/7252858061",
+    "name": "Lerbovägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.084386,
+     59.351968
+    ]
+   },
+   "properties": {
+    "id": "node/7263541703",
+    "name": "Storängsvägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.153881,
+     59.345946
+    ]
+   },
+   "properties": {
+    "id": "node/7274664562",
+    "name": "Brostugevägen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.092731,
+     59.357099
+    ]
+   },
+   "properties": {
+    "id": "node/7274664581",
+    "name": "Bobergsskolan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.089223,
+     59.396523
+    ]
+   },
+   "properties": {
+    "id": "node/7369457176",
+    "name": "Djursholms torg",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.056591,
+     59.361949
+    ]
+   },
+   "properties": {
+    "id": "node/7391222245",
+    "name": "Universitetet södra",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.046247,
+     59.332595
+    ]
+   },
+   "properties": {
+    "id": "node/8228281766",
+    "name": "Scheelegatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.048753,
+     59.332438
+    ]
+   },
+   "properties": {
+    "id": "node/8228281767",
+    "name": "Kungsbroplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.055074,
+     59.333295
+    ]
+   },
+   "properties": {
+    "id": "node/8228281768",
+    "name": "Cityterminalen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.054102,
+     59.333273
+    ]
+   },
+   "properties": {
+    "id": "node/8228281769",
+    "name": "Cityterminalen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.093129,
+     59.346655
+    ]
+   },
+   "properties": {
+    "id": "node/8228775614",
+    "name": "Rindögatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.05461,
+     59.333191
+    ]
+   },
+   "properties": {
+    "id": "node/9182850247",
+    "name": "Cityterminalen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.131765,
+     59.331311
+    ]
+   },
+   "properties": {
+    "id": "node/9356734379",
+    "name": "Djurgårdsbrunn",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.131416,
+     59.331444
+    ]
+   },
+   "properties": {
+    "id": "node/9356734380",
+    "name": "Djurgårdsbrunn",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.100161,
+     59.338287
+    ]
+   },
+   "properties": {
+    "id": "node/9784814005",
+    "name": "Hakberget",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.048886,
+     59.339095
+    ]
+   },
+   "properties": {
+    "id": "node/9926671539",
+    "name": "Sabbatsbergs sjukhus",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.045818,
+     59.35042
+    ]
+   },
+   "properties": {
+    "id": "node/12724155312",
+    "name": "Norrtull",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.038501,
+     59.348155
+    ]
+   },
+   "properties": {
+    "id": "node/12741242340",
+    "name": "Lise Meitners gata",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.038152,
+     59.34786
+    ]
+   },
+   "properties": {
+    "id": "node/12741242341",
+    "name": "Lise Meitners gata",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.062108,
+     59.328689
+    ]
+   },
+   "properties": {
+    "id": "node/12957251841",
+    "name": "Tegelbacken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.062842,
+     59.328565
+    ]
+   },
+   "properties": {
+    "id": "node/12957251846",
+    "name": "Tegelbacken",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.055538,
+     59.331385
+    ]
+   },
+   "properties": {
+    "id": "node/13052367181",
+    "name": "Cityterminalen",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.048483,
+     59.348826
+    ]
+   },
+   "properties": {
+    "id": "node/13178373373",
+    "name": "Ynglingagatan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.097026,
+     59.325466
+    ]
+   },
+   "properties": {
+    "id": "node/13341230243",
+    "name": "Liljevalchs/Gröna Lund",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.097116,
+     59.325094
+    ]
+   },
+   "properties": {
+    "id": "node/13344067309",
+    "name": "Liljevalchs/Gröna Lund",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.032577,
+     59.347046
+    ]
+   },
+   "properties": {
+    "id": "node/13374523106",
+    "name": "Hagaplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.03128,
+     59.34822
+    ]
+   },
+   "properties": {
+    "id": "node/13395685405",
+    "name": "Hagaplan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.072795,
+     59.345283
+    ]
+   },
+   "properties": {
+    "id": "node/13977595417",
+    "name": "Tekniska högskolan",
+    "type": "bus"
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     18.030265,
+     59.332227
+    ]
+   },
+   "properties": {
+    "id": "node/14090007951",
+    "name": "Fridhemsplan",
+    "type": "bus"
+   }
+  }
+ ]
+}

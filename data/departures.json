@@ -1,0 +1,51 @@
+{
+  "_help": "Sample services per stop, keyed 'Name|Municipality' as in data/search-index.json. Each service runs both directions every 'headway' minutes; departure times are derived from the clock (js/departures.js). Modes of a stop not listed here get generated sample services. mode: metro | train | tram | bus | ferry.",
+  "services": {
+    "Gärdet|Stockholm": [{"mode": "metro", "line": "13", "directions": ["Ropsten", "Norsborg"], "headway": 8}],
+    "Karlaplan|Stockholm": [{"mode": "metro", "line": "13", "directions": ["Ropsten", "Norsborg"], "headway": 8}],
+    "Ropsten|Stockholm": [
+      {"mode": "metro", "line": "13", "directions": ["Norsborg"], "headway": 8},
+      {"mode": "tram", "line": "21", "directions": ["Gåshaga brygga"], "headway": 15}
+    ],
+    "Östermalmstorg|Stockholm": [
+      {"mode": "metro", "line": "13", "directions": ["Ropsten", "Norsborg"], "headway": 8},
+      {"mode": "metro", "line": "14", "directions": ["Mörby centrum", "Fruängen"], "headway": 8}
+    ],
+    "Stadion|Stockholm": [{"mode": "metro", "line": "14", "directions": ["Mörby centrum", "Fruängen"], "headway": 6}],
+    "Tekniska högskolan|Stockholm": [{"mode": "metro", "line": "14", "directions": ["Mörby centrum", "Fruängen"], "headway": 6}],
+    "Universitetet|Stockholm": [{"mode": "metro", "line": "14", "directions": ["Mörby centrum", "Fruängen"], "headway": 6}],
+    "Mörby centrum|Danderyd": [{"mode": "metro", "line": "14", "directions": ["Fruängen"], "headway": 6}],
+    "Mörby|Danderyd": [{"mode": "tram", "line": "28", "directions": ["Österskär", "Stockholms östra"], "headway": 15}],
+    "Odenplan|Stockholm": [
+      {"mode": "metro", "line": "17", "directions": ["Åkeshov", "Skarpnäck"], "headway": 10},
+      {"mode": "metro", "line": "18", "directions": ["Alvik", "Farsta strand"], "headway": 10},
+      {"mode": "metro", "line": "19", "directions": ["Hässelby strand", "Hagsätra"], "headway": 10}
+    ],
+    "T-Centralen|Stockholm": [
+      {"mode": "metro", "line": "10", "directions": ["Kungsträdgården", "Hjulsta"], "headway": 8},
+      {"mode": "metro", "line": "11", "directions": ["Kungsträdgården", "Akalla"], "headway": 8},
+      {"mode": "metro", "line": "13", "directions": ["Ropsten", "Norsborg"], "headway": 8},
+      {"mode": "metro", "line": "14", "directions": ["Mörby centrum", "Fruängen"], "headway": 8},
+      {"mode": "metro", "line": "17", "directions": ["Åkeshov", "Skarpnäck"], "headway": 10},
+      {"mode": "metro", "line": "18", "directions": ["Alvik", "Farsta strand"], "headway": 10},
+      {"mode": "metro", "line": "19", "directions": ["Hässelby strand", "Hagsätra"], "headway": 10},
+      {"mode": "train", "line": "40", "directions": ["Uppsala C", "Södertälje centrum"], "headway": 15},
+      {"mode": "train", "line": "41", "directions": ["Märsta", "Södertälje centrum"], "headway": 15},
+      {"mode": "train", "line": "43", "directions": ["Bålsta", "Nynäshamn"], "headway": 15},
+      {"mode": "tram", "line": "7", "directions": ["Waldemarsudde", "T-Centralen"], "headway": 12}
+    ],
+    "Finnhamn|Österåker": [
+      {"mode": "ferry", "line": "13", "color": "#2f8a0e", "directions": ["Strömkajen (Stockholm)"], "headway": 180},
+      {"mode": "ferry", "line": "10", "color": "#00857a", "directions": ["Åsättra (Ljusterö)"], "headway": 240}
+    ]
+  },
+  "_help_notices": "notices: service notices per stop ('Name|Municipality'), shown on the stop page, on rides that start or end there (journey details) and as a ⚠ in journey results. Texts copied from SL app screenshots.",
+  "notices": {
+    "Östermalmstorg|Stockholm": [
+      "Östermalmstorg: Entrén från Grev Turegatan är stängd pga underhållsarbete. Hänvisning till entrén från Birger Jarlsgatan."
+    ],
+    "Mörby|Danderyd": [
+      "Natt mot lör 24/10 kl.01:55 till natt mot mån 26/10 kl.01:30 är tågtrafiken på Näsbyparkslinjen 29 inställd mellan Stockholms östra - Djursholms Ösby pga underhållsarbete. Buss ersätter Danderyds sjukhus - Djursholms Ösby. Läs mer på sl.se eller i sl-appen"
+    ]
+  }
+}
