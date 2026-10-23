@@ -5,14 +5,21 @@
 //   favoriteJourneys – starred From/To pairs
 // Stops are stored by key "Name|Municipality" (see js/stop-index.js); "My location" is "@me".
 // A journey is stored as "fromKey>toKey".
-// A first visit has neither. Add ?reset to the URL to wipe them (e.g. between test sessions).
+// A first visit has neither. Add ?reset to the URL to wipe them, for both versions (e.g. between
+// test sessions).
 
-const STORAGE_KEY = 'sl-proto-v1';
+import { VARIANT } from './variant.js';
+
+// Each test version keeps its own data, so testing A then B starts clean in both.
+const STORAGE_KEY = `sl-proto-v1-${VARIANT}`;
 const MAX_HISTORY = 10;
 
 function load() {
   try {
-    if (new URLSearchParams(location.search).has('reset')) localStorage.removeItem(STORAGE_KEY);
+    if (new URLSearchParams(location.search).has('reset')) {
+      // ?reset wipes both versions (and the pre-A/B key from earlier test runs).
+      for (const k of ['sl-proto-v1', 'sl-proto-v1-a', 'sl-proto-v1-b']) localStorage.removeItem(k);
+    }
     const d = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (d && Array.isArray(d.favorites) && Array.isArray(d.history)) return { journeys: [], favoriteJourneys: [], ...d };
   } catch { /* storage blocked or corrupt: start empty */ }

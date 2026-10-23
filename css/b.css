@@ -1,0 +1,2 @@
+/* Version B (redesign) styles. Loaded only by version B (js/b/index.js).
+   Prefer scoping rules with [data-variant="b"] so they can never leak into version A. */

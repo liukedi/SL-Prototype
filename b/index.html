@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" data-variant="b">
+<head>
+  <!-- GENERATED from ../index.html by scripts/make-entries.mjs. Edit index.html, then re-run. -->
+  <base href="../">
+  <meta charset="utf-8">
+  <!-- No page zoom: pinch must only zoom the map. viewport-fit=cover enables safe-area insets. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#172f44">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <title>SL map prototype</title>
+  <link rel="icon" href="data:,"> <!-- no favicon request -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Gothic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+  <link href="css/app.css" rel="stylesheet">
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+</head>
+<body>
+  <!-- Desktop mockup: fixed iPhone 15 Pro screen (393×852 pt), scaled to the window height by js/device.js -->
+  <div class="device" id="device">
+  <div class="screen" id="screen">
+  <div id="map" aria-label="Map"></div>
+
+  <!-- ===== Simulated iOS chrome ===== -->
+  <div class="status-bar" aria-hidden="true">
+    <span class="status-bar__time">18:30</span>
+    <span class="status-bar__icons">
+      <svg width="19" height="12" viewBox="0 0 19 12" fill="currentColor"><rect x="0" y="7.5" width="3.2" height="4.5" rx="1"/><rect x="5.2" y="5" width="3.2" height="7" rx="1"/><rect x="10.4" y="2.5" width="3.2" height="9.5" rx="1"/><rect x="15.6" y="0" width="3.2" height="12" rx="1"/></svg>
+      <svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor"><path d="M8.5 2.4c2.3 0 4.4.9 6 2.4l1.2-1.2A10.2 10.2 0 0 0 8.5.7 10.2 10.2 0 0 0 1.3 3.6l1.2 1.2a8.5 8.5 0 0 1 6-2.4zm0 3.4c1.4 0 2.6.5 3.6 1.4l1.2-1.2a6.8 6.8 0 0 0-9.6 0l1.2 1.2c1-.9 2.2-1.4 3.6-1.4zm0 3.4c.5 0 1 .2 1.3.5L8.5 11 7.2 9.7c.3-.3.8-.5 1.3-.5z"/></svg>
+      <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x="0.5" y="0.5" width="23" height="12" rx="3.8" stroke="currentColor" opacity="0.4"/><rect x="2" y="2" width="16" height="9" rx="2.4" fill="currentColor"/><path d="M25 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2z" fill="currentColor" opacity="0.4"/></svg>
+    </span>
+  </div>
+  <div class="dynamic-island" aria-hidden="true"></div>
+  <div class="home-indicator" aria-hidden="true"></div>
+
+  <!-- ===== Floating UI overlay ===== -->
+
+  <button class="service-pill glass" type="button" id="service-status">
+    <span>Service status</span>
+    <svg width="24" height="22" viewBox="0 0 24 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 2.2 22.2 19.8H1.8z"/>
+      <path d="M12 8.6v5.2" stroke-linecap="round"/>
+      <circle cx="12" cy="16.9" r="0.4" fill="currentColor"/>
+    </svg>
+  </button>
+
+  <button class="locate-btn glass" type="button" id="locate" aria-label="Show my location">
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 3 3.5 10.6l7.4 2.5 2.5 7.4z" fill="currentColor"/>
+    </svg>
+  </button>
+
+  <section class="sheet" id="sheet" aria-label="Stops and departures">
+    <div class="sheet__handle" aria-hidden="true"></div>
+    <div class="sheet__header">
+      <label class="search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/>
+        </svg>
+        <input type="search" placeholder="Search stop/station" readonly aria-label="Search stop/station">
+      </label>
+    </div>
+    <div class="sheet__body" id="sheet-body">
+      <!-- Favourite cards / "no favorites" card: js/favorites.js -->
+    </div>
+    <!-- Stop page (departures for one stop): js/stop-page.js -->
+    <div class="stop-page" id="stop-page" hidden></div>
+  </section>
+
+  <!-- ===== Other tabs (the Map tab is the map + sheet above) ===== -->
+  <section class="page page--travel" id="page-travel" aria-label="Travel" hidden></section>
+  <section class="page page--placeholder" id="page-tickets" aria-label="Tickets" hidden>
+    <p>This page is not included in the test.</p>
+  </section>
+  <section class="page page--placeholder" id="page-more" aria-label="More" hidden>
+    <p>This page is not included in the test.</p>
+  </section>
+
+  <nav class="tabbar glass" aria-label="Main">
+    <button type="button" data-tab="travel" class="tab">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="6" cy="5.5" r="2.5"/><circle cx="18" cy="18.5" r="2.5"/>
+        <path d="M8 7.5 15.5 11a2 2 0 0 1 0 3.4L9 17"/>
+      </svg>
+      <span>Travel</span>
+    </button>
+    <button type="button" data-tab="map" class="tab is-active" aria-current="page">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M2.5 5.5 8 3.5v15l-5.5 2z M9.5 3.5l5 2v15l-5-2z M16 5.5l5.5-2v15L16 20.5z" fill="currentColor"/>
+      </svg>
+      <span>Map</span>
+    </button>
+    <button type="button" data-tab="tickets" class="tab">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+        <path d="M2.5 6h19v3.2a2.8 2.8 0 0 0 0 5.6V18h-19v-3.2a2.8 2.8 0 0 0 0-5.6z"/>
+        <path d="M9 11.2a3 3 0 0 0 6 0" stroke-linecap="round"/>
+      </svg>
+      <span>Tickets</span>
+    </button>
+    <button type="button" data-tab="more" class="tab">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <span>More</span>
+    </button>
+  </nav>
+
+  </div><!-- /.screen -->
+  </div><!-- /.device -->
+
+  <!-- Outside the phone, on the page background: never covers app content. -->
+  <div class="proto-label">Research prototype</div>
+  <button type="button" class="sound-toggle" id="sound-toggle" aria-pressed="true">
+    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M2 5.5h3l4-3.5v12l-4-3.5H2z" fill="currentColor"/>
+      <path class="on" d="M12 5a4 4 0 0 1 0 6M14.5 2.8a7 7 0 0 1 0 10.4"/>
+      <path class="off" d="m12 5.5 5 5m0-5-5 5"/>
+    </svg>
+    <span class="on">Ambient sound on</span><span class="off">Ambient sound off</span>
+  </button>
+
+  <script type="module" src="js/ui.js"></script>
+</body>
+</html>

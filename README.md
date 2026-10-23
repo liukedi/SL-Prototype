@@ -8,6 +8,30 @@ They pan by dragging, zoom with the scroll wheel or trackpad pinch, and drag the
 
 > Research prototype. Not affiliated with SL; no SL logo or assets are used.
 
+## Two test versions (A / B)
+
+The study compares two versions. Participants get two links:
+
+| Version | Link (GitHub Pages) | Local |
+|---|---|---|
+| A: baseline, the SL app as it is | `https://<user>.github.io/<repo>/a/` | http://localhost:8080/a/ |
+| B: redesign | `https://<user>.github.io/<repo>/b/` | http://localhost:8080/b/ |
+
+The neutral names (a / b) don't reveal which version is the original.
+
+- **Shared code:** both versions run the same code. `a/index.html` and `b/index.html` only set
+  `<html data-variant="a|b">` and `<base href="../">`. They are generated from `index.html`; after editing
+  `index.html`, run:
+  ```bash
+  node scripts/make-entries.mjs
+  ```
+- **Version B's changes:** they live only in `js/b/` (entry: `js/b/index.js`, called from `js/ui.js` when the version
+  is B) and `css/b.css`. Version A never loads them, so A stays the baseline.
+- **Separate storage:** each version keeps its own favourites and history (`sl-proto-v1-a` / `sl-proto-v1-b` in
+  localStorage), so a participant who tests both starts clean in each. `?reset` wipes both.
+- **Baseline snapshot:** git tag `baseline-v1` marks version A as finished before work on B started.
+- The root URL (`/`) also opens version A, for development.
+
 ## Run locally
 
 ```bash
@@ -53,7 +77,11 @@ Consider leaving `reference/` out of a public repo if the screenshots shouldn't 
 ## Project structure
 
 ```
-index.html            page shell + static overlay markup
+index.html            page shell + static overlay markup (shared by both versions)
+a/index.html          version A entry (generated)
+b/index.html          version B entry (generated)
+js/variant.js         which version is running ('a' or 'b')
+js/b/, css/b.css      version B (redesign) only
 css/app.css           all styling; design tokens (incl. --font-ui) at the top
 js/config.js          location, zoom levels, stop thresholds, data URLs  ← tune here
 js/map.js             MapLibre map, icon loading, stop layers, user-location marker
@@ -84,6 +112,7 @@ js/clock.js           scenario clock (starts at CONFIG.scenarioTime, e.g. 18:30)
 scripts/fetch-stops.mjs  regenerates data/stops.geojson from the Overpass API
 scripts/fetch-search-index.mjs  regenerates data/search-index.json from the Overpass API
 scripts/serve.py      no-cache LAN dev server
+scripts/make-entries.mjs  generates a/index.html and b/index.html from index.html
 reference/            SL screenshots + comparison image
 ```
 

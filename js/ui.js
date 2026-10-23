@@ -12,6 +12,7 @@ import { MODES, modesOf } from './departures.js';
 import { initTravel } from './travel.js';
 import { initAmbience } from './ambience.js';
 import { now as clockNow } from './clock.js';
+import { isB } from './variant.js';
 
 // The page itself must never zoom: only the map does.
 // - Desktop: a trackpad pinch arrives as ctrl+wheel. MapLibre handles it on the map first;
@@ -146,6 +147,12 @@ async function main() {
   map = await createMap('map', { onStopClick: openStopFromMap });
   sharpen(getScale());
   locateBtn.addEventListener('click', () => map.flyToUser());
+
+  // Version B (redesign) adds its changes on top of the shared app.
+  if (isB) {
+    const { initVariantB } = await import('./b/index.js');
+    initVariantB({ map, sheet, searchPanel, travel, openStop, closeStop });
+  }
   // Service status and the non-Map tabs are intentionally inert in the baseline.
 }
 
