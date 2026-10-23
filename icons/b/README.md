@@ -18,3 +18,4 @@ after export.
 | exhibition.png | 100:483 (67×67 pt) | 〃 |
 | nature-gamla-stan.png | 89:487 | Stations with natural scenery outside |
 | nature-ropsten.png | 90:514 | 〃 |
+| special-generic.png | 127:1004 | Orange T: special stations without a designed icon |

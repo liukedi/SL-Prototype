@@ -7,6 +7,8 @@
 //   app.searchPanel – stop search { open(mode), close, isOpen }
 //   app.travel      – Travel tab
 //   app.openStop(stop), app.closeStop()
+import { addSpecialStations } from './special-stations.js';
+
 export function initVariantB(app) {
   // Version B styles (css/b.css), only for this version.
   const link = document.createElement('link');
@@ -14,6 +16,6 @@ export function initVariantB(app) {
   link.href = 'css/b.css';
   document.head.appendChild(link);
 
-  // Design changes for version B go here (in this folder).
-  void app;
+  // Design changes for version B (each in its own module in this folder).
+  addSpecialStations(app).catch((err) => console.error('special stations', err));
 }
