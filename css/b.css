@@ -133,7 +133,9 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  height: 334px; /* sizes and positions measured from the Figma frames (pt) */
+  /* Reaches 12px above the bottom sheet's top edge so the sheet doesn't peek out above it;
+     never shorter than the 334pt Figma card. Inner positions measured from the Figma frames. */
+  top: min(calc(var(--sheet-top, 479px) - 12px), calc(100% - 18px - 334px));
   padding: 39px 33px 19px 34px;
   overflow: hidden;
   border-radius: 40px;
