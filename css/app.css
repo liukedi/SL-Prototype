@@ -60,7 +60,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .device {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: var(--device-center-y, 50%); /* set by js/device.js, below the A | B switch */
   width: calc(393px + 2 * var(--bezel));
   height: calc(852px + 2 * var(--bezel));
   border-radius: calc(var(--screen-radius) + var(--bezel));
@@ -179,6 +179,37 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   letter-spacing: 0.02em;
   pointer-events: none;
 }
+
+/* A | B version switch, above the phone. The current version is highlighted from
+   <html data-variant>, so it needs no script. */
+.variant-switch {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(20, 24, 32, 0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  z-index: 50;
+}
+.variant-switch a {
+  min-width: 52px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.variant-switch a:hover { color: #fff; }
+[data-variant="a"] .variant-switch [data-v="a"],
+[data-variant="b"] .variant-switch [data-v="b"] { background: rgba(255, 255, 255, 0.92); color: #14181f; }
 
 /* Ambient sound toggle (outside the phone, next to the label) */
 .sound-toggle {

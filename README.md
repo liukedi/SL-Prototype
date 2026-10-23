@@ -31,6 +31,9 @@ The neutral names (a / b) don't reveal which version is the original.
   localStorage), so a participant who tests both starts clean in each. `?reset` wipes both.
 - **Baseline snapshot:** git tag `baseline-v1` marks version A as finished before work on B started.
 - The root URL (`/`) also opens version A, for development.
+- **A | B switch:** above the phone, a switch opens the other version (`a/` ↔ `b/`), with the current one highlighted.
+  The phone is placed below it (`TOP` in `js/device.js`). To hide it for a session, remove the
+  `<nav class="variant-switch">` block from `index.html` and re-run `node scripts/make-entries.mjs`.
 
 ## Run locally
 
