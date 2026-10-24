@@ -299,10 +299,14 @@
   display: none;
   flex-direction: column;
   border-radius: 28px 28px 0 0;
-  background: rgba(18, 21, 26, 0.97);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3);
+  /* Same dark frosted glass as the bottom sheet. */
+  background: var(--c-sheet);
+  -webkit-backdrop-filter: var(--c-sheet-blur);
+  backdrop-filter: var(--c-sheet-blur);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-bottom: 0;
+  box-sizing: border-box;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 [data-variant="b"] .b-allart.is-open { display: flex; animation: sp-up 0.32s cubic-bezier(0.2, 0.9, 0.25, 1); }
 [data-variant="b"] .b-allart.is-closing { display: flex; animation: sp-down 0.28s ease-in forwards; }
@@ -364,3 +368,6 @@
 [data-variant="b"] .b-viewpoint { display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; }
 [data-variant="b"] .b-viewpoint__dot { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #f2b544; color: #1d1a12; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45); }
 [data-variant="b"] .b-viewpoint__name { padding: 3px 8px; border-radius: 8px; background: rgba(18, 21, 26, 0.85); color: #fff; font-size: 13px; font-weight: 600; white-space: nowrap; }
+
+/* Tourist Mode: the sheet stays frosted glass when expanded too (version A turns it near-opaque). */
+[data-variant="b"][data-tourist="on"] .sheet.is-expanded { background: var(--c-sheet); }
