@@ -338,6 +338,11 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
     durations and complexity come from the thesis Notion page. The photos are cropped and resized to 405 × 405.
   - The 360° button shows "not available in the prototype" for 5 s, with a close button. DISCOVER does the same
     until `discoverUrl` is set.
+- **Rotating-exhibition stations** (`data/b/exhibitions.json`, `assets/b/exhibitions/`): the same Information / Time
+  Table tabs. Information shows the current exhibition (Konstväxlingar 2026–2027): its photo (no frame, no 360°),
+  lines, Duration (estimated), "On view" dates in place of Complexity, "About the exhibition" in place of the tip,
+  and DISCOVER. Texts are paraphrased from Region Stockholm's exhibition pages (linked in `source`); photos are
+  © Region Stockholm and the photographers named in `credit`. Update the file when the exhibitions change.
 - **Tab bar:** hidden while a stop page is open in version B with Tourist Mode on (as in the Stadion design).
 - **Map sheet: Explore / Favorite tabs** (`js/b/explore.js`, `data/b/curated-routes.json`):
   - **Explore** (default): "The Art Metro" shows the 3 nearest special stations to the user (Gärdet), sorted by

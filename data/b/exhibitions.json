@@ -1,0 +1,96 @@
+{
+  "_help": "Version B 'Information' tab for the rotating-exhibition stations (Konstväxlingar, 2026–2027 season). Texts paraphrased from Region Stockholm's exhibition pages (source). photo: file in assets/b/exhibitions/ (square crop; credit shown on hover). period replaces Complexity; about replaces 'What to look for'. duration is an estimate (suggested stay). discoverUrl: page opened by DISCOVER (null = not built yet).",
+  "stations": {
+    "Gärdet|Stockholm": {
+      "title": "Shortcuts",
+      "artist": "Ludvig Helin",
+      "description": "Ten large paintings hang along both platforms.",
+      "about": "Helin zoomed in and out of his paintings from the past ten years to find new details. From the platform the works shift between still and moving, abstract and figurative, depending on how far away you stand.",
+      "lines": [13],
+      "duration": "10-15 mins",
+      "period": "Sep 2026 – Sep 2027",
+      "photo": "gardet.jpg",
+      "credit": "Photo: Region Stockholm",
+      "source": "https://www.regionstockholm.se/kultur/konst-i-kollektivtrafiken/konstvaxlingar-pa-gardet/2026-2027-ludvig-helin/",
+      "discoverUrl": null
+    },
+    "Slussen|Stockholm": {
+      "title": "Máttaráhku ládjogahpir – Foremothers’ Hat of Pride",
+      "artist": "Outi Pieski",
+      "description": "40 art panels among the adverts on the platforms.",
+      "about": "The Sámi artist’s images treat nature as a carrier of memory and the landscape as full of stories. The recurring motif is the ládjogahpir, a horned women’s headdress and a symbol of pride, resistance and cultural self-determination.",
+      "lines": [13, 14, 17, 18, 19],
+      "duration": "15-20 mins",
+      "period": "Oct 2026 – Sep 2027",
+      "photo": "slussen.jpg",
+      "credit": "Photo: Maija Toivanen / HAM (the artist; no photo of the installation published yet)",
+      "source": "https://www.regionstockholm.se/kultur/konst-i-kollektivtrafiken/konstvaxlingar-pa-slussen/2026-2027-outi-pieski/",
+      "discoverUrl": null
+    },
+    "Mariatorget|Stockholm": {
+      "title": "Photographs with Text",
+      "artist": "David Shrigley",
+      "description": "Black-and-white photographs along the track walls.",
+      "about": "Shrigley swaps drawing for photography: everyday scenes shot on 35 mm film in the early 2000s, each paired with a short text that turns it into a witty, poetic story.",
+      "lines": [13, 14],
+      "duration": "10-15 mins",
+      "period": "Oct 2026 – Sep 2027",
+      "photo": "mariatorget.jpg",
+      "credit": "Photo: Hans Ekestang / Region Stockholm",
+      "source": "https://www.regionstockholm.se/kultur/konst-i-kollektivtrafiken/konstvaxlingar-pa-mariatorget/2026-2027-david-shrigley/",
+      "discoverUrl": null
+    },
+    "Zinkensdamm|Stockholm": {
+      "title": "Hotel Eden",
+      "artist": "Jan Håfström",
+      "description": "Two 11-metre picture series against a black background.",
+      "about": "Layered images drawing on religion, literature and art history, about life, loneliness, death and illness. The title points to his parents’ work in hotels, and to the Berlin hotel where Rosa Luxemburg was taken in 1919.",
+      "lines": [13, 14],
+      "duration": "10-15 mins",
+      "period": "Sep 2026 – Sep 2027",
+      "photo": "zinkensdamm.jpg",
+      "credit": "Photo: Region Stockholm",
+      "source": "https://www.regionstockholm.se/kultur/konst-i-kollektivtrafiken/konstvaxlingar-pa-zinkensdamm/2026-2027-jan-hafstrom/",
+      "discoverUrl": null
+    },
+    "Fridhemsplan|Stockholm": {
+      "title": "Trakternas förtrollade arv",
+      "artist": "Camila Manuelsdotter Pino",
+      "description": "Hand-coloured photographs on the yellow platform walls.",
+      "about": "Black-and-white photographs of hilly landscapes in Sweden and Chile, painted over by hand so they move between reality and imagination – about memory, place and belonging. The largest work is 6 metres long.",
+      "lines": [10, 11, 17, 18, 19],
+      "duration": "10-15 mins",
+      "period": "Sep 2026 – Sep 2027",
+      "photo": "fridhemsplan.jpg",
+      "credit": "Photo: Hans Ekestang / Region Stockholm",
+      "source": "https://www.regionstockholm.se/kultur/konst-i-kollektivtrafiken/konstvaxlingar-pa-fridhemsplan/2026-2027-camila-manuelsdotter-pino/",
+      "discoverUrl": null
+    },
+    "Skanstull|Stockholm": {
+      "title": "Solarceptors",
+      "artist": "Rasa Smite & Raitis Smits",
+      "description": "Video art on the ticket hall wall.",
+      "about": "A total artwork of music, collage and animation about plants as living bodies born of sunlight. 3D-scanned plants and scientific data show the world from the plants’ point of view.",
+      "lines": [17, 18, 19],
+      "duration": "5-10 mins",
+      "period": "Oct 2026 – Sep 2027",
+      "photo": "skanstull.jpg",
+      "credit": "Photo: Region Stockholm",
+      "source": "https://www.regionstockholm.se/kultur/konst-i-kollektivtrafiken/konstvaxlingar-pa-skanstull/2026-2027-rasa-smite-och-raitis-smits/",
+      "discoverUrl": null
+    },
+    "Odenplan|Stockholm": {
+      "title": "under ytan (Beneath the Surface)",
+      "artist": "Sanne Lovén Rolén",
+      "description": "An aquarium in the platform display case.",
+      "about": "Textile fish share the case with familiar human waste – a sweet bag, a damaged lifeboat, a tin of sausages – inviting you to see the world from the point of view of children and animals.",
+      "lines": [17, 18, 19],
+      "duration": "5-10 mins",
+      "period": "9 Oct 2026 – Jan 2027",
+      "photo": "odenplan.jpg",
+      "credit": "Photo: Region Stockholm",
+      "source": "https://www.regionstockholm.se/kultur/konst-i-kollektivtrafiken/konstvaxlingar-pa-odenplan/2026-sanne-loven-rolen/",
+      "discoverUrl": null
+    }
+  }
+}
