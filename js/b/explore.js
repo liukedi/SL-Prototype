@@ -3,7 +3,7 @@
 //     from the user ("See All" opens a full-screen list, closed with ×) – and "Curated
 //     Routes", a row of cards (arrows / horizontal scroll); a card opens a full-screen route
 //     page (small route map, its stations, and a button that plans the way from the user's
-//     location to the route's nearest station in the Travel tab).
+//     location to the nearer end of the route – first or last station – in the Travel tab).
 //   - A stop opened from See All or a route page returns there (same scroll) when closed.
 //   - The sheet's default position is higher while Tourist Mode is on (DEFAULT_TOP).
 //   - Favorite: the original sheet content (favourites, Add favorite).
@@ -192,7 +192,7 @@ export async function addExplore(app) {
           </button>`).join('')}
         </div>
         <button type="button" class="b-routepage__plan" data-act="plan">Go to ${esc(nearestStop(r).name)} ${ARROW_OUT}</button>
-        <p class="b-routepage__note">The nearest station on this route from your location</p>
+        <p class="b-routepage__note">Start from the end of this route nearest to you</p>
       </div>`;
     routePage.classList.remove('is-closing');
     routePage.classList.add('is-open');
@@ -209,9 +209,9 @@ export async function addExplore(app) {
     routeShown = null;
     closePanel(routePage, () => { routeMap?.remove(); routeMap = null; });
   }
-  // The route's station nearest to the user: where they join it.
+  // Where the user joins the route: whichever end (first or last station) is nearer to them.
   function nearestStop(r) {
-    return r.stops.map((k) => stopFromKey(byKey, k)).filter((x) => x.lngLat)
+    return [r.stops[0], r.stops.at(-1)].map((k) => stopFromKey(byKey, k)).filter((x) => x.lngLat)
       .reduce((best, x) => (km(CONFIG.userLocation, x.lngLat) < km(CONFIG.userLocation, best.lngLat) ? x : best));
   }
   function planTrip(r) {

@@ -347,7 +347,7 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
   - "Curated Routes" is a row of route cards (arrows or horizontal scrolling). A card opens a full-screen route
     page: a small route map (every station of the line between the ends, art stations as icons), the route's
     stations as a list, and "Go to <station>", which plans the way from the user's location to the route's
-    nearest station in the Travel tab. Routes are edited in
+    nearer end (its first or last station) in the Travel tab. Routes are edited in
     `data/b/curated-routes.json`.
   - A stop opened from See All or a route page returns there when it's closed, with the same filter and scroll.
   - With Tourist Mode on, the sheet's default position is higher (350 pt from the top;
