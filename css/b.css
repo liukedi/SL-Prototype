@@ -348,3 +348,19 @@
 [data-variant="b"] .si__tip--exhibition svg { color: #c5ec6f; }
 [data-variant="b"] .si__exh-title { margin: 0 0 6px !important; color: #fff !important; font-weight: 600; }
 [data-variant="b"] .si__exh-title span { font-weight: 400; color: #c3cad1; }
+
+/* Scenic-view stations */
+[data-variant="b"] .si__note { display: flex; gap: 8px; align-items: flex-start; margin: 14px 0 0; padding: 10px 12px; border-radius: 14px; background: rgba(242, 181, 68, 0.12); color: #f5d79a; font-size: 13.5px; line-height: 1.4; }
+[data-variant="b"] .si__note svg { flex: none; margin-top: 1px; }
+[data-variant="b"] .si__tip--scenic svg { color: #f2b544; }
+[data-variant="b"] .si__steps { margin: 2px 0 0; padding-left: 18px; font-size: 14px; line-height: 1.45; color: #d5dade; }
+[data-variant="b"] .si__steps li + li { margin-top: 3px; }
+[data-variant="b"] .si__stay { margin: 8px 0 0 !important; font-size: 12.5px !important; color: #9aa1a8 !important; }
+[data-variant="b"] .si__walk { width: 100%; height: 44px; margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 22px; background: #0a7bbd; color: #fff; font: inherit; font-size: 15px; font-weight: 600; }
+[data-variant="b"] .si__walk:active { background: #08679f; }
+[data-variant="b"] .si__discover--secondary { margin-top: 10px; }
+
+/* Viewpoint marker on the map (js/b/scenic.js) */
+[data-variant="b"] .b-viewpoint { display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; }
+[data-variant="b"] .b-viewpoint__dot { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #f2b544; color: #1d1a12; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45); }
+[data-variant="b"] .b-viewpoint__name { padding: 3px 8px; border-radius: 8px; background: rgba(18, 21, 26, 0.85); color: #fff; font-size: 13px; font-weight: 600; white-space: nowrap; }

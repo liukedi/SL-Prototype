@@ -19,3 +19,9 @@ after export.
 | nature-gamla-stan.png | 89:487 | Stations with natural scenery outside |
 | nature-ropsten.png | 90:514 | 〃 |
 | special-generic.png | 127:1004 | Orange T: special stations without a designed icon |
+| nature-kristineberg.png | — (made in code) | Stations with natural scenery outside |
+| nature-hammarbyhojden.png | — (made in code) | 〃 |
+| nature-skogskyrkogarden.png | — (made in code) | 〃 |
+
+The three "made in code" icons follow the Gamla stan / Ropsten design (landscape photo, 40 % black mask,
+white T in a circle, 201 px, 30 px corners). Photos: assets/b/scenic/credits.json (Wikimedia Commons).

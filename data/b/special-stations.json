@@ -29,8 +29,8 @@
 
     { "key": "Gamla stan|Stockholm", "category": "nature", "icon": "nature-gamla-stan.png" },
     { "key": "Ropsten|Stockholm", "category": "nature", "icon": "nature-ropsten.png" },
-    { "key": "Kristineberg|Stockholm", "category": "nature", "icon": null },
-    { "key": "Hammarbyhöjden|Stockholm", "category": "nature", "icon": null },
-    { "key": "Skogskyrkogården|Stockholm", "category": "nature", "icon": null }
+    { "key": "Kristineberg|Stockholm", "category": "nature", "icon": "nature-kristineberg.png" },
+    { "key": "Hammarbyhöjden|Stockholm", "category": "nature", "icon": "nature-hammarbyhojden.png" },
+    { "key": "Skogskyrkogården|Stockholm", "category": "nature", "icon": "nature-skogskyrkogarden.png" }
   ]
 }

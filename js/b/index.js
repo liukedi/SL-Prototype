@@ -13,6 +13,7 @@ import { addMapSettings } from './map-settings.js';
 import { addJourneyArt } from './journey-art.js';
 import { addExplore } from './explore.js';
 import { addMapCentering } from './map-center.js';
+import { addScenicMap } from './scenic.js';
 
 export function initVariantB(app) {
   // Version B styles (css/b.css), only for this version.
@@ -28,4 +29,5 @@ export function initVariantB(app) {
   addJourneyArt().catch((err) => console.error('journey art', err));
   addExplore(app).catch((err) => console.error('explore', err));
   addMapCentering(app);
+  addScenicMap(app).catch((err) => console.error('scenic', err));
 }

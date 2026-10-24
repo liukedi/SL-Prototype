@@ -343,6 +343,13 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
   lines, Duration (estimated), "On view" dates in place of Complexity, "About the exhibition" in place of the tip,
   and DISCOVER. Texts are paraphrased from Region Stockholm's exhibition pages (linked in `source`); photos are
   © Region Stockholm and the photographers named in `credit`. Update the file when the exhibitions change.
+- **Scenic-view stations** (`data/b/scenic.json`, `assets/b/scenic/`, `js/b/scenic.js`, `js/b/sun.js`): the same tabs.
+  Information shows a photo of the view, lines, Walk (time · distance from the station to the viewpoint), Best time
+  (Any time / Daylight / Sunset with the time computed for the scenario day; after dark a note says so), "How to
+  get there" (from the thesis Notion page) and "Show walking route". On the map, a selected scenic station shows
+  its viewpoint and the dashed walking path (OpenStreetMap foot routing, computed once and stored); the button
+  fits both above the sheet. Photos: Wikimedia Commons, credits in `assets/b/scenic/credits.json`.
+  Kristineberg, Hammarbyhöjden and Skogskyrkogården got icons in the same style (see `icons/b/README.md`).
 - **Tab bar:** hidden while a stop page is open in version B with Tourist Mode on (as in the Stadion design).
 - **Map sheet: Explore / Favorite tabs** (`js/b/explore.js`, `data/b/curated-routes.json`):
   - **Explore** (default): "The Art Metro" shows the 3 nearest special stations to the user (Gärdet), sorted by
