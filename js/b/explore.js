@@ -2,13 +2,14 @@
 //   - Explore (default): "The Art Metro" – the nearest special stations, sorted by distance
 //     from the user ("See All" opens a full-screen list, closed with ×) – and "Curated
 //     Routes", a row of cards (arrows / horizontal scroll); a card opens a full-screen route
-//     page (small route map, its stations, "Plan this trip" → Travel tab).
+//     page (small route map, its stations, and a button that plans the way from the user's
+//     location to the route's nearest station in the Travel tab).
 //   - A stop opened from See All or a route page returns there (same scroll) when closed.
 //   - The sheet's default position is higher while Tourist Mode is on (DEFAULT_TOP).
 //   - Favorite: the original sheet content (favourites, Add favorite).
 // Tourist Mode off: no tabs, the sheet is as in version A.
 import { CONFIG } from '../config.js';
-import { loadStopIndex, stopFromKey } from '../stop-index.js';
+import { loadStopIndex, stopFromKey, MY_LOCATION } from '../stop-index.js';
 import { lineColor } from '../departures.js';
 import { lineBadgeHtml, CHEVRON, esc } from '../departure-row.js';
 import { createRouteMap } from '../map.js';
@@ -190,7 +191,8 @@ export async function addExplore(app) {
             <span>${esc(stopFromKey(byKey, k).name)}${CHEVRON}</span>
           </button>`).join('')}
         </div>
-        <button type="button" class="b-routepage__plan" data-act="plan">Plan this trip ${ARROW_OUT}</button>
+        <button type="button" class="b-routepage__plan" data-act="plan">Go to ${esc(nearestStop(r).name)} ${ARROW_OUT}</button>
+        <p class="b-routepage__note">The nearest station on this route from your location</p>
       </div>`;
     routePage.classList.remove('is-closing');
     routePage.classList.add('is-open');
@@ -207,8 +209,13 @@ export async function addExplore(app) {
     routeShown = null;
     closePanel(routePage, () => { routeMap?.remove(); routeMap = null; });
   }
+  // The route's station nearest to the user: where they join it.
+  function nearestStop(r) {
+    return r.stops.map((k) => stopFromKey(byKey, k)).filter((x) => x.lngLat)
+      .reduce((best, x) => (km(CONFIG.userLocation, x.lngLat) < km(CONFIG.userLocation, best.lngLat) ? x : best));
+  }
   function planTrip(r) {
-    const [from, to] = [r.stops[0], r.stops.at(-1)].map((k) => stopFromKey(byKey, k));
+    const [from, to] = [MY_LOCATION, nearestStop(r)];
     document.querySelector('.tabbar [data-tab="travel"]').click();
     app.travel.setEndpoint('from', from);
     app.travel.setEndpoint('to', to);

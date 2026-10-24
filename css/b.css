@@ -338,3 +338,4 @@
   font-weight: 600;
 }
 [data-variant="b"] .b-routepage__plan:active { background: #08679f; }
+[data-variant="b"] .b-routepage__note { margin: 8px 0 0; text-align: center; font-size: 12px; color: #9aa1a8; }
