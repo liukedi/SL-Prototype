@@ -25,18 +25,6 @@
       "photo": "kungstradgarden.jpg",
       "discoverUrl": null
     },
-    "Rådhuset|Stockholm": {
-      "description": "A huge pink and rust-red rock cave with historic objects set into its walls.",
-      "tip": "Walk the whole platform and look for the historic objects set into the cave walls.",
-      "lines": [
-        10,
-        11
-      ],
-      "duration": "10-20 mins",
-      "complexity": 1,
-      "photo": "radhuset.jpg",
-      "discoverUrl": null
-    },
     "Solna centrum|Solna": {
       "description": "A deep red cave ceiling above a green forest, about nature and society.",
       "tip": "Take line 11 (Akalla branch) and walk the platform from one end to the other.",
@@ -57,17 +45,6 @@
       "duration": "10-15 mins",
       "complexity": 2,
       "photo": "solna-strand.jpg",
-      "discoverUrl": null
-    },
-    "Rissne|Sundbyberg": {
-      "description": "A long timeline with maps, running from ancient times to today.",
-      "tip": "Walk along the platform wall: the timeline runs the whole length.",
-      "lines": [
-        10
-      ],
-      "duration": "15-20 mins",
-      "complexity": 1,
-      "photo": "rissne.jpg",
       "discoverUrl": null
     },
     "Tensta|Stockholm": {
@@ -158,43 +135,6 @@
       "duration": "15-25 mins",
       "complexity": 1,
       "photo": "universitetet.jpg",
-      "discoverUrl": null
-    },
-    "Thorildsplan|Stockholm": {
-      "description": "8-bit video-game tiles with pixel clouds and mushrooms.",
-      "tip": "Not a cave station: look for the tiled walls around the above-ground platform.",
-      "lines": [
-        17,
-        18,
-        19
-      ],
-      "duration": "15 mins",
-      "complexity": 2,
-      "photo": "thorildsplan.jpg",
-      "discoverUrl": null
-    },
-    "Hötorget|Stockholm": {
-      "description": "1950s architecture and light art with a strong retro feel.",
-      "tip": "Look at the whole platform, the tiles and the ceiling lights.",
-      "lines": [
-        17,
-        18,
-        19
-      ],
-      "duration": "10-15 mins",
-      "complexity": 1,
-      "photo": "hotorget.jpg",
-      "discoverUrl": null
-    },
-    "Bagarmossen|Stockholm": {
-      "description": "Modern public art, quite different from the classic cave stations.",
-      "tip": "Look at the platform and the walls.",
-      "lines": [
-        17
-      ],
-      "duration": "10 mins",
-      "complexity": 1,
-      "photo": "bagarmossen.jpg",
       "discoverUrl": null
     }
   }

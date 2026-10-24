@@ -324,11 +324,12 @@ The page simulates a tourist using the app in an ordinary hotel room:
 
 All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets/b/`. Version A doesn't load any of it.
 
-- **Special stations on the map** (`js/b/special-stations.js`, `data/b/special-stations.json`): 29 art,
-  rotating-exhibition and scenery stations.
+- **Special stations on the map** (`js/b/special-stations.js`, `data/b/special-stations.json`): 24 stations:
+  12 art interior, 7 rotating-exhibition and 5 scenic-view stations. Art stations without a designed icon
+  (Rådhuset, Rissne, Thorildsplan, Hötorget, Bagarmossen) were dropped and are ordinary stations again.
   - **District scale:** orange dots.
-  - **From z13.3:** the designed icons (`icons/b/`). Exhibition stations get the green hanging frame; stations
-    without a designed icon get the orange T.
+  - **From z13.3:** the designed icons (`icons/b/`). Exhibition stations get the green hanging frame. (A station without
+    an icon would fall back to the orange T, `icons/b/special-generic.png`; none does now.)
   - The ordinary metro dot or icon of these stations is hidden, and tapping one opens its stop page.
 - **Selected special station:** shown on the map as a white label with its icon and name.
 - **Information tab for art stations** (`js/b/station-info.js`, `data/b/station-info.json`):
@@ -389,10 +390,8 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
 |---|---|---|---|
 | Stadion | ArildV | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Stadion_metro_station_January_2026_01.jpg |
 | Kungsträdgården | Ray Swi-hymn from Sijhih-Taipei, Taiwan | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:20180623_Stockholm_6386_(48410972942).jpg |
-| Rådhuset | Ray Swi-hymn from Sijhih-Taipei, Taiwan | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:20180624_Stockholm_7791_(48412225521).jpg |
 | Solna centrum | Tony Webster | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Solna_Centrum_Tunnelbana_Painted_Train_Station,_Stockholm,_Sweden_15777674995.jpg |
 | Solna strand | Frank Schulenburg | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Solna_strand_metro_station_in_August_2019.jpg |
-| Rissne | AleWi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Rissne_20170902_04.jpg |
 | Tensta | AleWi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Tensta_metro_20170902_03.jpg |
 | Hallonbergen | AleWi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Hallonbergen_20180624_02.jpg |
 | Husby | Trausti Evans | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:17042014-8075_Husby_(13922311054).jpg |
@@ -400,7 +399,4 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
 | Tekniska högskolan | Andrzej Otrębski | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Stockholm_metro_Tekniska_hogskolan_4.jpg |
 | Mörby centrum | AleWi | CC0 | https://commons.wikimedia.org/wiki/File:M%C3%B6rby_centrum_tunnelbana_augusti_2016_-_bild_7.jpg |
 | Universitetet | Arild Vågen | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Universitetet_metro_station_January_2015_04.jpg |
-| Thorildsplan | AleWi | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Thorildsplan_20170813_bild_03.jpg |
-| Hötorget | Tom Björkstedt | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:H%C3%B6torget_(45001793182).jpg |
-| Bagarmossen | Arild Vågen | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Bagarmossen_Metro_station_October_2014_01.jpg |
 | T-Centralen | Ingolf from Berlin , Deutschland | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Stockholm_-_Tunnelbana_-_T-Centralen_(11106375836).jpg |

@@ -18,7 +18,11 @@ after export.
 | exhibition.png | 100:483 (67×67 pt) | 〃 |
 | nature-gamla-stan.png | 89:487 | Stations with natural scenery outside |
 | nature-ropsten.png | 90:514 | 〃 |
-| special-generic.png | 127:1004 | Orange T: special stations without a designed icon |
+| special-generic.png | 127:1004 | Orange T: fallback for a special station without a designed icon (unused now) |
+| art-tensta.png | 222:1029 (SVG export, rasterised at 3×) | Stations having beautiful art works |
+| art-hallonbergen.png | SVG export (corners clipped to the 12 pt radius) | 〃 |
+| art-husby.png | 222:898 (SVG export) | 〃 |
+| art-tekniska-hogskolan.png | 222:786 (SVG export) | 〃 |
 | nature-kristineberg.png | — (made in code) | Stations with natural scenery outside |
 | nature-hammarbyhojden.png | — (made in code) | 〃 |
 | nature-skogskyrkogarden.png | — (made in code) | 〃 |
