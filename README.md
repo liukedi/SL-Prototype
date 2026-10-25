@@ -51,7 +51,8 @@ One page walks a participant through the scenario experiment (study 2 of the the
    at the end a summary of times and tab switches, with "去填问卷" locked for 15 s so the moderator can note them)
 4. Post-test questionnaire (SAM, UEQ-S, intentions, version preference; the same one after both rounds) → break
 5. Round 2: version B, other scenario. Before the tasks the participant is asked to switch Tourist Mode on
-   ("开始任务" unlocks once it is on), then T1–T3 → post-test questionnaire → interview
+   ("开始任务" unlocks once it is on), then T1–T3 → post-test questionnaire → interview. The interview page lists
+   all measured data of the session (per round and task: time, tab switches, time away; and the data string).
 
 - **Scenario order:** odd codes (P01, P03, …) get X (Mörby centrum) first, even codes Y (Solna centrum) first.
   Versions are always A then B, shown only as "第一个版本 / 第二个版本".

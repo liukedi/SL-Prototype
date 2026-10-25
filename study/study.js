@@ -103,7 +103,35 @@ function renderText(step) {
     break: `<h1>休息一下</h1><p>${esc(TEXT.break)}</p>${nextBtn('进入第二轮')}`,
     interview: `<h1>访谈</h1><p>${esc(TEXT.interview)}</p><p class="big">${esc(TEXT.thanks)}</p>`,
   }[step.id];
-  return `<section class="card">${body}</section>`;
+  return `<section class="card">${body}</section>${step.id === 'interview' ? sessionData() : ''}`;
+}
+
+// All measured data of the session, shown on the last page for the moderator to note down.
+function sessionData() {
+  const roundRows = [1, 2].map((r) => {
+    const s = steps.find((x) => x.round === r && x.kind === 'round');
+    const t = state.times[r];
+    const a = state.away[r] ?? {};
+    const cells = TASKS.map((k) => (t[k.id] == null ? '<td>—</td><td>—</td><td>—</td>'
+      : `<td>${mmss(t[k.id])}</td><td>${a[k.id]?.switches ?? 0} 次</td><td>${mmss(a[k.id]?.sec ?? 0)}</td>`)).join('');
+    const total = TASKS.reduce((n, k) => n + (t[k.id] ?? 0), 0);
+    return `<tr><th>${esc(ROUND_NAME[r])}（${s.version.toUpperCase()}）<br><span class="muted">情境 ${s.scenario} · ${esc(SCENARIOS[s.scenario].destination)}</span></th>${cells}<td>${mmss(total)}</td></tr>`;
+  }).join('');
+  return `
+    <section class="card data-card">
+      <h2>本场数据</h2>
+      <p>参与者 <b>${esc(code)}</b> · 情境顺序 ${order[0]} → ${order[1]}</p>
+      <div class="data-scroll">
+        <table class="data">
+          <tr><th rowspan="2"></th>${TASKS.map((k) => `<th colspan="3">${esc(k.title)}</th>`).join('')}<th rowspan="2">三个任务合计</th></tr>
+          <tr>${TASKS.map(() => '<th>用时</th><th>切出</th><th>离开时长</th>').join('')}</tr>
+          ${roundRows}
+        </table>
+      </div>
+      <p class="muted">“切出”= 任务进行中切到其他浏览器标签页或最小化窗口的次数；“离开时长”= 不在本页面的总时间。</p>
+      <p class="mod-param"><code>${esc(dataParam(2))}</code>
+        <button type="button" class="btn btn--small" data-act="mod-copy">复制</button></p>
+    </section>`;
 }
 
 function renderSurvey(step) {
