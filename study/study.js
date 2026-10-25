@@ -369,12 +369,21 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// ---------- moderator panel (collapsed by default) ----------
+// ---------- progress control panel (collapsed by default; a click elsewhere closes it) ----------
+document.addEventListener('click', (e) => {
+  const panel = $('.moderator');
+  if (panel.open && !panel.contains(e.target)) panel.open = false;
+});
+// Clicks inside the prototype frame don't reach this page; focus moving into it does.
+window.addEventListener('blur', () => {
+  setTimeout(() => { if (document.activeElement === $('#proto')) $('.moderator').open = false; });
+});
 function renderModerator() {
   const t = (r, k) => (state.times[r][k] != null
     ? `${mmss(state.times[r][k])} · 切出 ${state.away[r]?.[k]?.switches ?? 0}` : '—');
   $('#moderator-body').innerHTML = `
-    <p><b>${esc(code)}</b> · 情境顺序 ${order[0]} → ${order[1]}
+    <p><a class="btn btn--small" href="./">← 返回开始页（选择正式测试 / 测试）</a></p>
+    <p><b>${esc(isTest ? '测试' : code)}</b> · 情境顺序 ${order[0]} → ${order[1]}
       （第一轮 ${esc(SCENARIOS[order[0]].destination)}，第二轮 ${esc(SCENARIOS[order[1]].destination)}）</p>
     <table class="mod-table">
       <tr><th></th>${TASKS.map((k) => `<th>${k.id}</th>`).join('')}</tr>

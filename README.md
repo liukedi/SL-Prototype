@@ -67,7 +67,7 @@ order X → Y, nothing recorded).
 - **Leaving the page:** during each task, switches to another browser tab (or minimising the window) are counted, with
   the time away: `T1-185s2a40` = 185 s, 2 switches, 40 s away. A separate browser window beside this one is not
   detected, so participants should search in a new tab of the same window.
-- **Moderator panel** (bottom left, collapsed): scenario order, task times, the data string (copy), jump to a step,
+- **进度控制 panel** (bottom left, collapsed; a click elsewhere closes it): back to the start page, scenario order, task times, the data string (copy), jump to a step,
   clear progress. Progress is saved in the browser, so a reload resumes at the same step (don't reload during a
   round: it restarts the prototype).
 - Texts: `study/content.js` (from the experiment plan).
