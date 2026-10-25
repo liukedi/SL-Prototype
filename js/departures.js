@@ -6,6 +6,7 @@
 import { CONFIG } from './config.js';
 import { loadStopIndex, stopKey } from './stop-index.js';
 import { now as clockNow } from './clock.js';
+import { METRO_LINES as METRO_SEQUENCES } from './routes.js';
 
 export const MODES = {
   metro: { label: 'Metro', icon: 'metro', letter: 'm' },
@@ -64,6 +65,17 @@ function generateServices(stop, mode, rows) {
     return () => (pool.length ? pick(pool)[0] : stop.municipality);
   };
   if (mode === 'metro') {
+    // The real lines through this station (station sequences in js/routes.js), heading for
+    // their end stations; a random line only for a station those sequences don't include.
+    const real = Object.entries(METRO_SEQUENCES).filter(([, seq]) => seq.includes(stop.name));
+    if (real.length) {
+      return real.map(([line, seq]) => ({
+        mode,
+        line,
+        directions: [seq.at(-1), seq[0]].filter((d) => d !== stop.name),
+        headway: 8,
+      }));
+    }
     const [line, a, b] = pick(METRO_LINES);
     return [{ mode, line, directions: [a, b], headway: 8 }];
   }
