@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>情境实验 · SL map prototype</title>
+  <link rel="icon" href="data:,">
+  <link href="../css/fonts.css" rel="stylesheet">
+  <link href="study.css" rel="stylesheet">
+</head>
+<body>
+  <header class="bar">
+    <span class="bar__title">情境实验</span>
+    <ol class="progress" id="progress" aria-label="进度"></ol>
+    <span class="bar__p" id="participant"></span>
+  </header>
+
+  <div class="layout">
+    <!-- Prototype (warm-up and the two rounds); its version is chosen by the flow. -->
+    <div class="proto-wrap"><iframe id="proto" class="proto" title="原型" allow="autoplay"></iframe></div>
+    <aside class="side" id="side" aria-live="polite"></aside>
+    <main class="main" id="main" aria-live="polite"></main>
+  </div>
+
+  <details class="moderator">
+    <summary>主持人</summary>
+    <div id="moderator-body"></div>
+  </details>
+
+  <script type="module" src="study.js"></script>
+</body>
+</html>

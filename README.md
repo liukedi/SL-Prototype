@@ -39,6 +39,30 @@ The neutral names (a / b) don't reveal which version is the original.
   The phone is placed below it (`TOP` in `js/device.js`). To hide it for a session, remove the
   `<nav class="variant-switch">` block from `index.html` and re-run `node scripts/make-entries.mjs`.
 
+## Scenario experiment flow (`study/`, branch `study-flow`)
+
+One page walks a participant through the scenario experiment (study 2 of the thesis plan):
+`study/?p=P03` (without `?p`, it asks for the participant code).
+
+1. Welcome (opening statement) → consent form → opening questionnaire (background + pre-test intentions)
+2. Think-aloud explanation and practice → warm-up task in version A (not counted)
+3. Round 1: version A, scenario card, tasks T1–T3 (timed; after T2 a pause for the moderator's three questions)
+4. Round 1 questionnaire (SAM, UEQ-S, confidence) → break
+5. Round 2: version B (Tourist Mode off, as in the plan), other scenario, T1–T3 → round 2 questionnaire
+   (+ post-test intentions, version preference) → interview
+
+- **Scenario order:** odd codes (P01, P03, …) get X (Mörby centrum) first, even codes Y (Solna centrum) first.
+  Versions are always A then B, shown only as "第一个版本 / 第二个版本".
+- **Prototype in the flow:** loaded as `a/` or `b/` with `?reset&study` (fresh data, clock from 18:30, A | B switch
+  hidden). Each round reloads it.
+- **Questionnaires:** links go in `study/config.js` (e.g. 问卷星). Each link gets the participant code and the task times
+  as a URL parameter (`sojumpparm` for 问卷星), e.g. `P03_R1_A_X_T1-185_T2-240_T3-300` (seconds), so answers and
+  times end up together without a database. Empty links show a placeholder.
+- **Moderator panel** (bottom left, collapsed): scenario order, task times, the data string (copy), jump to a step,
+  clear progress. Progress is saved in the browser, so a reload resumes at the same step (don't reload during a
+  round: it restarts the prototype).
+- Texts: `study/content.js` (from the experiment plan).
+
 ## Self-contained (works without Google / CDNs / tile servers)
 
 Everything the prototype loads is served from the site itself, so it also works where Google Fonts, unpkg or

@@ -2,7 +2,10 @@
 // and the whole device is scaled to fit the browser window's height, below the A | B switch.
 
 const MARGIN = 20; // px of page space kept beside and below the phone
-const TOP = 60; // px reserved above the phone for the A | B version switch
+import { isStudy } from './variant.js';
+
+// px reserved above the phone for the A | B version switch (none in study mode, where it's hidden)
+const TOP = isStudy ? MARGIN : 60;
 
 let scale = 1;
 

@@ -1,0 +1,146 @@
+/* Scenario experiment flow (study/index.html). Dark, quiet chrome around the prototype. */
+:root {
+  --bg: #11151b;
+  --panel: #1a2029;
+  --panel-2: #222a35;
+  --line: rgba(255, 255, 255, 0.1);
+  --text: #eef2f5;
+  --muted: #a7b0ba;
+  --accent: #2a9fd8;
+  --accent-ink: #fff;
+  --scenario: #2b2418;
+  --scenario-line: rgba(242, 181, 68, 0.35);
+  --bar-h: 52px;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Special Gothic', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+h1 { margin: 0 0 16px; font-size: 26px; font-weight: 600; line-height: 1.3; }
+p { margin: 0 0 14px; }
+code { font-size: 13px; color: #cfd8e0; word-break: break-all; }
+
+/* ---- top bar ---- */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: var(--bar-h);
+  padding: 0 20px;
+  background: #0c0f13;
+  border-bottom: 1px solid var(--line);
+}
+.bar__title { flex: none; font-weight: 600; }
+.bar__p { flex: none; margin-left: auto; padding: 2px 10px; border-radius: 999px; background: var(--panel-2); color: var(--muted); font-size: 14px; }
+.bar__p:empty { display: none; }
+.progress { display: flex; gap: 6px; margin: 0; padding: 0; list-style: none; overflow-x: auto; scrollbar-width: none; font-size: 13px; color: var(--muted); }
+.progress::-webkit-scrollbar { display: none; }
+.progress li { flex: none; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--line); white-space: nowrap; }
+.progress li.is-done { color: #7fd99a; border-color: rgba(127, 217, 154, 0.35); }
+.progress li.is-current { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+
+/* ---- layout: prototype + side panel, or a centred page ---- */
+.layout { display: flex; height: calc(100vh - var(--bar-h)); }
+.proto-wrap, .side { display: none; }
+.has-proto .proto-wrap { display: block; flex: 1; min-width: 0; }
+.has-proto .side { display: block; flex: none; width: 400px; padding: 20px; overflow-y: auto; border-left: 1px solid var(--line); background: var(--bg); }
+.has-proto .main { display: none; }
+.proto { display: block; width: 100%; height: 100%; border: 0; background: #000; }
+.main { flex: 1; overflow-y: auto; padding: 40px 20px 80px; }
+.main > .card { max-width: 680px; margin: 0 auto; padding: 32px 36px; }
+
+/* ---- cards ---- */
+.card { padding: 18px 20px; margin-bottom: 14px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); }
+.card > :last-child { margin-bottom: 0; }
+.card--scenario { background: var(--scenario); border-color: var(--scenario-line); font-size: 15px; }
+.card--task { border-color: rgba(42, 159, 216, 0.45); }
+.eyebrow { margin-bottom: 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--muted); }
+.card--scenario .eyebrow { color: #f2c77a; }
+.task { font-size: 17px; font-weight: 500; }
+.muted { color: var(--muted); font-size: 14px; }
+.big { font-size: 20px; font-weight: 600; }
+.note { margin: 6px 0 20px; padding: 14px 16px; border-radius: 12px; background: var(--panel-2); border-left: 3px solid var(--accent); }
+.done-list { margin: 0 0 14px; padding: 0 4px; list-style: none; color: #7fd99a; font-size: 14px; }
+.task__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; }
+.timer { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 14px; }
+.timer-note { margin: 10px 0 0; color: #f2b544; font-size: 13px; }
+
+/* ---- buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 0 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(1.15); }
+.btn--primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.card > .btn--primary { margin-top: 8px; }
+.btn--small { min-height: 30px; padding: 0 12px; font-size: 13px; margin: 2px 0; }
+.btn--small.is-current { border-color: var(--accent); color: #9fd3f0; }
+.btn--danger { color: #ff9a8f; }
+
+/* ---- questionnaires ---- */
+.survey { display: flex; flex-direction: column; max-width: 860px; height: calc(100vh - var(--bar-h) - 60px); margin: 0 auto; }
+.survey__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.survey__head h1 { margin: 0; }
+.survey__actions { display: flex; gap: 10px; }
+.survey__frame { flex: 1; width: 100%; border: 0; border-radius: 16px; background: #fff; }
+.survey__missing { flex: 1; display: grid; place-content: center; gap: 10px; padding: 24px; border: 1px dashed var(--line); border-radius: 16px; color: var(--muted); text-align: center; }
+
+/* ---- start screen ---- */
+.is-start .progress { visibility: hidden; }
+.is-start .moderator { display: none; }
+.start-form { display: flex; gap: 10px; margin: 6px 0 18px; }
+.start-form input {
+  width: 140px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+/* ---- moderator panel ---- */
+.moderator {
+  position: fixed;
+  left: 16px;
+  bottom: 14px;
+  z-index: 10;
+  max-width: min(720px, calc(100vw - 32px));
+  border-radius: 14px;
+  background: rgba(12, 15, 19, 0.92);
+  border: 1px solid var(--line);
+  font-size: 14px;
+}
+.moderator summary { padding: 6px 14px; color: var(--muted); cursor: pointer; font-size: 13px; }
+.moderator[open] summary { border-bottom: 1px solid var(--line); }
+#moderator-body { padding: 12px 14px 4px; }
+.mod-table { border-collapse: collapse; margin-bottom: 12px; font-variant-numeric: tabular-nums; }
+.mod-table th, .mod-table td { padding: 4px 12px 4px 0; text-align: left; }
+.mod-param { display: flex; align-items: center; gap: 10px; }
+
+@media (max-width: 900px) {
+  .has-proto .side { width: 320px; }
+}

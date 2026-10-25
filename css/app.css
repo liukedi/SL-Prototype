@@ -208,6 +208,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   text-decoration: none;
 }
 .variant-switch a:hover { color: #fff; }
+/* Study mode (?study, js/variant.js): the experiment flow picks the version. */
+[data-study] .variant-switch { display: none; }
 [data-variant="a"] .variant-switch [data-v="a"],
 [data-variant="b"] .variant-switch [data-v="b"] { background: rgba(255, 255, 255, 0.92); color: #14181f; }
 
