@@ -73,6 +73,13 @@ code { font-size: 13px; color: #cfd8e0; word-break: break-all; }
 .task__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; }
 .timer { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 14px; }
 .timer-note { margin: 10px 0 0; color: #f2b544; font-size: 13px; }
+.done-time { margin-left: 6px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tm-status { margin: 8px 0 0; color: #7fd99a; font-size: 14px; }
+.summary { width: 100%; margin: 4px 0 16px; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+.summary th { color: var(--muted); font-weight: 400; text-align: left; padding: 4px 0; }
+.summary td { padding: 6px 0; border-top: 1px solid var(--line); }
+.summary td + td, .summary th + th { padding-left: 10px; }
+.btn:disabled { opacity: 0.45; cursor: default; filter: none; }
 
 /* ---- buttons ---- */
 .btn {

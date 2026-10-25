@@ -41,7 +41,9 @@ function buildSteps(order) {
 
 // ---------- state (per participant, survives reloads) ----------
 const KEY = `sl-study-${code}`;
-const fresh = () => ({ step: 0, phase: 'intro', taskStart: null, times: { 1: {}, 2: {} } });
+// times: seconds per task; away: { switches, sec } = leaving this page (another browser tab
+// or window) during the task, e.g. to search.
+const fresh = () => ({ step: 0, phase: 'intro', taskStart: null, times: { 1: {}, 2: {} }, away: { 1: {}, 2: {} }, cur: null, doneAt: null });
 let state = fresh();
 try { state = { ...fresh(), ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { /* storage blocked */ }
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* ignore */ } };
@@ -52,14 +54,17 @@ const steps = buildSteps(order);
 // ---------- helpers ----------
 const mmss = (sec) => `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`;
 
-// e.g. P03_R1_A_X_T1-185_T2-240_T3-300 (seconds); round 2 also carries round 1.
+// e.g. P03_R1_A_X_T1-185s2a40_T2-240s0a0_T3-300s1a15: seconds, then tab switches (s) and
+// seconds away (a) per task; round 2 also carries round 1.
 function dataParam(uptoRound) {
   const parts = [code];
   for (const r of [1, 2]) {
     if (r > uptoRound) break;
     const s = steps.find((x) => x.round === r && x.kind === 'round');
     const t = state.times[r];
-    parts.push(`R${r}`, s.version.toUpperCase(), s.scenario, ...TASKS.map((k) => `${k.id}-${t[k.id] ?? 'NA'}`));
+    const a = state.away[r] ?? {};
+    parts.push(`R${r}`, s.version.toUpperCase(), s.scenario, ...TASKS.map((k) => (t[k.id] == null
+      ? `${k.id}-NA` : `${k.id}-${t[k.id]}s${a[k.id]?.switches ?? 0}a${a[k.id]?.sec ?? 0}`)));
   }
   return parts.join('_');
 }
@@ -94,7 +99,7 @@ const nextBtn = (label = '下一步') => `<button type="button" class="btn btn--
 function renderText(step) {
   const body = {
     welcome: `<h1>欢迎参加测试</h1>${para(TEXT.welcome)}${nextBtn('开始')}`,
-    thinkaloud: `<h1>出声思考</h1>${para(TEXT.thinkAloud)}<div class="note">${esc(TEXT.thinkAloudPractice)}</div>${nextBtn()}`,
+    thinkaloud: `<h1>出声思考</h1>${para(TEXT.thinkAloud)}<div class="note">${esc(TEXT.thinkAloudExamples)}</div>${nextBtn()}`,
     break: `<h1>休息一下</h1><p>${esc(TEXT.break)}</p>${nextBtn('进入第二轮')}`,
     interview: `<h1>访谈</h1><p>${esc(TEXT.interview)}</p><p class="big">${esc(TEXT.thanks)}</p>`,
   }[step.id];
@@ -130,19 +135,28 @@ function renderSide(step) {
   const scenario = `<div class="card card--scenario"><p class="eyebrow">情境 · ${esc(ROUND_NAME[step.round])}</p><p>${esc(sc.text)}</p></div>`;
   const ph = state.phase;
   if (ph === 'intro') {
-    return `${scenario}<div class="card"><p class="muted">${esc(TEXT.search)}</p>
-      <button type="button" class="btn btn--primary" data-act="start">开始任务</button></div>`;
+    const gate = step.version === 'b'
+      ? `<div class="card card--task"><p class="eyebrow">开始前</p><p class="task">${esc(TEXT.touristMode)}</p>
+          <p class="tm-status" id="tm-status" hidden>✓ ${esc(TEXT.touristModeOn)}</p></div>`
+      : '';
+    return `${scenario}${gate}<div class="card"><p class="muted">${esc(TEXT.search)}</p>
+      <button type="button" class="btn btn--primary" data-act="start" ${step.version === 'b' ? 'disabled' : ''}>开始任务</button></div>`;
   }
   if (ph === 'verify') {
     return `${scenario}<div class="card"><p class="task">${esc(TEXT.verify)}</p>
       <button type="button" class="btn btn--primary" data-act="after-verify">继续</button></div>`;
   }
   if (ph === 'done') {
-    return `${scenario}<div class="card"><p class="task">这一轮的三个任务都完成了。</p>${nextBtn('去填问卷')}</div>`;
+    const a = state.away[step.round];
+    const rows = TASKS.map((k) => `<tr><td>${esc(k.title)}</td><td>${mmss(state.times[step.round][k.id] ?? 0)}</td>
+      <td>${a[k.id]?.switches ?? 0} 次 · ${mmss(a[k.id]?.sec ?? 0)}</td></tr>`).join('');
+    return `${scenario}<div class="card"><p class="task">${esc(TEXT.roundDone)}</p>
+      <table class="summary"><tr><th></th><th>用时</th><th>切出页面</th></tr>${rows}</table>
+      <button type="button" class="btn btn--primary" data-act="next" id="to-survey" disabled>去填问卷</button></div>`;
   }
   const task = TASKS.find((t) => t.id === ph);
   const doneTasks = TASKS.filter((t) => state.times[step.round][t.id] != null)
-    .map((t) => `<li>${esc(t.title)} ✓</li>`).join('');
+    .map((t) => `<li>${esc(t.title)} ✓ <span class="done-time">${mmss(state.times[step.round][t.id])}</span></li>`).join('');
   return `${scenario}
     ${doneTasks ? `<ul class="done-list">${doneTasks}</ul>` : ''}
     <div class="card card--task">
@@ -174,14 +188,50 @@ function render() {
 }
 
 // ---------- task timer ----------
+const SUMMARY_WAIT_SEC = 15; // the round summary stays up this long, for the moderator's notes
+
 function tick() {
   const el = $('#timer');
-  if (!el || !state.taskStart) return;
-  const sec = Math.floor((Date.now() - state.taskStart) / 1000);
-  el.textContent = mmss(sec);
-  $('#timer-note').hidden = sec < STUDY.longTaskMin * 60;
+  if (el && state.taskStart) {
+    const sec = Math.floor((Date.now() - state.taskStart) / 1000);
+    el.textContent = mmss(sec);
+    $('#timer-note').hidden = sec < STUDY.longTaskMin * 60;
+  }
+  // Round summary: "去填问卷" unlocks after SUMMARY_WAIT_SEC.
+  const toSurvey = $('#to-survey');
+  if (toSurvey && state.doneAt) {
+    const left = SUMMARY_WAIT_SEC - Math.floor((Date.now() - state.doneAt) / 1000);
+    toSurvey.disabled = left > 0;
+    toSurvey.textContent = left > 0 ? `去填问卷（${left}）` : '去填问卷';
+  }
+  // Round 2: "开始任务" only once Tourist Mode is on in the prototype (same origin frame).
+  const status = $('#tm-status');
+  if (status) {
+    let on = false;
+    try { on = $('#proto').contentDocument?.documentElement.dataset.tourist === 'on'; } catch { /* not loaded */ }
+    status.hidden = !on;
+    $('[data-act="start"]').disabled = !on;
+  }
 }
-setInterval(tick, 1000);
+setInterval(tick, 500);
+
+// ---------- leaving the page during a task (another browser tab, minimised window) ----------
+// Counts switches and time away per task. Note: a separate browser window placed beside
+// this one is not detected; ask participants to search in a new tab of this window.
+let awayStart = null;
+document.addEventListener('visibilitychange', () => {
+  const step = steps[state.step];
+  if (!state.taskStart || !step?.round || !TASKS.some((t) => t.id === state.phase)) return;
+  const rec = (state.away[step.round][state.phase] ??= { switches: 0, sec: 0 });
+  if (document.hidden) {
+    rec.switches += 1;
+    awayStart = Date.now();
+  } else if (awayStart) {
+    rec.sec += Math.round((Date.now() - awayStart) / 1000);
+    awayStart = null;
+  }
+  save();
+});
 
 // ---------- actions ----------
 function go(stepIndex) {
@@ -206,6 +256,7 @@ document.addEventListener('click', (e) => {
   if (act === 'next') return go(state.step + 1);
   if (act === 'start') {
     state.times[step.round] = {}; // a round (re)started: its earlier times no longer apply
+    state.away[step.round] = {};
     return startTask('T1');
   }
   if (act === 'task-done') {
@@ -216,6 +267,7 @@ document.addEventListener('click', (e) => {
     if (state.phase === 'T2') { state.phase = 'verify'; save(); return render(); } // moderator's 3 questions
     if (i < TASKS.length - 1) return startTask(TASKS[i + 1].id);
     state.phase = 'done';
+    state.doneAt = Date.now();
     save();
     return render();
   }
@@ -232,7 +284,8 @@ document.addEventListener('click', (e) => {
 
 // ---------- moderator panel (collapsed by default) ----------
 function renderModerator() {
-  const t = (r, k) => (state.times[r][k] != null ? mmss(state.times[r][k]) : '—');
+  const t = (r, k) => (state.times[r][k] != null
+    ? `${mmss(state.times[r][k])} · 切出 ${state.away[r]?.[k]?.switches ?? 0}` : '—');
   $('#moderator-body').innerHTML = `
     <p><b>${esc(code)}</b> · 情境顺序 ${order[0]} → ${order[1]}
       （第一轮 ${esc(SCENARIOS[order[0]].destination)}，第二轮 ${esc(SCENARIOS[order[1]].destination)}）</p>

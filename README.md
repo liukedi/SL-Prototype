@@ -46,10 +46,12 @@ One page walks a participant through the scenario experiment (study 2 of the the
 
 1. Welcome (opening statement) → background questionnaire → pre-test intentions (the consent form is sent before the
    session)
-2. Think-aloud explanation and practice → warm-up task in version A (not counted)
-3. Round 1: version A, scenario card, tasks T1–T3 (timed; after T2 a pause for the moderator's three questions)
+2. Think-aloud explanation (with examples, no practice) → warm-up task in version A (not counted)
+3. Round 1: version A, scenario card, tasks T1–T3 (timed; after T2 a pause for the moderator's three questions;
+   at the end a summary of times and tab switches, with "去填问卷" locked for 15 s so the moderator can note them)
 4. Post-test questionnaire (SAM, UEQ-S, intentions, version preference; the same one after both rounds) → break
-5. Round 2: version B (Tourist Mode off, as in the plan), other scenario, T1–T3 → post-test questionnaire → interview
+5. Round 2: version B, other scenario. Before the tasks the participant is asked to switch Tourist Mode on
+   ("开始任务" unlocks once it is on), then T1–T3 → post-test questionnaire → interview
 
 - **Scenario order:** odd codes (P01, P03, …) get X (Mörby centrum) first, even codes Y (Solna centrum) first.
   Versions are always A then B, shown only as "第一个版本 / 第二个版本".
@@ -58,6 +60,9 @@ One page walks a participant through the scenario experiment (study 2 of the the
 - **Questionnaires:** 问卷星 links in `study/config.js`. Each link gets the participant code and the task times
   as a URL parameter (`sojumpparm` for 问卷星), e.g. `P03_R1_A_X_T1-185_T2-240_T3-300` (seconds), so answers and
   times end up together without a database. Empty links show a placeholder.
+- **Leaving the page:** during each task, switches to another browser tab (or minimising the window) are counted, with
+  the time away: `T1-185s2a40` = 185 s, 2 switches, 40 s away. A separate browser window beside this one is not
+  detected, so participants should search in a new tab of the same window.
 - **Moderator panel** (bottom left, collapsed): scenario order, task times, the data string (copy), jump to a step,
   clear progress. Progress is saved in the browser, so a reload resumes at the same step (don't reload during a
   round: it restarts the prototype).
