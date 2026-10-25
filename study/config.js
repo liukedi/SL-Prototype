@@ -1,13 +1,12 @@
 // Settings for the scenario experiment (study/index.html). Edit here, not in study.js.
 
 export const STUDY = {
-  // Online questionnaires (e.g. 问卷星 wjx.cn). Paste each questionnaire's link here.
-  // Empty = the page shows a placeholder (for trying out the flow).
+  // Online questionnaires (问卷星 wjx.cn). Empty = the page shows a placeholder.
+  // The consent form is sent before the session (experiment plan), so it isn't a step here.
   questionnaires: {
-    consent: '', // 知情同意书
-    background: '', // 开场问卷：背景信息 + 意愿前测
-    round1: '', // 第一轮问卷：SAM + UEQ-S + 计划把握程度
-    round2: '', // 第二轮问卷 + 收尾：SAM + UEQ-S + 计划把握程度 + 意愿后测 + 版本偏好
+    background: 'https://v.wjx.cn/vm/tKqTGEy.aspx', // 背景信息
+    preTest: 'https://v.wjx.cn/vm/mpgPwiK.aspx', // 意愿测试（任务开始前）
+    post: 'https://v.wjx.cn/vm/mecLCiK.aspx', // 测试后问卷：SAM + UEQ-S + 意愿 + 版本偏好（两轮共用）
   },
 
   // Each questionnaire link gets the participant's code and, after a round, the task times,

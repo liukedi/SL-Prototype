@@ -1,6 +1,6 @@
 // Scenario experiment flow (study 2): one page that walks a participant through the session.
 //   ?p=P03 → the participant's session; without it, a start screen asks for the code.
-//   Order: welcome → consent → background questionnaire → think-aloud → warm-up (version A)
+//   Order: welcome → background → pre-test intentions → think-aloud → warm-up (version A)
 //   → round 1 (version A) → questionnaire → break → round 2 (version B) → questionnaire → interview.
 //   Scenario order by participant number (as in the plan): odd = X (Mörby centrum) first,
 //   even = Y (Solna centrum) first. Versions are always A then B and only called
@@ -26,15 +26,15 @@ function orderFor(p) {
 function buildSteps(order) {
   return [
     { id: 'welcome', label: '开始', kind: 'text' },
-    { id: 'consent', label: '知情同意', kind: 'survey', survey: 'consent', title: '知情同意书' },
-    { id: 'background', label: '开场问卷', kind: 'survey', survey: 'background', title: '开场问卷' },
+    { id: 'background', label: '背景信息', kind: 'survey', survey: 'background', title: '背景信息' },
+    { id: 'pretest', label: '意愿测试', kind: 'survey', survey: 'preTest', title: '意愿测试' },
     { id: 'thinkaloud', label: '出声思考', kind: 'text' },
     { id: 'warmup', label: '热身', kind: 'proto', version: 'a' },
     { id: 'round1', label: '第一轮', kind: 'round', round: 1, version: 'a', scenario: order[0] },
-    { id: 'q1', label: '问卷', kind: 'survey', survey: 'round1', title: '第一轮问卷', round: 1 },
+    { id: 'q1', label: '问卷', kind: 'survey', survey: 'post', title: '第一个版本 · 测试后问卷', round: 1 },
     { id: 'break', label: '休息', kind: 'text' },
     { id: 'round2', label: '第二轮', kind: 'round', round: 2, version: 'b', scenario: order[1] },
-    { id: 'q2', label: '问卷', kind: 'survey', survey: 'round2', title: '第二轮问卷', round: 2 },
+    { id: 'q2', label: '问卷', kind: 'survey', survey: 'post', title: '第二个版本 · 测试后问卷', round: 2 },
     { id: 'interview', label: '访谈', kind: 'text' },
   ];
 }
