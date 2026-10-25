@@ -9,10 +9,10 @@ export const STUDY = {
     post: 'https://v.wjx.cn/vm/mecLCiK.aspx', // 测试后问卷：SAM + UEQ-S + 意愿 + 版本偏好（两轮共用）
   },
 
-  // Each questionnaire link gets the participant's code and, after a round, the task times,
-  // as this URL parameter, so the answers can be matched without a database.
-  // 问卷星 records the parameter "sojumpparm" with each response ("来源详情 / 自定义参数").
-  paramName: 'sojumpparm',
+  // Google Sheet that collects the data of formal sessions: the web app URL of the Apps
+  // Script in scripts/google-sheet-apps-script.gs (deployed on the sheet "SL 情境实验 · 本场数据").
+  // Empty = nothing is sent; the download button still works.
+  sheetUrl: '',
 
   // A task that runs longer than this shows a note (the moderator asks whether to go on).
   longTaskMin: 8,

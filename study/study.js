@@ -14,11 +14,15 @@ import { SCENARIOS, TASKS, TEXT } from './content.js';
 const $ = (sel) => document.querySelector(sel);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const params = new URLSearchParams(location.search);
+// ?p=P03: formal session of participant 3. ?p=TEST: a test run (order X → Y; nothing is recorded).
 const code = (params.get('p') ?? '').toUpperCase();
+const isTest = code === 'TEST';
+const isFormal = /^P\d{2,}$/.test(code);
 
 const ROUND_NAME = { 1: '第一个版本', 2: '第二个版本' };
 
 function orderFor(p) {
+  if (p === 'TEST') return ['X', 'Y'];
   const n = Number(p.replace(/\D/g, ''));
   return n % 2 === 1 ? ['X', 'Y'] : ['Y', 'X'];
 }
@@ -69,13 +73,7 @@ function dataParam(uptoRound) {
   return parts.join('_');
 }
 
-function surveyUrl(step) {
-  const base = STUDY.questionnaires[step.survey];
-  if (!base) return '';
-  const u = new URL(base, location.href);
-  u.searchParams.set(STUDY.paramName, step.round ? dataParam(step.round) : code);
-  return u.href;
-}
+const surveyUrl = (step) => STUDY.questionnaires[step.survey] || '';
 
 let protoLoadedFor = null; // which step's prototype is in the frame
 function loadPrototype(step) {
@@ -106,6 +104,61 @@ function renderText(step) {
   return `<section class="card">${body}</section>${step.id === 'interview' ? sessionData() : ''}`;
 }
 
+// ---------- the session's data as one table row (same columns as the Google Sheet) ----------
+const HEADER = ['记录时间', '编号', '情境顺序',
+  ...[1, 2].flatMap((r) => [`${r === 1 ? '第一轮' : '第二轮'}版本`, `${r === 1 ? '第一轮' : '第二轮'}情境`,
+    ...TASKS.flatMap((k) => [`R${r} ${k.id} 用时(秒)`, `R${r} ${k.id} 切出次数`, `R${r} ${k.id} 离开(秒)`])]),
+  '数据串'];
+function dataRow() {
+  const row = [new Date().toLocaleString('sv-SE'), code, `${order[0]}→${order[1]}`];
+  for (const r of [1, 2]) {
+    const s = steps.find((x) => x.round === r && x.kind === 'round');
+    const t = state.times[r];
+    const a = state.away[r] ?? {};
+    row.push(s.version.toUpperCase(), `${s.scenario} ${SCENARIOS[s.scenario].destination}`);
+    for (const k of TASKS) row.push(t[k.id] ?? '', t[k.id] == null ? '' : a[k.id]?.switches ?? 0, t[k.id] == null ? '' : a[k.id]?.sec ?? 0);
+  }
+  row.push(dataParam(2));
+  return row;
+}
+
+// Formal sessions only: send the row to the Google Sheet once (Apps Script web app). Google is
+// blocked in mainland China without a VPN, so a failure is normal there: the download button
+// is the fallback.
+async function recordToSheet() {
+  if (!isFormal || state.recorded || !STUDY.sheetUrl) return;
+  setRecordStatus('正在记录到表格…', '');
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 12000);
+  try {
+    // no-cors: the answer can't be read, but a network failure still throws.
+    await fetch(STUDY.sheetUrl, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dataRow()), signal: ctrl.signal });
+    state.recorded = true;
+    save();
+    setRecordStatus('✓ 已自动记录到表格。', 'ok');
+  } catch {
+    setRecordStatus('没能自动记录（可能是网络无法访问 Google）。请点“下载数据文件”，把文件发给主持人。', 'warn');
+  } finally {
+    clearTimeout(timer);
+  }
+}
+function setRecordStatus(text, kind) {
+  const el = $('#record-status');
+  if (!el) return;
+  el.textContent = text;
+  el.className = `record-status ${kind}`;
+}
+
+function downloadData() {
+  const cell = (v) => `"${String(v).replace(/"/g, '""')}"`;
+  const csv = `\uFEFF${[HEADER, dataRow()].map((r) => r.map(cell).join(',')).join('\r\n')}\r\n`; // BOM: Excel opens UTF-8
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
+  a.download = `SL-study-${code}.csv`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
 // All measured data of the session, shown on the last page for the moderator to note down.
 function sessionData() {
   const roundRows = [1, 2].map((r) => {
@@ -131,6 +184,10 @@ function sessionData() {
       <p class="muted">“切出”= 任务进行中切到其他浏览器标签页或最小化窗口的次数；“离开时长”= 不在本页面的总时间。</p>
       <p class="mod-param"><code>${esc(dataParam(2))}</code>
         <button type="button" class="btn btn--small" data-act="mod-copy">复制</button></p>
+      <p class="record-status ${state.recorded ? 'ok' : ''}" id="record-status">${isTest
+        ? '测试模式：数据不会记录到表格。'
+        : state.recorded ? '✓ 已自动记录到表格。' : STUDY.sheetUrl ? '' : '表格地址还没有设置（study/config.js → sheetUrl），请下载数据文件。'}</p>
+      <button type="button" class="btn" data-act="download">下载数据文件</button>
     </section>`;
 }
 
@@ -139,7 +196,7 @@ function renderSurvey(step) {
   const frame = url
     ? `<iframe class="survey__frame" src="${esc(url)}" title="${esc(step.title)}"></iframe>`
     : `<div class="survey__missing">问卷链接还没有设置（study/config.js → questionnaires.${esc(step.survey)}）。<br>
-        这里会显示问卷，并带上参数：<code>${esc(STUDY.paramName)}=${esc(step.round ? dataParam(step.round) : code)}</code></div>`;
+        这里会显示问卷。</div>`;
   return `
     <section class="survey">
       <div class="survey__head">
@@ -213,6 +270,7 @@ function render() {
   }
   renderModerator();
   tick();
+  if (step.id === 'interview') recordToSheet();
 }
 
 // ---------- task timer ----------
@@ -301,6 +359,7 @@ document.addEventListener('click', (e) => {
   }
   if (act === 'after-verify') return startTask('T3');
   if (act === 'mod-go') return go(Number(e.target.closest('[data-step]').dataset.step));
+  if (act === 'download') return downloadData();
   if (act === 'mod-copy') {
     navigator.clipboard?.writeText(dataParam(2)).then(() => { e.target.textContent = '已复制'; });
     return;
@@ -327,25 +386,37 @@ function renderModerator() {
     <p><button type="button" class="btn btn--small btn--danger" data-act="mod-reset">清空进度</button></p>`;
 }
 
-// ---------- start screen (no participant code) ----------
+// ---------- start screen: test run, or a formal session with the participant's number ----------
 function renderStart() {
   document.body.classList.add('is-start');
   $('#main').innerHTML = `
     <section class="card">
       <h1>情境实验</h1>
-      <p>请输入主持人提供的参与者编号，然后开始。</p>
-      <form id="start-form" class="start-form">
-        <input name="p" placeholder="P01" pattern="[Pp]\\d{2}" required autocomplete="off" aria-label="参与者编号">
-        <button class="btn btn--primary">开始</button>
-      </form>
+      <div class="start-choice">
+        <div>
+          <h2>正式测试</h2>
+          <p class="muted">输入参与者编号（1、2、3…）。结束时数据会记录到表格。</p>
+          <form id="start-form" class="start-form">
+            <input name="n" type="number" min="1" max="99" placeholder="编号" required aria-label="参与者编号">
+            <button class="btn btn--primary">开始正式测试</button>
+          </form>
+        </div>
+        <div>
+          <h2>测试</h2>
+          <p class="muted">试走流程用，数据不会记录。</p>
+          <a class="btn" href="?p=TEST">开始测试</a>
+        </div>
+      </div>
     </section>`;
   $('#start-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    location.search = `?p=${encodeURIComponent(e.target.p.value.toUpperCase())}`;
+    const n = Number(e.target.n.value);
+    if (n >= 1) location.search = `?p=P${String(n).padStart(2, '0')}`;
   });
 }
 
-if (/^P\d{2}$/.test(code)) {
-  $('#participant').textContent = code;
+if (isFormal || isTest) {
+  $('#participant').textContent = isTest ? '测试' : code;
+  document.body.classList.toggle('is-test', isTest);
   render();
 } else renderStart();

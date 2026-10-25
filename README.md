@@ -41,8 +41,9 @@ The neutral names (a / b) don't reveal which version is the original.
 
 ## Scenario experiment flow (`study/`, branch `study-flow`)
 
-One page walks a participant through the scenario experiment (study 2 of the thesis plan):
-`study/?p=P03` (without `?p`, it asks for the participant code).
+One page walks a participant through the scenario experiment (study 2 of the thesis plan). The start page
+(`study/`) has two buttons: **正式测试** with the participant's number (→ `study/?p=P03`) and **测试** (→ `study/?p=TEST`,
+order X → Y, nothing recorded).
 
 1. Welcome (opening statement) → background questionnaire → pre-test intentions (the consent form is sent before the
    session)
@@ -54,13 +55,15 @@ One page walks a participant through the scenario experiment (study 2 of the the
    ("开始任务" unlocks once it is on), then T1–T3 → post-test questionnaire → interview. The interview page lists
    all measured data of the session (per round and task: time, tab switches, time away; and the data string).
 
-- **Scenario order:** odd codes (P01, P03, …) get X (Mörby centrum) first, even codes Y (Solna centrum) first.
+- **Scenario order:** odd numbers (1, 3, …) get X (Mörby centrum) first, even numbers Y (Solna centrum) first.
   Versions are always A then B, shown only as "第一个版本 / 第二个版本".
 - **Prototype in the flow:** loaded as `a/` or `b/` with `?reset&study` (fresh data, clock from 18:30, A | B switch
   hidden). Each round reloads it.
-- **Questionnaires:** 问卷星 links in `study/config.js`. Each link gets the participant code and the task times
-  as a URL parameter (`sojumpparm` for 问卷星), e.g. `P03_R1_A_X_T1-185_T2-240_T3-300` (seconds), so answers and
-  times end up together without a database. Empty links show a placeholder.
+- **Questionnaires:** 问卷星 links in `study/config.js` (opened as they are; participants type their number).
+- **Session data** (formal sessions): at the end the data row is sent to the Google Sheet
+  "SL 情境实验 · 本场数据" through an Apps Script web app (`scripts/google-sheet-apps-script.gs`; its URL goes in
+  `study/config.js → sheetUrl`). Google is blocked in mainland China without a VPN, so the last page also has
+  **下载数据文件** (a CSV with the same columns) for the participant to send to the moderator.
 - **Leaving the page:** during each task, switches to another browser tab (or minimising the window) are counted, with
   the time away: `T1-185s2a40` = 185 s, 2 switches, 40 s away. A separate browser window beside this one is not
   detected, so participants should search in a new tab of the same window.
