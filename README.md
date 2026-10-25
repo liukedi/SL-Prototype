@@ -14,8 +14,12 @@ The study compares two versions. Participants get two links:
 
 | Version | Link (GitHub Pages) | Local |
 |---|---|---|
-| A: baseline, the SL app as it is | `https://<user>.github.io/<repo>/a/` | http://localhost:8080/a/ |
-| B: redesign | `https://<user>.github.io/<repo>/b/` | http://localhost:8080/b/ |
+| A: baseline, the SL app as it is | https://liukedi.github.io/SL-Prototype/a/ | http://localhost:8080/a/ |
+| B: redesign | https://liukedi.github.io/SL-Prototype/b/ | http://localhost:8080/b/ |
+
+Repository: https://github.com/liukedi/SL-Prototype (GitHub Pages from `main`, root). Pushing to `main` updates
+the site within a minute or two. Add `?reset` to a link to start a session with no saved favourites, history or
+Tourist Mode state.
 
 The neutral names (a / b) don't reveal which version is the original.
 
