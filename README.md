@@ -35,6 +35,26 @@ The neutral names (a / b) don't reveal which version is the original.
   The phone is placed below it (`TOP` in `js/device.js`). To hide it for a session, remove the
   `<nav class="variant-switch">` block from `index.html` and re-run `node scripts/make-entries.mjs`.
 
+## Self-contained (works without Google / CDNs / tile servers)
+
+Everything the prototype loads is served from the site itself, so it also works where Google Fonts, unpkg or
+OpenFreeMap are blocked or slow (e.g. mainland China without a VPN):
+
+| What | Where | Was |
+|---|---|---|
+| MapLibre GL JS 4.7.1 | `vendor/maplibre-gl/` | unpkg.com |
+| Special Gothic font (OFL; latin + latin-ext, 400–700) | `vendor/fonts/special-gothic/`, `css/fonts.css` | Google Fonts |
+| Map tiles (OpenMapTiles schema, zoom 0–14) | `tiles/` (~36 MB) | tiles.openfreemap.org |
+| Map label glyphs (Noto Sans Regular / Italic / Bold) | `vendor/glyphs/` | tiles.openfreemap.org |
+
+- **Map area:** tiles cover 17.78–18.30 E, 59.21–59.45 N: the whole metro network (Hässelby / Norsborg – Ropsten /
+  Farsta, Akalla / Mörby – Skogskyrkogården). Outside it the map shows only its background colour. The area is
+  `BBOX` in the script and `bounds` in `map-style.json` (keep them the same).
+- **Refresh or extend:** `node scripts/vendor-offline.mjs` (skips files it already has; `--only=tiles` etc.).
+- **Licences:** map data © OpenStreetMap contributors (ODbL), © OpenMapTiles, tiles from OpenFreeMap, credited in the
+  map's attribution. Special Gothic: SIL Open Font License. MapLibre: BSD-3-Clause.
+- Only the station photos' Wikimedia links in this README and the DISCOVER pages (not built) point elsewhere.
+
 ## Run locally
 
 ```bash

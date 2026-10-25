@@ -164,6 +164,10 @@ function createStopPinElement(iconName) {
   return el;
 }
 
+// The style's tiles and glyphs are files on this site (relative paths). MapLibre fetches tiles
+// in a web worker, where a relative URL would not resolve, so make every URL absolute.
+const absoluteUrls = (url) => ({ url: new URL(url, document.baseURI).href });
+
 export async function createMap(container, { onStopClick } = {}) {
   const [icons, stops] = await Promise.all([
     sharedIcons(),
@@ -173,6 +177,7 @@ export async function createMap(container, { onStopClick } = {}) {
   const map = new maplibregl.Map({
     container,
     style: CONFIG.styleUrl,
+    transformRequest: absoluteUrls,
     center: CONFIG.userLocation,
     zoom: initialZoom(),
     minZoom: CONFIG.minZoom,
@@ -260,6 +265,7 @@ export async function createRouteMap(container, journey) {
   const map = new maplibregl.Map({
     container,
     style: CONFIG.styleUrl,
+    transformRequest: absoluteUrls,
     center: CONFIG.userLocation,
     zoom: 12,
     attributionControl: false,

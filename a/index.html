@@ -13,12 +13,12 @@
   <title>SL map prototype</title>
   <link rel="icon" href="data:,"> <!-- no favicon request -->
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Gothic:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+  <!-- Everything is served from this site (no Google Fonts / CDN / tile server), so the
+       prototype also loads where those are blocked. See scripts/vendor-offline.mjs. -->
+  <link href="css/fonts.css" rel="stylesheet">
+  <link href="vendor/maplibre-gl/maplibre-gl.css" rel="stylesheet">
   <link href="css/app.css" rel="stylesheet">
-  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="vendor/maplibre-gl/maplibre-gl.js"></script>
 </head>
 <body>
   <!-- Desktop mockup: fixed iPhone 15 Pro screen (393×852 pt), scaled to the window height by js/device.js -->
