@@ -14,10 +14,19 @@ import { fileURLToPath } from 'node:url';
 // (fileURLToPath, not URL.pathname: the project folder name has a space.)
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const MAPLIBRE = '4.7.1';
-// Area with map detail: Stockholm's metro network and around (Hässelby/Norsborg – Ropsten/Farsta,
-// Akalla/Mörby – Skogskyrkogården). Outside it the map shows only the background colour.
-export const BBOX = [17.78, 59.21, 18.30, 59.45]; // west, south, east, north
+// Map areas (west, south, east, north), keep in step with map-style.json → sources.bounds:
+//   - SL's whole area (Stockholm County) up to zoom 12: towns, roads, water everywhere;
+//   - the dense core (metro, commuter rail, trams: Upplands Väsby – Södertälje, Ekerö – Lidingö /
+//     Nacka) up to zoom 14, full detail;
+//   - outside the core, zoom 13–14 around every stop (data/stops.geojson: the stop's tile and
+//     its 8 neighbours), so wherever there is transit the map has full detail. Elsewhere at zoom
+//     13+ (forest, sea between towns) the map shows only its background colour.
+export const TIERS = [
+  { bbox: [17.24, 58.74, 19.17, 60.21], minZoom: 0, maxZoom: 12 },
+  { bbox: [17.55, 59.10, 18.55, 59.62], minZoom: 13, maxZoom: 14 },
+];
 const MAX_ZOOM = 14; // OpenMapTiles data stops at 14; MapLibre over-zooms beyond
+const AROUND_STOPS = { minZoom: 13, maxZoom: 14, ring: 1 };
 const GLYPH_STACKS = ['Noto Sans Regular', 'Noto Sans Italic', 'Noto Sans Bold'];
 const GLYPH_RANGES = [0, 256, 512, 768, 8192]; // Latin, Latin-1, Latin Extended A/B, punctuation (– ’ …)
 const UA = { 'User-Agent': 'SL-prototype-research/1.0 (offline copy for a thesis user study)' };
@@ -76,10 +85,27 @@ async function tiles() {
   const tj = JSON.parse((await get('https://tiles.openfreemap.org/planet')).toString());
   const tmpl = tj.tiles[0];
   const jobs = [];
-  for (let z = 0; z <= MAX_ZOOM; z++) {
-    const [x0, x1] = [lng2x(BBOX[0], z), lng2x(BBOX[2], z)];
-    const [y0, y1] = [lat2y(BBOX[3], z), lat2y(BBOX[1], z)];
-    for (let x = x0; x <= x1; x++) for (let y = y0; y <= y1; y++) jobs.push([z, x, y]);
+  for (const { bbox, minZoom, maxZoom } of TIERS) {
+    for (let z = minZoom; z <= maxZoom; z++) {
+      const [x0, x1] = [lng2x(bbox[0], z), lng2x(bbox[2], z)];
+      const [y0, y1] = [lat2y(bbox[3], z), lat2y(bbox[1], z)];
+      for (let x = x0; x <= x1; x++) for (let y = y0; y <= y1; y++) jobs.push([z, x, y]);
+    }
+  }
+  const stops = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/stops.geojson'), 'utf8')).features;
+  const seenJob = new Set(jobs.map((j) => j.join('/')));
+  for (let z = AROUND_STOPS.minZoom; z <= AROUND_STOPS.maxZoom; z++) {
+    for (const f of stops) {
+      const [lng, lat] = f.geometry.coordinates;
+      const tx = lng2x(lng, z);
+      const ty = lat2y(lat, z);
+      for (let dx = -AROUND_STOPS.ring; dx <= AROUND_STOPS.ring; dx++) {
+        for (let dy = -AROUND_STOPS.ring; dy <= AROUND_STOPS.ring; dy++) {
+          const id = `${z}/${tx + dx}/${ty + dy}`;
+          if (!seenJob.has(id)) { seenJob.add(id); jobs.push([z, tx + dx, ty + dy]); }
+        }
+      }
+    }
   }
   let done = 0; let bytes = 0; let missing = 0;
   const worker = async () => {
@@ -94,7 +120,7 @@ async function tiles() {
     }
   };
   await Promise.all(Array.from({ length: 6 }, worker));
-  write(path.join(ROOT, 'tiles/README.md'), `# Map tiles (offline copy)\n\nVector tiles in the OpenMapTiles schema from [OpenFreeMap](https://openfreemap.org) (data © OpenStreetMap contributors, ODbL; © OpenMapTiles), zoom 0–${MAX_ZOOM}, for the area ${BBOX.join(', ')} (west, south, east, north). Source: ${tmpl}. Made by scripts/vendor-offline.mjs.\n`);
+  write(path.join(ROOT, 'tiles/README.md'), `# Map tiles (offline copy)\n\nVector tiles in the OpenMapTiles schema from [OpenFreeMap](https://openfreemap.org) (data © OpenStreetMap contributors, ODbL; © OpenMapTiles), ${TIERS.map((t) => `zoom ${t.minZoom}–${t.maxZoom} for ${t.bbox.join(', ')}`).join('; ')} (west, south, east, north); and zoom ${AROUND_STOPS.minZoom}–${AROUND_STOPS.maxZoom} around every stop in data/stops.geojson. Source: ${tmpl}. Made by scripts/vendor-offline.mjs.\n`);
   console.log(`tiles: ok, ${done} tiles, ${missing} empty, ${(bytes / 1e6).toFixed(1)} MB new`);
 }
 

@@ -16,17 +16,13 @@ function initialZoom() {
 // At low zoom the SL app shows one dot per stop rather than one per platform.
 // Mark the first platform of each same-named group (within ~250 m) as `primary`.
 function markPrimaryStops(fc) {
-  const kept = [];
+  const keptByName = new Map(); // name → [x, y] of the platforms kept so far
   for (const f of fc.features) {
     const [x, y] = f.geometry.coordinates;
-    const near = kept.find(
-      (k) =>
-        k.properties.name === f.properties.name &&
-        Math.abs(k.geometry.coordinates[0] - x) < 0.0045 &&
-        Math.abs(k.geometry.coordinates[1] - y) < 0.0023
-    );
+    const kept = keptByName.get(f.properties.name) ?? [];
+    const near = kept.some(([kx, ky]) => Math.abs(kx - x) < 0.0045 && Math.abs(ky - y) < 0.0023);
     f.properties.primary = !near;
-    if (!near) kept.push(f);
+    if (!near) { kept.push([x, y]); keptByName.set(f.properties.name, kept); }
   }
   return fc;
 }
@@ -45,6 +41,9 @@ export function createUserLocationElement() {
 const ICONS = {
   'stop-bus': ['icons/bus.svg', 3],
   'stop-metro': ['icons/metro.svg', 3],
+  'stop-train': ['icons/train.svg', 3],
+  'stop-tram': ['icons/tram.svg', 3],
+  'stop-ferry': ['icons/ferry.svg', 3],
   'place-dot': ['icons/place-dot.svg', 3],
   // Stretchable shield for road refs (E20 etc.); 48x36 px image, 3 px rounded corners.
   shield: ['icons/shield.svg', 3, { stretchX: [[9, 39]], stretchY: [[9, 27]], content: [6, 6, 42, 30] }],
@@ -140,12 +139,12 @@ function addStopLayers(map, stops) {
     source: 'stops',
     minzoom: CONFIG.stopsIconMinZoom,
     layout: {
-      'icon-image': ['match', ['get', 'type'], 'metro', 'stop-metro', 'stop-bus'],
+      'icon-image': ['match', ['get', 'type'], 'metro', 'stop-metro', 'train', 'stop-train', 'tram', 'stop-tram', 'ferry', 'stop-ferry', 'stop-bus'],
       'icon-size': ['interpolate', ['linear'], ['zoom'], 14, 0.9, 16, 1, 18, 1.08],
       'icon-allow-overlap': true,
       // POI labels still avoid the stop icons.
       'icon-ignore-placement': false,
-      'symbol-sort-key': ['match', ['get', 'type'], 'metro', 0, 1],
+      'symbol-sort-key': ['match', ['get', 'type'], 'metro', 0, 'train', 1, 'tram', 2, 'ferry', 3, 4],
       'symbol-z-order': 'source',
     },
   });

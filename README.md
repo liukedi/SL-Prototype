@@ -48,12 +48,13 @@ OpenFreeMap are blocked or slow (e.g. mainland China without a VPN):
 |---|---|---|
 | MapLibre GL JS 4.7.1 | `vendor/maplibre-gl/` | unpkg.com |
 | Special Gothic font (OFL; latin + latin-ext, 400–700) | `vendor/fonts/special-gothic/`, `css/fonts.css` | Google Fonts |
-| Map tiles (OpenMapTiles schema, zoom 0–14) | `tiles/` (~36 MB) | tiles.openfreemap.org |
+| Map tiles (OpenMapTiles schema, zoom 0–14) | `tiles/` (~110 MB) | tiles.openfreemap.org |
 | Map label glyphs (Noto Sans Regular / Italic / Bold) | `vendor/glyphs/` | tiles.openfreemap.org |
 
-- **Map area:** tiles cover 17.78–18.30 E, 59.21–59.45 N: the whole metro network (Hässelby / Norsborg – Ropsten /
-  Farsta, Akalla / Mörby – Skogskyrkogården). Outside it the map shows only its background colour. The area is
-  `BBOX` in the script and `bounds` in `map-style.json` (keep them the same).
+- **Map area:** SL's whole area (Stockholm County, 17.24–19.17 E, 58.74–60.21 N) up to zoom 12; the dense core
+  (17.55–18.55 E, 59.10–59.62 N) and the surroundings of every stop up to zoom 14 (full detail). Zoomed in far from
+  any stop (forest, sea) the map shows only its background colour. Areas: `TIERS` / `AROUND_STOPS` in the script;
+  `bounds` in `map-style.json` = the county.
 - **Refresh or extend:** `node scripts/vendor-offline.mjs` (skips files it already has; `--only=tiles` etc.).
 - **Licences:** map data © OpenStreetMap contributors (ODbL), © OpenMapTiles, tiles from OpenFreeMap, credited in the
   map's attribution. Special Gothic: SIL Open Font License. MapLibre: BSD-3-Clause.
@@ -129,7 +130,7 @@ js/keyboard.js        simulated iOS keyboard (dark)
 js/device.js          fits the iPhone mockup to the window
 js/ui.js              entry point: wires sheet, favourites, search, buttons; page-zoom lock
 map-style.json        custom dark MapLibre style (OpenMapTiles schema, OpenFreeMap tiles)
-data/stops.geojson    bus stops + metro stations (static, from OSM)
+data/stops.geojson    all SL stops: bus, metro, train, tram, ferry (static, from OSM)
 data/departures.json  sample services (lines, end stations, headway) per stop
 data/search-index.json  all stops in Stockholm County: name, municipality, modes, position
 icons/                SVG icons: stops, POI categories, road shield
@@ -176,10 +177,11 @@ so the prototype stays free: OpenFreeMap tiles with a custom style tuned to look
 node scripts/fetch-stops.mjs
 ```
 
-Needs Node 18+. The script queries `highway=bus_stop`, `public_transport=platform` + `bus=yes` and
-`station=subway` in the bounding box Östermalm–Gärdet–Ropsten–Mörby centrum (+ western Lidingö).
-It merges duplicates within 20 m and retries on mirror servers if overpass-api.de is busy.
-Data © OpenStreetMap contributors (ODbL).
+Needs Node 18+. The script queries all public transport stops in Stockholm County (SL's area): bus stops and
+platforms, metro stations, commuter / local rail stations (pendeltåg, Roslagsbanan, Saltsjöbanan), tram and
+light rail stops, and ferry piers (~10,000 stops). It merges duplicates within 20 m and retries on mirror servers
+if overpass-api.de is busy. After changing the stops, re-run `node scripts/vendor-offline.mjs --only=tiles` so the
+map has full detail around new stops. Data © OpenStreetMap contributors (ODbL).
 
 ## Desktop mockup
 
