@@ -4,9 +4,9 @@
 //   → round 1 (version A) → questionnaire → break → round 2 (version B) → questionnaire → interview.
 //   Scenario order by participant number (as in the plan): odd = X (Danderyds sjukhus) first,
 //   even = Y (Hallonbergen) first. Versions are always A then B and only called
-//   "第一个版本" / "第二个版本" on screen.
+//   "Version 1" / "Version 2" on screen.
 // Each task is started and finished with a button. Measured per task: time and how often the
-// guide 《斯德哥尔摩艺术地铁站介绍》 (external material, not part of the prototype) was opened;
+// guide "Stockholm Metro Art Guide" (external material, not part of the prototype) was opened;
 // for T1 also the art stations found (details opened: the guide in both rounds, the stations'
 // pages in version B; round 2 doesn't count round 1's) and the one nearest to the user (the
 // expected answer). The warm-up (version A) records nothing; each round reloads the prototype
@@ -21,12 +21,12 @@ import { CONFIG } from '../js/config.js';
 const $ = (sel) => document.querySelector(sel);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const params = new URLSearchParams(location.search);
-// ?p=P03: formal session of participant 3. ?p=TEST: a test run (order X → Y; nothing is recorded).
-const code = (params.get('p') ?? '').toUpperCase();
-const isTest = code === 'TEST';
-const isFormal = /^P\d{2,}$/.test(code);
+// English version (branch study-flow-en): test sessions only, order X → Y, nothing recorded.
+const code = 'TEST';
+const isTest = true;
+const isFormal = false;
 
-const ROUND_NAME = { 1: '第一个版本', 2: '第二个版本' };
+const ROUND_NAME = { 1: 'Version 1', 2: 'Version 2' };
 
 function orderFor(p) {
   if (p === 'TEST') return ['X', 'Y'];
@@ -36,17 +36,17 @@ function orderFor(p) {
 
 function buildSteps(order) {
   return [
-    { id: 'welcome', label: '开始', kind: 'text' },
-    { id: 'background', label: '背景信息', kind: 'survey', survey: 'background', title: '背景信息' },
-    { id: 'pretest', label: '意愿测试', kind: 'survey', survey: 'preTest', title: '意愿测试' },
-    { id: 'thinkaloud', label: '出声思考', kind: 'text' },
-    { id: 'warmup', label: '热身', kind: 'proto', version: 'a' },
-    { id: 'round1', label: '第一轮', kind: 'round', round: 1, version: 'a', scenario: order[0] },
-    { id: 'q1', label: '问卷', kind: 'survey', survey: 'post', title: '第一个版本 · 测试后问卷', round: 1 },
-    { id: 'break', label: '休息', kind: 'text' },
-    { id: 'round2', label: '第二轮', kind: 'round', round: 2, version: 'b', scenario: order[1] },
-    { id: 'q2', label: '问卷', kind: 'survey', survey: 'post', title: '第二个版本 · 测试后问卷', round: 2 },
-    { id: 'interview', label: '访谈', kind: 'text' },
+    { id: 'welcome', label: 'Welcome', kind: 'text' },
+    { id: 'background', label: 'Background', kind: 'survey', survey: 'background', title: 'Background' },
+    { id: 'pretest', label: 'Intentions', kind: 'survey', survey: 'preTest', title: 'Intentions' },
+    { id: 'thinkaloud', label: 'Think aloud', kind: 'text' },
+    { id: 'warmup', label: 'Warm-up', kind: 'proto', version: 'a' },
+    { id: 'round1', label: 'Round 1', kind: 'round', round: 1, version: 'a', scenario: order[0] },
+    { id: 'q1', label: 'Questionnaire', kind: 'survey', survey: 'post', title: 'Version 1 · Post-test questionnaire', round: 1 },
+    { id: 'break', label: 'Break', kind: 'text' },
+    { id: 'round2', label: 'Round 2', kind: 'round', round: 2, version: 'b', scenario: order[1] },
+    { id: 'q2', label: 'Questionnaire', kind: 'survey', survey: 'post', title: 'Version 2 · Post-test questionnaire', round: 2 },
+    { id: 'interview', label: 'Interview', kind: 'text' },
   ];
 }
 
@@ -56,7 +56,7 @@ const KEY = `sl-study-${code}`;
 // times: seconds per task.
 // views[round][task] = { guide: [keys], app: [keys], opens }: station details viewed in the
 // guide / in the app (version B's station pages), and how often the guide was opened.
-// warmupStart: when the warm-up began ("完成热身" unlocks after STUDY.warmupMin).
+// warmupStart: when the warm-up began ("Finish warm-up" unlocks after STUDY.warmupMin).
 const fresh = () => ({ step: 0, phase: 'T1', taskStart: null, times: { 1: {}, 2: {} }, views: { 1: {}, 2: {} }, doneAt: null, warmupStart: null });
 let state = fresh();
 try { state = { ...fresh(), ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { /* storage blocked */ }
@@ -120,7 +120,7 @@ const T1_TARGET = 6;
 function foundHtml(r) {
   const f = found(r);
   return `<p class="found__count">${esc(TEXT.found(f.length, T1_TARGET))}</p>
-    ${f.length ? `<p class="found__list">${esc(f.map(name).join('、'))}</p>` : ''}
+    ${f.length ? `<p class="found__list">${esc(f.map(name).join(', '))}</p>` : ''}
     ${r === 2 && viewed(2, 'T1').length > f.length ? `<p class="found__note">${esc(TEXT.foundExcluded)}</p>` : ''}`;
 }
 function updateFound() {
@@ -189,24 +189,24 @@ function renderProgress() {
 }
 
 const para = (arr) => arr.map((t) => `<p>${esc(t)}</p>`).join('');
-const nextBtn = (label = '下一步') => `<button type="button" class="btn btn--primary" data-act="next">${esc(label)}</button>`;
+const nextBtn = (label = 'Next') => `<button type="button" class="btn btn--primary" data-act="next">${esc(label)}</button>`;
 
 function renderText(step) {
   const body = {
-    welcome: `<h1>欢迎参加测试</h1>${para(TEXT.welcome)}${nextBtn('开始')}`,
-    thinkaloud: `<h1>出声思考</h1>${para(TEXT.thinkAloud)}<div class="note">${esc(TEXT.thinkAloudExamples)}</div>${nextBtn()}`,
-    break: `<h1>休息一下</h1><p>${esc(TEXT.break)}</p>${nextBtn('进入第二轮')}`,
-    interview: `<h1>访谈</h1><p>${esc(TEXT.interview)}</p><p class="big">${esc(TEXT.thanks)}</p>`,
+    welcome: `<h1>Welcome</h1>${para(TEXT.welcome)}${nextBtn('Begin')}`,
+    thinkaloud: `<h1>Thinking aloud</h1>${para(TEXT.thinkAloud)}<div class="note">${esc(TEXT.thinkAloudExamples)}</div>${nextBtn()}`,
+    break: `<h1>Break</h1><p>${esc(TEXT.break)}</p>${nextBtn('Go to round 2')}`,
+    interview: `<h1>Interview</h1><p>${esc(TEXT.interview)}</p><p class="big">${esc(TEXT.thanks)}</p>`,
   }[step.id];
   return `<section class="card">${body}</section>${step.id === 'interview' ? sessionData() : ''}`;
 }
 
 // ---------- the session's data as one table row (same columns as the Google Sheet) ----------
-const HEADER = ['记录时间', '编号', '情境顺序',
-  ...[1, 2].flatMap((r) => [`${r === 1 ? '第一轮' : '第二轮'}版本`, `${r === 1 ? '第一轮' : '第二轮'}情境`,
-    ...TASKS.flatMap((k) => [`R${r} ${k.id} 用时(秒)`, `R${r} ${k.id} 打开资料次数`]),
-    `R${r} T1 找到的站`, `R${r} T1 找到站数`, `R${r} T1 最近的站（标准答案）`]),
-  '数据串'];
+const HEADER = ['Recorded', 'Participant', 'Scenario order',
+  ...[1, 2].flatMap((r) => [`R${r} version`, `R${r} scenario`,
+    ...TASKS.flatMap((k) => [`R${r} ${k.id} time (s)`, `R${r} ${k.id} guide openings`]),
+    `R${r} T1 stations found`, `R${r} T1 number found`, `R${r} T1 nearest station (expected answer)`]),
+  'Data string'];
 function dataRow() {
   const row = [new Date().toLocaleString('sv-SE'), code, `${order[0]}→${order[1]}`];
   for (const r of [1, 2]) {
@@ -226,7 +226,7 @@ function dataRow() {
 // is the fallback.
 async function recordToSheet() {
   if (!isFormal || state.recorded || !STUDY.sheetUrl) return;
-  setRecordStatus('正在记录到表格…', '');
+  setRecordStatus('Recording to the sheet…', '');
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 12000);
   try {
@@ -234,9 +234,9 @@ async function recordToSheet() {
     await fetch(STUDY.sheetUrl, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ header: HEADER, row: dataRow() }), signal: ctrl.signal });
     state.recorded = true;
     save();
-    setRecordStatus('✓ 已自动记录到表格。', 'ok');
+    setRecordStatus('✓ Recorded to the sheet.', 'ok');
   } catch {
-    setRecordStatus('没能自动记录（可能是网络无法访问 Google）。请点“下载数据文件”，把文件发给主持人。', 'warn');
+    setRecordStatus('Could not record automatically. Please press “Download data file” and send the file to the moderator.', 'warn');
   } finally {
     clearTimeout(timer);
   }
@@ -264,38 +264,38 @@ function sessionData() {
     const s = steps.find((x) => x.round === r && x.kind === 'round');
     const t = state.times[r];
     const cells = TASKS.map((k) => (t[k.id] == null ? '<td>—</td><td>—</td>'
-      : `<td>${mmss(t[k.id])}</td><td>${opens(r, k.id)} 次</td>`)).join('');
+      : `<td>${mmss(t[k.id])}</td><td>${opens(r, k.id)}×</td>`)).join('');
     const total = TASKS.reduce((n, k) => n + (t[k.id] ?? 0), 0);
-    return `<tr><th>${esc(ROUND_NAME[r])}（${s.version.toUpperCase()}）<br><span class="muted">情境 ${s.scenario} · ${esc(SCENARIOS[s.scenario].destination)}</span></th>${cells}<td>${mmss(total)}</td></tr>`;
+    return `<tr><th>${esc(ROUND_NAME[r])}(${s.version.toUpperCase()})<br><span class="muted">Scenario ${s.scenario} · ${esc(SCENARIOS[s.scenario].destination)}</span></th>${cells}<td>${mmss(total)}</td></tr>`;
   }).join('');
   return `
     <section class="card data-card">
-      <h2>本场数据</h2>
-      <p>参与者 <b>${esc(code)}</b> · 情境顺序 ${order[0]} → ${order[1]}</p>
+      <h2>Session data</h2>
+      <p>Participant <b>${esc(code)}</b> · scenario order ${order[0]} → ${order[1]}</p>
       <div class="data-scroll">
         <table class="data">
-          <tr><th rowspan="2"></th>${TASKS.map((k) => `<th colspan="2">${esc(k.title)}</th>`).join('')}<th rowspan="2">三个任务合计</th></tr>
-          <tr>${TASKS.map(() => '<th>用时</th><th>打开资料</th>').join('')}</tr>
+          <tr><th rowspan="2"></th>${TASKS.map((k) => `<th colspan="2">${esc(k.title)}</th>`).join('')}<th rowspan="2">All three tasks</th></tr>
+          <tr>${TASKS.map(() => '<th>Time</th><th>Guide</th>').join('')}</tr>
           ${roundRows}
         </table>
       </div>
-      <p class="muted">“打开资料”= 任务进行中打开《斯德哥尔摩艺术地铁站介绍》的次数。</p>
+      <p class="muted">“Guide” = how often the “Stockholm Metro Art Guide” was opened during the task.</p>
       ${t1Summary()}
       <p class="mod-param"><code>${esc(dataParam(2))}</code>
-        <button type="button" class="btn btn--small" data-act="mod-copy">复制</button></p>
+        <button type="button" class="btn btn--small" data-act="mod-copy">Copy</button></p>
       <p class="record-status ${state.recorded ? 'ok' : ''}" id="record-status">${isTest
-        ? '测试模式：数据不会记录到表格。'
-        : state.recorded ? '✓ 已自动记录到表格。' : STUDY.sheetUrl ? '' : '表格地址还没有设置（study/config.js → sheetUrl），请下载数据文件。'}</p>
-      <button type="button" class="btn" data-act="download">下载数据文件</button>
+        ? 'Test mode: the data is not recorded to the sheet.'
+        : state.recorded ? '✓ Recorded to the sheet.' : STUDY.sheetUrl ? '' : 'The sheet address is not set (study/config.js → sheetUrl); please download the data file.'}</p>
+      <button type="button" class="btn" data-act="download">Download data file</button>
     </section>`;
 }
 
 // T1 per round: art stations found, how many, and the nearest (expected answer).
 function t1Summary(rounds = [1, 2]) {
-  return `<table class="summary"><tr><th></th><th>任务 1 找到的站</th><th>最近的站（标准答案）</th></tr>
+  return `<table class="summary"><tr><th></th><th>Task 1 stations found</th><th>Nearest (expected answer)</th></tr>
     ${rounds.map((r) => {
       const f = found(r);
-      return `<tr><td>${esc(ROUND_NAME[r])}</td><td>${f.length} 个：${esc(f.map(name).join('、') || '—')}</td>
+      return `<tr><td>${esc(ROUND_NAME[r])}</td><td>${f.length}: ${esc(f.map(name).join(', ') || '—')}</td>
         <td>${esc(nearest(f) || '—')}</td></tr>`;
     }).join('')}</table>`;
 }
@@ -304,15 +304,15 @@ function renderSurvey(step) {
   const url = surveyUrl(step);
   const frame = url
     ? `<iframe class="survey__frame" src="${esc(url)}" title="${esc(step.title)}"></iframe>`
-    : `<div class="survey__missing">问卷链接还没有设置（study/config.js → questionnaires.${esc(step.survey)}）。<br>
-        这里会显示问卷。</div>`;
+    : `<div class="survey__missing">The questionnaire link is not set (study/config.js → questionnaires.${esc(step.survey)}).<br>
+        The questionnaire will appear here.</div>`;
   return `
     <section class="survey">
       <div class="survey__head">
         <h1>${esc(step.title)}</h1>
         <div class="survey__actions">
-          ${url ? `<a class="btn" href="${esc(url)}" target="_blank" rel="noopener">在新窗口打开</a>` : ''}
-          ${nextBtn('我已提交，下一步')}
+          ${url ? `<a class="btn" href="${esc(url)}" target="_blank" rel="noopener">Open in a new window</a>` : ''}
+          ${nextBtn('I have submitted it · Next')}
         </div>
       </div>
       ${frame}
@@ -321,24 +321,24 @@ function renderSurvey(step) {
 
 function renderSide(step) {
   if (step.kind === 'proto') {
-    return `<div class="card card--task"><p class="eyebrow">热身</p><p>${esc(TEXT.warmupIntro)}</p>
+    return `<div class="card card--task"><p class="eyebrow">Warm-up</p><p>${esc(TEXT.warmupIntro)}</p>
       <ol class="warmup-list">${TEXT.warmupTasks.map((t) => `<li>${esc(t)}</li>`).join('')}</ol>
       <p class="warmup-wait" id="warmup-wait"></p>
-      <button type="button" class="btn btn--done" data-act="next" id="warmup-done" disabled>完成热身</button></div>`;
+      <button type="button" class="btn btn--done" data-act="next" id="warmup-done" disabled>Finish warm-up</button></div>`;
   }
   // round
   const sc = SCENARIOS[step.scenario];
-  const scenario = `<div class="card card--scenario"><p class="eyebrow">情境 · ${esc(ROUND_NAME[step.round])}</p>${para(sc.text)}</div>`;
+  const scenario = `<div class="card card--scenario"><p class="eyebrow">Scenario · ${esc(ROUND_NAME[step.round])}</p>${para(sc.text)}</div>`;
   const guideCard = `<div class="card card--guide"><p>${esc(TEXT.guide)}</p>
-    <button type="button" class="btn" data-act="guide">打开资料</button></div>`;
+    <button type="button" class="btn" data-act="guide">Open guide</button></div>`;
   const ph = state.phase;
   if (ph === 'done') {
     const rows = TASKS.map((k) => `<tr><td>${esc(k.title)}</td><td>${mmss(state.times[step.round][k.id] ?? 0)}</td>
-      <td>${opens(step.round, k.id)} 次</td></tr>`).join('');
+      <td>${opens(step.round, k.id)}×</td></tr>`).join('');
     return `${scenario}<div class="card"><p class="task">${esc(TEXT.roundDone)}</p>
-      <table class="summary"><tr><th></th><th>用时</th><th>打开资料</th></tr>${rows}</table>
+      <table class="summary"><tr><th></th><th>Time</th><th>Guide opened</th></tr>${rows}</table>
       ${t1Summary([step.round])}
-      <button type="button" class="btn btn--primary" data-act="next" id="to-survey" disabled>去填问卷</button></div>`;
+      <button type="button" class="btn btn--primary" data-act="next" id="to-survey" disabled>Go to the questionnaire</button></div>`;
   }
   const task = TASKS.find((t) => t.id === ph);
   const started = state.taskStart != null;
@@ -347,19 +347,19 @@ function renderSide(step) {
   // Before the round's first task: how the round works, and (version B) Tourist Mode first.
   const intro = task.id === 'T1' && !started
     ? `<div class="card card--intro"><p>${esc(TEXT.roundIntro)}</p></div>
-      ${step.version === 'b' ? `<div class="card card--task"><p class="eyebrow">开始前</p><p class="task">${esc(TEXT.touristMode)}</p>
+      ${step.version === 'b' ? `<div class="card card--task"><p class="eyebrow">Before you start</p><p class="task">${esc(TEXT.touristMode)}</p>
         <p class="tm-status" id="tm-status" hidden>✓ ${esc(TEXT.touristModeOn)}</p></div>` : ''}`
     : '';
   const avoid = task.id === 'T1' && step.round === 2 && found(1).length
-    ? `<p class="avoid">${esc(TEXT.avoid)}${esc(found(1).map(name).join('、'))}</p>` : '';
+    ? `<p class="avoid">${esc(TEXT.avoid)}${esc(found(1).map(name).join(', '))}</p>` : '';
   const foot = started
     ? `<div class="task__foot">
         <span class="timer" id="timer">00:00</span>
-        <button type="button" class="btn btn--done" data-act="task-done">完成</button>
+        <button type="button" class="btn btn--done" data-act="task-done">Done</button>
       </div>
-      <p class="timer-note" id="timer-note" hidden>已超过 ${STUDY.longTaskMin} 分钟</p>`
-    : `<div class="task__foot"><span class="muted">准备好后点“开始”</span>
-        <button type="button" class="btn btn--primary" data-act="start" ${task.id === 'T1' && step.version === 'b' ? 'disabled' : ''}>开始</button></div>`;
+      <p class="timer-note" id="timer-note" hidden>Over ${STUDY.longTaskMin} minutes</p>`
+    : `<div class="task__foot"><span class="muted">Press “Start” when you are ready</span>
+        <button type="button" class="btn btn--primary" data-act="start" ${task.id === 'T1' && step.version === 'b' ? 'disabled' : ''}>Start</button></div>`;
   return `${scenario}
     ${doneTasks ? `<ul class="done-list">${doneTasks}</ul>` : ''}
     ${intro}
@@ -400,21 +400,21 @@ function tick() {
     el.textContent = mmss(sec);
     $('#timer-note').hidden = sec < STUDY.longTaskMin * 60;
   }
-  // Warm-up: "完成热身" unlocks after STUDY.warmupMin minutes.
+  // Warm-up: "Finish warm-up" unlocks after STUDY.warmupMin minutes.
   const warmupDone = $('#warmup-done');
   if (warmupDone && state.warmupStart) {
     const left = STUDY.warmupMin * 60 - Math.floor((Date.now() - state.warmupStart) / 1000);
     warmupDone.disabled = left > 0;
     $('#warmup-wait').textContent = left > 0 ? TEXT.warmupWait(mmss(left)) : TEXT.warmupReady;
   }
-  // Round summary: "去填问卷" unlocks after STUDY.summaryWaitSec.
+  // Round summary: "Go to the questionnaire" unlocks after STUDY.summaryWaitSec.
   const toSurvey = $('#to-survey');
   if (toSurvey && state.doneAt) {
     const left = STUDY.summaryWaitSec - Math.floor((Date.now() - state.doneAt) / 1000);
     toSurvey.disabled = left > 0;
-    toSurvey.textContent = left > 0 ? `去填问卷（${left}）` : '去填问卷';
+    toSurvey.textContent = left > 0 ? `Go to the questionnaire (${left})` : 'Go to the questionnaire';
   }
-  // Round 2: task 1's "开始" only once Tourist Mode is on in the prototype (same origin frame).
+  // Round 2: task 1's "Start" only once Tourist Mode is on in the prototype (same origin frame).
   const status = $('#tm-status');
   if (status) {
     let on = false;
@@ -456,7 +456,7 @@ document.addEventListener('click', (e) => {
     state.times[step.round][state.phase] = sec;
     state.taskStart = null;
     const i = TASKS.findIndex((t) => t.id === state.phase);
-    if (i < TASKS.length - 1) state.phase = TASKS[i + 1].id; // the next task waits for "开始"
+    if (i < TASKS.length - 1) state.phase = TASKS[i + 1].id; // the next task waits for "Start"
     else { state.phase = 'done'; state.doneAt = Date.now(); }
     save();
     return render();
@@ -465,11 +465,11 @@ document.addEventListener('click', (e) => {
   if (act === 'mod-go') return go(Number(e.target.closest('[data-step]').dataset.step));
   if (act === 'download') return downloadData();
   if (act === 'mod-copy') {
-    navigator.clipboard?.writeText(dataParam(2)).then(() => { e.target.textContent = '已复制'; });
+    navigator.clipboard?.writeText(dataParam(2)).then(() => { e.target.textContent = 'Copied'; });
     return;
   }
   if (act === 'mod-reset') {
-    if (confirm(`清空 ${code} 的进度和用时，从头开始？`)) { state = fresh(); save(); protoLoadedFor = null; render(); }
+    if (confirm(`Clear ${code}'s progress and times and start over?`)) { state = fresh(); save(); protoLoadedFor = null; render(); }
   }
 });
 
@@ -484,52 +484,21 @@ window.addEventListener('blur', () => {
 });
 function renderModerator() {
   const t = (r, k) => (state.times[r][k] != null
-    ? `${mmss(state.times[r][k])} · 资料 ${opens(r, k)} 次` : '—');
+    ? `${mmss(state.times[r][k])} · guide ${opens(r, k)}×` : '—');
   $('#moderator-body').innerHTML = `
-    <p><a class="btn btn--small" href="./">← 返回开始页（选择正式测试 / 测试）</a></p>
-    <p><b>${esc(isTest ? '测试' : code)}</b> · 情境顺序 ${order[0]} → ${order[1]}
-      （第一轮 ${esc(SCENARIOS[order[0]].destination)}，第二轮 ${esc(SCENARIOS[order[1]].destination)}）</p>
+    <p><b>Test session</b> · scenario order ${order[0]} → ${order[1]}
+      (round 1 ${esc(SCENARIOS[order[0]].destination)}, round 2 ${esc(SCENARIOS[order[1]].destination)})</p>
     <table class="mod-table">
       <tr><th></th>${TASKS.map((k) => `<th>${k.id}</th>`).join('')}</tr>
-      <tr><td>第一轮 A</td>${TASKS.map((k) => `<td>${t(1, k.id)}</td>`).join('')}</tr>
-      <tr><td>第二轮 B</td>${TASKS.map((k) => `<td>${t(2, k.id)}</td>`).join('')}</tr>
+      <tr><td>Round 1 A</td>${TASKS.map((k) => `<td>${t(1, k.id)}</td>`).join('')}</tr>
+      <tr><td>Round 2 B</td>${TASKS.map((k) => `<td>${t(2, k.id)}</td>`).join('')}</tr>
     </table>
-    <p class="mod-param"><code>${esc(dataParam(2))}</code> <button type="button" class="btn btn--small" data-act="mod-copy">复制</button></p>
-    <p>跳到：${steps.map((s, i) => `<button type="button" class="btn btn--small${i === state.step ? ' is-current' : ''}" data-act="mod-go" data-step="${i}">${i + 1} ${esc(s.label)}</button>`).join(' ')}</p>
-    <p><button type="button" class="btn btn--small btn--danger" data-act="mod-reset">清空进度</button></p>`;
+    <p class="mod-param"><code>${esc(dataParam(2))}</code> <button type="button" class="btn btn--small" data-act="mod-copy">Copy</button></p>
+    <p>Jump to: ${steps.map((s, i) => `<button type="button" class="btn btn--small${i === state.step ? ' is-current' : ''}" data-act="mod-go" data-step="${i}">${i + 1} ${esc(s.label)}</button>`).join(' ')}</p>
+    <p><button type="button" class="btn btn--small btn--danger" data-act="mod-reset">Clear progress</button></p>`;
 }
 
-// ---------- start screen: test run, or a formal session with the participant's number ----------
-function renderStart() {
-  document.body.classList.add('is-start');
-  $('#main').innerHTML = `
-    <section class="card">
-      <h1>情境实验</h1>
-      <div class="start-choice">
-        <div>
-          <h2>正式测试</h2>
-          <p class="muted">输入参与者编号（1、2、3…）。结束时数据会记录到表格。</p>
-          <form id="start-form" class="start-form">
-            <input name="n" type="number" min="1" max="99" placeholder="编号" required aria-label="参与者编号">
-            <button class="btn btn--primary">开始正式测试</button>
-          </form>
-        </div>
-        <div>
-          <h2>测试</h2>
-          <p class="muted">试走流程用，数据不会记录。</p>
-          <a class="btn" href="?p=TEST">开始测试</a>
-        </div>
-      </div>
-    </section>`;
-  $('#start-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const n = Number(e.target.n.value);
-    if (n >= 1) location.search = `?p=P${String(n).padStart(2, '0')}`;
-  });
-}
-
-if (isFormal || isTest) {
-  $('#participant').textContent = isTest ? '测试' : code;
-  document.body.classList.toggle('is-test', isTest);
-  render();
-} else renderStart();
+// English version: test sessions only (nothing is recorded to the sheet).
+$('#participant').textContent = 'Test';
+document.body.classList.add('is-test');
+render();

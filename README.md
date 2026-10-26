@@ -41,6 +41,10 @@ The neutral names (a / b) don't reveal which version is the original.
 
 ## Scenario experiment flow (`study/`, branch `study-flow`)
 
+> **Branch `study-flow-en`:** the English version of the study page, for test sessions only (no start screen,
+> nothing recorded to the sheet; the data page and CSV download still work). The prototype and the questionnaires
+> are unchanged.
+
 One page walks a participant through the scenario experiment (study 2 of the thesis plan). The start page
 (`study/`) has two buttons: **正式测试** with the participant's number (→ `study/?p=P03`) and **测试** (→ `study/?p=TEST`,
 order X → Y, nothing recorded).

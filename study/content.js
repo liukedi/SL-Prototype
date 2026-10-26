@@ -1,11 +1,11 @@
 // Texts shown to participants in the scenario experiment (from the experiment plan,
-// 情境模拟实验). Chinese, as in the sessions; the prototype itself stays in English.
+// 情境模拟实验). English version (branch study-flow-en); the questionnaires stay as they are.
 
 // Scenario texts: one paragraph per line on screen.
 const scenario = (destination) => [
-  '你来瑞典的斯德哥尔摩自由行，入住在 Gärdet 地铁站旁边。',
-  `现在是晚上 18:30。你在斯德哥尔摩的好友邀请你 20:00 到家里做客，建议你 19:45 到达 ${destination} 地铁站，他会准时来接你。`,
-  '你这几天在网上找旅行攻略时，听说斯德哥尔摩的地铁站很有艺术特色，但还没有深入了解，想找机会参观一些。',
+  'You are travelling on your own in Stockholm, Sweden, staying next to Gärdet metro station.',
+  `It is 18:30 in the evening. A friend who lives in Stockholm has invited you to their home at 20:00 and suggests you arrive at ${destination} metro station at 19:45, where they will pick you up.`,
+  'While reading travel tips online these past days, you heard that Stockholm’s metro stations are known for their art, but you haven’t looked into it yet. You would like to visit some.',
 ];
 
 export const SCENARIOS = {
@@ -14,60 +14,61 @@ export const SCENARIOS = {
   Y: { destination: 'Hallonbergen', text: scenario('Hallonbergen') },
 };
 
-// Tasks of each round; each one is started and finished with a button. T1 counts the art
-// stations whose details were opened (the guide in both rounds; in version B also the
-// stations' pages in the app); in round 2 stations found in round 1 don't count.
+// Tasks of each round; each one is started and finished with a button. T1 counts the
+// sightseeing stations (all three kinds in the guide) whose details were opened (the guide in
+// both rounds; in version B also the stations' pages in the app); in round 2 stations found in
+// round 1 don't count.
 export const TASKS = [
   {
     id: 'T1',
-    title: '任务 1 · 探索',
+    title: 'Task 1 · Explore',
     text: (round) => (round === 1
-      ? '请查看 6 个观赏性地铁站的详情，然后在原型的地图中分别搜索出这些站点的位置并收藏，利用它们在地图上的位置，判断其中离你最近的那一个。'
-      : '请查看 6 个观赏性地铁站的详情（要和第一轮找到的不同），然后在原型的地图中分别搜索出这些站点的位置并收藏，利用它们在地图上的位置，判断其中离你最近的那一个。'),
+      ? 'Look at the details of 6 sightseeing metro stations. Then search for each of them on the prototype’s map and save them as favourites. Using their positions on the map, decide which one is closest to you.'
+      : 'Look at the details of 6 sightseeing metro stations (different from the ones you found in the first round). Then search for each of them on the prototype’s map and save them as favourites. Using their positions on the map, decide which one is closest to you.'),
   },
   {
     id: 'T2',
-    title: '任务 2 · 路线',
-    text: () => '请查一下从这里去朋友那里的地铁路线，数一数路上会经过几个观赏性地铁站。',
+    title: 'Task 2 · Route',
+    text: () => 'Find the metro route from here to your friend’s station, and count how many sightseeing metro stations you pass on the way.',
   },
   {
     id: 'T3',
-    title: '任务 3 · 规划',
-    text: () => '请安排今晚的行程：去哪几个观赏性地铁站、按什么顺序、几点能到朋友指定的地铁站。安排好后告诉主持人你的最终计划。',
+    title: 'Task 3 · Plan',
+    text: () => 'Plan your evening: which sightseeing metro stations to visit, in what order, and when you will reach the station your friend named. When you are done, tell the moderator your final plan.',
   },
 ];
 
 export const TEXT = {
   welcome: [
-    '谢谢你参加这次测试。我们在研究游客如何用交通 app 来安排在斯德哥尔摩的行程。今天你会在两个版本的 app 里完成一些任务，然后填几份简短的问卷，最后聊一聊你的感受。全程大约一个小时。',
-    '我们测试的是 app，不是你，没有对错之分。如果某个地方你觉得难用或看不懂，那正是我们想知道的。',
-    '测试会录音和录屏，数据会匿名处理，只用于研究。你可以随时停止，不需要理由。',
-    '这是一个原型，有些功能没有做完，点了可能会提示“原型里没有这个功能”，这是正常的。',
+    'Thank you for taking part. We are studying how tourists use a transit app to plan their time in Stockholm. Today you will do some tasks in two versions of the app, fill in a few short questionnaires, and finally talk with us about your experience. The whole session takes about an hour.',
+    'We are testing the app, not you: there are no right or wrong answers. If something feels hard to use or confusing, that is exactly what we want to know.',
+    'The session is audio and screen recorded. The data is anonymised and used only for research. You can stop at any time without giving a reason.',
+    'This is a prototype and some features are not built. Tapping them may show a message saying the feature isn’t available in the prototype; that is expected.',
   ],
   thinkAloud: [
-    '做任务的时候，请把你在想的都说出来：你在看什么、想做什么、喜欢什么、哪里看不懂。就像在自言自语。',
+    'While doing the tasks, please say out loud whatever you are thinking: what you are looking at, what you want to do, what you like, what you don’t understand. As if talking to yourself.',
   ],
-  thinkAloudExamples: '比如：“我在找……”“这个图标是什么意思？”“我想点这里看看”“这个信息很有用”。说得零碎也没关系。',
-  warmupIntro: '先熟悉一下这个 app。这一步只是熟悉操作，不计入结果，遇到不会的地方可以直接问主持人。',
+  thinkAloudExamples: 'For example: “I’m looking for…”, “What does this icon mean?”, “Let me tap here”, “This is useful”. Fragments are fine.',
+  warmupIntro: 'First, get to know the app. This step is only for practice and is not counted. If you get stuck, just ask the moderator.',
   warmupTasks: [
-    '请查一下从 Gärdet 站出发、开往 T-Centralen 方向的下一班地铁是几点。',
-    '在地图上缩放、移动，看看站点图标的变化。',
-    '随意探索这个应用的各种功能。',
+    'Find out when the next metro from Gärdet towards T-Centralen leaves.',
+    'Zoom and pan the map, and see how the station icons change.',
+    'Explore the app’s features freely.',
   ],
-  warmupWait: (left) => `还剩 ${left}，请继续自由探索。时间到了才能进入正式任务。`,
-  warmupReady: '热身时间到了，准备好后可以进入正式任务。',
-  roundIntro: '这一轮一共有三个任务。每个任务开始时请点“开始”，完成后点“完成”。完全不用着急，没有时间限制。',
-  // 观赏性地铁站 = all three kinds in the guide: Art Interior, Art Exhibits, Scenic View.
-  found: (n, total) => (n === 0 ? '还没有找到观赏性地铁站。打开一个观赏性地铁站的详情页，就算找到一个。'
-    : n < total ? `你找到了 ${n}/${total} 个观赏性地铁站：` : `你已经找到 ${total} 个观赏性地铁站了：`),
-  foundExcluded: '第一轮找到过的站不计入。',
-  guide: '做任务时，你可以随时打开《斯德哥尔摩艺术地铁站介绍》。它不属于原型，是外部的补充资料。',
-  guideNote: '外部补充资料 · 不属于原型',
-  avoid: '第一轮找到的站（这次请找其他站）：',
-  touristMode: '这一轮开始前，请先打开 Tourist Mode：点地图左上角的图层按钮，在 Map Setting 里打开 Tourist Mode 开关。打开后会出现几张介绍卡片，可以看完，也可以跳过。',
-  touristModeOn: 'Tourist Mode 已打开，可以开始任务了。',
-  roundDone: '这一轮的三个任务都完成了。',
-  break: '第一轮结束了。可以休息一两分钟，准备好后再进入第二轮。',
-  interview: '所有任务和问卷都完成了。最后请和主持人聊一聊你的感受，大约 10 分钟。',
-  thanks: '非常感谢你的参与！',
+  warmupWait: (left) => `${left} left. Please keep exploring; the tasks start when the time is up.`,
+  warmupReady: 'Warm-up time is over. Continue when you are ready.',
+  roundIntro: 'This round has three tasks. Press “Start” when you begin a task and “Done” when you have finished it. Take your time: there is no time limit.',
+  // Sightseeing metro stations = all three kinds in the guide: Art Interior, Art Exhibits, Scenic View.
+  found: (n, total) => (n === 0 ? 'No sightseeing stations found yet. Opening a sightseeing station’s details counts as finding it.'
+    : n < total ? `You have found ${n}/${total} sightseeing stations:` : `You have found ${total} sightseeing stations:`),
+  foundExcluded: 'Stations found in the first round don’t count.',
+  guide: 'During the tasks you can open the “Stockholm Metro Art Guide” at any time. It is not part of the prototype; it is external reference material.',
+  guideNote: 'External reference material · not part of the prototype',
+  avoid: 'Stations found in the first round (please find other ones this time): ',
+  touristMode: 'Before this round, please turn on Tourist Mode: tap the layers button at the top left of the map, and switch on Tourist Mode in Map Setting. A few intro cards will appear; you can read them or skip them.',
+  touristModeOn: 'Tourist Mode is on. You can start the tasks.',
+  roundDone: 'You have finished all three tasks of this round.',
+  break: 'The first round is over. Take a break of a minute or two, and continue to the second round when you are ready.',
+  interview: 'All tasks and questionnaires are done. Finally, please talk with the moderator about your experience (about 10 minutes).',
+  thanks: 'Thank you very much for taking part!',
 };

@@ -1,4 +1,4 @@
-// "斯德哥尔摩艺术地铁站介绍": the reading material for the scenario experiment (external, not
+// "Stockholm Metro Art Guide": the reading material for the scenario experiment (external, not
 // part of the prototype). Same stations and texts as version B's Tourist Mode (data/b/*.json),
 // shown as a full-screen list → detail overlay inside the experiment page (same window, so screen sharing records it). Stations are
 // sorted alphabetically within each type, so the order gives no hint about distance.
@@ -6,9 +6,9 @@
 
 const DATA = '../data/b/';
 const TYPES = [
-  { id: 'art', label: 'Art Interior', zh: '艺术站（永久艺术）' },
-  { id: 'exhibition', label: 'Art Exhibits', zh: '展览站（轮换展览）' },
-  { id: 'nature', label: 'Scenic View', zh: '风景站（出站看风景）' },
+  { id: 'art', label: 'Art Interior', zh: 'permanent art' },
+  { id: 'exhibition', label: 'Art Exhibits', zh: 'changing exhibitions' },
+  { id: 'nature', label: 'Scenic View', zh: 'views outside the station' },
 ];
 const COMPLEXITY = { 1: 'Easy', 2: 'Medium', 3: 'Complex' };
 const BEST = { any: 'Any time', daylight: 'Daylight', sunset: 'Sunset' };
@@ -28,7 +28,7 @@ export async function createGuide({ note = '', onOpen, onView } = {}) {
   const el = document.createElement('section');
   el.className = 'guide';
   el.setAttribute('role', 'dialog');
-  el.setAttribute('aria-label', '斯德哥尔摩艺术地铁站介绍');
+  el.setAttribute('aria-label', 'Stockholm Metro Art Guide');
   el.hidden = true;
   document.body.appendChild(el);
 
@@ -65,7 +65,7 @@ export async function createGuide({ note = '', onOpen, onView } = {}) {
         <p class="g-muted">Viewpoint: ${esc(d.viewpoint)} · stay ${esc(d.stay)}</p>`;
     }
     return `
-      <button type="button" class="g-back" data-g="back">← 返回列表</button>
+      <button type="button" class="g-back" data-g="back">← Back to the list</button>
       <article class="g-detail">
         <img class="g-detail__photo" src="../assets/b/${photoDir(s)}/${esc(d.photo)}" alt="${esc(s.name)}">
         <div>
@@ -94,8 +94,8 @@ export async function createGuide({ note = '', onOpen, onView } = {}) {
   el.innerHTML = `
     <div class="guide__panel">
       <header class="guide__head">
-        <div><h2>斯德哥尔摩艺术地铁站介绍</h2>${note ? `<p class="guide__note">${esc(note)}</p>` : ''}</div>
-        <button type="button" class="btn" data-g="close">关闭</button>
+        <div><h2>Stockholm Metro Art Guide</h2>${note ? `<p class="guide__note">${esc(note)}</p>` : ''}</div>
+        <button type="button" class="btn" data-g="close">Close</button>
       </header>
       <div class="guide__body"></div>
     </div>`;
