@@ -1,11 +1,14 @@
 // Version B: art stations on journey details (Tourist Mode on).
 //   - Their icon after the station name (boarding / alighting stations and "Show N stops").
 //   - "N art stations" next to the time and transfers.
-//   - The full-screen route map shows their icon instead of the plain stop dot.
+//   - The small route map marks them with orange dots; the full-screen route map shows their
+//     icons, and tapping one slides up that station's page (Information / Time Table).
 // Special stations are matched by name and position (a bus stop with the same name
 // elsewhere doesn't count).
 import { setJourneyDecorator } from '../journey-details.js';
-import { loadStopIndex } from '../stop-index.js';
+import { loadStopIndex, stopFromKey } from '../stop-index.js';
+import { initStopPage } from '../stop-page.js';
+import { SPECIAL_ORANGE } from './special-stations.js';
 import { esc } from '../departure-row.js';
 import { touristMode } from './tourist-mode.js';
 
@@ -39,7 +42,7 @@ export async function addJourneyArt() {
   const byName = new Map();
   for (const s of stations) {
     const stop = byKey.get(s.key);
-    if (stop?.lngLat) byName.set(stop.name, { icon: s.icon ?? GENERIC_ICON, lngLat: stop.lngLat });
+    if (stop?.lngLat) byName.set(stop.name, { key: s.key, icon: s.icon ?? GENERIC_ICON, lngLat: stop.lngLat });
   }
   const special = (stop) => {
     const s = stop && byName.get(stop.name);
@@ -64,6 +67,23 @@ export async function addJourneyArt() {
     routeMap: (routeMap, j) => (touristMode.on ? routeArt(routeMap, j) : null),
   });
 
+  // ---- station page sliding up over a full-screen route map ----
+  const screen = document.getElementById('screen');
+  const panel = document.createElement('section');
+  panel.className = 'jd-stop-sheet';
+  panel.hidden = true;
+  panel.innerHTML = '<div class="sheet__handle" aria-hidden="true"></div><div class="stop-page"></div>';
+  screen.appendChild(panel);
+  const closeStop = () => { stopPage.close(); panel.hidden = true; panel.classList.remove('is-open'); };
+  const stopPage = initStopPage(panel.querySelector('.stop-page'), { onClose: closeStop });
+  const openStop = (key) => {
+    panel.hidden = false;
+    requestAnimationFrame(() => panel.classList.add('is-open'));
+    stopPage.open(stopFromKey(byKey, key));
+  };
+  document.querySelectorAll('.tabbar [data-tab]').forEach((t) => t.addEventListener('click', closeStop));
+  touristMode.subscribe((on) => { if (!on) closeStop(); });
+
   routeArt = (routeMap, j) => {
     const map = routeMap.map;
     const found = onRoute(j);
@@ -72,7 +92,7 @@ export async function addJourneyArt() {
     const features = [...found].map(([name, s]) => ({
       type: 'Feature',
       geometry: { type: 'Point', coordinates: s.lngLat },
-      properties: { name, icon: `b-${s.icon}` },
+      properties: { name, key: s.key, icon: `b-${s.icon}` },
     }));
     Promise.all([...new Set(features.map((f) => f.properties.icon))].map(async (id) => {
       const img = await loadImage(`icons/b/${id.slice(2)}`);
@@ -80,6 +100,14 @@ export async function addJourneyArt() {
     })).catch((err) => console.error('journey art icons', err));
 
     map.addSource('route-art', { type: 'geojson', data: { type: 'FeatureCollection', features } });
+    // Small map: orange dots (as on the main map at district scale).
+    map.addLayer({
+      id: 'route-art-dot',
+      type: 'circle',
+      source: 'route-art',
+      paint: { 'circle-color': SPECIAL_ORANGE, 'circle-radius': 5, 'circle-stroke-color': '#ffffff', 'circle-stroke-width': 1.5 },
+    });
+    // Full screen: the stations' icons, tappable.
     map.addLayer({
       id: 'route-art',
       type: 'symbol',
@@ -92,13 +120,31 @@ export async function addJourneyArt() {
         'icon-ignore-placement': true,
       },
     });
-    // The route's own dots / end circles at these stations step aside for the icon.
+    let fullscreen = false;
+    map.on('click', 'route-art', (e) => {
+      const key = e.features?.[0]?.properties.key;
+      if (fullscreen && key) openStop(key);
+    });
+    map.on('mouseenter', 'route-art', () => { if (fullscreen) map.getCanvas().style.cursor = 'pointer'; });
+    map.on('mouseleave', 'route-art', () => { map.getCanvas().style.cursor = ''; });
+
+    // The route's own dots / end-circle cores at these stations step aside for the dot / icon.
     const notArt = ['!', ['in', ['get', 'name'], ['literal', names]]];
     const original = Object.fromEntries(['route-dots', 'route-ends', 'route-ends-core'].map((id) => [id, map.getFilter(id)]));
+    const apply = () => {
+      map.setLayoutProperty('route-art', 'visibility', fullscreen ? 'visible' : 'none');
+      map.setLayoutProperty('route-art-dot', 'visibility', fullscreen ? 'none' : 'visible');
+      for (const [id, f] of Object.entries(original)) {
+        const hide = fullscreen || id !== 'route-ends'; // small map keeps the end rings around the dot
+        map.setFilter(id, hide ? ['all', f, notArt] : f);
+      }
+    };
+    apply();
     return {
       setFullscreen(on) {
-        map.setLayoutProperty('route-art', 'visibility', on ? 'visible' : 'none');
-        for (const [id, f] of Object.entries(original)) map.setFilter(id, on ? ['all', f, notArt] : f);
+        fullscreen = on;
+        apply();
+        if (!on) closeStop();
       },
     };
   };

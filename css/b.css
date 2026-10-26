@@ -38,31 +38,6 @@
 [data-variant="b"] .si-pin img { width: 44px; height: 44px; border-radius: 8px; }
 [data-variant="b"] .si-pin span { font-size: 22px; color: #111; white-space: nowrap; }
 
-/* Message card (features not built in the prototype) */
-[data-variant="b"] .b-toast {
-  position: absolute;
-  left: 24px;
-  right: 24px;
-  top: 50%;
-  z-index: 45;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 18px 16px 20px 20px;
-  border-radius: 20px;
-  background: rgba(20, 26, 34, 0.94);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(-50%) scale(0.96);
-  transition: opacity 0.2s, transform 0.2s;
-}
-[data-variant="b"] .b-toast.is-visible { opacity: 1; transform: translateY(-50%) scale(1); }
-[data-variant="b"] .b-toast p { flex: 1; margin: 0; font-size: 16px; line-height: 1.4; color: #f2f4f6; }
-[data-variant="b"] .b-toast__close { flex: none; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: rgba(255, 255, 255, 0.12); color: #fff; }
-[data-variant="b"] .b-toast__bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: #3fb5e8; transform-origin: left; animation: b-toast-bar linear forwards; }
-@keyframes b-toast-bar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
 
 /* On a stop page the tab bar is hidden (as in the Stadion design), so the station
    information is fully visible. */
@@ -371,3 +346,29 @@
 
 /* Tourist Mode: the sheet stays frosted glass when expanded too (version A turns it near-opaque). */
 [data-variant="b"][data-tourist="on"] .sheet.is-expanded { background: var(--c-sheet); }
+
+/* Station page over a full-screen route map (js/b/journey-art.js): slides up from the bottom */
+[data-variant="b"] .jd-stop-sheet {
+  position: absolute;
+  left: var(--sheet-inset);
+  right: var(--sheet-inset);
+  bottom: 0;
+  z-index: 36;
+  display: flex;
+  flex-direction: column;
+  height: 62%;
+  box-sizing: border-box;
+  border-radius: 28px 28px 0 0;
+  background: var(--c-sheet);
+  -webkit-backdrop-filter: var(--c-sheet-blur);
+  backdrop-filter: var(--c-sheet-blur);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-bottom: 0;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(100%);
+  transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+[data-variant="b"] .jd-stop-sheet[hidden] { display: none; }
+[data-variant="b"] .jd-stop-sheet.is-open { transform: none; }
+[data-variant="b"] .jd-stop-sheet .stop-page { flex: 1; height: auto; min-height: 0; }
+[data-variant="b"] .jd-stop-sheet .stop-page__scroll { padding-bottom: calc(var(--safe-bottom) + 24px); }
