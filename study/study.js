@@ -89,9 +89,11 @@ const surveyUrl = (step) => STUDY.questionnaires[step.survey] || '';
 
 // ---------- station details viewed during a task ----------
 const name = (key) => key.split('|')[0];
+// The task on screen (started or not): details opened while it is shown count for it, so a
+// station opened just before pressing "Start" is not lost.
 const running = () => {
   const step = steps[state.step];
-  return step?.kind === 'round' && state.taskStart && TASKS.some((t) => t.id === state.phase) ? { r: step.round, t: state.phase } : null;
+  return step?.kind === 'round' && TASKS.some((t) => t.id === state.phase) ? { r: step.round, t: state.phase } : null;
 };
 function viewRec(r, t) {
   state.views[r] ??= {};
@@ -163,22 +165,31 @@ for (const s of guide.stations) specialKeys.add(s.key);
 
 // Version B in the frame: a station page shown with its details (any stop page: map, search,
 // Explore, the journey map) counts as viewed. All three kinds count (art, exhibition, scenic).
-$('#proto').addEventListener('load', () => {
+// Hooked on every load and re-checked every tick, so a reloaded frame is never missed.
+function hookFrame() {
   try {
-    $('#proto').contentDocument.addEventListener('sl:stop-page', (e) => {
+    const doc = $('#proto').contentDocument;
+    if (!doc || doc.slStudyHooked) return;
+    doc.slStudyHooked = true;
+    doc.addEventListener('sl:stop-page', (e) => {
       const { stop, info } = e.detail ?? {};
       if (stop?.name && info) recordView('app', `${stop.name}|${stop.municipality}`);
     });
   } catch { /* not same origin */ }
-});
+}
+$('#proto').addEventListener('load', hookFrame);
 
 let protoLoadedFor = null; // which step's prototype is in the frame
 function loadPrototype(step) {
   const frame = $('#proto');
   if (protoLoadedFor === step.id) return;
   protoLoadedFor = step.id;
-  // ?reset: no saved favourites / history / Tourist Mode; the clock restarts at 18:30.
-  frame.src = `../${step.version}/?reset&study&t=${Date.now()}`;
+  // ?reset: no saved favourites / history / Tourist Mode; the clock restarts at 18:30. Only the
+  // first time a step is shown: if this page is reloaded (or the browser reloads the tab after
+  // switching away), the prototype keeps the participant's favourites and Tourist Mode.
+  const reset = state.protoReset !== step.id;
+  if (reset) { state.protoReset = step.id; save(); }
+  frame.src = `../${step.version}/?${reset ? 'reset&' : ''}study&t=${Date.now()}`;
 }
 
 // ---------- rendering ----------
@@ -367,7 +378,7 @@ function renderSide(step) {
       <p class="eyebrow">${esc(task.title)}</p>
       <p class="task">${esc(task.text(step.round))}</p>
       ${avoid}
-      ${started && task.id === 'T1' ? `<div class="found" id="found">${foundHtml(step.round)}</div>` : ''}
+      ${task.id === 'T1' ? `<div class="found" id="found">${foundHtml(step.round)}</div>` : ''}
       ${foot}
     </div>
     ${guideCard}`;
@@ -394,6 +405,7 @@ function render() {
 
 // ---------- task timer ----------
 function tick() {
+  hookFrame();
   const el = $('#timer');
   if (el && state.taskStart) {
     const sec = Math.floor((Date.now() - state.taskStart) / 1000);
@@ -430,6 +442,13 @@ function go(stepIndex) {
   state.step = Math.max(0, Math.min(steps.length - 1, stepIndex));
   state.phase = 'T1';
   state.taskStart = null;
+  const target = steps[state.step];
+  state.protoReset = null; // the step's prototype starts fresh
+  protoLoadedFor = null;
+  if (target.kind === 'round') { // entering a round: it starts clean
+    state.times[target.round] = {};
+    state.views[target.round] = {};
+  }
   if (steps[state.step].kind === 'proto') state.warmupStart = null; // (re)entering the warm-up restarts its clock
   save();
   render();
@@ -442,11 +461,8 @@ document.addEventListener('click', (e) => {
   const step = steps[state.step];
   if (act === 'next') return go(state.step + 1);
   if (act === 'start') {
-    if (state.phase === 'T1') { // a round (re)started: its earlier data no longer apply
-      state.times[step.round] = {};
-      state.views[step.round] = {};
-    }
-    delete state.views[step.round][state.phase]; // a task restarted
+    // (Views and guide openings since the task was shown are kept; the round's data are
+    // cleared when the round is entered, see go().)
     state.taskStart = Date.now();
     save();
     return render();
