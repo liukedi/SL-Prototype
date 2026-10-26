@@ -50,6 +50,7 @@ export function showOnboarding() {
         ${s.body}
       </div>
       <div class="onb__actions">
+        <div class="onb__dots" aria-label="Card ${i + 1} of ${STEPS.length}">${STEPS.map((_, k) => `<i class="${k === i ? 'is-on' : ''}"></i>`).join('')}</div>
         ${s.skip ? '<button type="button" class="onb__skip" data-onb="skip">Skip All</button>' : ''}
         <button type="button" class="onb__btn" data-onb="next">${s.button}</button>
       </div>`;
