@@ -161,12 +161,13 @@ const guide = await createGuide({
 });
 for (const s of guide.stations) specialKeys.add(s.key);
 
-// Version B in the frame: a station page opened for a special station counts as viewed.
+// Version B in the frame: a station page shown with its details (any stop page: map, search,
+// Explore, the journey map) counts as viewed. All three kinds count (art, exhibition, scenic).
 $('#proto').addEventListener('load', () => {
   try {
-    $('#proto').contentDocument.addEventListener('sl:select-stop', (e) => {
-      const st = e.detail;
-      if (st?.name) recordView('app', `${st.name}|${st.municipality}`);
+    $('#proto').contentDocument.addEventListener('sl:stop-page', (e) => {
+      const { stop, info } = e.detail ?? {};
+      if (stop?.name && info) recordView('app', `${stop.name}|${stop.municipality}`);
     });
   } catch { /* not same origin */ }
 });
