@@ -48,14 +48,19 @@ order X → Y, nothing recorded).
 1. Welcome (opening statement) → background questionnaire → pre-test intentions (the consent form is sent before the
    session)
 2. Think-aloud explanation (with examples, no practice) → warm-up task in version A (not counted)
-3. Round 1: version A, scenario card, tasks T1–T3 (timed; after T2 a pause for the moderator's three questions;
-   at the end a summary of times and tab switches, with "去填问卷" locked for 15 s so the moderator can note them)
+3. Round 1: version A, scenario card, tasks T1–T3 (timed): T1 view six art stations' details and find the one
+   nearest to you; T2 count the art stations on the route; T3 plan the evening (arrive by 19:45). The guide
+   《斯德哥尔摩艺术地铁站介绍》 can be opened from every task card. At the end a summary (times, tab switches,
+   stations viewed in T1 and the nearest of them), with "去填问卷" locked for 15 s so the moderator can note it.
 4. Post-test questionnaire (SAM, UEQ-S, intentions, version preference; the same one after both rounds) → break
 5. Round 2: version B, other scenario. Before the tasks the participant is asked to switch Tourist Mode on
    ("开始任务" unlocks once it is on), then T1–T3 → post-test questionnaire → interview. The interview page lists
    all measured data of the session (per round and task: time, tab switches, time away; and the data string).
 
-- **Scenario order:** odd numbers (1, 3, …) get X (Mörby centrum) first, even numbers Y (Solna centrum) first.
+- **Scenario order:** odd numbers (1, 3, …) get X (Mörby centrum) first, even numbers Y (Hallonbergen) first.
+- **Guide** (`study/guide.js`): the 24 special stations with the same photos and texts as version B, list → detail,
+  inside the page. Recorded per task: openings, and the stations whose details were viewed (in version B also the
+  stations' pages in the app). Round 2's T1 card lists round 1's stations, to choose six others.
   Versions are always A then B, shown only as "第一个版本 / 第二个版本".
 - **Prototype in the flow:** loaded as `a/` or `b/` with `?reset&study` (fresh data, clock from 18:30, A | B switch
   hidden). Each round reloads it.

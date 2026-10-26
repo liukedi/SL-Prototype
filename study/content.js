@@ -1,21 +1,42 @@
 // Texts shown to participants in the scenario experiment (from the experiment plan,
 // 情境模拟实验). Chinese, as in the sessions; the prototype itself stays in English.
 
+// Scenario texts: one paragraph per line on screen.
+const scenario = (destination) => [
+  '你来瑞典的斯德哥尔摩自由行，入住在 Gärdet 地铁站旁边。',
+  `现在是晚上 18:30。你在斯德哥尔摩的好友邀请你 20:00 到家里做客，建议你 19:45 到达 ${destination} 地铁站，他会准时来接你。`,
+  '你这几天在网上找旅行攻略时，听说斯德哥尔摩的地铁站很有艺术特色，但还没有深入了解，想找机会参观一些。',
+];
+
 export const SCENARIOS = {
-  X: {
-    destination: 'Mörby centrum',
-    text: '你来斯德哥尔摩旅游，刚入住 Gärdet 地铁站附近的酒店。现在是晚上 6 点半，你和朋友约了 7 点 45 分在他家吃饭，他家在 Mörby centrum 站附近。你听说斯德哥尔摩的地铁站很有艺术特色，想在去朋友家的路上顺便看几个。请用这个 app 来安排，不清楚的信息可以用网页浏览器搜索。',
-  },
-  Y: {
-    destination: 'Solna centrum',
-    text: '你来斯德哥尔摩旅游，刚入住 Gärdet 地铁站附近的酒店。现在是晚上 6 点半，你和朋友约了 7 点 45 分在他家吃饭，他家在 Solna centrum 站附近。你听说斯德哥尔摩的地铁站很有艺术特色，想在去朋友家的路上顺便看几个。请用这个 app 来安排，不清楚的信息可以用网页浏览器搜索。',
-  },
+  X: { destination: 'Mörby centrum', text: scenario('Mörby centrum') },
+  Y: { destination: 'Hallonbergen', text: scenario('Hallonbergen') },
 };
 
+// Tasks of each round. T1 counts the stations whose details were viewed (the guide in both
+// rounds; in version B also the stations' pages in the app); in round 2 they should be six
+// stations not viewed in round 1 (the task card lists those).
 export const TASKS = [
-  { id: 'T1', title: '任务 1 · 发现', text: '你想在去朋友家的路上顺便看几个有艺术特色的地铁站。请找找看，有哪些站可能值得去。', done: '我找好了' },
-  { id: 'T2', title: '任务 2 · 了解', text: '从你找到的站里选一个你最感兴趣的，弄清楚：那里能看到什么、大概需要待多久、站内好不好找路。', done: '我已经清楚了' },
-  { id: 'T3', title: '任务 3 · 规划', text: '请安排今晚的行程：去哪几个站、按什么顺序、几点能到朋友家。安排好后告诉主持人你的最终计划。', done: '我安排好了' },
+  {
+    id: 'T1',
+    title: '任务 1 · 探索',
+    text: (round) => (round === 1
+      ? '请查看 6 个艺术地铁站的详情，然后利用它们在地图上的位置，找出其中离你最近的那一个。'
+      : '请查看 6 个艺术地铁站的详情（要和第一轮看过的不同），然后利用它们在地图上的位置，找出其中离你最近的那一个。'),
+    done: '我找到了',
+  },
+  {
+    id: 'T2',
+    title: '任务 2 · 路线',
+    text: () => '请查一下从这里去朋友那里的地铁路线，数一数路上会经过几个艺术地铁站。',
+    done: '我数好了',
+  },
+  {
+    id: 'T3',
+    title: '任务 3 · 规划',
+    text: () => '请安排今晚的行程：去哪几个艺术站、按什么顺序、几点能到朋友指定的地铁站。安排好后告诉主持人你的最终计划。',
+    done: '我安排好了',
+  },
 ];
 
 export const TEXT = {
@@ -31,8 +52,8 @@ export const TEXT = {
   thinkAloudExamples: '比如：“我在找……”“这个图标是什么意思？”“我想点这里看看”“这个信息很有用”。说得零碎也没关系。',
   warmup: '先熟悉一下这个 app：请查一下从 Gärdet 站出发、开往 T-Centralen 方向的下一班地铁是几点。',
   warmupNote: '这一步只是熟悉操作，不计入结果。遇到不会的地方可以直接问主持人。',
-  search: '做任务时，你可以随时新开浏览器标签页搜索信息（百度、必应、小红书网页版等都可以），再回到这里。',
-  verify: '请先回答主持人的几个问题，然后再继续。',
+  guide: '做任务时，你可以随时打开《斯德哥尔摩艺术地铁站介绍》。',
+  avoid: '第一轮看过的站（这次请选其他站）：',
   touristMode: '这一轮开始前，请先打开 Tourist Mode：点地图左上角的图层按钮，在 Map Setting 里打开 Tourist Mode 开关。打开后会出现几张介绍卡片，可以看完，也可以跳过。',
   touristModeOn: 'Tourist Mode 已打开，可以开始任务了。',
   roundDone: '这一轮的三个任务都完成了。请稍等片刻，主持人会记录一下用时。',

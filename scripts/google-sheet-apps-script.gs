@@ -12,13 +12,26 @@
 
 const SHEET_ID = '15SL6h7iy_nQT71mRMU8onnY2YD6Z6RZZS8Eh8XDMpL4';
 
+// Body: { header: [...], row: [...] }. The sheet's first row is kept equal to `header`, so it
+// follows when the page's columns change.
 function doPost(e) {
-  const row = JSON.parse(e.postData.contents);
-  if (!Array.isArray(row)) throw new Error('Expected a row (array)');
+  const { header, row } = JSON.parse(e.postData.contents);
+  if (!Array.isArray(row)) throw new Error('Expected { header, row }');
   const lock = LockService.getScriptLock();
   lock.waitLock(10000); // two sessions ending at the same moment
   try {
-    SpreadsheetApp.openById(SHEET_ID).getSheets()[0].appendRow(row);
+    const sheet = SpreadsheetApp.openById(SHEET_ID).getSheets()[0];
+    if (Array.isArray(header)) {
+      const current = sheet.getLastRow() ? sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0] : [];
+      if (current.join('\u0001') !== header.join('\u0001')) {
+        if (!sheet.getLastRow()) sheet.appendRow(header);
+        else {
+          sheet.getRange(1, 1, 1, Math.max(current.length, header.length)).clearContent();
+          sheet.getRange(1, 1, 1, header.length).setValues([header]);
+        }
+      }
+    }
+    sheet.appendRow(row);
   } finally {
     lock.releaseLock();
   }

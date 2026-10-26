@@ -3,13 +3,17 @@
 //   Order: welcome → background → pre-test intentions → think-aloud → warm-up (version A)
 //   → round 1 (version A) → questionnaire → break → round 2 (version B) → questionnaire → interview.
 //   Scenario order by participant number (as in the plan): odd = X (Mörby centrum) first,
-//   even = Y (Solna centrum) first. Versions are always A then B and only called
+//   even = Y (Hallonbergen) first. Versions are always A then B and only called
 //   "第一个版本" / "第二个版本" on screen.
-// Task times are measured here and passed to the questionnaires as a URL parameter
-// (config.js), so no database is needed. Progress is kept in localStorage per participant,
-// so an accidental reload resumes at the same step.
+// Measured per task: time, leaving the page (tab switches), and which stations' details were
+// viewed (the guide 《斯德哥尔摩艺术地铁站介绍》 in both rounds, the stations' pages in version
+// B); for T1 also the viewed station nearest to the user (the expected answer). Formal sessions
+// send the data to a Google Sheet at the end (config.js), with a CSV download as fallback.
+// Progress is kept in localStorage per participant, so a reload resumes at the same step.
 import { STUDY } from './config.js';
 import { SCENARIOS, TASKS, TEXT } from './content.js';
+import { createGuide } from './guide.js';
+import { CONFIG } from '../js/config.js';
 
 const $ = (sel) => document.querySelector(sel);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -47,10 +51,14 @@ function buildSteps(order) {
 const KEY = `sl-study-${code}`;
 // times: seconds per task; away: { switches, sec } = leaving this page (another browser tab
 // or window) during the task, e.g. to search.
-const fresh = () => ({ step: 0, phase: 'intro', taskStart: null, times: { 1: {}, 2: {} }, away: { 1: {}, 2: {} }, cur: null, doneAt: null });
+// views[round][task] = { guide: [keys], app: [keys], opens }: station details viewed in the
+// guide / in the app (version B's station pages), and how often the guide was opened.
+const fresh = () => ({ step: 0, phase: 'intro', taskStart: null, times: { 1: {}, 2: {} }, away: { 1: {}, 2: {} }, views: { 1: {}, 2: {} }, doneAt: null });
 let state = fresh();
 try { state = { ...fresh(), ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { /* storage blocked */ }
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* ignore */ } };
+
+state.views ??= { 1: {}, 2: {} }; // progress saved by an older version of this page
 
 const order = code ? orderFor(code) : ['X', 'Y'];
 const steps = buildSteps(order);
@@ -74,6 +82,72 @@ function dataParam(uptoRound) {
 }
 
 const surveyUrl = (step) => STUDY.questionnaires[step.survey] || '';
+
+// ---------- station details viewed during a task ----------
+const name = (key) => key.split('|')[0];
+const running = () => {
+  const step = steps[state.step];
+  return step?.kind === 'round' && state.taskStart && TASKS.some((t) => t.id === state.phase) ? { r: step.round, t: state.phase } : null;
+};
+function viewRec(r, t) {
+  state.views[r] ??= {};
+  return (state.views[r][t] ??= { guide: [], app: [], opens: 0 });
+}
+function recordView(source, key) {
+  const cur = running();
+  if (!cur || !specialKeys.has(key)) return;
+  // Version A's station pages have no art details (only departures): there, only the guide counts.
+  if (source === 'app' && steps[state.step].version !== 'b') return;
+  const rec = viewRec(cur.r, cur.t);
+  if (!rec[source].includes(key)) { rec[source].push(key); save(); }
+}
+// Distinct stations whose details were seen in a task (guide + app).
+const viewed = (r, t) => {
+  const v = state.views[r]?.[t];
+  return v ? [...new Set([...v.guide, ...v.app])] : [];
+};
+const guideOpens = (r) => Object.values(state.views[r] ?? {}).reduce((n, v) => n + (v.opens ?? 0), 0);
+
+// Station positions (metro entries of the search index) and the user's (fake) position.
+let positions = new Map();
+const specialKeys = new Set();
+fetch('../data/search-index.json').then((r) => r.json()).then(({ stops }) => {
+  for (const [n, mun, types, lng, lat] of stops) {
+    const key = `${n}|${mun}`;
+    if (lng != null && (types.includes('m') || !positions.has(key))) positions.set(key, [lng, lat]);
+  }
+});
+function km([lng1, lat1], [lng2, lat2]) {
+  const r = Math.PI / 180;
+  const a = Math.sin(((lat2 - lat1) * r) / 2) ** 2 + Math.cos(lat1 * r) * Math.cos(lat2 * r) * Math.sin(((lng2 - lng1) * r) / 2) ** 2;
+  return 12742 * Math.asin(Math.sqrt(a));
+}
+// The viewed station nearest to the user: the expected answer of T1.
+function nearest(keys) {
+  let best = null;
+  for (const k of keys) {
+    const p = positions.get(k);
+    if (p && (!best || km(CONFIG.userLocation, p) < best.d)) best = { key: k, d: km(CONFIG.userLocation, p) };
+  }
+  return best ? `${name(best.key)} (${best.d.toFixed(1)} km)` : '';
+}
+
+// The guide, opened from the task cards; every opening and station viewed is recorded.
+const guide = await createGuide({
+  onOpen: () => { const cur = running(); if (cur) { viewRec(cur.r, cur.t).opens += 1; save(); } },
+  onView: (key) => recordView('guide', key),
+});
+for (const s of guide.stations) specialKeys.add(s.key);
+
+// Version B in the frame: a station page opened for a special station counts as viewed.
+$('#proto').addEventListener('load', () => {
+  try {
+    $('#proto').contentDocument.addEventListener('sl:select-stop', (e) => {
+      const st = e.detail;
+      if (st?.name) recordView('app', `${st.name}|${st.municipality}`);
+    });
+  } catch { /* not same origin */ }
+});
 
 let protoLoadedFor = null; // which step's prototype is in the frame
 function loadPrototype(step) {
@@ -107,7 +181,8 @@ function renderText(step) {
 // ---------- the session's data as one table row (same columns as the Google Sheet) ----------
 const HEADER = ['记录时间', '编号', '情境顺序',
   ...[1, 2].flatMap((r) => [`${r === 1 ? '第一轮' : '第二轮'}版本`, `${r === 1 ? '第一轮' : '第二轮'}情境`,
-    ...TASKS.flatMap((k) => [`R${r} ${k.id} 用时(秒)`, `R${r} ${k.id} 切出次数`, `R${r} ${k.id} 离开(秒)`])]),
+    ...TASKS.flatMap((k) => [`R${r} ${k.id} 用时(秒)`, `R${r} ${k.id} 切出次数`, `R${r} ${k.id} 离开(秒)`]),
+    `R${r} T1 看过的站`, `R${r} T1 看过站数`, `R${r} T1 最近的站（标准答案）`, `R${r} 打开资料次数`]),
   '数据串'];
 function dataRow() {
   const row = [new Date().toLocaleString('sv-SE'), code, `${order[0]}→${order[1]}`];
@@ -117,6 +192,8 @@ function dataRow() {
     const a = state.away[r] ?? {};
     row.push(s.version.toUpperCase(), `${s.scenario} ${SCENARIOS[s.scenario].destination}`);
     for (const k of TASKS) row.push(t[k.id] ?? '', t[k.id] == null ? '' : a[k.id]?.switches ?? 0, t[k.id] == null ? '' : a[k.id]?.sec ?? 0);
+    const v = viewed(r, 'T1');
+    row.push(v.map(name).join(' / '), v.length, nearest(v), guideOpens(r));
   }
   row.push(dataParam(2));
   return row;
@@ -132,7 +209,7 @@ async function recordToSheet() {
   const timer = setTimeout(() => ctrl.abort(), 12000);
   try {
     // no-cors: the answer can't be read, but a network failure still throws.
-    await fetch(STUDY.sheetUrl, { method: 'POST', mode: 'no-cors', body: JSON.stringify(dataRow()), signal: ctrl.signal });
+    await fetch(STUDY.sheetUrl, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ header: HEADER, row: dataRow() }), signal: ctrl.signal });
     state.recorded = true;
     save();
     setRecordStatus('✓ 已自动记录到表格。', 'ok');
@@ -182,6 +259,7 @@ function sessionData() {
         </table>
       </div>
       <p class="muted">“切出”= 任务进行中切到其他浏览器标签页或最小化窗口的次数；“离开时长”= 不在本页面的总时间。</p>
+      ${t1Summary()}
       <p class="mod-param"><code>${esc(dataParam(2))}</code>
         <button type="button" class="btn btn--small" data-act="mod-copy">复制</button></p>
       <p class="record-status ${state.recorded ? 'ok' : ''}" id="record-status">${isTest
@@ -189,6 +267,16 @@ function sessionData() {
         : state.recorded ? '✓ 已自动记录到表格。' : STUDY.sheetUrl ? '' : '表格地址还没有设置（study/config.js → sheetUrl），请下载数据文件。'}</p>
       <button type="button" class="btn" data-act="download">下载数据文件</button>
     </section>`;
+}
+
+// T1 per round: stations viewed, how many, the nearest (expected answer), guide openings.
+function t1Summary(rounds = [1, 2]) {
+  return `<table class="summary"><tr><th></th><th>任务 1 看过的站</th><th>最近的站（标准答案）</th><th>打开资料</th></tr>
+    ${rounds.map((r) => {
+      const v = viewed(r, 'T1');
+      return `<tr><td>${esc(ROUND_NAME[r])}</td><td>${v.length} 个：${esc(v.map(name).join('、') || '—')}</td>
+        <td>${esc(nearest(v) || '—')}</td><td>${guideOpens(r)} 次</td></tr>`;
+    }).join('')}</table>`;
 }
 
 function renderSurvey(step) {
@@ -217,19 +305,17 @@ function renderSide(step) {
   }
   // round
   const sc = SCENARIOS[step.scenario];
-  const scenario = `<div class="card card--scenario"><p class="eyebrow">情境 · ${esc(ROUND_NAME[step.round])}</p><p>${esc(sc.text)}</p></div>`;
+  const scenario = `<div class="card card--scenario"><p class="eyebrow">情境 · ${esc(ROUND_NAME[step.round])}</p>${para(sc.text)}</div>`;
+  const guideCard = `<div class="card card--guide"><p>${esc(TEXT.guide)}</p>
+    <button type="button" class="btn" data-act="guide">打开资料</button></div>`;
   const ph = state.phase;
   if (ph === 'intro') {
     const gate = step.version === 'b'
       ? `<div class="card card--task"><p class="eyebrow">开始前</p><p class="task">${esc(TEXT.touristMode)}</p>
           <p class="tm-status" id="tm-status" hidden>✓ ${esc(TEXT.touristModeOn)}</p></div>`
       : '';
-    return `${scenario}${gate}<div class="card"><p class="muted">${esc(TEXT.search)}</p>
+    return `${scenario}${gate}<div class="card">
       <button type="button" class="btn btn--primary" data-act="start" ${step.version === 'b' ? 'disabled' : ''}>开始任务</button></div>`;
-  }
-  if (ph === 'verify') {
-    return `${scenario}<div class="card"><p class="task">${esc(TEXT.verify)}</p>
-      <button type="button" class="btn btn--primary" data-act="after-verify">继续</button></div>`;
   }
   if (ph === 'done') {
     const a = state.away[step.round];
@@ -237,22 +323,27 @@ function renderSide(step) {
       <td>${a[k.id]?.switches ?? 0} 次 · ${mmss(a[k.id]?.sec ?? 0)}</td></tr>`).join('');
     return `${scenario}<div class="card"><p class="task">${esc(TEXT.roundDone)}</p>
       <table class="summary"><tr><th></th><th>用时</th><th>切出页面</th></tr>${rows}</table>
+      ${t1Summary([step.round])}
       <button type="button" class="btn btn--primary" data-act="next" id="to-survey" disabled>去填问卷</button></div>`;
   }
   const task = TASKS.find((t) => t.id === ph);
   const doneTasks = TASKS.filter((t) => state.times[step.round][t.id] != null)
     .map((t) => `<li>${esc(t.title)} ✓ <span class="done-time">${mmss(state.times[step.round][t.id])}</span></li>`).join('');
+  const avoid = task.id === 'T1' && step.round === 2 && viewed(1, 'T1').length
+    ? `<p class="avoid">${esc(TEXT.avoid)}${esc(viewed(1, 'T1').map(name).join('、'))}</p>` : '';
   return `${scenario}
     ${doneTasks ? `<ul class="done-list">${doneTasks}</ul>` : ''}
     <div class="card card--task">
       <p class="eyebrow">${esc(task.title)}</p>
-      <p class="task">${esc(task.text)}</p>
+      <p class="task">${esc(task.text(step.round))}</p>
+      ${avoid}
       <div class="task__foot">
         <span class="timer" id="timer">00:00</span>
         <button type="button" class="btn btn--primary" data-act="task-done">${esc(task.done)}</button>
       </div>
       <p class="timer-note" id="timer-note" hidden>已超过 ${STUDY.longTaskMin} 分钟</p>
-    </div>`;
+    </div>
+    ${guideCard}`;
 }
 
 function render() {
@@ -343,6 +434,7 @@ document.addEventListener('click', (e) => {
   if (act === 'start') {
     state.times[step.round] = {}; // a round (re)started: its earlier times no longer apply
     state.away[step.round] = {};
+    state.views[step.round] = {};
     return startTask('T1');
   }
   if (act === 'task-done') {
@@ -350,14 +442,13 @@ document.addEventListener('click', (e) => {
     state.times[step.round][state.phase] = sec;
     state.taskStart = null;
     const i = TASKS.findIndex((t) => t.id === state.phase);
-    if (state.phase === 'T2') { state.phase = 'verify'; save(); return render(); } // moderator's 3 questions
     if (i < TASKS.length - 1) return startTask(TASKS[i + 1].id);
     state.phase = 'done';
     state.doneAt = Date.now();
     save();
     return render();
   }
-  if (act === 'after-verify') return startTask('T3');
+  if (act === 'guide') return guide.open();
   if (act === 'mod-go') return go(Number(e.target.closest('[data-step]').dataset.step));
   if (act === 'download') return downloadData();
   if (act === 'mod-copy') {
