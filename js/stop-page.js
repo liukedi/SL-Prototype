@@ -5,6 +5,7 @@ import { store } from './store.js';
 import { stopKey } from './stop-index.js';
 import { MODES, MODE_ORDER, servicesOf, departuresFrom, listedNotices } from './departures.js';
 import { departureRowHtml, lineBadgeHtml, noticeHtml, esc } from './departure-row.js';
+import { showToast, NOT_BUILT } from './toast.js';
 import { now as clockNow } from './clock.js';
 
 const MAX_PER_SECTION = 12;
@@ -91,7 +92,9 @@ export function initStopPage(container, { onClose }) {
     const m = e.target.closest('[data-mode]')?.dataset.mode;
     if (m) { mode = mode === m ? null : m; line = null; render(); return; }
     const l = e.target.closest('[data-line]')?.dataset.line;
-    if (l) { line = line === l ? null : l; render(); }
+    if (l) { line = line === l ? null : l; render(); return; }
+    // A departure's own page (its stops and times) isn't built in the prototype.
+    if (e.target.closest('.departure')) showToast(NOT_BUILT);
   });
   starBtn.addEventListener('click', () => store.toggleFavorite(stopKey(stop)));
   container.querySelector('.stop-page__close').addEventListener('click', () => onClose?.());

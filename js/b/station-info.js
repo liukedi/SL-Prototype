@@ -15,7 +15,7 @@ import { setStopInfoProvider } from '../stop-page.js';
 import { stopKey } from '../stop-index.js';
 import { esc, lineBadgeHtml } from '../departure-row.js';
 import { lineColor } from '../departures.js';
-import { showToast } from './toast.js';
+import { showToast, NOT_BUILT } from './toast.js';
 import { touristMode } from './tourist-mode.js';
 import { sunset, stockholmHHMM, minutesOf } from './sun.js';
 import { now as clockNow } from '../clock.js';
@@ -25,7 +25,6 @@ const CREDITS_URL = './assets/b/stations/credits.json';
 const SPECIAL_URL = './data/b/special-stations.json';
 const EXHIBITIONS_URL = './data/b/exhibitions.json';
 const SCENIC_URL = './data/b/scenic.json';
-const NOT_BUILT = 'This feature is not available in the prototype.';
 const COMPLEXITY = {
   1: { label: 'Easy', color: '#5ed16a' },
   2: { label: 'Medium', color: '#f2b544' },
