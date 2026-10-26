@@ -400,7 +400,8 @@ All version B code is in `js/b/`, `css/b.css`, `data/b/`, `icons/b/` and `assets
   `js/journey-details.js`, which A doesn't use):
   - The station icon after the station name: boarding and alighting stations, and the stops under "Show N stops".
   - "N art stations" next to the time and transfers (special stations on the route, each counted once).
-  - The full-screen route map shows their icons in place of the stop dots (the small map card stays plain).
+  - The small route map card marks them with orange dots; the full-screen route map shows their icons, and tapping
+    an icon slides up that station's page (Information / Time Table) from the bottom.
 - **Map Setting / Tourist Mode** (`js/b/map-settings.js`, `js/b/tourist-mode.js`):
   - A layers button at the top left of the map opens the "Map Setting" sheet, which has a Tourist Mode switch.
   - **Off:** version B looks and works exactly like A (no special stations, no Information tab, normal tab bar).
