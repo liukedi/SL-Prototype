@@ -7,9 +7,8 @@
 //   "第一个版本" / "第二个版本" on screen.
 // Each task is started and finished with a button. Measured per task: time and how often the
 // guide 《斯德哥尔摩艺术地铁站介绍》 (external material, not part of the prototype) was opened;
-// for T1 also the art stations found (details opened: the guide in both rounds, the stations'
-// pages in version B; round 2 doesn't count round 1's) and the one nearest to the user (the
-// expected answer). The warm-up (version A) records nothing; each round reloads the prototype
+// for T1 also the sightseeing stations saved as favourites in the prototype (round 2 doesn't
+// count round 1's) and the one nearest to the user (the expected answer). The warm-up (version A) records nothing; each round reloads the prototype
 // with ?reset, so nothing from the warm-up carries over. Formal sessions
 // send the data to a Google Sheet at the end (config.js), with a CSV download as fallback.
 // Progress is kept in localStorage per participant, so a reload resumes at the same step.
@@ -54,10 +53,10 @@ function buildSteps(order) {
 const KEY = `sl-study-${code}`;
 // phase (in a round): the task 'T1'…'T3' (not started while taskStart is null), then 'done'.
 // times: seconds per task.
-// views[round][task] = { guide: [keys], app: [keys], opens }: station details viewed in the
-// guide / in the app (version B's station pages), and how often the guide was opened.
+// views[round][task] = { opens }: how often the guide was opened.
+// saved[round]: T1's sightseeing stations saved as favourites in the prototype.
 // warmupStart: when the warm-up began ("完成热身" unlocks after STUDY.warmupMin).
-const fresh = () => ({ step: 0, phase: 'T1', taskStart: null, times: { 1: {}, 2: {} }, views: { 1: {}, 2: {} }, doneAt: null, warmupStart: null });
+const fresh = () => ({ step: 0, phase: 'T1', taskStart: null, times: { 1: {}, 2: {} }, views: { 1: {}, 2: {} }, doneAt: null, warmupStart: null, saved: { 1: [], 2: [] } });
 let state = fresh();
 try { state = { ...fresh(), ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { /* storage blocked */ }
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* ignore */ } };
@@ -97,33 +96,33 @@ const running = () => {
 };
 function viewRec(r, t) {
   state.views[r] ??= {};
-  return (state.views[r][t] ??= { guide: [], app: [], opens: 0 });
+  return (state.views[r][t] ??= { opens: 0 });
 }
-function recordView(source, key) {
-  const cur = running();
-  if (!cur || !specialKeys.has(key)) return;
-  // Version A's station pages have no art details (only departures): there, only the guide counts.
-  if (source === 'app' && steps[state.step].version !== 'b') return;
-  const rec = viewRec(cur.r, cur.t);
-  if (!rec[source].includes(key)) { rec[source].push(key); save(); updateFound(); }
-}
-// Distinct stations whose details were seen in a task (guide + app).
-const viewed = (r, t) => {
-  const v = state.views[r]?.[t];
-  return v ? [...new Set([...v.guide, ...v.app])] : [];
-};
 const opens = (r, t) => state.views[r]?.[t]?.opens ?? 0;
-// T1's art stations found: those viewed, minus (in round 2) those already found in round 1.
+// T1's stations found = sightseeing stations saved as favourites in the prototype (read from its
+// storage while T1 is shown; same origin), minus (in round 2) those saved in round 1.
+const savedIn = (r) => state.saved?.[r] ?? [];
 const found = (r) => {
   const before = r === 2 ? found(1) : [];
-  return viewed(r, 'T1').filter((k) => !before.includes(k));
+  return savedIn(r).filter((k) => !before.includes(k));
 };
+function readFavourites() {
+  const cur = running();
+  if (!cur || cur.t !== 'T1') return;
+  let favs = [];
+  try { favs = JSON.parse(localStorage.getItem(`sl-proto-v1-${steps[state.step].version}`) || '{}').favorites ?? []; } catch { return; }
+  const list = favs.filter((k) => specialKeys.has(k));
+  if (JSON.stringify(list) === JSON.stringify(savedIn(cur.r))) return;
+  state.saved = { ...state.saved, [cur.r]: list };
+  save();
+  updateFound();
+}
 const T1_TARGET = 6;
 function foundHtml(r) {
   const f = found(r);
   return `<p class="found__count">${esc(TEXT.found(f.length, T1_TARGET))}</p>
     ${f.length ? `<p class="found__list">${esc(f.map(name).join('、'))}</p>` : ''}
-    ${r === 2 && viewed(2, 'T1').length > f.length ? `<p class="found__note">${esc(TEXT.foundExcluded)}</p>` : ''}`;
+    ${r === 2 && savedIn(2).length > f.length ? `<p class="found__note">${esc(TEXT.foundExcluded)}</p>` : ''}`;
 }
 function updateFound() {
   const el = $('#found');
@@ -155,29 +154,13 @@ function nearest(keys) {
   return best ? `${name(best.key)} (${best.d.toFixed(1)} km)` : '';
 }
 
-// The guide, opened from the task cards; every opening and station viewed is recorded.
+// The guide, opened from the task cards; every opening is recorded.
 const guide = await createGuide({
   note: TEXT.guideNote,
   onOpen: () => { const cur = running(); if (cur) { viewRec(cur.r, cur.t).opens += 1; save(); } },
-  onView: (key) => recordView('guide', key),
 });
 for (const s of guide.stations) specialKeys.add(s.key);
 
-// Version B in the frame: a station page shown with its details (any stop page: map, search,
-// Explore, the journey map) counts as viewed. All three kinds count (art, exhibition, scenic).
-// Hooked on every load and re-checked every tick, so a reloaded frame is never missed.
-function hookFrame() {
-  try {
-    const doc = $('#proto').contentDocument;
-    if (!doc || doc.slStudyHooked) return;
-    doc.slStudyHooked = true;
-    doc.addEventListener('sl:stop-page', (e) => {
-      const { stop, info } = e.detail ?? {};
-      if (stop?.name && info) recordView('app', `${stop.name}|${stop.municipality}`);
-    });
-  } catch { /* not same origin */ }
-}
-$('#proto').addEventListener('load', hookFrame);
 
 let protoLoadedFor = null; // which step's prototype is in the frame
 function loadPrototype(step) {
@@ -188,7 +171,13 @@ function loadPrototype(step) {
   // first time a step is shown: if this page is reloaded (or the browser reloads the tab after
   // switching away), the prototype keeps the participant's favourites and Tourist Mode.
   const reset = state.protoReset !== step.id;
-  if (reset) { state.protoReset = step.id; save(); }
+  if (reset) {
+    state.protoReset = step.id;
+    save();
+    // (?reset clears these too, but only once the frame has loaded: clear now, so the old
+    // favourites are never read for the new step.)
+    for (const k of ['sl-proto-v1-a', 'sl-proto-v1-b']) try { localStorage.removeItem(k); } catch { /* ignore */ }
+  }
   frame.src = `../${step.version}/?${reset ? 'reset&' : ''}study&t=${Date.now()}`;
 }
 
@@ -216,7 +205,7 @@ function renderText(step) {
 const HEADER = ['记录时间', '编号', '情境顺序',
   ...[1, 2].flatMap((r) => [`${r === 1 ? '第一轮' : '第二轮'}版本`, `${r === 1 ? '第一轮' : '第二轮'}情境`,
     ...TASKS.flatMap((k) => [`R${r} ${k.id} 用时(秒)`, `R${r} ${k.id} 打开资料次数`]),
-    `R${r} T1 找到的站`, `R${r} T1 找到站数`, `R${r} T1 最近的站（标准答案）`]),
+    `R${r} T1 收藏的站`, `R${r} T1 收藏站数`, `R${r} T1 最近的站（标准答案）`]),
   '数据串'];
 function dataRow() {
   const row = [new Date().toLocaleString('sv-SE'), code, `${order[0]}→${order[1]}`];
@@ -301,9 +290,9 @@ function sessionData() {
     </section>`;
 }
 
-// T1 per round: art stations found, how many, and the nearest (expected answer).
+// T1 per round: sightseeing stations saved, how many, and the nearest (expected answer).
 function t1Summary(rounds = [1, 2]) {
-  return `<table class="summary"><tr><th></th><th>任务 1 找到的站</th><th>最近的站（标准答案）</th></tr>
+  return `<table class="summary"><tr><th></th><th>任务 1 收藏的站</th><th>最近的站（标准答案）</th></tr>
     ${rounds.map((r) => {
       const f = found(r);
       return `<tr><td>${esc(ROUND_NAME[r])}</td><td>${f.length} 个：${esc(f.map(name).join('、') || '—')}</td>
@@ -405,7 +394,7 @@ function render() {
 
 // ---------- task timer ----------
 function tick() {
-  hookFrame();
+  readFavourites();
   const el = $('#timer');
   if (el && state.taskStart) {
     const sec = Math.floor((Date.now() - state.taskStart) / 1000);
@@ -448,6 +437,7 @@ function go(stepIndex) {
   if (target.kind === 'round') { // entering a round: it starts clean
     state.times[target.round] = {};
     state.views[target.round] = {};
+    state.saved = { ...state.saved, [target.round]: [] };
   }
   if (steps[state.step].kind === 'proto') state.warmupStart = null; // (re)entering the warm-up restarts its clock
   save();

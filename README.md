@@ -53,7 +53,8 @@ order X → Y, nothing recorded).
 3. Round 1: version A, scenario card, and a note that there are three tasks, each started with **开始** (blue) and
    finished with **完成** (green, ✓), with no time limit. T1 open six art stations' details, find them on the map,
    save them and judge which is nearest; T2 count the art stations on the route; T3 plan the evening (arrive by
-   19:45). During T1 the task card counts the 观赏性地铁站 found (all three kinds: Art Interior, Art Exhibits, Scenic View; "你找到了 2/6 个观赏性地铁站"). The guide
+   19:45). During T1 the task card counts the 观赏性地铁站 (all three kinds: Art Interior, Art Exhibits, Scenic View)
+   saved as favourites in the prototype ("你收藏了 2/6 个观赏性地铁站"), read live from the prototype's storage. The guide
    《斯德哥尔摩艺术地铁站介绍》 can be opened from every task card. At the end a summary (times, guide openings,
    stations found in T1 and the nearest of them), with "去填问卷" locked for `summaryWaitSec` (5 s).
 4. Post-test questionnaire (SAM, UEQ-S, intentions, version preference; the same one after both rounds) → break
@@ -66,9 +67,8 @@ order X → Y, nothing recorded).
   (Not Mörby centrum: searching "Mörby" finds the Roslagsbanan station first. X's route passes 5 art stations, Y's 6.)
 - **Guide** (`study/guide.js`): the 24 special stations with the same photos and texts as version B, list → detail,
   full screen inside the page, marked as external material that is not part of the prototype. Recorded per task:
-  openings. T1's "found" stations: details opened in the guide (both rounds) or a station page with its details in the app (any way it was opened; the page reports `sl:stop-page`)
-  (version B only; A's station pages have no art details). In round 2, stations found in round 1 don't count, and
-  the T1 card lists them.
+  openings. T1 counts favourites, not details opened; in round 2, stations saved in round 1 don't count, and the T1 card
+  lists them. A page reload keeps the prototype's favourites (`?reset` only the first time a step is shown).
   Versions are always A then B, shown only as "第一个版本 / 第二个版本".
 - **Prototype in the flow:** loaded as `a/` or `b/` with `?reset&study` (fresh data, clock from 18:30, A | B switch
   hidden). Each round reloads it.

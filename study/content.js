@@ -14,16 +14,16 @@ export const SCENARIOS = {
   Y: { destination: 'Hallonbergen', text: scenario('Hallonbergen') },
 };
 
-// Tasks of each round; each one is started and finished with a button. T1 counts the art
-// stations whose details were opened (the guide in both rounds; in version B also the
-// stations' pages in the app); in round 2 stations found in round 1 don't count.
+// Tasks of each round; each one is started and finished with a button. T1 counts the
+// sightseeing stations (all three kinds in the guide) saved as favourites in the prototype; in
+// round 2 stations saved in round 1 don't count.
 export const TASKS = [
   {
     id: 'T1',
     title: '任务 1 · 探索',
     text: (round) => (round === 1
       ? '请查看 6 个观赏性地铁站的详情，然后在原型的地图中分别搜索出这些站点的位置并收藏，利用它们在地图上的位置，判断其中离你最近的那一个。'
-      : '请查看 6 个观赏性地铁站的详情（要和第一轮找到的不同），然后在原型的地图中分别搜索出这些站点的位置并收藏，利用它们在地图上的位置，判断其中离你最近的那一个。'),
+      : '请查看 6 个观赏性地铁站的详情（要和第一轮收藏的不同），然后在原型的地图中分别搜索出这些站点的位置并收藏，利用它们在地图上的位置，判断其中离你最近的那一个。'),
   },
   {
     id: 'T2',
@@ -58,12 +58,12 @@ export const TEXT = {
   warmupReady: '热身时间到了，准备好后可以进入正式任务。',
   roundIntro: '这一轮一共有三个任务。每个任务开始时请点“开始”，完成后点“完成”。完全不用着急，没有时间限制。',
   // 观赏性地铁站 = all three kinds in the guide: Art Interior, Art Exhibits, Scenic View.
-  found: (n, total) => (n === 0 ? '还没有找到观赏性地铁站。打开一个观赏性地铁站的详情页，就算找到一个。'
-    : n < total ? `你找到了 ${n}/${total} 个观赏性地铁站：` : `你已经找到 ${total} 个观赏性地铁站了：`),
-  foundExcluded: '第一轮找到过的站不计入。',
+  found: (n, total) => (n === 0 ? '还没有收藏观赏性地铁站。在原型中每收藏一个观赏性地铁站，就算一个。'
+    : n < total ? `你收藏了 ${n}/${total} 个观赏性地铁站：` : `你已经收藏了 ${total} 个观赏性地铁站：`),
+  foundExcluded: '第一轮收藏过的站不计入。',
   guide: '做任务时，你可以随时打开《斯德哥尔摩艺术地铁站介绍》。它不属于原型，是外部的补充资料。',
   guideNote: '外部补充资料 · 不属于原型',
-  avoid: '第一轮找到的站（这次请找其他站）：',
+  avoid: '第一轮收藏的站（这次请选其他站）：',
   touristMode: '这一轮开始前，请先打开 Tourist Mode：点地图左上角的图层按钮，在 Map Setting 里打开 Tourist Mode 开关。打开后会出现几张介绍卡片，可以看完，也可以跳过。',
   touristModeOn: 'Tourist Mode 已打开，可以开始任务了。',
   roundDone: '这一轮的三个任务都完成了。',
