@@ -119,6 +119,9 @@ export function initStopPage(container, { onClose }) {
       tab = info ? 'info' : 'times';
       if (stop !== s) return; // another stop was opened meanwhile
       render();
+      // Every stop page shown (also the extra ones, e.g. version B's journey map), and whether it
+      // has an info tab (version B's station details): the experiment page counts these.
+      container.dispatchEvent(new CustomEvent('sl:stop-page', { bubbles: true, detail: { stop: s, info: !!info } }));
       clearInterval(timer);
       timer = setInterval(render, 30000); // keep countdowns current
     },
