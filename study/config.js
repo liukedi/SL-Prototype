@@ -16,4 +16,9 @@ export const STUDY = {
 
   // A task that runs longer than this shows a note (the moderator asks whether to go on).
   longTaskMin: 8,
+
+  // Warm-up (version A, not recorded): "完成热身" unlocks after this many minutes of exploring.
+  warmupMin: 3,
+  // The round summary stays up this long before "去填问卷" unlocks.
+  summaryWaitSec: 5,
 };

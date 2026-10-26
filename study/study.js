@@ -2,12 +2,15 @@
 //   ?p=P03 → the participant's session; without it, a start screen asks for the code.
 //   Order: welcome → background → pre-test intentions → think-aloud → warm-up (version A)
 //   → round 1 (version A) → questionnaire → break → round 2 (version B) → questionnaire → interview.
-//   Scenario order by participant number (as in the plan): odd = X (Mörby centrum) first,
+//   Scenario order by participant number (as in the plan): odd = X (Danderyds sjukhus) first,
 //   even = Y (Hallonbergen) first. Versions are always A then B and only called
 //   "第一个版本" / "第二个版本" on screen.
-// Measured per task: time, leaving the page (tab switches), and which stations' details were
-// viewed (the guide 《斯德哥尔摩艺术地铁站介绍》 in both rounds, the stations' pages in version
-// B); for T1 also the viewed station nearest to the user (the expected answer). Formal sessions
+// Each task is started and finished with a button. Measured per task: time and how often the
+// guide 《斯德哥尔摩艺术地铁站介绍》 (external material, not part of the prototype) was opened;
+// for T1 also the art stations found (details opened: the guide in both rounds, the stations'
+// pages in version B; round 2 doesn't count round 1's) and the one nearest to the user (the
+// expected answer). The warm-up (version A) records nothing; each round reloads the prototype
+// with ?reset, so nothing from the warm-up carries over. Formal sessions
 // send the data to a Google Sheet at the end (config.js), with a CSV download as fallback.
 // Progress is kept in localStorage per participant, so a reload resumes at the same step.
 import { STUDY } from './config.js';
@@ -49,16 +52,18 @@ function buildSteps(order) {
 
 // ---------- state (per participant, survives reloads) ----------
 const KEY = `sl-study-${code}`;
-// times: seconds per task; away: { switches, sec } = leaving this page (another browser tab
-// or window) during the task, e.g. to search.
+// phase (in a round): the task 'T1'…'T3' (not started while taskStart is null), then 'done'.
+// times: seconds per task.
 // views[round][task] = { guide: [keys], app: [keys], opens }: station details viewed in the
 // guide / in the app (version B's station pages), and how often the guide was opened.
-const fresh = () => ({ step: 0, phase: 'intro', taskStart: null, times: { 1: {}, 2: {} }, away: { 1: {}, 2: {} }, views: { 1: {}, 2: {} }, doneAt: null });
+// warmupStart: when the warm-up began ("完成热身" unlocks after STUDY.warmupMin).
+const fresh = () => ({ step: 0, phase: 'T1', taskStart: null, times: { 1: {}, 2: {} }, views: { 1: {}, 2: {} }, doneAt: null, warmupStart: null });
 let state = fresh();
 try { state = { ...fresh(), ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { /* storage blocked */ }
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* ignore */ } };
 
 state.views ??= { 1: {}, 2: {} }; // progress saved by an older version of this page
+if (state.phase === 'intro') state.phase = 'T1';
 
 const order = code ? orderFor(code) : ['X', 'Y'];
 const steps = buildSteps(order);
@@ -66,17 +71,16 @@ const steps = buildSteps(order);
 // ---------- helpers ----------
 const mmss = (sec) => `${String(Math.floor(sec / 60)).padStart(2, '0')}:${String(sec % 60).padStart(2, '0')}`;
 
-// e.g. P03_R1_A_X_T1-185s2a40_T2-240s0a0_T3-300s1a15: seconds, then tab switches (s) and
-// seconds away (a) per task; round 2 also carries round 1.
+// e.g. P03_R1_A_X_T1-185s2g_T2-240s0g_T3-300s1g: seconds (s), then guide openings (g) per
+// task; round 2 also carries round 1.
 function dataParam(uptoRound) {
   const parts = [code];
   for (const r of [1, 2]) {
     if (r > uptoRound) break;
     const s = steps.find((x) => x.round === r && x.kind === 'round');
     const t = state.times[r];
-    const a = state.away[r] ?? {};
     parts.push(`R${r}`, s.version.toUpperCase(), s.scenario, ...TASKS.map((k) => (t[k.id] == null
-      ? `${k.id}-NA` : `${k.id}-${t[k.id]}s${a[k.id]?.switches ?? 0}a${a[k.id]?.sec ?? 0}`)));
+      ? `${k.id}-NA` : `${k.id}-${t[k.id]}s${opens(r, k.id)}g`)));
   }
   return parts.join('_');
 }
@@ -99,14 +103,31 @@ function recordView(source, key) {
   // Version A's station pages have no art details (only departures): there, only the guide counts.
   if (source === 'app' && steps[state.step].version !== 'b') return;
   const rec = viewRec(cur.r, cur.t);
-  if (!rec[source].includes(key)) { rec[source].push(key); save(); }
+  if (!rec[source].includes(key)) { rec[source].push(key); save(); updateFound(); }
 }
 // Distinct stations whose details were seen in a task (guide + app).
 const viewed = (r, t) => {
   const v = state.views[r]?.[t];
   return v ? [...new Set([...v.guide, ...v.app])] : [];
 };
-const guideOpens = (r) => Object.values(state.views[r] ?? {}).reduce((n, v) => n + (v.opens ?? 0), 0);
+const opens = (r, t) => state.views[r]?.[t]?.opens ?? 0;
+// T1's art stations found: those viewed, minus (in round 2) those already found in round 1.
+const found = (r) => {
+  const before = r === 2 ? found(1) : [];
+  return viewed(r, 'T1').filter((k) => !before.includes(k));
+};
+const T1_TARGET = 6;
+function foundHtml(r) {
+  const f = found(r);
+  return `<p class="found__count">${esc(TEXT.found(f.length, T1_TARGET))}</p>
+    ${f.length ? `<p class="found__list">${esc(f.map(name).join('、'))}</p>` : ''}
+    ${r === 2 && viewed(2, 'T1').length > f.length ? `<p class="found__note">${esc(TEXT.foundExcluded)}</p>` : ''}`;
+}
+function updateFound() {
+  const el = $('#found');
+  const cur = running();
+  if (el && cur) el.innerHTML = foundHtml(cur.r);
+}
 
 // Station positions (metro entries of the search index) and the user's (fake) position.
 let positions = new Map();
@@ -134,6 +155,7 @@ function nearest(keys) {
 
 // The guide, opened from the task cards; every opening and station viewed is recorded.
 const guide = await createGuide({
+  note: TEXT.guideNote,
   onOpen: () => { const cur = running(); if (cur) { viewRec(cur.r, cur.t).opens += 1; save(); } },
   onView: (key) => recordView('guide', key),
 });
@@ -181,19 +203,18 @@ function renderText(step) {
 // ---------- the session's data as one table row (same columns as the Google Sheet) ----------
 const HEADER = ['记录时间', '编号', '情境顺序',
   ...[1, 2].flatMap((r) => [`${r === 1 ? '第一轮' : '第二轮'}版本`, `${r === 1 ? '第一轮' : '第二轮'}情境`,
-    ...TASKS.flatMap((k) => [`R${r} ${k.id} 用时(秒)`, `R${r} ${k.id} 切出次数`, `R${r} ${k.id} 离开(秒)`]),
-    `R${r} T1 看过的站`, `R${r} T1 看过站数`, `R${r} T1 最近的站（标准答案）`, `R${r} 打开资料次数`]),
+    ...TASKS.flatMap((k) => [`R${r} ${k.id} 用时(秒)`, `R${r} ${k.id} 打开资料次数`]),
+    `R${r} T1 找到的站`, `R${r} T1 找到站数`, `R${r} T1 最近的站（标准答案）`]),
   '数据串'];
 function dataRow() {
   const row = [new Date().toLocaleString('sv-SE'), code, `${order[0]}→${order[1]}`];
   for (const r of [1, 2]) {
     const s = steps.find((x) => x.round === r && x.kind === 'round');
     const t = state.times[r];
-    const a = state.away[r] ?? {};
     row.push(s.version.toUpperCase(), `${s.scenario} ${SCENARIOS[s.scenario].destination}`);
-    for (const k of TASKS) row.push(t[k.id] ?? '', t[k.id] == null ? '' : a[k.id]?.switches ?? 0, t[k.id] == null ? '' : a[k.id]?.sec ?? 0);
-    const v = viewed(r, 'T1');
-    row.push(v.map(name).join(' / '), v.length, nearest(v), guideOpens(r));
+    for (const k of TASKS) row.push(t[k.id] ?? '', t[k.id] == null ? '' : opens(r, k.id));
+    const f = found(r);
+    row.push(f.map(name).join(' / '), f.length, nearest(f));
   }
   row.push(dataParam(2));
   return row;
@@ -241,9 +262,8 @@ function sessionData() {
   const roundRows = [1, 2].map((r) => {
     const s = steps.find((x) => x.round === r && x.kind === 'round');
     const t = state.times[r];
-    const a = state.away[r] ?? {};
-    const cells = TASKS.map((k) => (t[k.id] == null ? '<td>—</td><td>—</td><td>—</td>'
-      : `<td>${mmss(t[k.id])}</td><td>${a[k.id]?.switches ?? 0} 次</td><td>${mmss(a[k.id]?.sec ?? 0)}</td>`)).join('');
+    const cells = TASKS.map((k) => (t[k.id] == null ? '<td>—</td><td>—</td>'
+      : `<td>${mmss(t[k.id])}</td><td>${opens(r, k.id)} 次</td>`)).join('');
     const total = TASKS.reduce((n, k) => n + (t[k.id] ?? 0), 0);
     return `<tr><th>${esc(ROUND_NAME[r])}（${s.version.toUpperCase()}）<br><span class="muted">情境 ${s.scenario} · ${esc(SCENARIOS[s.scenario].destination)}</span></th>${cells}<td>${mmss(total)}</td></tr>`;
   }).join('');
@@ -253,12 +273,12 @@ function sessionData() {
       <p>参与者 <b>${esc(code)}</b> · 情境顺序 ${order[0]} → ${order[1]}</p>
       <div class="data-scroll">
         <table class="data">
-          <tr><th rowspan="2"></th>${TASKS.map((k) => `<th colspan="3">${esc(k.title)}</th>`).join('')}<th rowspan="2">三个任务合计</th></tr>
-          <tr>${TASKS.map(() => '<th>用时</th><th>切出</th><th>离开时长</th>').join('')}</tr>
+          <tr><th rowspan="2"></th>${TASKS.map((k) => `<th colspan="2">${esc(k.title)}</th>`).join('')}<th rowspan="2">三个任务合计</th></tr>
+          <tr>${TASKS.map(() => '<th>用时</th><th>打开资料</th>').join('')}</tr>
           ${roundRows}
         </table>
       </div>
-      <p class="muted">“切出”= 任务进行中切到其他浏览器标签页或最小化窗口的次数；“离开时长”= 不在本页面的总时间。</p>
+      <p class="muted">“打开资料”= 任务进行中打开《斯德哥尔摩艺术地铁站介绍》的次数。</p>
       ${t1Summary()}
       <p class="mod-param"><code>${esc(dataParam(2))}</code>
         <button type="button" class="btn btn--small" data-act="mod-copy">复制</button></p>
@@ -269,13 +289,13 @@ function sessionData() {
     </section>`;
 }
 
-// T1 per round: stations viewed, how many, the nearest (expected answer), guide openings.
+// T1 per round: art stations found, how many, and the nearest (expected answer).
 function t1Summary(rounds = [1, 2]) {
-  return `<table class="summary"><tr><th></th><th>任务 1 看过的站</th><th>最近的站（标准答案）</th><th>打开资料</th></tr>
+  return `<table class="summary"><tr><th></th><th>任务 1 找到的站</th><th>最近的站（标准答案）</th></tr>
     ${rounds.map((r) => {
-      const v = viewed(r, 'T1');
-      return `<tr><td>${esc(ROUND_NAME[r])}</td><td>${v.length} 个：${esc(v.map(name).join('、') || '—')}</td>
-        <td>${esc(nearest(v) || '—')}</td><td>${guideOpens(r)} 次</td></tr>`;
+      const f = found(r);
+      return `<tr><td>${esc(ROUND_NAME[r])}</td><td>${f.length} 个：${esc(f.map(name).join('、') || '—')}</td>
+        <td>${esc(nearest(f) || '—')}</td></tr>`;
     }).join('')}</table>`;
 }
 
@@ -300,8 +320,10 @@ function renderSurvey(step) {
 
 function renderSide(step) {
   if (step.kind === 'proto') {
-    return `<div class="card"><p class="eyebrow">热身</p><p class="task">${esc(TEXT.warmup)}</p>
-      <p class="muted">${esc(TEXT.warmupNote)}</p>${nextBtn('完成热身')}</div>`;
+    return `<div class="card card--task"><p class="eyebrow">热身</p><p>${esc(TEXT.warmupIntro)}</p>
+      <ol class="warmup-list">${TEXT.warmupTasks.map((t) => `<li>${esc(t)}</li>`).join('')}</ol>
+      <p class="warmup-wait" id="warmup-wait"></p>
+      <button type="button" class="btn btn--done" data-act="next" id="warmup-done" disabled>完成热身</button></div>`;
   }
   // round
   const sc = SCENARIOS[step.scenario];
@@ -309,39 +331,43 @@ function renderSide(step) {
   const guideCard = `<div class="card card--guide"><p>${esc(TEXT.guide)}</p>
     <button type="button" class="btn" data-act="guide">打开资料</button></div>`;
   const ph = state.phase;
-  if (ph === 'intro') {
-    const gate = step.version === 'b'
-      ? `<div class="card card--task"><p class="eyebrow">开始前</p><p class="task">${esc(TEXT.touristMode)}</p>
-          <p class="tm-status" id="tm-status" hidden>✓ ${esc(TEXT.touristModeOn)}</p></div>`
-      : '';
-    return `${scenario}${gate}<div class="card">
-      <button type="button" class="btn btn--primary" data-act="start" ${step.version === 'b' ? 'disabled' : ''}>开始任务</button></div>`;
-  }
   if (ph === 'done') {
-    const a = state.away[step.round];
     const rows = TASKS.map((k) => `<tr><td>${esc(k.title)}</td><td>${mmss(state.times[step.round][k.id] ?? 0)}</td>
-      <td>${a[k.id]?.switches ?? 0} 次 · ${mmss(a[k.id]?.sec ?? 0)}</td></tr>`).join('');
+      <td>${opens(step.round, k.id)} 次</td></tr>`).join('');
     return `${scenario}<div class="card"><p class="task">${esc(TEXT.roundDone)}</p>
-      <table class="summary"><tr><th></th><th>用时</th><th>切出页面</th></tr>${rows}</table>
+      <table class="summary"><tr><th></th><th>用时</th><th>打开资料</th></tr>${rows}</table>
       ${t1Summary([step.round])}
       <button type="button" class="btn btn--primary" data-act="next" id="to-survey" disabled>去填问卷</button></div>`;
   }
   const task = TASKS.find((t) => t.id === ph);
+  const started = state.taskStart != null;
   const doneTasks = TASKS.filter((t) => state.times[step.round][t.id] != null)
     .map((t) => `<li>${esc(t.title)} ✓ <span class="done-time">${mmss(state.times[step.round][t.id])}</span></li>`).join('');
-  const avoid = task.id === 'T1' && step.round === 2 && viewed(1, 'T1').length
-    ? `<p class="avoid">${esc(TEXT.avoid)}${esc(viewed(1, 'T1').map(name).join('、'))}</p>` : '';
+  // Before the round's first task: how the round works, and (version B) Tourist Mode first.
+  const intro = task.id === 'T1' && !started
+    ? `<div class="card card--intro"><p>${esc(TEXT.roundIntro)}</p></div>
+      ${step.version === 'b' ? `<div class="card card--task"><p class="eyebrow">开始前</p><p class="task">${esc(TEXT.touristMode)}</p>
+        <p class="tm-status" id="tm-status" hidden>✓ ${esc(TEXT.touristModeOn)}</p></div>` : ''}`
+    : '';
+  const avoid = task.id === 'T1' && step.round === 2 && found(1).length
+    ? `<p class="avoid">${esc(TEXT.avoid)}${esc(found(1).map(name).join('、'))}</p>` : '';
+  const foot = started
+    ? `<div class="task__foot">
+        <span class="timer" id="timer">00:00</span>
+        <button type="button" class="btn btn--done" data-act="task-done">完成</button>
+      </div>
+      <p class="timer-note" id="timer-note" hidden>已超过 ${STUDY.longTaskMin} 分钟</p>`
+    : `<div class="task__foot"><span class="muted">准备好后点“开始”</span>
+        <button type="button" class="btn btn--primary" data-act="start" ${task.id === 'T1' && step.version === 'b' ? 'disabled' : ''}>开始</button></div>`;
   return `${scenario}
     ${doneTasks ? `<ul class="done-list">${doneTasks}</ul>` : ''}
+    ${intro}
     <div class="card card--task">
       <p class="eyebrow">${esc(task.title)}</p>
       <p class="task">${esc(task.text(step.round))}</p>
       ${avoid}
-      <div class="task__foot">
-        <span class="timer" id="timer">00:00</span>
-        <button type="button" class="btn btn--primary" data-act="task-done">${esc(task.done)}</button>
-      </div>
-      <p class="timer-note" id="timer-note" hidden>已超过 ${STUDY.longTaskMin} 分钟</p>
+      ${started && task.id === 'T1' ? `<div class="found" id="found">${foundHtml(step.round)}</div>` : ''}
+      ${foot}
     </div>
     ${guideCard}`;
 }
@@ -359,14 +385,13 @@ function render() {
     $('#side').innerHTML = '';
     $('#main').innerHTML = step.kind === 'survey' ? renderSurvey(step) : renderText(step);
   }
+  if (step.kind === 'proto' && !state.warmupStart) { state.warmupStart = Date.now(); save(); }
   renderModerator();
   tick();
   if (step.id === 'interview') recordToSheet();
 }
 
 // ---------- task timer ----------
-const SUMMARY_WAIT_SEC = 15; // the round summary stays up this long, for the moderator's notes
-
 function tick() {
   const el = $('#timer');
   if (el && state.taskStart) {
@@ -374,14 +399,21 @@ function tick() {
     el.textContent = mmss(sec);
     $('#timer-note').hidden = sec < STUDY.longTaskMin * 60;
   }
-  // Round summary: "去填问卷" unlocks after SUMMARY_WAIT_SEC.
+  // Warm-up: "完成热身" unlocks after STUDY.warmupMin minutes.
+  const warmupDone = $('#warmup-done');
+  if (warmupDone && state.warmupStart) {
+    const left = STUDY.warmupMin * 60 - Math.floor((Date.now() - state.warmupStart) / 1000);
+    warmupDone.disabled = left > 0;
+    $('#warmup-wait').textContent = left > 0 ? TEXT.warmupWait(mmss(left)) : TEXT.warmupReady;
+  }
+  // Round summary: "去填问卷" unlocks after STUDY.summaryWaitSec.
   const toSurvey = $('#to-survey');
   if (toSurvey && state.doneAt) {
-    const left = SUMMARY_WAIT_SEC - Math.floor((Date.now() - state.doneAt) / 1000);
+    const left = STUDY.summaryWaitSec - Math.floor((Date.now() - state.doneAt) / 1000);
     toSurvey.disabled = left > 0;
     toSurvey.textContent = left > 0 ? `去填问卷（${left}）` : '去填问卷';
   }
-  // Round 2: "开始任务" only once Tourist Mode is on in the prototype (same origin frame).
+  // Round 2: task 1's "开始" only once Tourist Mode is on in the prototype (same origin frame).
   const status = $('#tm-status');
   if (status) {
     let on = false;
@@ -392,59 +424,39 @@ function tick() {
 }
 setInterval(tick, 500);
 
-// ---------- leaving the page during a task (another browser tab, minimised window) ----------
-// Counts switches and time away per task. Note: a separate browser window placed beside
-// this one is not detected; ask participants to search in a new tab of this window.
-let awayStart = null;
-document.addEventListener('visibilitychange', () => {
-  const step = steps[state.step];
-  if (!state.taskStart || !step?.round || !TASKS.some((t) => t.id === state.phase)) return;
-  const rec = (state.away[step.round][state.phase] ??= { switches: 0, sec: 0 });
-  if (document.hidden) {
-    rec.switches += 1;
-    awayStart = Date.now();
-  } else if (awayStart) {
-    rec.sec += Math.round((Date.now() - awayStart) / 1000);
-    awayStart = null;
-  }
-  save();
-});
-
 // ---------- actions ----------
 function go(stepIndex) {
   state.step = Math.max(0, Math.min(steps.length - 1, stepIndex));
-  state.phase = 'intro';
+  state.phase = 'T1';
   state.taskStart = null;
+  if (steps[state.step].kind === 'proto') state.warmupStart = null; // (re)entering the warm-up restarts its clock
   save();
   render();
   window.scrollTo(0, 0);
 }
 
-function startTask(id) {
-  state.phase = id;
-  state.taskStart = Date.now();
-  save();
-  render();
-}
 
 document.addEventListener('click', (e) => {
   const act = e.target.closest('[data-act]')?.dataset.act;
   const step = steps[state.step];
   if (act === 'next') return go(state.step + 1);
   if (act === 'start') {
-    state.times[step.round] = {}; // a round (re)started: its earlier times no longer apply
-    state.away[step.round] = {};
-    state.views[step.round] = {};
-    return startTask('T1');
+    if (state.phase === 'T1') { // a round (re)started: its earlier data no longer apply
+      state.times[step.round] = {};
+      state.views[step.round] = {};
+    }
+    delete state.views[step.round][state.phase]; // a task restarted
+    state.taskStart = Date.now();
+    save();
+    return render();
   }
   if (act === 'task-done') {
     const sec = Math.round((Date.now() - state.taskStart) / 1000);
     state.times[step.round][state.phase] = sec;
     state.taskStart = null;
     const i = TASKS.findIndex((t) => t.id === state.phase);
-    if (i < TASKS.length - 1) return startTask(TASKS[i + 1].id);
-    state.phase = 'done';
-    state.doneAt = Date.now();
+    if (i < TASKS.length - 1) state.phase = TASKS[i + 1].id; // the next task waits for "开始"
+    else { state.phase = 'done'; state.doneAt = Date.now(); }
     save();
     return render();
   }
@@ -471,7 +483,7 @@ window.addEventListener('blur', () => {
 });
 function renderModerator() {
   const t = (r, k) => (state.times[r][k] != null
-    ? `${mmss(state.times[r][k])} · 切出 ${state.away[r]?.[k]?.switches ?? 0}` : '—');
+    ? `${mmss(state.times[r][k])} · 资料 ${opens(r, k)} 次` : '—');
   $('#moderator-body').innerHTML = `
     <p><a class="btn btn--small" href="./">← 返回开始页（选择正式测试 / 测试）</a></p>
     <p><b>${esc(isTest ? '测试' : code)}</b> · 情境顺序 ${order[0]} → ${order[1]}

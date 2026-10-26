@@ -1,6 +1,6 @@
-// "斯德哥尔摩艺术地铁站介绍": the reading material for the scenario experiment. Same stations
-// and texts as version B's Tourist Mode (data/b/*.json), shown as a list → detail overlay
-// inside the experiment page (same window, so screen sharing records it). Stations are
+// "斯德哥尔摩艺术地铁站介绍": the reading material for the scenario experiment (external, not
+// part of the prototype). Same stations and texts as version B's Tourist Mode (data/b/*.json),
+// shown as a full-screen list → detail overlay inside the experiment page (same window, so screen sharing records it). Stations are
 // sorted alphabetically within each type, so the order gives no hint about distance.
 // Reports each opening and each station whose details are viewed (for the task data).
 
@@ -15,7 +15,7 @@ const BEST = { any: 'Any time', daylight: 'Daylight', sunset: 'Sunset' };
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const nameOf = (key) => key.split('|')[0];
 
-export async function createGuide({ onOpen, onView } = {}) {
+export async function createGuide({ note = '', onOpen, onView } = {}) {
   const [special, info, exhibitions, scenic] = await Promise.all(
     ['special-stations', 'station-info', 'exhibitions', 'scenic'].map((f) => fetch(`${DATA}${f}.json`).then((r) => r.json())),
   );
@@ -94,14 +94,14 @@ export async function createGuide({ onOpen, onView } = {}) {
   el.innerHTML = `
     <div class="guide__panel">
       <header class="guide__head">
-        <h2>斯德哥尔摩艺术地铁站介绍</h2>
+        <div><h2>斯德哥尔摩艺术地铁站介绍</h2>${note ? `<p class="guide__note">${esc(note)}</p>` : ''}</div>
         <button type="button" class="btn" data-g="close">关闭</button>
       </header>
       <div class="guide__body"></div>
     </div>`;
   el.addEventListener('click', (e) => {
     const g = e.target.closest('[data-g]')?.dataset.g;
-    if (g === 'close' || e.target === el) return close();
+    if (g === 'close') return close();
     if (g === 'back') return showList();
     const item = e.target.closest('.g-item');
     if (item) showDetail(item.dataset.key);

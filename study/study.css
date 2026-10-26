@@ -112,7 +112,10 @@ code { font-size: 13px; color: #cfd8e0; word-break: break-all; }
 }
 .btn:hover { filter: brightness(1.15); }
 .btn--primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
-.card > .btn--primary { margin-top: 8px; }
+/* Finishing a task / the warm-up: green and with a check, unlike the blue start buttons. */
+.btn--done { background: #2f9e5b; border-color: #2f9e5b; color: #fff; font-weight: 600; }
+.btn--done::before { content: '✓'; }
+.card > .btn--primary, .card > .btn--done { margin-top: 8px; }
 .btn--small { min-height: 30px; padding: 0 12px; font-size: 13px; margin: 2px 0; }
 .btn--small.is-current { border-color: var(--accent); color: #9fd3f0; }
 .btn--danger { color: #ff9a8f; }
@@ -172,16 +175,18 @@ code { font-size: 13px; color: #cfd8e0; word-break: break-all; }
 .card--scenario p + p { margin-top: -6px; }
 .card--guide { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; }
 .card--guide p { margin: 0; color: var(--muted); }
+.card--guide .btn { flex: none; white-space: nowrap; }
 .avoid { margin: -4px 0 10px; padding: 8px 12px; border-radius: 10px; background: var(--panel-2); color: #f5d79a; font-size: 14px; }
 
 /* ---- guide 《斯德哥尔摩艺术地铁站介绍》 ---- */
-.guide { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 24px; background: rgba(0, 0, 0, 0.55); }
+.guide { position: fixed; inset: 0; z-index: 20; background: #f7f5f1; }
 .guide[hidden] { display: none; }
-.guide__panel { display: flex; flex-direction: column; width: min(980px, 100%); height: min(860px, 100%); border-radius: 18px; background: #f7f5f1; color: #1c2024; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
-.guide__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 22px; border-bottom: 1px solid #e3ded6; }
+.guide__panel { display: flex; flex-direction: column; height: 100%; color: #1c2024; }
+.guide__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px max(22px, calc((100% - 1180px) / 2)); border-bottom: 1px solid #e3ded6; }
 .guide__head h2 { margin: 0; font-size: 20px; font-weight: 600; }
+.guide__note { display: inline-block; margin: 4px 0 0; padding: 2px 10px; border-radius: 999px; background: #ece6dc; color: #6b5f4d; font-size: 13px; }
 .guide__head .btn { background: #fff; color: #1c2024; border-color: #d8d2c8; }
-.guide__body { flex: 1; overflow-y: auto; padding: 8px 22px 28px; }
+.guide__body { flex: 1; overflow-y: auto; padding: 8px max(22px, calc((100% - 1180px) / 2)) 40px; }
 .g-type { margin: 22px 0 12px; font-size: 18px; font-weight: 600; }
 .g-type span { margin-left: 6px; color: #7a7f86; font-size: 14px; font-weight: 400; }
 .g-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
@@ -207,3 +212,14 @@ code { font-size: 13px; color: #cfd8e0; word-break: break-all; }
 .g-line--blue { background: #0089ca; }
 .g-line--green { background: #4ca85b; }
 @media (max-width: 720px) { .g-detail { grid-template-columns: 1fr; } }
+
+/* ---- round intro, warm-up, T1 found counter ---- */
+.card--intro { background: var(--panel-2); font-size: 15px; }
+.warmup-list { margin: 0 0 12px; padding-left: 22px; }
+.warmup-list li { margin-bottom: 8px; font-size: 16px; font-weight: 500; }
+.warmup-wait { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.found { margin: 0 0 10px; padding: 10px 12px; border-radius: 10px; background: rgba(127, 217, 154, 0.1); border: 1px solid rgba(127, 217, 154, 0.3); font-size: 14px; }
+.found p { margin: 0; }
+.found__count { color: #9fe3b3; font-weight: 600; }
+.found__list { margin-top: 4px !important; }
+.found__note { margin-top: 4px !important; color: var(--muted); font-size: 13px; }

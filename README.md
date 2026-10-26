@@ -47,20 +47,28 @@ order X → Y, nothing recorded).
 
 1. Welcome (opening statement) → background questionnaire → pre-test intentions (the consent form is sent before the
    session)
-2. Think-aloud explanation (with examples, no practice) → warm-up task in version A (not counted)
-3. Round 1: version A, scenario card, tasks T1–T3 (timed): T1 view six art stations' details and find the one
-   nearest to you; T2 count the art stations on the route; T3 plan the evening (arrive by 19:45). The guide
-   《斯德哥尔摩艺术地铁站介绍》 can be opened from every task card. At the end a summary (times, tab switches,
-   stations viewed in T1 and the nearest of them), with "去填问卷" locked for 15 s so the moderator can note it.
+2. Think-aloud explanation (with examples, no practice) → warm-up in version A (not recorded): three small tasks
+   (next train from Gärdet towards T-Centralen; zoom and pan the map; explore freely). "完成热身" unlocks after
+   `warmupMin` minutes (`study/config.js`), so participants explore enough.
+3. Round 1: version A, scenario card, and a note that there are three tasks, each started with **开始** (blue) and
+   finished with **完成** (green, ✓), with no time limit. T1 open six art stations' details, find them on the map,
+   save them and judge which is nearest; T2 count the art stations on the route; T3 plan the evening (arrive by
+   19:45). During T1 the task card counts the art stations found ("你找到了 2/6 个艺术站点"). The guide
+   《斯德哥尔摩艺术地铁站介绍》 can be opened from every task card. At the end a summary (times, guide openings,
+   stations found in T1 and the nearest of them), with "去填问卷" locked for `summaryWaitSec` (5 s).
 4. Post-test questionnaire (SAM, UEQ-S, intentions, version preference; the same one after both rounds) → break
-5. Round 2: version B, other scenario. Before the tasks the participant is asked to switch Tourist Mode on
-   ("开始任务" unlocks once it is on), then T1–T3 → post-test questionnaire → interview. The interview page lists
-   all measured data of the session (per round and task: time, tab switches, time away; and the data string).
+5. Round 2: version B, other scenario. Before T1 the participant is asked to switch Tourist Mode on (T1's "开始"
+   unlocks once it is on), then T1–T3 → post-test questionnaire → interview. The interview page lists all measured
+   data of the session (per round and task: time and guide openings; T1's stations; and the data string
+   `T1-185s2g` = 185 s, guide opened twice).
 
-- **Scenario order:** odd numbers (1, 3, …) get X (Mörby centrum) first, even numbers Y (Hallonbergen) first.
+- **Scenario order:** odd numbers (1, 3, …) get X (Danderyds sjukhus) first, even numbers Y (Hallonbergen) first.
+  (Not Mörby centrum: searching "Mörby" finds the Roslagsbanan station first. X's route passes 5 art stations, Y's 6.)
 - **Guide** (`study/guide.js`): the 24 special stations with the same photos and texts as version B, list → detail,
-  inside the page. Recorded per task: openings, and the stations whose details were viewed (in version B also the
-  stations' pages in the app). Round 2's T1 card lists round 1's stations, to choose six others.
+  full screen inside the page, marked as external material that is not part of the prototype. Recorded per task:
+  openings. T1's "found" stations: details opened in the guide (both rounds) or the station's page in the app
+  (version B only; A's station pages have no art details). In round 2, stations found in round 1 don't count, and
+  the T1 card lists them.
   Versions are always A then B, shown only as "第一个版本 / 第二个版本".
 - **Prototype in the flow:** loaded as `a/` or `b/` with `?reset&study` (fresh data, clock from 18:30, A | B switch
   hidden). Each round reloads it.
@@ -69,10 +77,7 @@ order X → Y, nothing recorded).
   "SL 情境实验 · 本场数据" through an Apps Script web app (`scripts/google-sheet-apps-script.gs`; its URL goes in
   `study/config.js → sheetUrl`). Google is blocked in mainland China without a VPN, so the last page also has
   **下载数据文件** (a CSV with the same columns) for the participant to send to the moderator.
-- **Leaving the page:** during each task, switches to another browser tab (or minimising the window) are counted, with
-  the time away: `T1-185s2a40` = 185 s, 2 switches, 40 s away. A separate browser window beside this one is not
-  detected, so participants should search in a new tab of the same window.
-- **进度控制 panel** (bottom left, collapsed; a click elsewhere closes it): back to the start page, scenario order, task times, the data string (copy), jump to a step,
+- **进度控制 panel** (bottom left, collapsed; a click elsewhere closes it; the prototype's sound and label move to the bottom right): back to the start page, scenario order, task times and guide openings, the data string (copy), jump to a step,
   clear progress. Progress is saved in the browser, so a reload resumes at the same step (don't reload during a
   round: it restarts the prototype).
 - Texts: `study/content.js` (from the experiment plan).
