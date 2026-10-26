@@ -15,16 +15,15 @@ export const SCENARIOS = {
 };
 
 // Tasks of each round; each one is started and finished with a button. T1 counts the
-// sightseeing stations (all three kinds in the guide) whose details were opened (the guide in
-// both rounds; in version B also the stations' pages in the app); in round 2 stations found in
-// round 1 don't count.
+// sightseeing stations (all three kinds in the guide) saved as favourites in the prototype; in
+// round 2 stations saved in round 1 don't count.
 export const TASKS = [
   {
     id: 'T1',
     title: 'Task 1 · Explore',
     text: (round) => (round === 1
       ? 'Look at the details of 6 sightseeing metro stations. Then search for each of them on the prototype’s map and save them as favourites. Using their positions on the map, decide which one is closest to you.'
-      : 'Look at the details of 6 sightseeing metro stations (different from the ones you found in the first round). Then search for each of them on the prototype’s map and save them as favourites. Using their positions on the map, decide which one is closest to you.'),
+      : 'Look at the details of 6 sightseeing metro stations (different from the ones you saved in the first round). Then search for each of them on the prototype’s map and save them as favourites. Using their positions on the map, decide which one is closest to you.'),
   },
   {
     id: 'T2',
@@ -59,12 +58,12 @@ export const TEXT = {
   warmupReady: 'Warm-up time is over. Continue when you are ready.',
   roundIntro: 'This round has three tasks. Press “Start” when you begin a task and “Done” when you have finished it. Take your time: there is no time limit.',
   // Sightseeing metro stations = all three kinds in the guide: Art Interior, Art Exhibits, Scenic View.
-  found: (n, total) => (n === 0 ? 'No sightseeing stations found yet. Opening a sightseeing station’s details counts as finding it.'
-    : n < total ? `You have found ${n}/${total} sightseeing stations:` : `You have found ${total} sightseeing stations:`),
-  foundExcluded: 'Stations found in the first round don’t count.',
+  found: (n, total) => (n === 0 ? 'No sightseeing stations saved yet. Each sightseeing station you save as a favourite in the prototype counts.'
+    : n < total ? `You have saved ${n}/${total} sightseeing stations:` : `You have saved ${total} sightseeing stations:`),
+  foundExcluded: 'Stations saved in the first round don’t count.',
   guide: 'During the tasks you can open the “Stockholm Metro Art Guide” at any time. It is not part of the prototype; it is external reference material.',
   guideNote: 'External reference material · not part of the prototype',
-  avoid: 'Stations found in the first round (please find other ones this time): ',
+  avoid: 'Stations saved in the first round (please choose other ones this time): ',
   touristMode: 'Before this round, please turn on Tourist Mode: tap the layers button at the top left of the map, and switch on Tourist Mode in Map Setting. A few intro cards will appear; you can read them or skip them.',
   touristModeOn: 'Tourist Mode is on. You can start the tasks.',
   roundDone: 'You have finished all three tasks of this round.',
