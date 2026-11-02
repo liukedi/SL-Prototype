@@ -53,10 +53,11 @@ function buildSteps(order) {
 const KEY = `sl-study-${code}`;
 // phase (in a round): the task 'T1'…'T3' (not started while taskStart is null), then 'done'.
 // times: seconds per task.
-// views[round][task] = { opens }: how often the guide was opened.
+// views[round][task] = { opens, guideMs }: how often and how long the guide was open.
+// features: version B features used in round 2, by id (see FEATURES).
 // saved[round]: T1's sightseeing stations saved as favourites in the prototype.
 // warmupStart: when the warm-up began ("Finish warm-up" unlocks after STUDY.warmupMin).
-const fresh = () => ({ step: 0, phase: 'T1', taskStart: null, times: { 1: {}, 2: {} }, views: { 1: {}, 2: {} }, doneAt: null, warmupStart: null, saved: { 1: [], 2: [] } });
+const fresh = () => ({ step: 0, phase: 'T1', taskStart: null, times: { 1: {}, 2: {} }, views: { 1: {}, 2: {} }, doneAt: null, warmupStart: null, saved: { 1: [], 2: [] }, features: {} });
 let state = fresh();
 try { state = { ...fresh(), ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { /* storage blocked */ }
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch { /* ignore */ } };
@@ -96,9 +97,11 @@ const running = () => {
 };
 function viewRec(r, t) {
   state.views[r] ??= {};
-  return (state.views[r][t] ??= { opens: 0 });
+  return (state.views[r][t] ??= { opens: 0, guideMs: 0 });
 }
 const opens = (r, t) => state.views[r]?.[t]?.opens ?? 0;
+const guideSec = (r, t) => Math.round((state.views[r]?.[t]?.guideMs ?? 0) / 1000);
+const guideCell = (r, t) => `${opens(r, t)}× · ${mmss(guideSec(r, t))}`;
 // T1's stations found = sightseeing stations saved as favourites in the prototype (read from its
 // storage while T1 is shown; same origin), minus (in round 2) those saved in round 1.
 const savedIn = (r) => state.saved?.[r] ?? [];
@@ -154,10 +157,26 @@ function nearest(keys) {
   return best ? `${name(best.key)} (${best.d.toFixed(1)} km)` : '';
 }
 
-// The guide, opened from the task cards; every opening is recorded.
+// The guide, opened from the task cards; every opening and the time it stays open are recorded,
+// per task. (Also when the page is left with the guide open.)
+let guideOpen = null;
+function closeGuideTime() {
+  if (!guideOpen) return;
+  viewRec(guideOpen.r, guideOpen.t).guideMs = (viewRec(guideOpen.r, guideOpen.t).guideMs ?? 0) + Date.now() - guideOpen.at;
+  guideOpen = null;
+  save();
+}
+window.addEventListener('pagehide', closeGuideTime);
 const guide = await createGuide({
   note: TEXT.guideNote,
-  onOpen: () => { const cur = running(); if (cur) { viewRec(cur.r, cur.t).opens += 1; save(); } },
+  onOpen: () => {
+    const cur = running();
+    if (!cur) return;
+    viewRec(cur.r, cur.t).opens += 1;
+    guideOpen = { ...cur, at: Date.now() };
+    save();
+  },
+  onClose: closeGuideTime,
 });
 for (const s of guide.stations) specialKeys.add(s.key);
 
@@ -202,10 +221,18 @@ function renderText(step) {
 }
 
 // ---------- the session's data as one table row (same columns as the Google Sheet) ----------
+// Version B features counted during round 2's started tasks.
+const FEATURES = [
+  { id: 'explore', label: 'Explore' },
+  { id: 'route', label: 'Curated routes' },
+  { id: 'marker', label: 'Art markers on the route' },
+];
+const featureCount = (id) => state.features?.[id] ?? 0;
 const HEADER = ['Recorded', 'Participant', 'Scenario order',
   ...[1, 2].flatMap((r) => [`R${r} version`, `R${r} scenario`,
-    ...TASKS.flatMap((k) => [`R${r} ${k.id} time (s)`, `R${r} ${k.id} guide openings`]),
-    `R${r} T1 stations saved`, `R${r} T1 number saved`, `R${r} T1 nearest station (expected answer)`]),
+    ...TASKS.flatMap((k) => [`R${r} ${k.id} time (s)`, `R${r} ${k.id} guide openings`, `R${r} ${k.id} guide time (s)`]),
+    `R${r} T1 stations saved`, `R${r} T1 number saved`, `R${r} T1 nearest station (expected answer)`,
+    ...(r === 2 ? FEATURES.map((f) => `R2 ${f.label} uses`) : [])]),
   'Data string'];
 function dataRow() {
   const row = [new Date().toLocaleString('sv-SE'), code, `${order[0]}→${order[1]}`];
@@ -213,9 +240,10 @@ function dataRow() {
     const s = steps.find((x) => x.round === r && x.kind === 'round');
     const t = state.times[r];
     row.push(s.version.toUpperCase(), `${s.scenario} ${SCENARIOS[s.scenario].destination}`);
-    for (const k of TASKS) row.push(t[k.id] ?? '', t[k.id] == null ? '' : opens(r, k.id));
+    for (const k of TASKS) row.push(t[k.id] ?? '', t[k.id] == null ? '' : opens(r, k.id), t[k.id] == null ? '' : guideSec(r, k.id));
     const f = found(r);
     row.push(f.map(name).join(' / '), f.length, nearest(f));
+    if (r === 2) row.push(...FEATURES.map((x) => featureCount(x.id)));
   }
   row.push(dataParam(2));
   return row;
@@ -264,7 +292,7 @@ function sessionData() {
     const s = steps.find((x) => x.round === r && x.kind === 'round');
     const t = state.times[r];
     const cells = TASKS.map((k) => (t[k.id] == null ? '<td>—</td><td>—</td>'
-      : `<td>${mmss(t[k.id])}</td><td>${opens(r, k.id)}×</td>`)).join('');
+      : `<td>${mmss(t[k.id])}</td><td>${guideCell(r, k.id)}</td>`)).join('');
     const total = TASKS.reduce((n, k) => n + (t[k.id] ?? 0), 0);
     return `<tr><th>${esc(ROUND_NAME[r])}(${s.version.toUpperCase()})<br><span class="muted">Scenario ${s.scenario} · ${esc(SCENARIOS[s.scenario].destination)}</span></th>${cells}<td>${mmss(total)}</td></tr>`;
   }).join('');
@@ -281,6 +309,7 @@ function sessionData() {
       </div>
       <p class="muted">“Guide” = how often the “Stockholm Metro Art Guide” was opened during the task.</p>
       ${t1Summary()}
+      <p class="muted">Features used in round 2: ${FEATURES.map((f) => `${esc(f.label)} ${featureCount(f.id)}×`).join(' · ')}</p>
       <p class="mod-param"><code>${esc(dataParam(2))}</code>
         <button type="button" class="btn btn--small" data-act="mod-copy">Copy</button></p>
       <p class="record-status ${state.recorded ? 'ok' : ''}" id="record-status">${isTest
@@ -334,7 +363,7 @@ function renderSide(step) {
   const ph = state.phase;
   if (ph === 'done') {
     const rows = TASKS.map((k) => `<tr><td>${esc(k.title)}</td><td>${mmss(state.times[step.round][k.id] ?? 0)}</td>
-      <td>${opens(step.round, k.id)}×</td></tr>`).join('');
+      <td>${guideCell(step.round, k.id)}</td></tr>`).join('');
     return `${scenario}<div class="card"><p class="task">${esc(TEXT.roundDone)}</p>
       <table class="summary"><tr><th></th><th>Time</th><th>Guide opened</th></tr>${rows}</table>
       ${t1Summary([step.round])}
@@ -461,11 +490,27 @@ function guardInput(e, doc) {
   if (!ASKS.has(e.type) || Date.now() - touristSwitchedAt < TOURIST_SETTLE_MS) return;
   showGate(beforeTouristTask && !touristOn);
 }
+// Round 2, during a started task: which version B features are used.
+function countFeature(id) {
+  const step = steps[state.step];
+  if (step?.round !== 2 || !state.taskStart || !running()) return;
+  state.features = { ...state.features, [id]: featureCount(id) + 1 };
+  save();
+}
+function trackClick(e) {
+  const el = e.target;
+  if (!el.closest) return;
+  if (el.closest('.b-explore [data-route]')) countFeature('route');
+  else if (el.closest('.b-explore .b-artrow, .b-explore [data-act="see-all"], .b-allart:not(.b-routepage) .b-artrow')) countFeature('explore');
+}
 function hookFrame() {
   try {
     const win = $('#proto').contentWindow;
     if (!win || win.slStudyGuard) return;
     win.slStudyGuard = true;
+    win.addEventListener('click', trackClick, true);
+    // A station page over the full-screen journey map opens only from a tapped art marker.
+    win.addEventListener('sl:stop-page', (e) => { if (e.target.closest?.('.jd-stop-sheet')) countFeature('marker'); });
     for (const type of GUARDED) win.addEventListener(type, (e) => guardInput(e, win.document), { capture: true, passive: false });
   } catch { /* not same origin */ }
 }
@@ -500,6 +545,7 @@ function go(stepIndex) {
     state.times[target.round] = {};
     state.views[target.round] = {};
     state.saved = { ...state.saved, [target.round]: [] };
+    if (target.round === 2) state.features = {};
   }
   if (steps[state.step].kind === 'proto') state.warmupStart = null; // (re)entering the warm-up restarts its clock
   save();
