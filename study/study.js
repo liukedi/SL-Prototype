@@ -387,6 +387,9 @@ function render() {
     $('#main').innerHTML = step.kind === 'survey' ? renderSurvey(step) : renderText(step);
   }
   if (step.kind === 'proto' && !state.warmupStart) { state.warmupStart = Date.now(); save(); }
+  closeGate();
+  // A task waiting for "Start": no typing into a field that still has the focus.
+  if (waitingStep()) { try { $('#proto').contentDocument?.activeElement?.blur(); } catch { /* not loaded */ } }
   renderModerator();
   tick();
   if (step.id === 'interview') recordToSheet();
@@ -394,6 +397,7 @@ function render() {
 
 // ---------- task timer ----------
 function tick() {
+  hookFrame();
   readFavourites();
   const el = $('#timer');
   if (el && state.taskStart) {
@@ -426,6 +430,64 @@ function tick() {
 }
 setInterval(tick, 500);
 
+// ---------- the prototype only responds once the task is started ----------
+// Input inside the phone is swallowed (capture listeners on the same-origin frame) while a task
+// waits for "Start", and a dialog asks whether to start. Exception, before round 2's first
+// task: the layers button and Map Setting sheet until Tourist Mode is on, and its intro cards.
+const GUARDED = ['pointerdown', 'mousedown', 'touchstart', 'click', 'dblclick', 'contextmenu', 'wheel', 'keydown'];
+const ASKS = new Set(['pointerdown', 'touchstart', 'wheel', 'keydown']);
+const TOURIST_SETTLE_MS = 1200; // the sheet closing, until the intro cards appear
+let touristSwitchedAt = 0;
+
+const waitingStep = () => {
+  const step = steps[state.step];
+  return step?.kind === 'round' && !state.taskStart && TASKS.some((t) => t.id === state.phase) ? step : null;
+};
+function guardInput(e, doc) {
+  const step = waitingStep();
+  const el = e.target;
+  if (!step || !el.closest?.('#device')) return;
+  const beforeTouristTask = step.version === 'b' && state.phase === 'T1';
+  const touristOn = doc.documentElement.dataset.tourist === 'on';
+  if (beforeTouristTask) {
+    if (el.closest('.onb')) return;
+    if (!touristOn && el.closest('.layers-btn, .map-settings')) {
+      if (el.closest('[data-act="tourist"]')) touristSwitchedAt = Date.now();
+      return;
+    }
+  }
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  if (!ASKS.has(e.type) || Date.now() - touristSwitchedAt < TOURIST_SETTLE_MS) return;
+  showGate(beforeTouristTask && !touristOn);
+}
+function hookFrame() {
+  try {
+    const win = $('#proto').contentWindow;
+    if (!win || win.slStudyGuard) return;
+    win.slStudyGuard = true;
+    for (const type of GUARDED) win.addEventListener(type, (e) => guardInput(e, win.document), { capture: true, passive: false });
+  } catch { /* not same origin */ }
+}
+$('#proto').addEventListener('load', hookFrame);
+
+function showGate(touristFirst) {
+  closeGate();
+  const el = document.createElement('div');
+  el.className = 'gate';
+  el.setAttribute('role', 'alertdialog');
+  el.innerHTML = `<div class="gate__box">
+    <p class="gate__text">${esc(touristFirst ? TEXT.gateTourist : TEXT.gateAsk)}</p>
+    <div class="gate__actions">
+      ${touristFirst
+    ? `<button type="button" class="btn btn--primary" data-act="gate-close">${esc(TEXT.gateOk)}</button>`
+    : `<button type="button" class="btn" data-act="gate-close">${esc(TEXT.gateCancel)}</button>
+         <button type="button" class="btn btn--primary" data-act="gate-start">${esc(TEXT.gateStart)}</button>`}
+    </div></div>`;
+  $('.proto-wrap').appendChild(el);
+}
+function closeGate() { $('.gate')?.remove(); }
+
 // ---------- actions ----------
 function go(stepIndex) {
   state.step = Math.max(0, Math.min(steps.length - 1, stepIndex));
@@ -450,7 +512,8 @@ document.addEventListener('click', (e) => {
   const act = e.target.closest('[data-act]')?.dataset.act;
   const step = steps[state.step];
   if (act === 'next') return go(state.step + 1);
-  if (act === 'start') {
+  if (act === 'gate-close') return closeGate();
+  if (act === 'start' || act === 'gate-start') {
     // (Views and guide openings since the task was shown are kept; the round's data are
     // cleared when the round is entered, see go().)
     state.taskStart = Date.now();

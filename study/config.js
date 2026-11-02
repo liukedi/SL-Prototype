@@ -18,7 +18,7 @@ export const STUDY = {
   longTaskMin: 8,
 
   // Warm-up (version A, not recorded): "完成热身" unlocks after this many minutes of exploring.
-  warmupMin: 3,
+  warmupMin: 4,
   // The round summary stays up this long before "去填问卷" unlocks.
   summaryWaitSec: 5,
 };
