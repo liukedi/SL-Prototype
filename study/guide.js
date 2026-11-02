@@ -15,7 +15,7 @@ const BEST = { any: 'Any time', daylight: 'Daylight', sunset: 'Sunset' };
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const nameOf = (key) => key.split('|')[0];
 
-export async function createGuide({ note = '', onOpen, onView } = {}) {
+export async function createGuide({ note = '', onOpen, onClose, onView } = {}) {
   const [special, info, exhibitions, scenic] = await Promise.all(
     ['special-stations', 'station-info', 'exhibitions', 'scenic'].map((f) => fetch(`${DATA}${f}.json`).then((r) => r.json())),
   );
@@ -113,7 +113,10 @@ export async function createGuide({ note = '', onOpen, onView } = {}) {
     el.hidden = false;
     onOpen?.();
   }
-  function close() { el.hidden = true; }
+  function close() {
+    el.hidden = true;
+    onClose?.();
+  }
 
   return { open, close, stations };
 }
