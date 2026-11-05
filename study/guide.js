@@ -118,5 +118,6 @@ export async function createGuide({ note = '', onOpen, onClose, onView } = {}) {
     onClose?.();
   }
 
-  return { open, close, stations };
+  const photos = stations.map((s) => `../assets/b/${photoDir(s)}/${s.data.photo}`);
+  return { open, close, stations, photos };
 }

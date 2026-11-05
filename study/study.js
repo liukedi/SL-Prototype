@@ -15,6 +15,7 @@
 import { STUDY } from './config.js';
 import { SCENARIOS, TASKS, TEXT } from './content.js';
 import { createGuide } from './guide.js';
+import { warmCache } from './preload.js';
 import { CONFIG } from '../js/config.js';
 
 const $ = (sel) => document.querySelector(sel);
@@ -648,3 +649,4 @@ if (isFormal || isTest) {
   document.body.classList.toggle('is-test', isTest);
   render();
 } else renderStart();
+warmCache(guide.photos);
