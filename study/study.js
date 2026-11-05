@@ -198,7 +198,7 @@ function loadPrototype(step) {
     // favourites are never read for the new step.)
     for (const k of ['sl-proto-v1-a', 'sl-proto-v1-b']) try { localStorage.removeItem(k); } catch { /* ignore */ }
   }
-  frame.src = `../${step.version}/?${reset ? 'reset&' : ''}study&t=${Date.now()}`;
+  frame.src = `../${step.version}/index.html?${reset ? 'reset&' : ''}study&t=${Date.now()}`;
 }
 
 // ---------- rendering ----------
