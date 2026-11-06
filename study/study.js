@@ -21,6 +21,9 @@ import { CONFIG } from '../js/config.js';
 const $ = (sel) => document.querySelector(sel);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const params = new URLSearchParams(location.search);
+// Access token of an EdgeOne preview link (mainland China visitors), passed on to the prototype.
+const hostToken = ['eo_token', 'eo_time'].filter((k) => params.has(k))
+  .map((k) => `&${k}=${encodeURIComponent(params.get(k))}`).join('');
 // ?p=P03: formal session of participant 3. ?p=TEST: a test run (order X → Y; nothing is recorded).
 const code = (params.get('p') ?? '').toUpperCase();
 const isTest = code === 'TEST';
@@ -198,7 +201,7 @@ function loadPrototype(step) {
     // favourites are never read for the new step.)
     for (const k of ['sl-proto-v1-a', 'sl-proto-v1-b']) try { localStorage.removeItem(k); } catch { /* ignore */ }
   }
-  frame.src = `../${step.version}/index.html?${reset ? 'reset&' : ''}study&t=${Date.now()}`;
+  frame.src = `../${step.version}/index.html?${reset ? 'reset&' : ''}study&t=${Date.now()}${hostToken}`;
 }
 
 // ---------- rendering ----------
@@ -633,14 +636,14 @@ function renderStart() {
         <div>
           <h2>测试</h2>
           <p class="muted">试走流程用，数据不会记录。</p>
-          <a class="btn" href="?p=TEST">开始测试</a>
+          <a class="btn" href="?p=TEST${esc(hostToken)}">开始测试</a>
         </div>
       </div>
     </section>`;
   $('#start-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const n = Number(e.target.n.value);
-    if (n >= 1) location.search = `?p=P${String(n).padStart(2, '0')}`;
+    if (n >= 1) location.search = `?p=P${String(n).padStart(2, '0')}${hostToken}`;
   });
 }
 
