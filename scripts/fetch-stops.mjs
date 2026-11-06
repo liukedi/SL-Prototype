@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// One-off generator for data/stops.geojson.
+// One-off generator for data/stops.json.
 // Queries the Overpass API for all public transport stops in SL's area (Stockholm County):
 // bus stops, metro (tunnelbana) and commuter / local rail stations, tram and light rail
 // stops, and ferry piers. Writes a static GeoJSON file so the prototype never calls
@@ -19,7 +19,7 @@ const ENDPOINTS = [
   'https://overpass.kumi.systems/api/interpreter',
   'https://overpass.private.coffee/api/interpreter',
 ];
-const OUT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'data', 'stops.geojson');
+const OUT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'data', 'stops.json');
 
 const query = `
 [out:json][timeout:180];

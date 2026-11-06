@@ -1,3 +1,6 @@
 .DS_Store
 # local Claude preview config
 .claude/
+# Raw map tiles: the source for scripts/pack-tiles.mjs; the site uses tilepacks/
+tiles/
+dist/

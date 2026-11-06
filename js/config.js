@@ -30,7 +30,7 @@ export const CONFIG = {
 
   // Sources
   styleUrl: './map-style.json',
-  stopsUrl: './data/stops.geojson',
+  stopsUrl: './data/stops.json',
   departuresUrl: './data/departures.json', // sample departures for favourite cards
   searchIndexUrl: './data/search-index.json', // all SL-area stops + municipality
 

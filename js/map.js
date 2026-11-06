@@ -4,6 +4,7 @@
 /* global maplibregl */
 import { CONFIG } from './config.js';
 import { nowMs } from './clock.js';
+import { registerTilePacks } from './tile-packs.js';
 
 // Start zoom: ?z=1..4 jumps to a reference screenshot's zoom, ?zoom=15.2 to any zoom.
 function initialZoom() {
@@ -163,9 +164,12 @@ function createStopPinElement(iconName) {
   return el;
 }
 
-// The style's tiles and glyphs are files on this site (relative paths). MapLibre fetches tiles
-// in a web worker, where a relative URL would not resolve, so make every URL absolute.
+// The style's glyphs are files on this site (relative paths). MapLibre fetches them in a web
+// worker, where a relative URL would not resolve, so make every URL absolute. (Tiles come
+// through packed://, js/tile-packs.js.)
 const absoluteUrls = (url) => ({ url: new URL(url, document.baseURI).href });
+
+registerTilePacks(maplibregl);
 
 export async function createMap(container, { onStopClick } = {}) {
   const [icons, stops] = await Promise.all([
