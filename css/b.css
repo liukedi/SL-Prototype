@@ -189,16 +189,7 @@
 [data-variant="b"] .b-tabs button { padding: 4px 3px 7px; border-bottom: 2px solid transparent; color: #c3cad1; font: inherit; font-size: 14px; }
 [data-variant="b"] .b-tabs button.is-active { color: #fff; border-bottom-color: #fff; }
 
-/* Explore panel: scrolls by itself (wheel / trackpad); dragging still moves the sheet. */
-/* The sheet is screen-tall and pushed down by --sheet-top, so the panel's bottom padding
-   adds that offset plus the tab bar: the last card can scroll fully into view. */
-[data-variant="b"] .b-explore {
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: none;
-  padding-bottom: calc(var(--sheet-top, 0px) + var(--tabbar-h) + var(--tabbar-bottom) + 20px);
-}
-[data-variant="b"] .b-explore::-webkit-scrollbar { display: none; }
+/* Explore panel: a .sheet__body, so it scrolls like the Favorite list (css/app.css). */
 [data-variant="b"] .b-sec { padding: 0 3px; }
 [data-variant="b"] .b-sec__head { display: flex; align-items: center; justify-content: space-between; min-height: 32px; margin-top: 12px; }
 [data-variant="b"] .b-sec__head h3 { margin: 0; font-size: 16.5px; font-weight: 600; }
