@@ -5,15 +5,15 @@
 
 const FILES = [
   'vendor/maplibre-gl/maplibre-gl.js', 'vendor/maplibre-gl/maplibre-gl.css',
-  'data/stops.geojson', 'data/search-index.json', 'map-style.json', 'assets/hotel-room.jpg',
-  'tiles/14/9015/4816.pbf', 'tiles/14/9015/4817.pbf', 'tiles/14/9016/4816.pbf', 'tiles/14/9016/4817.pbf',
+  'data/stops.json', 'data/search-index.json', 'map-style.json', 'assets/hotel-room.jpg',
+  'tilepacks/14/2253-1204.bin', 'tilepacks/14/2254-1204.bin', // the tiles around Gärdet
   'vendor/glyphs/Noto%20Sans%20Regular/0-255.pbf', 'vendor/glyphs/Noto%20Sans%20Bold/0-255.pbf',
   'vendor/glyphs/Noto%20Sans%20Italic/0-255.pbf',
   ...['400', '500', '600'].map((w) => `vendor/fonts/special-gothic/special-gothic-${w}-latin.woff2`),
   'css/app.css', 'css/b.css', 'css/fonts.css',
   ...['ambience', 'clock', 'config', 'departure-row', 'departures', 'device', 'favorites', 'filters-sheet',
     'journey-details', 'journeys', 'keyboard', 'map', 'routes', 'search-panel', 'sheet', 'stop-index',
-    'stop-page', 'stop-search', 'store', 'time-picker', 'toast', 'travel', 'ui', 'variant'].map((f) => `js/${f}.js`),
+    'stop-page', 'stop-search', 'store', 'tile-packs', 'time-picker', 'toast', 'travel', 'ui', 'variant'].map((f) => `js/${f}.js`),
   ...['explore', 'index', 'journey-art', 'map-center', 'map-settings', 'onboarding', 'scenic',
     'special-stations', 'station-info', 'sun', 'toast', 'tourist-mode'].map((f) => `js/b/${f}.js`),
   ...['curated-routes', 'exhibitions', 'scenic', 'special-stations', 'station-info'].map((f) => `data/b/${f}.json`),
