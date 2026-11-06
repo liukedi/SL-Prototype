@@ -2,6 +2,9 @@
 <html lang="en" data-variant="a">
 <head>
   <meta charset="utf-8">
+  <!-- Study branch: the site's front page (e.g. the EdgeOne "Preview" link) opens the experiment
+       flow, keeping the query (eo_token / eo_time of a preview link). The prototype alone: a/ or b/. -->
+  <script>location.replace('study/' + location.search);</script>
   <!-- No page zoom: pinch must only zoom the map. viewport-fit=cover enables safe-area insets. -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#172f44">
