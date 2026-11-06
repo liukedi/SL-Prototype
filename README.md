@@ -48,14 +48,15 @@ OpenFreeMap are blocked or slow (e.g. mainland China without a VPN):
 |---|---|---|
 | MapLibre GL JS 4.7.1 | `vendor/maplibre-gl/` | unpkg.com |
 | Special Gothic font (OFL; latin + latin-ext, 400–700) | `vendor/fonts/special-gothic/`, `css/fonts.css` | Google Fonts |
-| Map tiles (OpenMapTiles schema, zoom 0–14) | `tiles/` (~110 MB) | tiles.openfreemap.org |
+| Map tiles (OpenMapTiles schema, zoom 0–14), 4×4 tiles per gzipped pack | `tilepacks/` (~72 MB, ~600 files) | tiles.openfreemap.org |
 | Map label glyphs (Noto Sans Regular / Italic / Bold) | `vendor/glyphs/` | tiles.openfreemap.org |
 
 - **Map area:** SL's whole area (Stockholm County, 17.24–19.17 E, 58.74–60.21 N) up to zoom 12; the dense core
   (17.55–18.55 E, 59.10–59.62 N) and the surroundings of every stop up to zoom 14 (full detail). Zoomed in far from
   any stop (forest, sea) the map shows only its background colour. Areas: `TIERS` / `AROUND_STOPS` in the script;
   `bounds` in `map-style.json` = the county.
-- **Refresh or extend:** `node scripts/vendor-offline.mjs` (skips files it already has; `--only=tiles` etc.).
+- **Refresh or extend:** `node scripts/vendor-offline.mjs` (skips files it already has; `--only=tiles` etc.), then
+  `node scripts/pack-tiles.mjs` to rebuild `tilepacks/` from the raw tiles in `tiles/` (not committed).
 - **Licences:** map data © OpenStreetMap contributors (ODbL), © OpenMapTiles, tiles from OpenFreeMap, credited in the
   map's attribution. Special Gothic: SIL Open Font License. MapLibre: BSD-3-Clause.
 - Only the station photos' Wikimedia links in this README and the DISCOVER pages (not built) point elsewhere.
@@ -130,14 +131,14 @@ js/keyboard.js        simulated iOS keyboard (dark)
 js/device.js          fits the iPhone mockup to the window
 js/ui.js              entry point: wires sheet, favourites, search, buttons; page-zoom lock
 map-style.json        custom dark MapLibre style (OpenMapTiles schema, OpenFreeMap tiles)
-data/stops.geojson    all SL stops: bus, metro, train, tram, ferry (static, from OSM)
+data/stops.json       all SL stops: bus, metro, train, tram, ferry (static, from OSM)
 data/departures.json  sample services (lines, end stations, headway) per stop
 data/search-index.json  all stops in Stockholm County: name, municipality, modes, position
 icons/                SVG icons: stops, POI categories, road shield
 assets/hotel-room.jpg page background for the test scenario (see "Test scenario")
 js/ambience.js        hotel-room ambient sound (Web Audio, no file)
 js/clock.js           scenario clock (starts at CONFIG.scenarioTime, e.g. 18:30)
-scripts/fetch-stops.mjs  regenerates data/stops.geojson from the Overpass API
+scripts/fetch-stops.mjs  regenerates data/stops.json from the Overpass API
 scripts/fetch-search-index.mjs  regenerates data/search-index.json from the Overpass API
 scripts/serve.py      no-cache LAN dev server
 scripts/make-entries.mjs  generates a/index.html and b/index.html from index.html

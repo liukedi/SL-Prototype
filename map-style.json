@@ -7,7 +7,7 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "tiles": ["tiles/{z}/{x}/{y}.pbf"],
+      "tiles": ["packed://{z}/{x}/{y}"],
       "minzoom": 0,
       "maxzoom": 14,
       "bounds": [17.24, 58.74, 19.17, 60.21],

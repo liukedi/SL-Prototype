@@ -3,7 +3,8 @@
 // Downloads, once:
 //   1. MapLibre GL JS + CSS            → vendor/maplibre-gl/
 //   2. Special Gothic (Google Fonts)    → vendor/fonts/special-gothic/ + css/fonts.css
-//   3. Map tiles for the Stockholm area → tiles/{z}/{x}/{y}.pbf  (OpenFreeMap, OpenMapTiles schema)
+//   3. Map tiles for the Stockholm area → tiles/{z}/{x}/{y}.pbf  (OpenFreeMap, OpenMapTiles schema;
+//      the site uses them packed: run scripts/pack-tiles.mjs afterwards)
 //      and the label glyphs            → vendor/glyphs/{fontstack}/{range}.pbf
 // Usage: node scripts/vendor-offline.mjs [--only=maplibre,fonts,tiles,glyphs]
 // Re-running skips files that already exist.
@@ -18,7 +19,7 @@ const MAPLIBRE = '4.7.1';
 //   - SL's whole area (Stockholm County) up to zoom 12: towns, roads, water everywhere;
 //   - the dense core (metro, commuter rail, trams: Upplands Väsby – Södertälje, Ekerö – Lidingö /
 //     Nacka) up to zoom 14, full detail;
-//   - outside the core, zoom 13–14 around every stop (data/stops.geojson: the stop's tile and
+//   - outside the core, zoom 13–14 around every stop (data/stops.json: the stop's tile and
 //     its 8 neighbours), so wherever there is transit the map has full detail. Elsewhere at zoom
 //     13+ (forest, sea between towns) the map shows only its background colour.
 export const TIERS = [
@@ -92,7 +93,7 @@ async function tiles() {
       for (let x = x0; x <= x1; x++) for (let y = y0; y <= y1; y++) jobs.push([z, x, y]);
     }
   }
-  const stops = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/stops.geojson'), 'utf8')).features;
+  const stops = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/stops.json'), 'utf8')).features;
   const seenJob = new Set(jobs.map((j) => j.join('/')));
   for (let z = AROUND_STOPS.minZoom; z <= AROUND_STOPS.maxZoom; z++) {
     for (const f of stops) {
@@ -120,7 +121,7 @@ async function tiles() {
     }
   };
   await Promise.all(Array.from({ length: 6 }, worker));
-  write(path.join(ROOT, 'tiles/README.md'), `# Map tiles (offline copy)\n\nVector tiles in the OpenMapTiles schema from [OpenFreeMap](https://openfreemap.org) (data © OpenStreetMap contributors, ODbL; © OpenMapTiles), ${TIERS.map((t) => `zoom ${t.minZoom}–${t.maxZoom} for ${t.bbox.join(', ')}`).join('; ')} (west, south, east, north); and zoom ${AROUND_STOPS.minZoom}–${AROUND_STOPS.maxZoom} around every stop in data/stops.geojson. Source: ${tmpl}. Made by scripts/vendor-offline.mjs.\n`);
+  write(path.join(ROOT, 'tiles/README.md'), `# Map tiles (offline copy)\n\nVector tiles in the OpenMapTiles schema from [OpenFreeMap](https://openfreemap.org) (data © OpenStreetMap contributors, ODbL; © OpenMapTiles), ${TIERS.map((t) => `zoom ${t.minZoom}–${t.maxZoom} for ${t.bbox.join(', ')}`).join('; ')} (west, south, east, north); and zoom ${AROUND_STOPS.minZoom}–${AROUND_STOPS.maxZoom} around every stop in data/stops.json. Source: ${tmpl}. Made by scripts/vendor-offline.mjs.\n`);
   console.log(`tiles: ok, ${done} tiles, ${missing} empty, ${(bytes / 1e6).toFixed(1)} MB new`);
 }
 
